@@ -37,15 +37,15 @@ OTHER_FILES += \
 symbian: {
     DEFINES += SYMBIAN_TARGET
 
-    TARGET.UID3 = 0xE29A4776
-    #TARGET.UID3 = 0x2004B224
+    #TARGET.UID3 = 0xE29A4776
+    TARGET.UID3 = 0x2004B229
     TARGET.EPOCSTACKSIZE = 0x14000
     TARGET.EPOCHEAPSIZE = 0x020000 0x8000000
 
     ICON = icon.svg
 
     # SIS header: name, uid, version
-    packageheader = "$${LITERAL_HASH}{\"ChristmasTree\"}, (0xE29A4776), 1, 0, 0, TYPE=SA"
+    packageheader = "$${LITERAL_HASH}{\"ChristmasTree\"}, (0x2004B229), 1, 0, 0, TYPE=SA"
     # Vendor info: localised and non-localised vendor names
     vendorinfo = "%{\"Oleg Derevenetz\"}" ":\"Oleg Derevenetz\""
 
