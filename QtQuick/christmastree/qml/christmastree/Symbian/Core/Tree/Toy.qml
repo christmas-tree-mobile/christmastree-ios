@@ -6,10 +6,27 @@ Image {
     height: sourceSize.height
     smooth: true
 
-    property int toyNumber: 0
+    property int    toyNumber: 0
+    property string toyType:   ""
 
     onToyNumberChanged: {
-        source = "../../../images/" + treePage.imageDir + "/toys/toy-" + toyNumber + ".png";
+        if (toyNumber !== 0 && toyType !== "") {
+            source = "../../../images/" + treePage.imageDir + "/toys/" + toyType + "-" + toyNumber + ".png";
+
+            if (toyType === "twinkle") {
+                twinkleSequentialAnimation.start();
+            }
+        }
+    }
+
+    onToyTypeChanged: {
+        if (toyNumber !== 0 && toyType !== "") {
+            source = "../../../images/" + treePage.imageDir + "/toys/" + toyType + "-" + toyNumber + ".png";
+
+            if (toyType === "twinkle") {
+                twinkleSequentialAnimation.start();
+            }
+        }
     }
 
     function enlargeToy() {
@@ -88,6 +105,29 @@ Image {
             } else {
                 toy.destroy();
             }
+        }
+    }
+
+    SequentialAnimation {
+        id:    twinkleSequentialAnimation
+        loops: Animation.Infinite
+
+        PropertyAnimation {
+            id:       twinkleDecOpacityPropertyAnimation
+            target:   toy
+            property: "opacity"
+            from:     1.0
+            to:       0.5
+            duration: 2000
+        }
+
+        PropertyAnimation {
+            id:       twinkleIncOpacityPropertyAnimation
+            target:   toy
+            property: "opacity"
+            from:     0.5
+            to:       1.0
+            duration: 2000
         }
     }
 }

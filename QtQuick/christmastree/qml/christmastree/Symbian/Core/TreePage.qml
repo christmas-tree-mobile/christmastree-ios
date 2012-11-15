@@ -15,6 +15,7 @@ Page {
     property int currentTreeNum:       1
     property int maxTreeNum:           1
     property int maxToysNum:           16
+    property int maxTwinklesNum:       3
 
     property int upperTreePointX:      imageDir === "360x640" ? 180 : 240
     property int upperTreePointY:      imageDir === "360x640" ? 100 : 130
@@ -373,7 +374,7 @@ Page {
                         id:     toysItemDelegate
                         width:  sourceSize.width
                         height: sourceSize.height
-                        source: "../../images/" + treePage.imageDir + "/toys/toy-" + toyNumber + ".png"
+                        source: "../../images/" + treePage.imageDir + "/toys/" + toyType + "-" + toyNumber + ".png"
 
                         MouseArea {
                             id:           toysItemMouseArea
@@ -384,7 +385,7 @@ Page {
 
                                 var mapped = mapToItem(backgroundImage, mouseX, mouseY);
 
-                                treePage.newToy = Qt.createComponent("Tree/Toy.qml").createObject(backgroundImage, {"z": 4, "toyNumber": toyNumber});
+                                treePage.newToy = Qt.createComponent("Tree/Toy.qml").createObject(backgroundImage, {"z": 4, "toyType": toyType, "toyNumber": toyNumber});
 
                                 treePage.newToy.enlargeToy();
 
@@ -462,8 +463,12 @@ Page {
 
         toysListModel.clear();
 
-        for (var i = 1; i <= maxToysNum; i++) {
-            toysListModel.append({"toyNumber": i});
+        for (var i = 1; i <= treePage.maxToysNum; i++) {
+            toysListModel.append({"toyType": "toy", "toyNumber": i});
+        }
+
+        for (var i = 1; i <= treePage.maxTwinklesNum; i++) {
+            toysListModel.append({"toyType": "twinkle", "toyNumber": i});
         }
 
         audio.play();
