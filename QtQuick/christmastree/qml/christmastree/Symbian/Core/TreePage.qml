@@ -313,7 +313,7 @@ Page {
                 id:           toysListView
                 anchors.fill: parent
                 orientation:  ListView.Vertical
-                cacheBuffer:  treePage.maxToysNum * 256 // To prevent strange issue with "untouchable toys" on Symbian
+                cacheBuffer:  (treePage.maxToysNum + treePage.maxTwinklesNum) * 256 // To prevent strange issue with "untouchable toys" on Symbian
                 model:        toysVisualDataModel
 
                 VisualDataModel {
