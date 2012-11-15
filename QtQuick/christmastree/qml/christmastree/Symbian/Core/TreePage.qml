@@ -389,16 +389,16 @@ Page {
 
                                 treePage.newToy.enlargeToy();
 
-                                treePage.newToy.x = mapped.x - treePage.newToy.width  / 2;
-                                treePage.newToy.y = mapped.y - treePage.newToy.height / 2;
+                                treePage.newToy.x = mapped.x - treePage.newToy.width / 2;
+                                treePage.newToy.y = mapped.y - treePage.newToy.height;
                             }
 
                             onPositionChanged: {
                                 var mapped = mapToItem(backgroundImage, mouseX, mouseY);
 
                                 if (treePage.newToy !== null) {
-                                    treePage.newToy.x = mapped.x - treePage.newToy.width  / 2;
-                                    treePage.newToy.y = mapped.y - treePage.newToy.height / 2;
+                                    treePage.newToy.x = mapped.x - treePage.newToy.width / 2;
+                                    treePage.newToy.y = mapped.y - treePage.newToy.height;
                                 }
                             }
 

@@ -41,14 +41,12 @@ Image {
     }
 
     function reduceToy() {
-        var center_x = x + width  / 2;
-        var center_y = y + height / 2;
+        var center_x = x + width / 2;
 
         width  = sourceSize.width;
         height = sourceSize.height;
 
-        x = center_x - width  / 2;
-        y = center_y - height / 2;
+        x = center_x - width / 2;
     }
 
     function destroyToy() {
@@ -59,20 +57,39 @@ Image {
         id:           toyMouseArea
         anchors.fill: parent
 
+        property int pressMouseX: 0
+        property int pressMouseY: 0
+
         onPressed: {
             var mapped = mapToItem(toy.parent, mouseX, mouseY);
 
+            pressMouseX = mapped.x;
+            pressMouseY = mapped.y;
+
             toy.enlargeToy();
 
-            toy.x = mapped.x - toy.width  / 2;
-            toy.y = mapped.y - toy.height / 2;
+            toy.x = mapped.x - toy.width / 2;
+            toy.y = mapped.y - toy.height;
+        }
+
+        onPressAndHold: {
+            var mapped = mapToItem(toy.parent, mouseX, mouseY);
+
+            if (Math.abs(mapped.x - pressMouseX) < 8 &&
+                Math.abs(mapped.y - pressMouseY) < 8) {
+                if (toy.z === 4) {
+                    toy.z = 2;
+                } else {
+                    toy.z = 4;
+                }
+            }
         }
 
         onPositionChanged: {
             var mapped = mapToItem(toy.parent, mouseX, mouseY);
 
-            toy.x = mapped.x - toy.width  / 2;
-            toy.y = mapped.y - toy.height / 2;
+            toy.x = mapped.x - toy.width / 2;
+            toy.y = mapped.y - toy.height;
         }
 
         onReleased: {
@@ -80,14 +97,6 @@ Image {
 
             if (!treePage.validateToy(toy.x + toy.width / 2, toy.y + toy.height / 2)) {
                 toy.destroyToy();
-            }
-        }
-
-        onDoubleClicked: {
-            if (toy.z === 4) {
-                toy.z = 2;
-            } else {
-                toy.z = 4;
             }
         }
     }
