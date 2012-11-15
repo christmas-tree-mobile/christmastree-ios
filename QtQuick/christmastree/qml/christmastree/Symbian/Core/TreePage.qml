@@ -423,9 +423,9 @@ Page {
 
     QueryDialog {
         id:               imageCapturedQueryDialog
-        titleText:        "Error"
+        titleText:        "Info"
         icon:             "qrc:/resources/images/dialog_info.png"
-        message:          "Image was succesfully saved"
+        message:          "Image saved successfully"
         acceptButtonText: "OK"
     }
 
