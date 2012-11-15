@@ -26,6 +26,10 @@ Window {
             id: treePage
         }
 
+        SettingsPage {
+            id: settingsPage
+        }
+
         HelpPage {
             id: helpPage
         }
@@ -39,7 +43,7 @@ Window {
     }
 
     Component.onCompleted: {
-        treePage.initArtwork(SettingsScript.getSetting("BackgroundNum", 1), SettingsScript.getSetting("TreeNum", 1));
+        treePage.setArtwork(SettingsScript.getSetting("BackgroundNum", 1), SettingsScript.getSetting("TreeNum", 1));
 
         mainPageStack.push(treePage);
     }

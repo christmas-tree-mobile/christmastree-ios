@@ -11,18 +11,18 @@ Page {
     orientationLock: PageOrientation.LockPortrait
 
     property int currentBackgroundNum: 1
-    property int maxBackgroundNum:     1
+    property int maxBackgroundNum:     3
     property int currentTreeNum:       1
-    property int maxTreeNum:           1
+    property int maxTreeNum:           3
     property int maxToysNum:           16
     property int maxTwinklesNum:       3
 
     property int upperTreePointX:      imageDir === "360x640" ? 180 : 240
-    property int upperTreePointY:      imageDir === "360x640" ? 100 : 130
-    property int lowerLeftTreePointX:  imageDir === "360x640" ? 30  : 40
-    property int lowerLeftTreePointY:  imageDir === "360x640" ? 540 : 720
-    property int lowerRightTreePointX: imageDir === "360x640" ? 330 : 440
-    property int lowerRightTreePointY: imageDir === "360x640" ? 540 : 720
+    property int upperTreePointY:      imageDir === "360x640" ? 50  : 130
+    property int lowerLeftTreePointX:  imageDir === "360x640" ? 10  : 40
+    property int lowerLeftTreePointY:  imageDir === "360x640" ? 550 : 720
+    property int lowerRightTreePointX: imageDir === "360x640" ? 350 : 440
+    property int lowerRightTreePointY: imageDir === "360x640" ? 550 : 720
 
     property bool appInForeground:     true
 
@@ -30,13 +30,17 @@ Page {
 
     property QtObject newToy:          null
 
-    function initArtwork(background_num, tree_num) {
+    function setArtwork(background_num, tree_num) {
         if (background_num <= maxBackgroundNum) {
             currentBackgroundNum = background_num;
         }
         if (tree_num <= maxTreeNum) {
             currentTreeNum = tree_num;
         }
+    }
+
+    function setVolume(volume) {
+        audio.volume = volume;
     }
 
     function validateToy(center_x, center_y) {
@@ -201,8 +205,6 @@ Page {
                 anchors.fill: parent
 
                 onClicked: {
-                    helpPage.loadHelp();
-
                     mainPageStack.replace(helpPage);
                 }
             }
@@ -222,25 +224,21 @@ Page {
                 anchors.fill: parent
 
                 onClicked: {
-                    if (treePage.currentBackgroundNum < treePage.maxBackgroundNum) {
-                        treePage.currentBackgroundNum = treePage.currentBackgroundNum + 1;
-                    } else {
-                        treePage.currentBackgroundNum = 1;
-                    }
+                    settingsPage.initSettings(treePage.currentBackgroundNum, treePage.currentTreeNum);
 
-                    mainWindow.setSetting("BackgroundNum", treePage.currentBackgroundNum);
+                    mainPageStack.replace(settingsPage);
                 }
             }
         }
 
         Image {
-            id:                     toysButtonImage
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.left:           parent.left
-            width:                  48
-            height:                 48
-            z:                      15
-            source:                 "qrc:/resources/images/toys.png"
+            id:             toysButtonImage
+            anchors.bottom: parent.bottom
+            anchors.left:   parent.left
+            width:          48
+            height:         48
+            z:              15
+            source:         "qrc:/resources/images/toys.png"
 
             MouseArea {
                 id:           toysButtonMouseArea
@@ -253,51 +251,6 @@ Page {
                     } else {
                         toysListRectangle.visible = true;
                         toysButtonImage.source    = "qrc:/resources/images/toys-pressed.png";
-                    }
-                }
-            }
-        }
-
-        Slider {
-            id:             volumeSlider
-            anchors.top:    toysButtonImage.bottom
-            anchors.bottom: volumeButtonImage.top
-            anchors.left:   parent.left
-            width:          volumeButtonImage.width
-            z:              15
-            orientation:    Qt.Vertical
-            minimumValue:   0.0
-            maximumValue:   1.0
-            value:          0.5
-            stepSize:       0.1
-            inverted:       true
-            visible:        false
-
-            onValueChanged: {
-                audio.volume = value;
-            }
-        }
-
-        Image {
-            id:             volumeButtonImage
-            anchors.bottom: parent.bottom
-            anchors.left:   parent.left
-            width:          48
-            height:         48
-            z:              15
-            source:         "qrc:/resources/images/volume.png"
-
-            MouseArea {
-                id:           volumeButtonMouseArea
-                anchors.fill: parent
-
-                onClicked: {
-                    if (volumeSlider.visible) {
-                        volumeSlider.visible     = false;
-                        volumeButtonImage.source = "qrc:/resources/images/volume.png";
-                    } else {
-                        volumeSlider.visible     = true;
-                        volumeButtonImage.source = "qrc:/resources/images/volume-pressed.png";
                     }
                 }
             }
@@ -380,17 +333,16 @@ Page {
                             id:           toysItemMouseArea
                             anchors.fill: parent
 
-                            onPressAndHold: {
-                                toysItemMouseArea.preventStealing = true;
+                            property int pressX: 0
+                            property int pressY: 0
 
+                            onPressed: {
                                 var mapped = mapToItem(backgroundImage, mouseX, mouseY);
 
-                                treePage.newToy = Qt.createComponent("Tree/Toy.qml").createObject(backgroundImage, {"z": 4, "toyType": toyType, "toyNumber": toyNumber});
+                                pressX = mapped.x;
+                                pressY = mapped.y;
 
-                                treePage.newToy.enlargeToy();
-
-                                treePage.newToy.x = mapped.x - treePage.newToy.width / 2;
-                                treePage.newToy.y = mapped.y - treePage.newToy.height;
+                                pressAndHoldTimer.start();
                             }
 
                             onPositionChanged: {
@@ -403,7 +355,7 @@ Page {
                             }
 
                             onReleased: {
-                                toysItemMouseArea.preventStealing = false;
+                                preventStealing = false;
 
                                 if (treePage.newToy !== null) {
                                     treePage.newToy.reduceToy();
@@ -413,6 +365,26 @@ Page {
                                     }
 
                                     treePage.newToy = null;
+                                }
+
+                                pressAndHoldTimer.stop();
+                            }
+
+                            Timer {
+                                id:       pressAndHoldTimer
+                                interval: 500
+
+                                onTriggered: {
+                                    if (toysItemMouseArea.pressed) {
+                                        toysItemMouseArea.preventStealing = true;
+
+                                        treePage.newToy = Qt.createComponent("Tree/Toy.qml").createObject(backgroundImage, {"z": 4, "toyType": toyType, "toyNumber": toyNumber});
+
+                                        treePage.newToy.enlargeToy();
+
+                                        treePage.newToy.x = toysItemMouseArea.pressX - treePage.newToy.width / 2;
+                                        treePage.newToy.y = toysItemMouseArea.pressY - treePage.newToy.height;
+                                    }
                                 }
                             }
                         }

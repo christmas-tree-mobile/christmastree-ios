@@ -7,8 +7,10 @@ Page {
     anchors.fill:    parent
     orientationLock: PageOrientation.LockPortrait
 
-    function loadHelp() {
-        helpWebView.url = "qrc:/resources/doc/help.html";
+    onStatusChanged: {
+        if (status === PageStatus.Active) {
+            helpWebView.url = "qrc:/resources/doc/help.html";
+        }
     }
 
     Flickable {

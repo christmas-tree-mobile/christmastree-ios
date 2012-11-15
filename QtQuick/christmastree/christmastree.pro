@@ -25,7 +25,6 @@ OTHER_FILES += \
     images/toys.png \
     images/toys-pressed.png \
     images/volume.png \
-    images/volume-pressed.png \
     images/capture.png \
     images/exit.png \
     images/ok.png \

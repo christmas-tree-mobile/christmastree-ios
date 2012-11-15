@@ -57,32 +57,21 @@ Image {
         id:           toyMouseArea
         anchors.fill: parent
 
-        property int pressMouseX: 0
-        property int pressMouseY: 0
+        property int pressX: 0
+        property int pressY: 0
 
         onPressed: {
             var mapped = mapToItem(toy.parent, mouseX, mouseY);
-
-            pressMouseX = mapped.x;
-            pressMouseY = mapped.y;
 
             toy.enlargeToy();
 
             toy.x = mapped.x - toy.width / 2;
             toy.y = mapped.y - toy.height;
-        }
 
-        onPressAndHold: {
-            var mapped = mapToItem(toy.parent, mouseX, mouseY);
+            pressX = mapped.x;
+            pressY = mapped.y;
 
-            if (Math.abs(mapped.x - pressMouseX) < 8 &&
-                Math.abs(mapped.y - pressMouseY) < 8) {
-                if (toy.z === 4) {
-                    toy.z = 2;
-                } else {
-                    toy.z = 4;
-                }
-            }
+            pressAndHoldTimer.start();
         }
 
         onPositionChanged: {
@@ -90,6 +79,11 @@ Image {
 
             toy.x = mapped.x - toy.width / 2;
             toy.y = mapped.y - toy.height;
+
+            if (Math.abs(mapped.x - pressX) > 16 ||
+                Math.abs(mapped.y - pressY) > 16) {
+                pressAndHoldTimer.stop();
+            }
         }
 
         onReleased: {
@@ -97,6 +91,23 @@ Image {
 
             if (!treePage.validateToy(toy.x + toy.width / 2, toy.y + toy.height / 2)) {
                 toy.destroyToy();
+            }
+
+            pressAndHoldTimer.stop();
+        }
+
+        Timer {
+            id:       pressAndHoldTimer
+            interval: 600
+
+            onTriggered: {
+                if (toyMouseArea.pressed) {
+                    if (toy.z === 4) {
+                        toy.z = 2;
+                    } else {
+                        toy.z = 4;
+                    }
+                }
             }
         }
     }
