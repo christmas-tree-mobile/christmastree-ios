@@ -71,6 +71,7 @@ Page {
                 y:            backgroundsRectangle.borderWidth
                 width:        background1Image.width
                 height:       background1Image.height
+                color:        "white"
                 border.width: backgroundsRectangle.borderWidth
                 border.color: "red"
 
@@ -103,6 +104,7 @@ Page {
                 y:            backgroundsRectangle.borderWidth
                 width:        background2Image.width
                 height:       background2Image.height
+                color:        "white"
                 border.width: backgroundsRectangle.borderWidth
                 border.color: "transparent"
 
@@ -135,6 +137,7 @@ Page {
                 y:            backgroundsRectangle.borderWidth
                 width:        background3Image.width
                 height:       background3Image.height
+                color:        "white"
                 border.width: backgroundsRectangle.borderWidth
                 border.color: "transparent"
 
@@ -181,6 +184,7 @@ Page {
                 y:            treesRectangle.borderWidth
                 width:        tree1Image.width
                 height:       tree1Image.height
+                color:        "white"
                 border.width: treesRectangle.borderWidth
                 border.color: "red"
 
@@ -213,6 +217,7 @@ Page {
                 y:            treesRectangle.borderWidth
                 width:        tree2Image.width
                 height:       tree2Image.height
+                color:        "white"
                 border.width: treesRectangle.borderWidth
                 border.color: "transparent"
 
@@ -245,6 +250,7 @@ Page {
                 y:            treesRectangle.borderWidth
                 width:        tree3Image.width
                 height:       tree3Image.height
+                color:        "white"
                 border.width: treesRectangle.borderWidth
                 border.color: "transparent"
 
