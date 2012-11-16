@@ -14,8 +14,8 @@ Page {
     property int maxBackgroundNum:     3
     property int currentTreeNum:       1
     property int maxTreeNum:           3
-    property int maxToysNum:           16
-    property int maxTwinklesNum:       3
+    property int maxToyNum:            29
+    property int maxTwinkleNum:        3
 
     property int upperTreePointX:      imageDir === "360x640" ? 180 : 240
     property int upperTreePointY:      imageDir === "360x640" ? 50  : 130
@@ -313,7 +313,7 @@ Page {
                 id:           toysListView
                 anchors.fill: parent
                 orientation:  ListView.Vertical
-                cacheBuffer:  (treePage.maxToysNum + treePage.maxTwinklesNum) * 256 // To prevent strange issue with "untouchable toys" on Symbian
+                cacheBuffer:  (treePage.maxToyNum + treePage.maxTwinkleNum) * 256 // To prevent strange issue with "untouchable toys" on Symbian
                 model:        toysVisualDataModel
 
                 VisualDataModel {
@@ -435,11 +435,11 @@ Page {
 
         toysListModel.clear();
 
-        for (var i = 1; i <= treePage.maxToysNum; i++) {
+        for (var i = 1; i <= treePage.maxToyNum; i++) {
             toysListModel.append({"toyType": "toy", "toyNumber": i});
         }
 
-        for (var i = 1; i <= treePage.maxTwinklesNum; i++) {
+        for (var i = 1; i <= treePage.maxTwinkleNum; i++) {
             toysListModel.append({"toyType": "twinkle", "toyNumber": i});
         }
 
