@@ -24,7 +24,7 @@ Page {
     property int lowerRightTreePointX: imageDir === "360x640" ? 350 : 440
     property int lowerRightTreePointY: imageDir === "360x640" ? 550 : 720
 
-    property bool appInForeground:     true
+    property bool appInForeground:     Qt.application.active
 
     property string imageDir:          "360x640"
 
@@ -408,18 +408,6 @@ Page {
         icon:             "qrc:/resources/images/dialog_error.png"
         message:          "Could not save image"
         acceptButtonText: "OK"
-    }
-
-    Connections {
-        target: CSApplication
-
-        onAppInBackground: {
-            treePage.appInForeground = false;
-        }
-
-        onAppInForeground: {
-            treePage.appInForeground = true;
-        }
     }
 
     Component.onCompleted: {
