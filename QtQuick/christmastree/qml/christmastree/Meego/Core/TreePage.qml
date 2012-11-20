@@ -14,15 +14,15 @@ Page {
     property int maxBackgroundNum:     3
     property int currentTreeNum:       1
     property int maxTreeNum:           3
-    property int maxToyNum:            29
+    property int maxToyNum:            37
     property int maxTwinkleNum:        3
 
-    property int upperTreePointX:      imageDir === "360x640" ? 180 : 240
-    property int upperTreePointY:      imageDir === "360x640" ? 50  : 130
-    property int lowerLeftTreePointX:  imageDir === "360x640" ? 10  : 40
-    property int lowerLeftTreePointY:  imageDir === "360x640" ? 550 : 720
-    property int lowerRightTreePointX: imageDir === "360x640" ? 350 : 440
-    property int lowerRightTreePointY: imageDir === "360x640" ? 550 : 720
+    property int upperTreePointX:      imageDir === "360x640" ? 180 : 238
+    property int upperTreePointY:      imageDir === "360x640" ? 50  : 66
+    property int lowerLeftTreePointX:  imageDir === "360x640" ? 10  : 12
+    property int lowerLeftTreePointY:  imageDir === "360x640" ? 550 : 730
+    property int lowerRightTreePointX: imageDir === "360x640" ? 350 : 464
+    property int lowerRightTreePointY: imageDir === "360x640" ? 550 : 730
 
     property bool appInForeground:     Qt.application.active
 
