@@ -10,12 +10,14 @@ Page {
     anchors.fill:    parent
     orientationLock: PageOrientation.LockPortrait
 
-    property int currentBackgroundNum: 1
-    property int maxBackgroundNum:     3
-    property int currentTreeNum:       1
-    property int maxTreeNum:           3
-    property int maxToyNum:            37
-    property int maxTwinkleNum:        0
+    property int currentBackgroundNum:   1
+    property int maxBackgroundNum:       3
+    property int currentTreeNum:         1
+    property int maxTreeNum:             3
+    property int maxToyNum:              37
+    property int maxTwinkleNum:          0
+    property int currentSnowflakesCount: 10
+    property int defaultSnowflakesCount: 10
 
     property int upperTreePointX:      imageDir === "360x640" ? 180 : 238
     property int upperTreePointY:      imageDir === "360x640" ? 50  : 66
@@ -36,6 +38,11 @@ Page {
         }
         if (tree_num <= maxTreeNum) {
             currentTreeNum = tree_num;
+        }
+        if (currentBackgroundNum === 3) {
+            currentSnowflakesCount = 0;
+        } else {
+            currentSnowflakesCount = defaultSnowflakesCount;
         }
     }
 
@@ -122,7 +129,7 @@ Page {
             source:            "qrc:/resources/images/snowflake-1.png"
             opacity:           0.75
             lifeSpan:          1000
-            count:             10
+            count:             treePage.currentSnowflakesCount
             angle:             90
             angleDeviation:    30
             velocity:          30
@@ -141,7 +148,7 @@ Page {
             source:            "qrc:/resources/images/snowflake-2.png"
             opacity:           0.5
             lifeSpan:          1000
-            count:             10
+            count:             treePage.currentSnowflakesCount
             angle:             90
             angleDeviation:    30
             velocity:          30
@@ -160,7 +167,7 @@ Page {
             source:            "qrc:/resources/images/snowflake-3.png"
             opacity:           0.5
             lifeSpan:          1000
-            count:             10
+            count:             treePage.currentSnowflakesCount
             angle:             90
             angleDeviation:    30
             velocity:          30
@@ -179,7 +186,7 @@ Page {
             source:            "qrc:/resources/images/snowflake-4.png"
             opacity:           0.25
             lifeSpan:          1000
-            count:             10
+            count:             treePage.currentSnowflakesCount
             angle:             90
             angleDeviation:    30
             velocity:          30
