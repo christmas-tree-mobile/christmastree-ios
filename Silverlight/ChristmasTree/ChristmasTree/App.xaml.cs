@@ -10,17 +10,21 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Marketplace;
 using Microsoft.Phone.Shell;
+using Microsoft.Xna.Framework;
 
 namespace ChristmasTree
 {
     public partial class App : Application
     {
-        private bool trialMode = true;
+        private bool trialMode       = true,
+                     hasMusicControl = true;
 
-        public bool TrialMode { get { return this.trialMode; } }
+        public bool TrialMode       { get { return this.trialMode; } }
+        public bool HasMusicControl { get { return this.hasMusicControl; } }
 
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
@@ -73,6 +77,8 @@ namespace ChristmasTree
 #else
             this.trialMode = (new LicenseInformation()).IsTrial();
 #endif
+
+            this.hasMusicControl = Microsoft.Xna.Framework.Media.MediaPlayer.GameHasControl;
         }
 
         // Code to execute when the application is activated (brought to foreground)
@@ -84,6 +90,8 @@ namespace ChristmasTree
 #else
             this.trialMode = (new LicenseInformation()).IsTrial();
 #endif
+
+            this.hasMusicControl = Microsoft.Xna.Framework.Media.MediaPlayer.GameHasControl;
         }
 
         // Code to execute when the application is deactivated (sent to background)
@@ -153,5 +161,32 @@ namespace ChristmasTree
         }
 
         #endregion
+    }
+
+    public class XNAFrameworkDispatcherService : IApplicationService
+    {
+        private DispatcherTimer frameworkDispatcherTimer;
+
+        public XNAFrameworkDispatcherService()
+        {
+            this.frameworkDispatcherTimer = new DispatcherTimer();
+            this.frameworkDispatcherTimer.Interval = TimeSpan.FromTicks(333333);
+            this.frameworkDispatcherTimer.Tick += frameworkDispatcherTimer_Tick;
+
+            FrameworkDispatcher.Update();
+        }
+
+        private void frameworkDispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            FrameworkDispatcher.Update();
+        }
+
+        void IApplicationService.StartService(ApplicationServiceContext context) {
+            this.frameworkDispatcherTimer.Start();
+        }
+
+        void IApplicationService.StopService() {
+            this.frameworkDispatcherTimer.Stop();
+        }
     }
 }

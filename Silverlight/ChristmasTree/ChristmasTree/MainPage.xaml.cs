@@ -23,12 +23,12 @@ namespace ChristmasTree
 {
     public partial class MainPage : PhoneApplicationPage
     {
+        private bool isMoveToy;
         private Image dragImage;
         private Image moveImage;
         private DispatcherTimer timerCreateToy;
         private DispatcherTimer timerHideToy;
         private BitmapImage biCreateToy;
-        private bool isMoveToy;
         private Point lastPointMove;
         private Point firstPointMove;
         private Point firstPointHideToy;
@@ -78,7 +78,7 @@ namespace ChristmasTree
             this.marketplaceDetailTask                   = new MarketplaceDetailTask();
 #if DEBUG_TRIAL
             this.marketplaceDetailTask.ContentType       = MarketplaceContentType.Applications;
-            this.marketplaceDetailTask.ContentIdentifier = "5b121f57-90a6-4c82-9652-529c3f0c5f8b";
+            this.marketplaceDetailTask.ContentIdentifier = "ca7b1704-42b5-4208-be23-e280d04e662c";
 #endif
         }
 
@@ -112,8 +112,11 @@ namespace ChristmasTree
             this.TreeImage.Source = new BitmapImage(new Uri(this.treeSettings, UriKind.Relative));
             this.TreeImageLayer.Source = new BitmapImage(new Uri(this.treeLayerSettings, UriKind.Relative));
 
-            this.mediaElement.Source = new Uri("/Sound/music.mp3", UriKind.Relative);
-            this.mediaElement.Play();
+            if ((Application.Current as App).HasMusicControl)
+            {
+                this.mediaElement.Source = new Uri("/Sound/music.mp3", UriKind.Relative);
+                this.mediaElement.Play();
+            }
         }
 
         private bool validateToy(int center_x, int center_y)
@@ -282,8 +285,11 @@ namespace ChristmasTree
 
         private void mediaElement_MediaEnded(object sender, RoutedEventArgs e)
         {
-            this.mediaElement.Source = new Uri("/Sound/music.mp3", UriKind.Relative);
-            this.mediaElement.Play();
+            if ((Application.Current as App).HasMusicControl)
+            {
+                this.mediaElement.Source = new Uri("/Sound/music.mp3", UriKind.Relative);
+                this.mediaElement.Play();
+            }
         }
 
         private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

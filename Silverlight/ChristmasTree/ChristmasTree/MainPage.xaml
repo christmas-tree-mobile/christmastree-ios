@@ -17,7 +17,7 @@
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel">
-            <MediaElement x:Name="mediaElement" Source="/Sound/music.mp3" MediaEnded="mediaElement_MediaEnded" Visibility="Collapsed" />
+            <MediaElement x:Name="mediaElement" MediaEnded="mediaElement_MediaEnded" Visibility="Collapsed" />
 
             <Grid x:Name="ToyGrid" Background="Transparent">
                 <Image Name="BackgroundImage" Stretch="Uniform" IsHitTestVisible="False" />
