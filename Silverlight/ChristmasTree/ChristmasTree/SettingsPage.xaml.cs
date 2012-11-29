@@ -32,6 +32,9 @@ namespace ChristmasTree
         private string backgroundSettings;
         private string treeSettings;
         private string treeLayerSettings;
+        private string volumeSettings;
+
+        private double defaultVolume = 0.75;
 
         public SettingsPage()
         {
@@ -45,7 +48,9 @@ namespace ChristmasTree
             if (this.backgroundSettings == "" || this.backgroundSettings == null)
             {
                 this.backgroundSettings = this.background1;
+
                 IsolatedStorageSettings.ApplicationSettings.Add("background_string", this.backgroundSettings);
+                IsolatedStorageSettings.ApplicationSettings.Save();
             }
 
             if (this.backgroundSettings == this.background1)
@@ -72,7 +77,9 @@ namespace ChristmasTree
             if (this.treeSettings == "" || this.treeSettings == null)
             {
                 this.treeSettings = this.tree1;
+
                 IsolatedStorageSettings.ApplicationSettings.Add("tree_string", this.treeSettings);
+                IsolatedStorageSettings.ApplicationSettings.Save();
             }
 
             if (this.treeSettings == this.tree1)
@@ -93,6 +100,40 @@ namespace ChristmasTree
                 this.borderTr2.BorderBrush = new SolidColorBrush(Colors.Transparent);
                 this.borderTr3.BorderBrush = new SolidColorBrush(Colors.White);
             }
+
+            IsolatedStorageSettings.ApplicationSettings.TryGetValue<string>("volume_string", out this.volumeSettings);
+
+            if (this.volumeSettings == "" || this.volumeSettings == null)
+            {
+                this.volumeSettings = Convert.ToString(this.defaultVolume);
+
+                IsolatedStorageSettings.ApplicationSettings.Add("volume_string", this.volumeSettings);
+                IsolatedStorageSettings.ApplicationSettings.Save();
+            }
+
+            try
+            {
+                this.VolumeSlider.Value = Convert.ToDouble(this.volumeSettings);
+            }
+            catch (Exception)
+            {
+                this.VolumeSlider.Value = this.defaultVolume;
+            }
+
+            if ((Application.Current as App).HasMusicControl)
+            {
+                this.mediaElement.Source = new Uri("/Sound/music.mp3", UriKind.Relative);
+                this.mediaElement.Play();
+            }
+        }
+
+        private void mediaElement_MediaEnded(object sender, RoutedEventArgs e)
+        {
+            if ((Application.Current as App).HasMusicControl)
+            {
+                this.mediaElement.Source = new Uri("/Sound/music.mp3", UriKind.Relative);
+                this.mediaElement.Play();
+            }
         }
 
         private void imageBg1_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -104,6 +145,7 @@ namespace ChristmasTree
             this.borderBg3.BorderBrush = new SolidColorBrush(Colors.Transparent);
 
             IsolatedStorageSettings.ApplicationSettings["background_string"] = this.backgroundSettings;
+            IsolatedStorageSettings.ApplicationSettings.Save();
         }
 
         private void imageBg2_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -114,7 +156,8 @@ namespace ChristmasTree
             this.borderBg2.BorderBrush = new SolidColorBrush(Colors.White);
             this.borderBg3.BorderBrush = new SolidColorBrush(Colors.Transparent);
 
-            IsolatedStorageSettings.ApplicationSettings["background_string"] = this.backgroundSettings;            
+            IsolatedStorageSettings.ApplicationSettings["background_string"] = this.backgroundSettings;
+            IsolatedStorageSettings.ApplicationSettings.Save();
         }
 
         private void imageBg3_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -125,7 +168,8 @@ namespace ChristmasTree
             this.borderBg2.BorderBrush = new SolidColorBrush(Colors.Transparent);
             this.borderBg3.BorderBrush = new SolidColorBrush(Colors.White);
 
-            IsolatedStorageSettings.ApplicationSettings["background_string"] = this.backgroundSettings;            
+            IsolatedStorageSettings.ApplicationSettings["background_string"] = this.backgroundSettings;
+            IsolatedStorageSettings.ApplicationSettings.Save();
         }
 
         private void imageTr1_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -139,6 +183,7 @@ namespace ChristmasTree
 
             IsolatedStorageSettings.ApplicationSettings["tree_string"] = this.treeSettings;
             IsolatedStorageSettings.ApplicationSettings["tree_layer_string"] = this.treeLayerSettings;
+            IsolatedStorageSettings.ApplicationSettings.Save();
         }
 
         private void imageTr2_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -151,7 +196,8 @@ namespace ChristmasTree
             this.borderTr3.BorderBrush = new SolidColorBrush(Colors.Transparent);
 
             IsolatedStorageSettings.ApplicationSettings["tree_string"] = this.treeSettings;
-            IsolatedStorageSettings.ApplicationSettings["tree_layer_string"] = this.treeLayerSettings;            
+            IsolatedStorageSettings.ApplicationSettings["tree_layer_string"] = this.treeLayerSettings;
+            IsolatedStorageSettings.ApplicationSettings.Save();
         }
 
         private void imageTr3_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -164,7 +210,16 @@ namespace ChristmasTree
             this.borderTr3.BorderBrush = new SolidColorBrush(Colors.White);
 
             IsolatedStorageSettings.ApplicationSettings["tree_string"] = this.treeSettings;
-            IsolatedStorageSettings.ApplicationSettings["tree_layer_string"] = this.treeLayerSettings;            
+            IsolatedStorageSettings.ApplicationSettings["tree_layer_string"] = this.treeLayerSettings;
+            IsolatedStorageSettings.ApplicationSettings.Save();
+        }
+
+        private void VolumeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            this.mediaElement.Volume = e.NewValue;
+
+            IsolatedStorageSettings.ApplicationSettings["volume_string"] = Convert.ToString(this.mediaElement.Volume);
+            IsolatedStorageSettings.ApplicationSettings.Save();
         }
     }
 }

@@ -18,7 +18,6 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel">
             <MediaElement x:Name="mediaElement" MediaEnded="mediaElement_MediaEnded" Visibility="Collapsed" />
-
             <Grid x:Name="ToyGrid" Background="Transparent">
                 <Image Name="BackgroundImage" Stretch="Uniform" IsHitTestVisible="False" />
                 <Image Name="TreeImage" Stretch="Uniform" Canvas.ZIndex="1" IsHitTestVisible="False" />

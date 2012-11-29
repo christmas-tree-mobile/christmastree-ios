@@ -47,12 +47,14 @@ namespace ChristmasTree
         private string backgroundSettings;
         private string treeSettings;
         private string treeLayerSettings;
+        private string volumeSettings;
 
         private MarketplaceDetailTask marketplaceDetailTask;
 
-        private string tree1 = "/Images/tree-1-bg.png";
-        private string treeLayer1 = "/Images/tree-1-fg.png";
-        private string background1 = "/Images/bg-1.png";
+        private double defaultVolume = 0.75;
+        private string defaultTree = "/Images/tree-1-bg.png";
+        private string defaultTreeLayer = "/Images/tree-1-fg.png";
+        private string defaultBackground = "/Images/bg-1.png";
 
         public MainPage()
         {
@@ -88,29 +90,54 @@ namespace ChristmasTree
 
             if (this.backgroundSettings == "" || this.backgroundSettings == null)
             {
-                this.backgroundSettings = this.background1;
+                this.backgroundSettings = this.defaultBackground;
+
                 IsolatedStorageSettings.ApplicationSettings.Add("background_string", this.backgroundSettings);
+                IsolatedStorageSettings.ApplicationSettings.Save();
             }
 
             IsolatedStorageSettings.ApplicationSettings.TryGetValue<string>("tree_layer_string", out this.treeLayerSettings);            
 
             if (this.treeLayerSettings == "" || this.treeLayerSettings == null) 
             {
-                this.treeLayerSettings = this.treeLayer1;
+                this.treeLayerSettings = this.defaultTreeLayer;
+
                 IsolatedStorageSettings.ApplicationSettings.Add("tree_layer_string", this.treeLayerSettings);
+                IsolatedStorageSettings.ApplicationSettings.Save();
             }
 
             IsolatedStorageSettings.ApplicationSettings.TryGetValue<string>("tree_string", out this.treeSettings);
 
             if (this.treeSettings == "" || this.treeSettings == null)
             {
-                this.treeSettings = this.tree1;                
+                this.treeSettings = this.defaultTree;
+
                 IsolatedStorageSettings.ApplicationSettings.Add("tree_string", this.treeSettings);
+                IsolatedStorageSettings.ApplicationSettings.Save();
             }
 
             this.BackgroundImage.Source = new BitmapImage(new Uri(this.backgroundSettings, UriKind.Relative));
             this.TreeImage.Source = new BitmapImage(new Uri(this.treeSettings, UriKind.Relative));
             this.TreeImageLayer.Source = new BitmapImage(new Uri(this.treeLayerSettings, UriKind.Relative));
+
+            IsolatedStorageSettings.ApplicationSettings.TryGetValue<string>("volume_string", out this.volumeSettings);
+
+            if (this.volumeSettings == "" || this.volumeSettings == null)
+            {
+                this.volumeSettings = Convert.ToString(this.defaultVolume);
+
+                IsolatedStorageSettings.ApplicationSettings.Add("volume_string", this.volumeSettings);
+                IsolatedStorageSettings.ApplicationSettings.Save();
+            }
+
+            try
+            {
+                this.mediaElement.Volume = Convert.ToDouble(this.volumeSettings);
+            }
+            catch (Exception)
+            {
+                this.mediaElement.Volume = this.defaultVolume;
+            }
 
             if ((Application.Current as App).HasMusicControl)
             {
@@ -406,26 +433,7 @@ namespace ChristmasTree
 
         private void ImgBtnSettings_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            if ((Application.Current as App).TrialMode)
-            {
-                MessageBoxResult result = MessageBox.Show(AppResources.MessageBoxMessageSettingsTrialVersionQuestion, AppResources.MessageBoxHeaderInfo, MessageBoxButton.OKCancel);
-
-                if (result == MessageBoxResult.OK)
-                {
-                    try
-                    {
-                        this.marketplaceDetailTask.Show();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(AppResources.MessageBoxMessageMarketplaceOpenError + " " + ex.Message.ToString(), AppResources.MessageBoxHeaderError, MessageBoxButton.OK);
-                    }
-                }
-            }
-            else
-            {
-                NavigationService.Navigate(new Uri("/SettingsPage.xaml", UriKind.Relative));
-            }
+            NavigationService.Navigate(new Uri("/SettingsPage.xaml", UriKind.Relative));
         }
 
         private void ImgBtnToys_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
