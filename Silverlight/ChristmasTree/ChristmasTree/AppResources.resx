@@ -136,6 +136,6 @@
     <value>Could not open Marketplace:</value>
   </data>
   <data name="MessageBoxMessageSettingsTrialVersionQuestion" xml:space="preserve">
-    <value>Application settings are available in the full version only. Do you want to purchase full version now?</value>
+    <value>These settings are available in the full version only. Do you want to purchase full version now?</value>
   </data>
 </root>

@@ -136,6 +136,6 @@
     <value>Невозможно открыть Marketplace:</value>
   </data>
   <data name="MessageBoxMessageSettingsTrialVersionQuestion" xml:space="preserve">
-    <value>Настройки приложения доступны только в полной версии. Хотите купить полную версию?</value>
+    <value>Эти настройки доступны только в полной версии. Хотите купить полную версию?</value>
   </data>
 </root>

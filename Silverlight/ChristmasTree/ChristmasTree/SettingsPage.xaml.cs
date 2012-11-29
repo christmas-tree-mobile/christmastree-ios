@@ -13,11 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
+using Microsoft.Phone.Tasks;
 
 namespace ChristmasTree
 {
     public partial class SettingsPage : PhoneApplicationPage
     {
+        private MarketplaceDetailTask marketplaceDetailTask;
+
         private string tree1 = "/Images/tree-1-bg.png";
         private string tree2 = "/Images/tree-2-bg.png";
         private string tree3 = "/Images/tree-3-bg.png";
@@ -40,6 +43,12 @@ namespace ChristmasTree
         public SettingsPage()
         {
             InitializeComponent();
+
+            this.marketplaceDetailTask                   = new MarketplaceDetailTask();
+#if DEBUG_TRIAL
+            this.marketplaceDetailTask.ContentType       = MarketplaceContentType.Applications;
+            this.marketplaceDetailTask.ContentIdentifier = "ca7b1704-42b5-4208-be23-e280d04e662c";
+#endif
 
             if ((System.Windows.Visibility)App.Current.Resources["PhoneDarkThemeVisibility"] == System.Windows.Visibility.Visible)
             {
@@ -150,80 +159,194 @@ namespace ChristmasTree
 
         private void imageBg1_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            this.backgroundSettings = this.background1;
+            if ((Application.Current as App).TrialMode)
+            {
+                MessageBoxResult result = MessageBox.Show(AppResources.MessageBoxMessageSettingsTrialVersionQuestion, AppResources.MessageBoxHeaderInfo, MessageBoxButton.OKCancel);
 
-            this.borderBg1.BorderBrush = new SolidColorBrush(Colors.Red);
-            this.borderBg2.BorderBrush = new SolidColorBrush(Colors.Transparent);
-            this.borderBg3.BorderBrush = new SolidColorBrush(Colors.Transparent);
+                if (result == MessageBoxResult.OK)
+                {
+                    try
+                    {
+                        this.marketplaceDetailTask.Show();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(AppResources.MessageBoxMessageMarketplaceOpenError + " " + ex.Message.ToString(), AppResources.MessageBoxHeaderError, MessageBoxButton.OK);
+                    }
+                }
+            }
+            else
+            {
+                this.backgroundSettings = this.background1;
 
-            IsolatedStorageSettings.ApplicationSettings["background_string"] = this.backgroundSettings;
-            IsolatedStorageSettings.ApplicationSettings.Save();
+                this.borderBg1.BorderBrush = new SolidColorBrush(Colors.Red);
+                this.borderBg2.BorderBrush = new SolidColorBrush(Colors.Transparent);
+                this.borderBg3.BorderBrush = new SolidColorBrush(Colors.Transparent);
+
+                IsolatedStorageSettings.ApplicationSettings["background_string"] = this.backgroundSettings;
+                IsolatedStorageSettings.ApplicationSettings.Save();
+            }
         }
 
         private void imageBg2_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            this.backgroundSettings = this.background2;
+            if ((Application.Current as App).TrialMode)
+            {
+                MessageBoxResult result = MessageBox.Show(AppResources.MessageBoxMessageSettingsTrialVersionQuestion, AppResources.MessageBoxHeaderInfo, MessageBoxButton.OKCancel);
 
-            this.borderBg1.BorderBrush = new SolidColorBrush(Colors.Transparent);
-            this.borderBg2.BorderBrush = new SolidColorBrush(Colors.Red);
-            this.borderBg3.BorderBrush = new SolidColorBrush(Colors.Transparent);
+                if (result == MessageBoxResult.OK)
+                {
+                    try
+                    {
+                        this.marketplaceDetailTask.Show();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(AppResources.MessageBoxMessageMarketplaceOpenError + " " + ex.Message.ToString(), AppResources.MessageBoxHeaderError, MessageBoxButton.OK);
+                    }
+                }
+            }
+            else
+            {
+                this.backgroundSettings = this.background2;
 
-            IsolatedStorageSettings.ApplicationSettings["background_string"] = this.backgroundSettings;
-            IsolatedStorageSettings.ApplicationSettings.Save();
+                this.borderBg1.BorderBrush = new SolidColorBrush(Colors.Transparent);
+                this.borderBg2.BorderBrush = new SolidColorBrush(Colors.Red);
+                this.borderBg3.BorderBrush = new SolidColorBrush(Colors.Transparent);
+
+                IsolatedStorageSettings.ApplicationSettings["background_string"] = this.backgroundSettings;
+                IsolatedStorageSettings.ApplicationSettings.Save();
+            }
         }
 
         private void imageBg3_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            this.backgroundSettings = this.background3;
+            if ((Application.Current as App).TrialMode)
+            {
+                MessageBoxResult result = MessageBox.Show(AppResources.MessageBoxMessageSettingsTrialVersionQuestion, AppResources.MessageBoxHeaderInfo, MessageBoxButton.OKCancel);
 
-            this.borderBg1.BorderBrush = new SolidColorBrush(Colors.Transparent);
-            this.borderBg2.BorderBrush = new SolidColorBrush(Colors.Transparent);
-            this.borderBg3.BorderBrush = new SolidColorBrush(Colors.Red);
+                if (result == MessageBoxResult.OK)
+                {
+                    try
+                    {
+                        this.marketplaceDetailTask.Show();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(AppResources.MessageBoxMessageMarketplaceOpenError + " " + ex.Message.ToString(), AppResources.MessageBoxHeaderError, MessageBoxButton.OK);
+                    }
+                }
+            }
+            else
+            {
+                this.backgroundSettings = this.background3;
 
-            IsolatedStorageSettings.ApplicationSettings["background_string"] = this.backgroundSettings;
-            IsolatedStorageSettings.ApplicationSettings.Save();
+                this.borderBg1.BorderBrush = new SolidColorBrush(Colors.Transparent);
+                this.borderBg2.BorderBrush = new SolidColorBrush(Colors.Transparent);
+                this.borderBg3.BorderBrush = new SolidColorBrush(Colors.Red);
+
+                IsolatedStorageSettings.ApplicationSettings["background_string"] = this.backgroundSettings;
+                IsolatedStorageSettings.ApplicationSettings.Save();
+            }
         }
 
         private void imageTr1_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            this.treeSettings = this.tree1;
-            this.treeLayerSettings = this.treeLayer1;
+            if ((Application.Current as App).TrialMode)
+            {
+                MessageBoxResult result = MessageBox.Show(AppResources.MessageBoxMessageSettingsTrialVersionQuestion, AppResources.MessageBoxHeaderInfo, MessageBoxButton.OKCancel);
 
-            this.borderTr1.BorderBrush = new SolidColorBrush(Colors.Red);
-            this.borderTr2.BorderBrush = new SolidColorBrush(Colors.Transparent);
-            this.borderTr3.BorderBrush = new SolidColorBrush(Colors.Transparent);
+                if (result == MessageBoxResult.OK)
+                {
+                    try
+                    {
+                        this.marketplaceDetailTask.Show();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(AppResources.MessageBoxMessageMarketplaceOpenError + " " + ex.Message.ToString(), AppResources.MessageBoxHeaderError, MessageBoxButton.OK);
+                    }
+                }
+            }
+            else
+            {
+                this.treeSettings = this.tree1;
+                this.treeLayerSettings = this.treeLayer1;
 
-            IsolatedStorageSettings.ApplicationSettings["tree_string"] = this.treeSettings;
-            IsolatedStorageSettings.ApplicationSettings["tree_layer_string"] = this.treeLayerSettings;
-            IsolatedStorageSettings.ApplicationSettings.Save();
+                this.borderTr1.BorderBrush = new SolidColorBrush(Colors.Red);
+                this.borderTr2.BorderBrush = new SolidColorBrush(Colors.Transparent);
+                this.borderTr3.BorderBrush = new SolidColorBrush(Colors.Transparent);
+
+                IsolatedStorageSettings.ApplicationSettings["tree_string"] = this.treeSettings;
+                IsolatedStorageSettings.ApplicationSettings["tree_layer_string"] = this.treeLayerSettings;
+                IsolatedStorageSettings.ApplicationSettings.Save();
+            }
         }
 
         private void imageTr2_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            this.treeSettings = this.tree2;
-            this.treeLayerSettings = this.treeLayer2;
+            if ((Application.Current as App).TrialMode)
+            {
+                MessageBoxResult result = MessageBox.Show(AppResources.MessageBoxMessageSettingsTrialVersionQuestion, AppResources.MessageBoxHeaderInfo, MessageBoxButton.OKCancel);
 
-            this.borderTr1.BorderBrush = new SolidColorBrush(Colors.Transparent);
-            this.borderTr2.BorderBrush = new SolidColorBrush(Colors.Red);
-            this.borderTr3.BorderBrush = new SolidColorBrush(Colors.Transparent);
+                if (result == MessageBoxResult.OK)
+                {
+                    try
+                    {
+                        this.marketplaceDetailTask.Show();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(AppResources.MessageBoxMessageMarketplaceOpenError + " " + ex.Message.ToString(), AppResources.MessageBoxHeaderError, MessageBoxButton.OK);
+                    }
+                }
+            }
+            else
+            {
+                this.treeSettings = this.tree2;
+                this.treeLayerSettings = this.treeLayer2;
 
-            IsolatedStorageSettings.ApplicationSettings["tree_string"] = this.treeSettings;
-            IsolatedStorageSettings.ApplicationSettings["tree_layer_string"] = this.treeLayerSettings;
-            IsolatedStorageSettings.ApplicationSettings.Save();
+                this.borderTr1.BorderBrush = new SolidColorBrush(Colors.Transparent);
+                this.borderTr2.BorderBrush = new SolidColorBrush(Colors.Red);
+                this.borderTr3.BorderBrush = new SolidColorBrush(Colors.Transparent);
+
+                IsolatedStorageSettings.ApplicationSettings["tree_string"] = this.treeSettings;
+                IsolatedStorageSettings.ApplicationSettings["tree_layer_string"] = this.treeLayerSettings;
+                IsolatedStorageSettings.ApplicationSettings.Save();
+            }
         }
 
         private void imageTr3_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            this.treeSettings = this.tree3;
-            this.treeLayerSettings = this.treeLayer3;
+            if ((Application.Current as App).TrialMode)
+            {
+                MessageBoxResult result = MessageBox.Show(AppResources.MessageBoxMessageSettingsTrialVersionQuestion, AppResources.MessageBoxHeaderInfo, MessageBoxButton.OKCancel);
 
-            this.borderTr1.BorderBrush = new SolidColorBrush(Colors.Transparent);
-            this.borderTr2.BorderBrush = new SolidColorBrush(Colors.Transparent);
-            this.borderTr3.BorderBrush = new SolidColorBrush(Colors.Red);
+                if (result == MessageBoxResult.OK)
+                {
+                    try
+                    {
+                        this.marketplaceDetailTask.Show();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(AppResources.MessageBoxMessageMarketplaceOpenError + " " + ex.Message.ToString(), AppResources.MessageBoxHeaderError, MessageBoxButton.OK);
+                    }
+                }
+            }
+            else
+            {
+                this.treeSettings = this.tree3;
+                this.treeLayerSettings = this.treeLayer3;
 
-            IsolatedStorageSettings.ApplicationSettings["tree_string"] = this.treeSettings;
-            IsolatedStorageSettings.ApplicationSettings["tree_layer_string"] = this.treeLayerSettings;
-            IsolatedStorageSettings.ApplicationSettings.Save();
+                this.borderTr1.BorderBrush = new SolidColorBrush(Colors.Transparent);
+                this.borderTr2.BorderBrush = new SolidColorBrush(Colors.Transparent);
+                this.borderTr3.BorderBrush = new SolidColorBrush(Colors.Red);
+
+                IsolatedStorageSettings.ApplicationSettings["tree_string"] = this.treeSettings;
+                IsolatedStorageSettings.ApplicationSettings["tree_layer_string"] = this.treeLayerSettings;
+                IsolatedStorageSettings.ApplicationSettings.Save();
+            }
         }
 
         private void VolumeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)

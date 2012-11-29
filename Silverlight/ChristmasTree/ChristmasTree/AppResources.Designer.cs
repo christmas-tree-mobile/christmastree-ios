@@ -115,7 +115,7 @@ namespace ChristmasTree {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Application settings are available in the full version only. Do you want to purchase full version now?.
+        ///   Looks up a localized string similar to These settings are available in the full version only. Do you want to purchase full version now?.
         /// </summary>
         public static string MessageBoxMessageSettingsTrialVersionQuestion {
             get {
