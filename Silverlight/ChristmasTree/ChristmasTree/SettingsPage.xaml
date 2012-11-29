@@ -16,7 +16,7 @@
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Background="Black">
+        <Grid x:Name="ContentPanel">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="200" />
@@ -58,7 +58,7 @@
                     <ColumnDefinition Width="48" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Image Width="48" Height="48" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Source="/Images/misc/volume.png" />
+                <Image x:Name="VolumeLabelImage" Width="48" Height="48" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" />
                 <Slider x:Name="VolumeSlider" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Column="1" Minimum="0" Maximum="1" LargeChange="0.1" SmallChange="0.1" ValueChanged="VolumeSlider_ValueChanged" />
             </Grid>
         </Grid>

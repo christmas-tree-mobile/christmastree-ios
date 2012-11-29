@@ -9,6 +9,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
@@ -39,6 +40,15 @@ namespace ChristmasTree
         public SettingsPage()
         {
             InitializeComponent();
+
+            if ((System.Windows.Visibility)App.Current.Resources["PhoneDarkThemeVisibility"] == System.Windows.Visibility.Visible)
+            {
+                this.VolumeLabelImage.Source = new BitmapImage(new Uri("/Images/dark/volume.png", UriKind.Relative));
+            }
+            else
+            {
+                this.VolumeLabelImage.Source = new BitmapImage(new Uri("/Images/light/volume.png", UriKind.Relative));
+            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -55,21 +65,21 @@ namespace ChristmasTree
 
             if (this.backgroundSettings == this.background1)
             {
-                this.borderBg1.BorderBrush = new SolidColorBrush(Colors.White);
+                this.borderBg1.BorderBrush = new SolidColorBrush(Colors.Red);
                 this.borderBg2.BorderBrush = new SolidColorBrush(Colors.Transparent);
                 this.borderBg3.BorderBrush = new SolidColorBrush(Colors.Transparent);
             }
             if (this.backgroundSettings == this.background2)
             {
                 this.borderBg1.BorderBrush = new SolidColorBrush(Colors.Transparent);
-                this.borderBg2.BorderBrush = new SolidColorBrush(Colors.White);
+                this.borderBg2.BorderBrush = new SolidColorBrush(Colors.Red);
                 this.borderBg3.BorderBrush = new SolidColorBrush(Colors.Transparent);
             }
             if (this.backgroundSettings == this.background3)
             {
                 this.borderBg1.BorderBrush = new SolidColorBrush(Colors.Transparent);
                 this.borderBg2.BorderBrush = new SolidColorBrush(Colors.Transparent);
-                this.borderBg3.BorderBrush = new SolidColorBrush(Colors.White);
+                this.borderBg3.BorderBrush = new SolidColorBrush(Colors.Red);
             }
 
             IsolatedStorageSettings.ApplicationSettings.TryGetValue<string>("tree_string", out this.treeSettings);
@@ -84,21 +94,21 @@ namespace ChristmasTree
 
             if (this.treeSettings == this.tree1)
             {
-                this.borderTr1.BorderBrush = new SolidColorBrush(Colors.White);
+                this.borderTr1.BorderBrush = new SolidColorBrush(Colors.Red);
                 this.borderTr2.BorderBrush = new SolidColorBrush(Colors.Transparent);
                 this.borderTr3.BorderBrush = new SolidColorBrush(Colors.Transparent);
             }
             if (this.treeSettings == this.tree2)
             {
                 this.borderTr1.BorderBrush = new SolidColorBrush(Colors.Transparent);
-                this.borderTr2.BorderBrush = new SolidColorBrush(Colors.White);
+                this.borderTr2.BorderBrush = new SolidColorBrush(Colors.Red);
                 this.borderTr3.BorderBrush = new SolidColorBrush(Colors.Transparent);
             }
             if (this.treeSettings == this.tree3)
             {
                 this.borderTr1.BorderBrush = new SolidColorBrush(Colors.Transparent);
                 this.borderTr2.BorderBrush = new SolidColorBrush(Colors.Transparent);
-                this.borderTr3.BorderBrush = new SolidColorBrush(Colors.White);
+                this.borderTr3.BorderBrush = new SolidColorBrush(Colors.Red);
             }
 
             IsolatedStorageSettings.ApplicationSettings.TryGetValue<string>("volume_string", out this.volumeSettings);
@@ -142,7 +152,7 @@ namespace ChristmasTree
         {
             this.backgroundSettings = this.background1;
 
-            this.borderBg1.BorderBrush = new SolidColorBrush(Colors.White);
+            this.borderBg1.BorderBrush = new SolidColorBrush(Colors.Red);
             this.borderBg2.BorderBrush = new SolidColorBrush(Colors.Transparent);
             this.borderBg3.BorderBrush = new SolidColorBrush(Colors.Transparent);
 
@@ -155,7 +165,7 @@ namespace ChristmasTree
             this.backgroundSettings = this.background2;
 
             this.borderBg1.BorderBrush = new SolidColorBrush(Colors.Transparent);
-            this.borderBg2.BorderBrush = new SolidColorBrush(Colors.White);
+            this.borderBg2.BorderBrush = new SolidColorBrush(Colors.Red);
             this.borderBg3.BorderBrush = new SolidColorBrush(Colors.Transparent);
 
             IsolatedStorageSettings.ApplicationSettings["background_string"] = this.backgroundSettings;
@@ -168,7 +178,7 @@ namespace ChristmasTree
 
             this.borderBg1.BorderBrush = new SolidColorBrush(Colors.Transparent);
             this.borderBg2.BorderBrush = new SolidColorBrush(Colors.Transparent);
-            this.borderBg3.BorderBrush = new SolidColorBrush(Colors.White);
+            this.borderBg3.BorderBrush = new SolidColorBrush(Colors.Red);
 
             IsolatedStorageSettings.ApplicationSettings["background_string"] = this.backgroundSettings;
             IsolatedStorageSettings.ApplicationSettings.Save();
@@ -179,7 +189,7 @@ namespace ChristmasTree
             this.treeSettings = this.tree1;
             this.treeLayerSettings = this.treeLayer1;
 
-            this.borderTr1.BorderBrush = new SolidColorBrush(Colors.White);
+            this.borderTr1.BorderBrush = new SolidColorBrush(Colors.Red);
             this.borderTr2.BorderBrush = new SolidColorBrush(Colors.Transparent);
             this.borderTr3.BorderBrush = new SolidColorBrush(Colors.Transparent);
 
@@ -194,7 +204,7 @@ namespace ChristmasTree
             this.treeLayerSettings = this.treeLayer2;
 
             this.borderTr1.BorderBrush = new SolidColorBrush(Colors.Transparent);
-            this.borderTr2.BorderBrush = new SolidColorBrush(Colors.White);
+            this.borderTr2.BorderBrush = new SolidColorBrush(Colors.Red);
             this.borderTr3.BorderBrush = new SolidColorBrush(Colors.Transparent);
 
             IsolatedStorageSettings.ApplicationSettings["tree_string"] = this.treeSettings;
@@ -209,7 +219,7 @@ namespace ChristmasTree
 
             this.borderTr1.BorderBrush = new SolidColorBrush(Colors.Transparent);
             this.borderTr2.BorderBrush = new SolidColorBrush(Colors.Transparent);
-            this.borderTr3.BorderBrush = new SolidColorBrush(Colors.White);
+            this.borderTr3.BorderBrush = new SolidColorBrush(Colors.Red);
 
             IsolatedStorageSettings.ApplicationSettings["tree_string"] = this.treeSettings;
             IsolatedStorageSettings.ApplicationSettings["tree_layer_string"] = this.treeLayerSettings;
