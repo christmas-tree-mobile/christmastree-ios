@@ -113,11 +113,13 @@ namespace ChristmasTree
 
             try
             {
-                this.VolumeSlider.Value = Convert.ToDouble(this.volumeSettings);
+                this.mediaElement.Volume = Convert.ToDouble(this.volumeSettings);
+                this.VolumeSlider.Value  = Convert.ToDouble(this.volumeSettings);
             }
             catch (Exception)
             {
-                this.VolumeSlider.Value = this.defaultVolume;
+                this.mediaElement.Volume = this.defaultVolume;
+                this.VolumeSlider.Value  = this.defaultVolume;
             }
 
             if ((Application.Current as App).HasMusicControl)

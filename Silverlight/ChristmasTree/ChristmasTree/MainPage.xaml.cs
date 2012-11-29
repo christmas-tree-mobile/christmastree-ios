@@ -51,10 +51,10 @@ namespace ChristmasTree
 
         private MarketplaceDetailTask marketplaceDetailTask;
 
-        private double defaultVolume = 0.75;
         private string defaultTree = "/Images/tree-1-bg.png";
         private string defaultTreeLayer = "/Images/tree-1-fg.png";
         private string defaultBackground = "/Images/bg-1.png";
+        private double defaultVolume = 0.75;
 
         public MainPage()
         {
