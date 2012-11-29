@@ -9,7 +9,7 @@ using System.Resources;
 [assembly: AssemblyTitle("ChristmasTree")]
 [assembly: AssemblyDescription("ChristmasTree allows you to decorate your own virtual Christmas Tree.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Natalia Derevenetz")]
+[assembly: AssemblyCompany("Natalia Derevenets")]
 [assembly: AssemblyProduct("ChristmasTree")]
 [assembly: AssemblyCopyright("Copyright ©  2012")]
 [assembly: AssemblyTrademark("")]
