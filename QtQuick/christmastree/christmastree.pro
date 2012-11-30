@@ -1,5 +1,5 @@
 TARGET = ChristmasTree
-VERSION = 1.0.0
+VERSION = 1.1.0
 
 TEMPLATE = app
 QT += core gui declarative
@@ -44,7 +44,7 @@ symbian: {
     ICON = icon.svg
 
     # SIS header: name, uid, version
-    packageheader = "$${LITERAL_HASH}{\"ChristmasTree\"}, (0x2004B229), 1, 0, 0, TYPE=SA"
+    packageheader = "$${LITERAL_HASH}{\"ChristmasTree\"}, (0x2004B229), 1, 1, 0, TYPE=SA"
     # Vendor info: localised and non-localised vendor names
     vendorinfo = "%{\"Oleg Derevenetz\"}" ":\"Oleg Derevenetz\""
 
