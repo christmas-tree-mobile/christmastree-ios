@@ -64,7 +64,7 @@ namespace ChristmasTree
             this.dragImage = null;
             this.countAnimationStart = 0;
 
-            for (int i = 1; i < 42; i++)
+            for (int i = 1; i <= 37; i++)
             {
                 this.ItemListBox.Items.Add(new ChristmasItem("/Images/toys/toy-" + i.ToString() + ".png"));
             }

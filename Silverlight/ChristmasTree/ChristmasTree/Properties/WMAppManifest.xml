@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2009/deployment" AppPlatformVersion="7.1">
-  <App xmlns="" ProductID="{20457ad6-7e2a-4096-849f-240174093880}" Title="ChristmasTree" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal"  Author="Natalia Derevenets" Description="ChristmasTree allows you to decorate your own virtual Christmas Tree." Publisher="ChristmasTree">
+  <App xmlns="" ProductID="{20457ad6-7e2a-4096-849f-240174093880}" Title="ChristmasTree" RuntimeType="Silverlight" Version="1.1.0.0" Genre="apps.normal"  Author="Natalia Derevenets" Description="ChristmasTree allows you to decorate your own virtual Christmas Tree." Publisher="ChristmasTree">
     <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_GAMERSERVICES"/>
