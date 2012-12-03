@@ -20,6 +20,8 @@ namespace ChristmasTree
     public partial class HelpPage : PhoneApplicationPage
     {
         private static string[] HELP_FILES = {"Help/help.html",
+                                              "Help/help.de-DE.html",
+                                              "Help/help.fr-FR.html",
                                               "Help/help.ru-RU.html",
                                               "Help/settings_button.png",
                                               "Help/toys_button.png",
