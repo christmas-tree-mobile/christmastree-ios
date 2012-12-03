@@ -15,7 +15,7 @@ Page {
     property int currentTreeNum:         1
     property int maxTreeNum:             3
     property int maxToyNum:              37
-    property int maxTwinkleNum:          0
+    property int maxTwinkleNum:          3
     property int currentSnowflakesCount: 10
     property int defaultSnowflakesCount: 10
 

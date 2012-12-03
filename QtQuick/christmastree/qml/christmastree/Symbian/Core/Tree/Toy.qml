@@ -138,7 +138,7 @@ Image {
             property: "opacity"
             from:     1.0
             to:       0.5
-            duration: 2000
+            duration: 500
         }
 
         PropertyAnimation {
@@ -147,7 +147,7 @@ Image {
             property: "opacity"
             from:     0.5
             to:       1.0
-            duration: 2000
+            duration: 500
         }
     }
 }
