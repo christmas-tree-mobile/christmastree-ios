@@ -61,7 +61,7 @@ namespace ChristmasTree
             InitializeComponent();
 
             this.isMoveToy = false;
-            this.dragImage = null;            
+            this.dragImage = null;
             this.countAnimationStart = 0;
 
             for (int i = 1; i <= 37; i++)
@@ -179,16 +179,17 @@ namespace ChristmasTree
         private void destroyToy(Image item)
         {
             Storyboard sb = new Storyboard();
-            DoubleAnimation fadeInAnimation = new DoubleAnimation();            
-            fadeInAnimation.From = 0;            
-            fadeInAnimation.To = this.ToyGrid.ActualHeight * 2;
-            fadeInAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
-            
-            Storyboard.SetTarget(fadeInAnimation, item);
-            Storyboard.SetTargetProperty(fadeInAnimation, new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.Y)"));
+            DoubleAnimation fallAnimation = new DoubleAnimation();
 
-            sb.Completed += new EventHandler(story_Completed);
-            sb.Children.Add(fadeInAnimation);            
+            fallAnimation.From = 0;
+            fallAnimation.To = this.ToyGrid.ActualHeight * 2;
+            fallAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+
+            Storyboard.SetTarget(fallAnimation, item);
+            Storyboard.SetTargetProperty(fallAnimation, new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.Y)"));
+
+            sb.Completed += new EventHandler(storyFall_Completed);
+            sb.Children.Add(fallAnimation);
             sb.Begin();
 
             this.countAnimationStart++;
@@ -217,7 +218,7 @@ namespace ChristmasTree
             int x = (int)(this.lastPointMove.X) - width / 2;
             int y = (int)(this.lastPointMove.Y) - height;            
             string path_img = Convert.ToString(this.biCreateToy.UriSource);
-            path_img.IndexOf("twinkle");
+
             this.dragImage = new Image();
             this.dragImage.Source = new BitmapImage(this.biCreateToy.UriSource);
             this.dragImage.Width = width;
@@ -230,36 +231,33 @@ namespace ChristmasTree
 
             Canvas.SetZIndex(this.dragImage, 7);
 
-            this.ToyGrid.Children.Add(this.dragImage);
-            this.isMoveToy = true;
             if (path_img.IndexOf("twinkle") > -1)
             {
                 this.dragImage.Tag = Convert.ToString("twinkle");
+
                 Storyboard sb = new Storyboard();
-                DoubleAnimation fadeInAnimation1 = new DoubleAnimation();
-                fadeInAnimation1.From = 1;
-                fadeInAnimation1.To = 0.0;
-                fadeInAnimation1.Duration = new Duration(TimeSpan.FromSeconds(1.0));
-                Storyboard.SetTarget(fadeInAnimation1, this.dragImage);
-                Storyboard.SetTargetProperty(fadeInAnimation1, new PropertyPath("(UIElement.Opacity)"));
-                sb.Children.Add(fadeInAnimation1);
-                sb.Completed += new EventHandler(storytwinkleCompleted);
-                sb.Begin();                
+                DoubleAnimation twinkleAnimation = new DoubleAnimation();
+
+                twinkleAnimation.From = 1;
+                twinkleAnimation.To = 0.0;
+                twinkleAnimation.Duration = new Duration(TimeSpan.FromSeconds(1.0));
+
+                Storyboard.SetTarget(twinkleAnimation, this.dragImage);
+                Storyboard.SetTargetProperty(twinkleAnimation, new PropertyPath("(UIElement.Opacity)"));
+
+                sb.Children.Add(twinkleAnimation);
+                sb.Completed += new EventHandler(storyTwinkle_Completed);
+                sb.Begin();
             }
 
+            this.ToyGrid.Children.Add(this.dragImage);
+            this.isMoveToy = true;
         }
 
-        private void storytwinkleCompleted(object sender, EventArgs e)
+        private void storyTwinkle_Completed(object sender, EventArgs e)
         {
             Storyboard story = (sender as Storyboard);
-            if ((story.Children[0] as DoubleAnimation).To == 1.0)
-            {
-                (story.Children[0] as DoubleAnimation).To = 0.0;
-            }
-            else 
-            {
-                (story.Children[0] as DoubleAnimation).To = 1.0;
-            }
+
             if ((story.Children[0] as DoubleAnimation).From == 1.0)
             {
                 (story.Children[0] as DoubleAnimation).From = 0.0;
@@ -268,15 +266,35 @@ namespace ChristmasTree
             {
                 (story.Children[0] as DoubleAnimation).From = 1.0;
             }
-            story.Begin();
+
+            if ((story.Children[0] as DoubleAnimation).To == 1.0)
+            {
+                (story.Children[0] as DoubleAnimation).To = 0.0;
+            }
+            else
+            {
+                (story.Children[0] as DoubleAnimation).To = 1.0;
+            }
+
+            try
+            {
+                story.Begin();
+            }
+            catch (Exception)
+            {
+                // This exception is thrown when target doesn't exist anymore (e.g. on exiting), so silently ignore it
+            }
         }
-        private void story_Completed(object sender, EventArgs e)
+
+        private void storyFall_Completed(object sender, EventArgs e)
         {
             this.countAnimationStart--;
+
             if (this.countAnimationStart == 0)
             {
-                var images = this.ToyGrid.Children.OfType<Image>();
                 List<Image> ImagesListToy = new List<Image>();
+                var images = this.ToyGrid.Children.OfType<Image>();
+
                 foreach (var img in images)
                 {
                     if ((img.RenderTransform as TranslateTransform) != null &&
