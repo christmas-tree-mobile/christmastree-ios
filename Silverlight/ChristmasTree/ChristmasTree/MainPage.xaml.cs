@@ -61,12 +61,16 @@ namespace ChristmasTree
             InitializeComponent();
 
             this.isMoveToy = false;
-            this.dragImage = null;
+            this.dragImage = null;            
             this.countAnimationStart = 0;
 
             for (int i = 1; i <= 37; i++)
             {
                 this.ItemListBox.Items.Add(new ChristmasItem("/Images/toys/toy-" + i.ToString() + ".png"));
+            }
+            for (int i = 1; i <= 3; i++)
+            {
+                this.ItemListBox.Items.Add(new ChristmasItem("/Images/toys/twinkle-" + i.ToString() + ".png"));
             }
 
             this.timerCreateToy = new System.Windows.Threading.DispatcherTimer();
@@ -175,17 +179,16 @@ namespace ChristmasTree
         private void destroyToy(Image item)
         {
             Storyboard sb = new Storyboard();
-            DoubleAnimation fadeInAnimation = new DoubleAnimation();
-
-            fadeInAnimation.From = 0;
+            DoubleAnimation fadeInAnimation = new DoubleAnimation();            
+            fadeInAnimation.From = 0;            
             fadeInAnimation.To = this.ToyGrid.ActualHeight * 2;
             fadeInAnimation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
-
+            
             Storyboard.SetTarget(fadeInAnimation, item);
             Storyboard.SetTargetProperty(fadeInAnimation, new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.Y)"));
 
             sb.Completed += new EventHandler(story_Completed);
-            sb.Children.Add(fadeInAnimation);
+            sb.Children.Add(fadeInAnimation);            
             sb.Begin();
 
             this.countAnimationStart++;
@@ -212,8 +215,9 @@ namespace ChristmasTree
             int width = this.biCreateToy.PixelWidth * 2;
             int height = this.biCreateToy.PixelHeight * 2;
             int x = (int)(this.lastPointMove.X) - width / 2;
-            int y = (int)(this.lastPointMove.Y) - height;
-
+            int y = (int)(this.lastPointMove.Y) - height;            
+            string path_img = Convert.ToString(this.biCreateToy.UriSource);
+            path_img.IndexOf("twinkle");
             this.dragImage = new Image();
             this.dragImage.Source = new BitmapImage(this.biCreateToy.UriSource);
             this.dragImage.Width = width;
@@ -228,8 +232,44 @@ namespace ChristmasTree
 
             this.ToyGrid.Children.Add(this.dragImage);
             this.isMoveToy = true;
+            if (path_img.IndexOf("twinkle") > -1)
+            {
+                this.dragImage.Tag = Convert.ToString("twinkle");
+                Storyboard sb = new Storyboard();
+                DoubleAnimation fadeInAnimation1 = new DoubleAnimation();
+                fadeInAnimation1.From = 1;
+                fadeInAnimation1.To = 0.0;
+                fadeInAnimation1.Duration = new Duration(TimeSpan.FromSeconds(1.0));
+                Storyboard.SetTarget(fadeInAnimation1, this.dragImage);
+                Storyboard.SetTargetProperty(fadeInAnimation1, new PropertyPath("(UIElement.Opacity)"));
+                sb.Children.Add(fadeInAnimation1);
+                sb.Completed += new EventHandler(storytwinkleCompleted);
+                sb.Begin();                
+            }
+
         }
 
+        private void storytwinkleCompleted(object sender, EventArgs e)
+        {
+            Storyboard story = (sender as Storyboard);
+            if ((story.Children[0] as DoubleAnimation).To == 1.0)
+            {
+                (story.Children[0] as DoubleAnimation).To = 0.0;
+            }
+            else 
+            {
+                (story.Children[0] as DoubleAnimation).To = 1.0;
+            }
+            if ((story.Children[0] as DoubleAnimation).From == 1.0)
+            {
+                (story.Children[0] as DoubleAnimation).From = 0.0;
+            }
+            else
+            {
+                (story.Children[0] as DoubleAnimation).From = 1.0;
+            }
+            story.Begin();
+        }
         private void story_Completed(object sender, EventArgs e)
         {
             this.countAnimationStart--;
