@@ -68,7 +68,7 @@ namespace ChristmasTree
             {
                 this.ItemListBox.Items.Add(new ChristmasItem("/Images/toys/toy-" + i.ToString() + ".png"));
             }
-            for (int i = 1; i <= 3; i++)
+            for (int i = 1; i <= 7; i++)
             {
                 this.ItemListBox.Items.Add(new ChristmasItem("/Images/toys/twinkle-" + i.ToString() + ".png"));
             }
@@ -233,8 +233,6 @@ namespace ChristmasTree
 
             if (path_img.IndexOf("twinkle") > -1)
             {
-                this.dragImage.Tag = Convert.ToString("twinkle");
-
                 Storyboard sb = new Storyboard();
                 DoubleAnimation twinkleAnimation = new DoubleAnimation();
 
