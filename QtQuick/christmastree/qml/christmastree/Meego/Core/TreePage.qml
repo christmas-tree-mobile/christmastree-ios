@@ -15,7 +15,7 @@ Page {
     property int currentTreeNum:         1
     property int maxTreeNum:             3
     property int maxToyNum:              37
-    property int maxTwinkleNum:          3
+    property int maxTwinkleNum:          7
     property int currentSnowflakesCount: 10
     property int defaultSnowflakesCount: 10
 
@@ -434,7 +434,7 @@ Page {
             toysListModel.append({"toyType": "toy", "toyNumber": i});
         }
 
-        for (var i = 1; i <= treePage.maxTwinkleNum; i++) {
+        for (i = 1; i <= treePage.maxTwinkleNum; i++) {
             toysListModel.append({"toyType": "twinkle", "toyNumber": i});
         }
 
