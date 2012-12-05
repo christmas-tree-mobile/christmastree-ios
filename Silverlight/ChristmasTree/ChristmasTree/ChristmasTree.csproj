@@ -68,9 +68,7 @@
     <Reference Include="System.Net" />
     <Reference Include="System.Xml" />
     <Reference Include="mscorlib.extensions" />
-    <Reference Include="WriteableBitmapExWinPhone">
-      <HintPath>References\WriteableBitmapEx_v1.0.3.0\WindowsPhone\WriteableBitmapExWinPhone.dll</HintPath>
-    </Reference>
+    <Reference Include="WriteableBitmapExWinPhone, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">

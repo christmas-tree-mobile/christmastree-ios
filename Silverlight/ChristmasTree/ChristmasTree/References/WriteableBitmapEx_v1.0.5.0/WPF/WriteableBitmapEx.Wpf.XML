@@ -1,111 +1,10 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>WriteableBitmapEx.WinRT</name>
+        <name>WriteableBitmapEx.Wpf</name>
     </assembly>
     <members>
-        <member name="T:Windows.UI.Xaml.Media.Imaging.ReadWriteMode">
-            <summary>
-            Read Write Mode for the BitmapContext.
-            </summary>
-        </member>
-        <member name="F:Windows.UI.Xaml.Media.Imaging.ReadWriteMode.ReadOnly">
-            <summary>
-            On Dispose of a BitmapContext, do not Invalidate
-            </summary>
-        </member>
-        <member name="F:Windows.UI.Xaml.Media.Imaging.ReadWriteMode.ReadWrite">
-            <summary>
-            On Dispose of a BitmapContext, invalidate the bitmap
-            </summary>
-        </member>
-        <member name="T:Windows.UI.Xaml.Media.Imaging.BitmapContext">
-            <summary>
-            A disposable cross-platform wrapper around a WriteableBitmap, allowing a common API for Silverlight + WPF with locking + unlocking if necessary
-            </summary>
-            <remarks>Attempting to put as many preprocessor hacks in this file, to keep the rest of the codebase relatively clean</remarks>
-        </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.BitmapContext.#ctor(Windows.UI.Xaml.Media.Imaging.WriteableBitmap)">
-            <summary>
-            Creates an instance of a BitmapContext, with default mode = ReadWrite
-            </summary>
-            <param name="writeableBitmap"></param>
-        </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.BitmapContext.#ctor(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,Windows.UI.Xaml.Media.Imaging.ReadWriteMode)">
-            <summary>
-            Creates an instance of a BitmapContext, with specified ReadWriteMode
-            </summary>
-            <param name="writeableBitmap"></param>
-            <param name="mode"></param>
-        </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.BitmapContext.BlockCopy(Windows.UI.Xaml.Media.Imaging.BitmapContext,System.Int32,Windows.UI.Xaml.Media.Imaging.BitmapContext,System.Int32,System.Int32)">
-            <summary>
-            Performs a Copy operation from source BitmapContext to destination BitmapContext
-            </summary>
-            <remarks>Equivalent to calling Buffer.BlockCopy in Silverlight, or native memcpy in WPF</remarks>
-        </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.BitmapContext.BlockCopy(System.Array,System.Int32,Windows.UI.Xaml.Media.Imaging.BitmapContext,System.Int32,System.Int32)">
-            <summary>
-            Performs a Copy operation from source Array to destination BitmapContext
-            </summary>
-            <remarks>Equivalent to calling Buffer.BlockCopy in Silverlight, or native memcpy in WPF</remarks>
-        </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.BitmapContext.BlockCopy(Windows.UI.Xaml.Media.Imaging.BitmapContext,System.Int32,System.Array,System.Int32,System.Int32)">
-            <summary>
-            Performs a Copy operation from source BitmapContext to destination Array
-            </summary>
-            <remarks>Equivalent to calling Buffer.BlockCopy in Silverlight, or native memcpy in WPF</remarks>
-        </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.BitmapContext.Clear">
-            <summary>
-            Clears the BitmapContext, filling the underlying bitmap with zeros
-            </summary>
-        </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.BitmapContext.Dispose">
-            <summary>
-            Disposes this instance if the underlying platform needs that.
-            </summary>
-        </member>
-        <member name="P:Windows.UI.Xaml.Media.Imaging.BitmapContext.WriteableBitmap">
-            <summary>
-            The Bitmap
-            </summary>
-        </member>
-        <member name="P:Windows.UI.Xaml.Media.Imaging.BitmapContext.Width">
-            <summary>
-            Width of the bitmap
-            </summary>
-        </member>
-        <member name="P:Windows.UI.Xaml.Media.Imaging.BitmapContext.Height">
-            <summary>
-            Height of the bitmap
-            </summary>
-        </member>
-        <member name="P:Windows.UI.Xaml.Media.Imaging.BitmapContext.Pixels">
-            <summary>
-            Gets the Pixels array 
-            </summary>        
-        </member>
-        <member name="P:Windows.UI.Xaml.Media.Imaging.BitmapContext.Length">
-            <summary>
-            Gets the length of the Pixels array 
-            </summary>
-        </member>
-        <member name="T:Windows.UI.Xaml.Media.Imaging.BitmapFactory">
-            <summary>
-            Cross-platform factory for WriteableBitmaps
-            </summary>
-        </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.BitmapFactory.New(System.Int32,System.Int32)">
-            <summary>
-            Creates a new WriteableBitmap of the specified width and height
-            </summary>
-            <remarks>For WPF the default DPI is 96x96 and PixelFormat is Pbgra32</remarks>
-            <param name="pixelWidth"></param>
-            <param name="pixelHeight"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions">
+        <member name="T:System.Windows.Media.Imaging.WriteableBitmapExtensions">
             <summary>
             Collection of extension methods for the WriteableBitmap class.
             </summary>
@@ -131,27 +30,27 @@
             Collection of transformation extension methods for the WriteableBitmap class.
             </summary>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.Clear(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,Windows.UI.Color)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.Clear(System.Windows.Media.Imaging.WriteableBitmap,System.Windows.Media.Color)">
             <summary>
             Fills the whole WriteableBitmap with a color.
             </summary>
             <param name="bmp">The WriteableBitmap.</param>
             <param name="color">The color used for filling.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.Clear(Windows.UI.Xaml.Media.Imaging.WriteableBitmap)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.Clear(System.Windows.Media.Imaging.WriteableBitmap)">
             <summary>
             Fills the whole WriteableBitmap with an empty color (0).
             </summary>
             <param name="bmp">The WriteableBitmap.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.Clone(Windows.UI.Xaml.Media.Imaging.WriteableBitmap)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.Clone(System.Windows.Media.Imaging.WriteableBitmap)">
             <summary>
             Clones the specified WriteableBitmap.
             </summary>
             <param name="bmp">The WriteableBitmap.</param>
             <returns>A copy of the WriteableBitmap.</returns>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.ForEach(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Func{System.Int32,System.Int32,Windows.UI.Color})">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.ForEach(System.Windows.Media.Imaging.WriteableBitmap,System.Func{System.Int32,System.Int32,System.Windows.Media.Color})">
             <summary>
             Applies the given function to all the pixels of the bitmap in 
             order to set their color.
@@ -159,7 +58,7 @@
             <param name="bmp">The WriteableBitmap.</param>
             <param name="func">The function to apply. With parameters x, y and a color as a result</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.ForEach(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Func{System.Int32,System.Int32,Windows.UI.Color,Windows.UI.Color})">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.ForEach(System.Windows.Media.Imaging.WriteableBitmap,System.Func{System.Int32,System.Int32,System.Windows.Media.Color,System.Windows.Media.Color})">
             <summary>
             Applies the given function to all the pixels of the bitmap in 
             order to set their color.
@@ -167,7 +66,7 @@
             <param name="bmp">The WriteableBitmap.</param>
             <param name="func">The function to apply. With parameters x, y, source color and a color as a result</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.GetPixeli(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32,System.Int32)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.GetPixeli(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32)">
             <summary>
             Gets the color of the pixel at the x, y coordinate as integer.  
             For best performance this method should not be used in iterative real-time scenarios. Implement the code directly inside a loop.
@@ -177,7 +76,7 @@
             <param name="y">The y coordinate of the pixel.</param>
             <returns>The color of the pixel at x, y.</returns>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.GetPixel(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32,System.Int32)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.GetPixel(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32)">
             <summary>
             Gets the color of the pixel at the x, y coordinate as a Color struct.  
             For best performance this method should not be used in iterative real-time scenarios. Implement the code directly inside a loop.
@@ -187,7 +86,7 @@
             <param name="y">The y coordinate of the pixel.</param>
             <returns>The color of the pixel at x, y as a Color struct.</returns>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.GetBrightness(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32,System.Int32)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.GetBrightness(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32)">
             <summary>
             Gets the brightness / luminance of the pixel at the x, y coordinate as byte.
             </summary>
@@ -196,7 +95,7 @@
             <param name="y">The y coordinate of the pixel.</param>
             <returns>The brightness of the pixel at x, y.</returns>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.SetPixeli(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32,System.Byte,System.Byte,System.Byte)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.SetPixeli(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Byte,System.Byte,System.Byte)">
             <summary>
             Sets the color of the pixel using a precalculated index (faster). 
             For best performance this method should not be used in iterative real-time scenarios. Implement the code directly inside a loop.
@@ -207,7 +106,7 @@
             <param name="g">The green value of the color.</param>
             <param name="b">The blue value of the color.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.SetPixel(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Byte,System.Byte,System.Byte)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.SetPixel(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Byte,System.Byte,System.Byte)">
             <summary>
             Sets the color of the pixel. 
             For best performance this method should not be used in iterative real-time scenarios. Implement the code directly inside a loop.
@@ -219,7 +118,7 @@
             <param name="g">The green value of the color.</param>
             <param name="b">The blue value of the color.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.SetPixeli(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32,System.Byte,System.Byte,System.Byte,System.Byte)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.SetPixeli(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Byte,System.Byte,System.Byte,System.Byte)">
             <summary>
             Sets the color of the pixel including the alpha value and using a precalculated index (faster). 
             For best performance this method should not be used in iterative real-time scenarios. Implement the code directly inside a loop.
@@ -231,7 +130,7 @@
             <param name="g">The green value of the color.</param>
             <param name="b">The blue value of the color.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.SetPixel(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Byte,System.Byte,System.Byte,System.Byte)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.SetPixel(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Byte,System.Byte,System.Byte,System.Byte)">
             <summary>
             Sets the color of the pixel including the alpha value. 
             For best performance this method should not be used in iterative real-time scenarios. Implement the code directly inside a loop.
@@ -244,7 +143,7 @@
             <param name="g">The green value of the color.</param>
             <param name="b">The blue value of the color.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.SetPixeli(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32,Windows.UI.Color)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.SetPixeli(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Windows.Media.Color)">
             <summary>
             Sets the color of the pixel using a precalculated index (faster). 
             For best performance this method should not be used in iterative real-time scenarios. Implement the code directly inside a loop.
@@ -253,7 +152,7 @@
             <param name="index">The coordinate index.</param>
             <param name="color">The color.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.SetPixel(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,Windows.UI.Color)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.SetPixel(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Windows.Media.Color)">
             <summary>
             Sets the color of the pixel. 
             For best performance this method should not be used in iterative real-time scenarios. Implement the code directly inside a loop.
@@ -263,7 +162,7 @@
             <param name="y">The y coordinate (column).</param>
             <param name="color">The color.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.SetPixeli(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32,System.Byte,Windows.UI.Color)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.SetPixeli(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Byte,System.Windows.Media.Color)">
             <summary>
             Sets the color of the pixel using an extra alpha value and a precalculated index (faster). 
             For best performance this method should not be used in iterative real-time scenarios. Implement the code directly inside a loop.
@@ -273,7 +172,7 @@
             <param name="a">The alpha value of the color.</param>
             <param name="color">The color.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.SetPixel(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Byte,Windows.UI.Color)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.SetPixel(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Byte,System.Windows.Media.Color)">
             <summary>
             Sets the color of the pixel using an extra alpha value. 
             For best performance this method should not be used in iterative real-time scenarios. Implement the code directly inside a loop.
@@ -284,7 +183,7 @@
             <param name="a">The alpha value of the color.</param>
             <param name="color">The color.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.SetPixeli(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32,System.Int32)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.SetPixeli(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32)">
             <summary>
             Sets the color of the pixel using a precalculated index (faster).  
             For best performance this method should not be used in iterative real-time scenarios. Implement the code directly inside a loop.
@@ -293,7 +192,7 @@
             <param name="index">The coordinate index.</param>
             <param name="color">The color.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.SetPixel(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.SetPixel(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32)">
             <summary>
             Sets the color of the pixel. 
             For best performance this method should not be used in iterative real-time scenarios. Implement the code directly inside a loop.
@@ -303,7 +202,7 @@
             <param name="y">The y coordinate (column).</param>
             <param name="color">The color.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.Blit(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,Windows.Foundation.Rect,Windows.UI.Xaml.Media.Imaging.WriteableBitmap,Windows.Foundation.Rect,Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.BlendMode)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.Blit(System.Windows.Media.Imaging.WriteableBitmap,System.Windows.Rect,System.Windows.Media.Imaging.WriteableBitmap,System.Windows.Rect,System.Windows.Media.Imaging.WriteableBitmapExtensions.BlendMode)">
             <summary>
             Copies (blits) the pixels from the WriteableBitmap source to the destination WriteableBitmap (this).
             </summary>
@@ -311,9 +210,9 @@
             <param name="destRect">The rectangle that defines the destination region.</param>
             <param name="source">The source WriteableBitmap.</param>
             <param name="sourceRect">The rectangle that will be copied from the source to the destination.</param>
-            <param name="BlendMode">The blending mode <see cref="T:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.BlendMode"/>.</param>
+            <param name="BlendMode">The blending mode <see cref="T:System.Windows.Media.Imaging.WriteableBitmapExtensions.BlendMode"/>.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.Blit(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,Windows.Foundation.Rect,Windows.UI.Xaml.Media.Imaging.WriteableBitmap,Windows.Foundation.Rect)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.Blit(System.Windows.Media.Imaging.WriteableBitmap,System.Windows.Rect,System.Windows.Media.Imaging.WriteableBitmap,System.Windows.Rect)">
             <summary>
             Copies (blits) the pixels from the WriteableBitmap source to the destination WriteableBitmap (this).
             </summary>
@@ -322,7 +221,7 @@
             <param name="source">The source WriteableBitmap.</param>
             <param name="sourceRect">The rectangle that will be copied from the source to the destination.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.Blit(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,Windows.Foundation.Point,Windows.UI.Xaml.Media.Imaging.WriteableBitmap,Windows.Foundation.Rect,Windows.UI.Color,Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.BlendMode)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.Blit(System.Windows.Media.Imaging.WriteableBitmap,System.Windows.Point,System.Windows.Media.Imaging.WriteableBitmap,System.Windows.Rect,System.Windows.Media.Color,System.Windows.Media.Imaging.WriteableBitmapExtensions.BlendMode)">
             <summary>
             Copies (blits) the pixels from the WriteableBitmap source to the destination WriteableBitmap (this).
             </summary>
@@ -331,9 +230,9 @@
             <param name="source">The source WriteableBitmap.</param>
             <param name="sourceRect">The rectangle that will be copied from the source to the destination.</param>
             <param name="color">If not Colors.White, will tint the source image. A partially transparent color and the image will be drawn partially transparent.</param>
-            <param name="BlendMode">The blending mode <see cref="T:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.BlendMode"/>.</param>
+            <param name="BlendMode">The blending mode <see cref="T:System.Windows.Media.Imaging.WriteableBitmapExtensions.BlendMode"/>.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.Blit(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,Windows.Foundation.Rect,Windows.UI.Xaml.Media.Imaging.WriteableBitmap,Windows.Foundation.Rect,Windows.UI.Color,Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.BlendMode)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.Blit(System.Windows.Media.Imaging.WriteableBitmap,System.Windows.Rect,System.Windows.Media.Imaging.WriteableBitmap,System.Windows.Rect,System.Windows.Media.Color,System.Windows.Media.Imaging.WriteableBitmapExtensions.BlendMode)">
             <summary>
             Copies (blits) the pixels from the WriteableBitmap source to the destination WriteableBitmap (this).
             </summary>
@@ -342,9 +241,9 @@
             <param name="source">The source WriteableBitmap.</param>
             <param name="sourceRect">The rectangle that will be copied from the source to the destination.</param>
             <param name="color">If not Colors.White, will tint the source image. A partially transparent color and the image will be drawn partially transparent. If the BlendMode is ColorKeying, this color will be used as color key to mask all pixels with this value out.</param>
-            <param name="BlendMode">The blending mode <see cref="T:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.BlendMode"/>.</param>
+            <param name="BlendMode">The blending mode <see cref="T:System.Windows.Media.Imaging.WriteableBitmapExtensions.BlendMode"/>.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.ToByteArray(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32,System.Int32)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.ToByteArray(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32)">
             <summary>
             Copies the Pixels from the WriteableBitmap into a ARGB byte array starting at a specific Pixels index.
             </summary>
@@ -353,7 +252,7 @@
             <param name="count">The number of Pixels to copy, -1 for all</param>
             <returns>The color buffer as byte ARGB values.</returns>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.ToByteArray(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.ToByteArray(System.Windows.Media.Imaging.WriteableBitmap,System.Int32)">
             <summary>
             Copies the Pixels from the WriteableBitmap into a ARGB byte array.
             </summary>
@@ -361,14 +260,14 @@
             <param name="count">The number of pixels to copy.</param>
             <returns>The color buffer as byte ARGB values.</returns>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.ToByteArray(Windows.UI.Xaml.Media.Imaging.WriteableBitmap)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.ToByteArray(System.Windows.Media.Imaging.WriteableBitmap)">
             <summary>
             Copies all the Pixels from the WriteableBitmap into a ARGB byte array.
             </summary>
             <param name="bmp">The WriteableBitmap.</param>
             <returns>The color buffer as byte ARGB values.</returns>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.FromByteArray(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Byte[],System.Int32,System.Int32)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.FromByteArray(System.Windows.Media.Imaging.WriteableBitmap,System.Byte[],System.Int32,System.Int32)">
             <summary>
             Copies color information from an ARGB byte array into this WriteableBitmap starting at a specific buffer index.
             </summary>
@@ -378,7 +277,7 @@
             <param name="buffer">The color buffer as byte ARGB values.</param>
             <returns>The WriteableBitmap that was passed as parameter.</returns>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.FromByteArray(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Byte[],System.Int32)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.FromByteArray(System.Windows.Media.Imaging.WriteableBitmap,System.Byte[],System.Int32)">
             <summary>
             Copies color information from an ARGB byte array into this WriteableBitmap.
             </summary>
@@ -387,7 +286,7 @@
             <param name="buffer">The color buffer as byte ARGB values.</param>
             <returns>The WriteableBitmap that was passed as parameter.</returns>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.FromByteArray(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Byte[])">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.FromByteArray(System.Windows.Media.Imaging.WriteableBitmap,System.Byte[])">
             <summary>
             Copies all the color information from an ARGB byte array into this WriteableBitmap.
             </summary>
@@ -395,7 +294,7 @@
             <param name="buffer">The color buffer as byte ARGB values.</param>
             <returns>The WriteableBitmap that was passed as parameter.</returns>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.WriteTga(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.IO.Stream)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.WriteTga(System.Windows.Media.Imaging.WriteableBitmap,System.IO.Stream)">
             <summary>
             Writes the WriteableBitmap as a TGA image to a stream. 
             Used with permission from Nokola: http://nokola.com/blog/post/2010/01/21/Quick-and-Dirty-Output-of-WriteableBitmap-as-TGA-Image.aspx
@@ -403,15 +302,23 @@
             <param name="bmp">The WriteableBitmap.</param>
             <param name="destination">The destination stream.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.FromContent(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Uri)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.FromResource(System.Windows.Media.Imaging.WriteableBitmap,System.String)">
+            <summary>
+            Loads an image from the applications resource file and fills this WriteableBitmap with it.
+            </summary>
+            <param name="bmp">The WriteableBitmap.</param>
+            <param name="relativePath">Only the relative path to the resource file. The assembly name is retrieved automatically.</param>
+            <returns>The WriteableBitmap that was passed as parameter.</returns>
+        </member>
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.FromContent(System.Windows.Media.Imaging.WriteableBitmap,System.String)">
             <summary>
             Loads an image from the applications content and fills this WriteableBitmap with it.
             </summary>
             <param name="bmp">The WriteableBitmap.</param>
-            <param name="uri">The URI to the content file.</param>
+            <param name="relativePath">Only the relative path to the content file.</param>
             <returns>The WriteableBitmap that was passed as parameter.</returns>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.FromStream(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,Windows.Storage.Streams.IRandomAccessStream)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.FromStream(System.Windows.Media.Imaging.WriteableBitmap,System.IO.Stream)">
             <summary>
             Loads the data from an image stream and fills this WriteableBitmap with it.
             </summary>
@@ -419,7 +326,7 @@
             <param name="stream">The stream with the image data.</param>
             <returns>The WriteableBitmap that was passed as parameter.</returns>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.FillRectangle(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,Windows.UI.Color)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.FillRectangle(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Windows.Media.Color)">
             <summary>
             Draws a filled rectangle.
             x2 has to be greater than x1 and y2 has to be greater than y1.
@@ -431,7 +338,7 @@
             <param name="y2">The y-coordinate of the bounding rectangle's bottom side.</param>
             <param name="color">The color.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.FillRectangle(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.FillRectangle(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
             Draws a filled rectangle.
             x2 has to be greater than x1 and y2 has to be greater than y1.
@@ -443,7 +350,7 @@
             <param name="y2">The y-coordinate of the bounding rectangle's bottom side.</param>
             <param name="color">The color.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.FillEllipse(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,Windows.UI.Color)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.FillEllipse(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Windows.Media.Color)">
             <summary>
             A Fast Bresenham Type Algorithm For Drawing filled ellipses http://homepage.smc.edu/kennedy_john/belipse.pdf 
             x2 has to be greater than x1 and y2 has to be greater than y1.
@@ -455,7 +362,7 @@
             <param name="y2">The y-coordinate of the bounding rectangle's bottom side.</param>
             <param name="color">The color for the line.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.FillEllipse(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.FillEllipse(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
             A Fast Bresenham Type Algorithm For Drawing filled ellipses http://homepage.smc.edu/kennedy_john/belipse.pdf 
             x2 has to be greater than x1 and y2 has to be greater than y1.
@@ -467,7 +374,7 @@
             <param name="y2">The y-coordinate of the bounding rectangle's bottom side.</param>
             <param name="color">The color for the line.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.FillEllipseCentered(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,Windows.UI.Color)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.FillEllipseCentered(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Windows.Media.Color)">
             <summary>
             A Fast Bresenham Type Algorithm For Drawing filled ellipses http://homepage.smc.edu/kennedy_john/belipse.pdf 
             Uses a different parameter representation than DrawEllipse().
@@ -479,7 +386,7 @@
             <param name="yr">The radius of the ellipse in y-direction.</param>
             <param name="color">The color for the line.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.FillEllipseCentered(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.FillEllipseCentered(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
             A Fast Bresenham Type Algorithm For Drawing filled ellipses http://homepage.smc.edu/kennedy_john/belipse.pdf 
             Uses a different parameter representation than DrawEllipse().
@@ -491,7 +398,7 @@
             <param name="yr">The radius of the ellipse in y-direction.</param>
             <param name="color">The color for the line.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.FillPolygon(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32[],Windows.UI.Color)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.FillPolygon(System.Windows.Media.Imaging.WriteableBitmap,System.Int32[],System.Windows.Media.Color)">
             <summary>
             Draws a filled polygon. Add the first point also at the end of the array if the line should be closed.
             </summary>
@@ -499,7 +406,7 @@
             <param name="points">The points of the polygon in x and y pairs, therefore the array is interpreted as (x1, y1, x2, y2, ..., xn, yn).</param>
             <param name="color">The color for the line.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.FillPolygon(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32[],System.Int32)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.FillPolygon(System.Windows.Media.Imaging.WriteableBitmap,System.Int32[],System.Int32)">
             <summary>
             Draws a filled polygon. Add the first point also at the end of the array if the line should be closed.
             </summary>
@@ -507,7 +414,7 @@
             <param name="points">The points of the polygon in x and y pairs, therefore the array is interpreted as (x1, y1, x2, y2, ..., xn, yn).</param>
             <param name="color">The color for the line.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.FillQuad(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,Windows.UI.Color)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.FillQuad(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Windows.Media.Color)">
             <summary>
             Draws a filled quad.
             </summary>
@@ -522,7 +429,7 @@
             <param name="y4">The y-coordinate of the 4th point.</param>
             <param name="color">The color.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.FillQuad(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.FillQuad(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
             Draws a filled quad.
             </summary>
@@ -537,7 +444,7 @@
             <param name="y4">The y-coordinate of the 4th point.</param>
             <param name="color">The color.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.FillTriangle(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,Windows.UI.Color)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.FillTriangle(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Windows.Media.Color)">
             <summary>
             Draws a filled triangle.
             </summary>
@@ -550,7 +457,7 @@
             <param name="y3">The y-coordinate of the 3rd point.</param>
             <param name="color">The color.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.FillTriangle(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.FillTriangle(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
             Draws a filled triangle.
             </summary>
@@ -563,7 +470,7 @@
             <param name="y3">The y-coordinate of the 3rd point.</param>
             <param name="color">The color.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.ComputeBezierPoints(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,Windows.UI.Xaml.Media.Imaging.BitmapContext,System.Int32,System.Int32)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.ComputeBezierPoints(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Windows.Media.Imaging.BitmapContext,System.Int32,System.Int32)">
             <summary>
             Draws a filled, cubic Beziér spline defined by start, end and two control points.
             </summary>
@@ -580,7 +487,7 @@
             <param name="w">The width of the bitmap.</param>
             <param name="h">The height of the bitmap.</param> 
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.FillBeziers(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32[],Windows.UI.Color)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.FillBeziers(System.Windows.Media.Imaging.WriteableBitmap,System.Int32[],System.Windows.Media.Color)">
             <summary>
             Draws a series of filled, cubic Beziér splines each defined by start, end and two control points. 
             The ending point of the previous curve is used as starting point for the next. 
@@ -590,7 +497,7 @@
             <param name="points">The points for the curve in x and y pairs, therefore the array is interpreted as (x1, y1, cx1, cy1, cx2, cy2, x2, y2, cx3, cx4 ..., xn, yn).</param>
             <param name="color">The color for the spline.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.FillBeziers(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32[],System.Int32)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.FillBeziers(System.Windows.Media.Imaging.WriteableBitmap,System.Int32[],System.Int32)">
             <summary>
             Draws a series of filled, cubic Beziér splines each defined by start, end and two control points. 
             The ending point of the previous curve is used as starting point for the next. 
@@ -600,7 +507,7 @@
             <param name="points">The points for the curve in x and y pairs, therefore the array is interpreted as (x1, y1, cx1, cy1, cx2, cy2, x2, y2, cx3, cx4 ..., xn, yn).</param>
             <param name="color">The color for the spline.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.ComputeSegmentPoints(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Single,System.Int32,Windows.UI.Xaml.Media.Imaging.BitmapContext,System.Int32,System.Int32)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.ComputeSegmentPoints(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Single,System.Int32,System.Windows.Media.Imaging.BitmapContext,System.Int32,System.Int32)">
             <summary>
             Computes the discrete segment points of a Cardinal spline (cubic) defined by four control points.
             </summary>
@@ -618,7 +525,7 @@
             <param name="w">The width of the bitmap.</param>
             <param name="h">The height of the bitmap.</param> 
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.FillCurve(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32[],System.Single,Windows.UI.Color)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.FillCurve(System.Windows.Media.Imaging.WriteableBitmap,System.Int32[],System.Single,System.Windows.Media.Color)">
             <summary>
             Draws a filled Cardinal spline (cubic) defined by a point collection. 
             The cardinal spline passes through each point in the collection.
@@ -628,7 +535,7 @@
             <param name="tension">The tension of the curve defines the shape. Usually between 0 and 1. 0 would be a straight line.</param>
             <param name="color">The color for the spline.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.FillCurve(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32[],System.Single,System.Int32)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.FillCurve(System.Windows.Media.Imaging.WriteableBitmap,System.Int32[],System.Single,System.Int32)">
             <summary>
             Draws a filled Cardinal spline (cubic) defined by a point collection. 
             The cardinal spline passes through each point in the collection.
@@ -638,7 +545,7 @@
             <param name="tension">The tension of the curve defines the shape. Usually between 0 and 1. 0 would be a straight line.</param>
             <param name="color">The color for the spline.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.FillCurveClosed(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32[],System.Single,Windows.UI.Color)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.FillCurveClosed(System.Windows.Media.Imaging.WriteableBitmap,System.Int32[],System.Single,System.Windows.Media.Color)">
             <summary>
             Draws a filled, closed Cardinal spline (cubic) defined by a point collection. 
             The cardinal spline passes through each point in the collection.
@@ -648,7 +555,7 @@
             <param name="tension">The tension of the curve defines the shape. Usually between 0 and 1. 0 would be a straight line.</param>
             <param name="color">The color for the spline.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.FillCurveClosed(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32[],System.Single,System.Int32)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.FillCurveClosed(System.Windows.Media.Imaging.WriteableBitmap,System.Int32[],System.Single,System.Int32)">
             <summary>
             Draws a filled, closed Cardinal spline (cubic) defined by a point collection. 
             The cardinal spline passes through each point in the collection.
@@ -658,22 +565,22 @@
             <param name="tension">The tension of the curve defines the shape. Usually between 0 and 1. 0 would be a straight line.</param>
             <param name="color">The color for the spline.</param>
         </member>
-        <member name="F:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.KernelGaussianBlur5x5">
+        <member name="F:System.Windows.Media.Imaging.WriteableBitmapExtensions.KernelGaussianBlur5x5">
             <summary>
              Gaussian blur kernel with the size 5x5
             </summary>
         </member>
-        <member name="F:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.KernelGaussianBlur3x3">
+        <member name="F:System.Windows.Media.Imaging.WriteableBitmapExtensions.KernelGaussianBlur3x3">
             <summary>
              Gaussian blur kernel with the size 3x3
             </summary>
         </member>
-        <member name="F:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.KernelSharpen3x3">
+        <member name="F:System.Windows.Media.Imaging.WriteableBitmapExtensions.KernelSharpen3x3">
             <summary>
              Sharpen kernel with the size 3x3
             </summary>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.Convolute(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32[0:,0:])">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.Convolute(System.Windows.Media.Imaging.WriteableBitmap,System.Int32[0:,0:])">
             <summary>
             Creates a new filtered WriteableBitmap.
             </summary>
@@ -681,7 +588,7 @@
             <param name="kernel">The kernel used for convolution.</param>
             <returns>A new WriteableBitmap that is a filtered version of the input.</returns>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.Convolute(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32[0:,0:],System.Int32,System.Int32)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.Convolute(System.Windows.Media.Imaging.WriteableBitmap,System.Int32[0:,0:],System.Int32,System.Int32)">
             <summary>
             Creates a new filtered WriteableBitmap.
             </summary>
@@ -691,14 +598,14 @@
             <param name="kernelOffsetSum">The offset used for the kernel summing.</param>
             <returns>A new WriteableBitmap that is a filtered version of the input.</returns>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.Invert(Windows.UI.Xaml.Media.Imaging.WriteableBitmap)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.Invert(System.Windows.Media.Imaging.WriteableBitmap)">
             <summary>
             Creates a new inverted WriteableBitmap and returns it.
             </summary>
             <param name="bmp">The WriteableBitmap.</param>
             <returns>The new inverted WriteableBitmap.</returns>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.DrawLineBresenham(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,Windows.UI.Color)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawLineBresenham(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Windows.Media.Color)">
             <summary>
             Draws a colored line by connecting two points using the Bresenham algorithm.
             </summary>
@@ -709,7 +616,7 @@
             <param name="y2">The y-coordinate of the end point.</param>
             <param name="color">The color for the line.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.DrawLineBresenham(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawLineBresenham(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
             Draws a colored line by connecting two points using the Bresenham algorithm.
             </summary>
@@ -720,7 +627,7 @@
             <param name="y2">The y-coordinate of the end point.</param>
             <param name="color">The color for the line.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.DrawLineDDA(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,Windows.UI.Color)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawLineDDA(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Windows.Media.Color)">
             <summary>
             Draws a colored line by connecting two points using a DDA algorithm (Digital Differential Analyzer).
             </summary>
@@ -731,7 +638,7 @@
             <param name="y2">The y-coordinate of the end point.</param>
             <param name="color">The color for the line.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.DrawLineDDA(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawLineDDA(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
             Draws a colored line by connecting two points using a DDA algorithm (Digital Differential Analyzer).
             </summary>
@@ -742,7 +649,7 @@
             <param name="y2">The y-coordinate of the end point.</param>
             <param name="color">The color for the line.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.DrawLine(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,Windows.UI.Color)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawLine(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Windows.Media.Color)">
             <summary>
             Draws a colored line by connecting two points using an optimized DDA.
             </summary>
@@ -753,7 +660,7 @@
             <param name="y2">The y-coordinate of the end point.</param>
             <param name="color">The color for the line.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.DrawLine(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawLine(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
             Draws a colored line by connecting two points using an optimized DDA.
             </summary>
@@ -764,7 +671,7 @@
             <param name="y2">The y-coordinate of the end point.</param>
             <param name="color">The color for the line.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.DrawLine(Windows.UI.Xaml.Media.Imaging.BitmapContext,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawLine(System.Windows.Media.Imaging.BitmapContext,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
             Draws a colored line by connecting two points using an optimized DDA. 
             Uses the pixels array and the width directly for best performance.
@@ -778,7 +685,7 @@
             <param name="y2">The y-coordinate of the end point.</param>
             <param name="color">The color for the line.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.DrawLineAa(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,Windows.UI.Color)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawLineAa(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Windows.Media.Color)">
             <summary> 
             Draws an anti-aliased line, using an optimized version of Gupta-Sproull algorithm 
             From http://nokola.com/blog/post/2010/10/14/Anti-aliased-Lines-And-Optimizing-Code-for-Windows-Phone-7e28093First-Look.aspx
@@ -790,7 +697,7 @@
             <param name="color">The color for the line.</param>
             </summary> 
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.DrawLineAa(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawLineAa(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary> 
             Draws an anti-aliased line, using an optimized version of Gupta-Sproull algorithm 
             From http://nokola.com/blog/post/2010/10/14/Anti-aliased-Lines-And-Optimizing-Code-for-Windows-Phone-7e28093First-Look.aspx
@@ -802,7 +709,7 @@
             <param name="color">The color for the line.</param>
             </summary> 
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.DrawLineAa(Windows.UI.Xaml.Media.Imaging.BitmapContext,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawLineAa(System.Windows.Media.Imaging.BitmapContext,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary> 
             Draws an anti-aliased line, using an optimized version of Gupta-Sproull algorithm 
             From http://nokola.com/blog/post/2010/10/14/Anti-aliased-Lines-And-Optimizing-Code-for-Windows-Phone-7e28093First-Look.aspx
@@ -816,7 +723,7 @@
             <param name="color">The color for the line.</param>
             </summary> 
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.AlphaBlendNormalOnPremultiplied(Windows.UI.Xaml.Media.Imaging.BitmapContext,System.Int32,System.Int32,System.UInt32,System.UInt32)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.AlphaBlendNormalOnPremultiplied(System.Windows.Media.Imaging.BitmapContext,System.Int32,System.Int32,System.UInt32,System.UInt32)">
             <summary> 
             Blends a specific source color on top of a destination premultiplied color 
             </summary> 
@@ -826,7 +733,7 @@
             <param name="srb">Source non-premultiplied red and blue component in the format 0x00rr00bb</param> 
             <param name="sg">Source green component (0..255)</param> 
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.DrawPolyline(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32[],Windows.UI.Color)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawPolyline(System.Windows.Media.Imaging.WriteableBitmap,System.Int32[],System.Windows.Media.Color)">
             <summary>
             Draws a polyline. Add the first point also at the end of the array if the line should be closed.
             </summary>
@@ -834,7 +741,7 @@
             <param name="points">The points of the polyline in x and y pairs, therefore the array is interpreted as (x1, y1, x2, y2, ..., xn, yn).</param>
             <param name="color">The color for the line.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.DrawPolyline(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32[],System.Int32)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawPolyline(System.Windows.Media.Imaging.WriteableBitmap,System.Int32[],System.Int32)">
             <summary>
             Draws a polyline. Add the first point also at the end of the array if the line should be closed.
             </summary>
@@ -842,7 +749,7 @@
             <param name="points">The points of the polyline in x and y pairs, therefore the array is interpreted as (x1, y1, x2, y2, ..., xn, yn).</param>
             <param name="color">The color for the line.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.DrawTriangle(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,Windows.UI.Color)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawTriangle(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Windows.Media.Color)">
             <summary>
             Draws a triangle.
             </summary>
@@ -855,7 +762,7 @@
             <param name="y3">The y-coordinate of the 3rd point.</param>
             <param name="color">The color.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.DrawTriangle(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawTriangle(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
             Draws a triangle.
             </summary>
@@ -868,7 +775,7 @@
             <param name="y3">The y-coordinate of the 3rd point.</param>
             <param name="color">The color.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.DrawQuad(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,Windows.UI.Color)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawQuad(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Windows.Media.Color)">
             <summary>
             Draws a quad.
             </summary>
@@ -883,7 +790,7 @@
             <param name="y4">The y-coordinate of the 4th point.</param>
             <param name="color">The color.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.DrawQuad(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawQuad(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
             Draws a quad.
             </summary>
@@ -898,7 +805,7 @@
             <param name="y4">The y-coordinate of the 4th point.</param>
             <param name="color">The color.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.DrawRectangle(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,Windows.UI.Color)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawRectangle(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Windows.Media.Color)">
             <summary>
             Draws a rectangle.
             x2 has to be greater than x1 and y2 has to be greater than y1.
@@ -910,7 +817,7 @@
             <param name="y2">The y-coordinate of the bounding rectangle's bottom side.</param>
             <param name="color">The color.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.DrawRectangle(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawRectangle(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
             Draws a rectangle.
             x2 has to be greater than x1 and y2 has to be greater than y1.
@@ -922,7 +829,7 @@
             <param name="y2">The y-coordinate of the bounding rectangle's bottom side.</param>
             <param name="color">The color.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.DrawEllipse(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,Windows.UI.Color)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawEllipse(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Windows.Media.Color)">
             <summary>
             A Fast Bresenham Type Algorithm For Drawing Ellipses http://homepage.smc.edu/kennedy_john/belipse.pdf 
             x2 has to be greater than x1 and y2 has to be greater than y1.
@@ -934,7 +841,7 @@
             <param name="y2">The y-coordinate of the bounding rectangle's bottom side.</param>
             <param name="color">The color for the line.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.DrawEllipse(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawEllipse(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
             A Fast Bresenham Type Algorithm For Drawing Ellipses http://homepage.smc.edu/kennedy_john/belipse.pdf 
             x2 has to be greater than x1 and y2 has to be greater than y1.
@@ -946,7 +853,7 @@
             <param name="y2">The y-coordinate of the bounding rectangle's bottom side.</param>
             <param name="color">The color for the line.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.DrawEllipseCentered(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,Windows.UI.Color)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawEllipseCentered(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Windows.Media.Color)">
             <summary>
             A Fast Bresenham Type Algorithm For Drawing Ellipses http://homepage.smc.edu/kennedy_john/belipse.pdf
             Uses a different parameter representation than DrawEllipse().
@@ -958,7 +865,7 @@
             <param name="yr">The radius of the ellipse in y-direction.</param>
             <param name="color">The color for the line.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.DrawEllipseCentered(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawEllipseCentered(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
             A Fast Bresenham Type Algorithm For Drawing Ellipses http://homepage.smc.edu/kennedy_john/belipse.pdf 
             Uses a different parameter representation than DrawEllipse().
@@ -970,7 +877,7 @@
             <param name="yr">The radius of the ellipse in y-direction.</param>
             <param name="color">The color for the line.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.DrawBezier(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,Windows.UI.Color)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawBezier(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Windows.Media.Color)">
             <summary>
             Draws a cubic Beziér spline defined by start, end and two control points.
             </summary>
@@ -985,7 +892,7 @@
             <param name="y2">The y-coordinate of the end point.</param>
             <param name="color">The color.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.DrawBezier(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawBezier(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
             Draws a cubic Beziér spline defined by start, end and two control points.
             </summary>
@@ -1000,7 +907,7 @@
             <param name="y2">The y-coordinate of the end point.</param>
             <param name="color">The color.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.DrawBeziers(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32[],Windows.UI.Color)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawBeziers(System.Windows.Media.Imaging.WriteableBitmap,System.Int32[],System.Windows.Media.Color)">
             <summary>
             Draws a series of cubic Beziér splines each defined by start, end and two control points. 
             The ending point of the previous curve is used as starting point for the next. 
@@ -1010,7 +917,7 @@
             <param name="points">The points for the curve in x and y pairs, therefore the array is interpreted as (x1, y1, cx1, cy1, cx2, cy2, x2, y2, cx3, cx4 ..., xn, yn).</param>
             <param name="color">The color for the spline.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.DrawBeziers(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32[],System.Int32)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawBeziers(System.Windows.Media.Imaging.WriteableBitmap,System.Int32[],System.Int32)">
             <summary>
             Draws a series of cubic Beziér splines each defined by start, end and two control points. 
             The ending point of the previous curve is used as starting point for the next. 
@@ -1020,7 +927,7 @@
             <param name="points">The points for the curve in x and y pairs, therefore the array is interpreted as (x1, y1, cx1, cy1, cx2, cy2, x2, y2, cx3, cx4 ..., xn, yn).</param>
             <param name="color">The color for the spline.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.DrawCurveSegment(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Single,System.Int32,Windows.UI.Xaml.Media.Imaging.BitmapContext,System.Int32,System.Int32)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawCurveSegment(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Single,System.Int32,System.Windows.Media.Imaging.BitmapContext,System.Int32,System.Int32)">
             <summary>
             Draws a segment of a Cardinal spline (cubic) defined by four control points.
             </summary>
@@ -1038,7 +945,7 @@
             <param name="w">The width of the bitmap.</param>
             <param name="h">The height of the bitmap.</param> 
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.DrawCurve(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32[],System.Single,Windows.UI.Color)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawCurve(System.Windows.Media.Imaging.WriteableBitmap,System.Int32[],System.Single,System.Windows.Media.Color)">
             <summary>
             Draws a Cardinal spline (cubic) defined by a point collection. 
             The cardinal spline passes through each point in the collection.
@@ -1048,7 +955,7 @@
             <param name="tension">The tension of the curve defines the shape. Usually between 0 and 1. 0 would be a straight line.</param>
             <param name="color">The color for the spline.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.DrawCurve(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32[],System.Single,System.Int32)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawCurve(System.Windows.Media.Imaging.WriteableBitmap,System.Int32[],System.Single,System.Int32)">
             <summary>
             Draws a Cardinal spline (cubic) defined by a point collection. 
             The cardinal spline passes through each point in the collection.
@@ -1058,7 +965,7 @@
             <param name="tension">The tension of the curve defines the shape. Usually between 0 and 1. 0 would be a straight line.</param>
             <param name="color">The color for the spline.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.DrawCurveClosed(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32[],System.Single,Windows.UI.Color)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawCurveClosed(System.Windows.Media.Imaging.WriteableBitmap,System.Int32[],System.Single,System.Windows.Media.Color)">
             <summary>
             Draws a closed Cardinal spline (cubic) defined by a point collection. 
             The cardinal spline passes through each point in the collection.
@@ -1068,7 +975,7 @@
             <param name="tension">The tension of the curve defines the shape. Usually between 0 and 1. 0 would be a straight line.</param>
             <param name="color">The color for the spline.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.DrawCurveClosed(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32[],System.Single,System.Int32)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.DrawCurveClosed(System.Windows.Media.Imaging.WriteableBitmap,System.Int32[],System.Single,System.Int32)">
             <summary>
             Draws a closed Cardinal spline (cubic) defined by a point collection. 
             The cardinal spline passes through each point in the collection.
@@ -1078,7 +985,7 @@
             <param name="tension">The tension of the curve defines the shape. Usually between 0 and 1. 0 would be a straight line.</param>
             <param name="color">The color for the spline.</param>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.Crop(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.Crop(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
             Creates a new cropped WriteableBitmap.
             </summary>
@@ -1089,7 +996,7 @@
             <param name="height">The height of the rectangle that defines the crop region.</param>
             <returns>A new WriteableBitmap that is a cropped version of the input.</returns>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.Crop(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,Windows.Foundation.Rect)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.Crop(System.Windows.Media.Imaging.WriteableBitmap,System.Windows.Rect)">
             <summary>
             Creates a new cropped WriteableBitmap.
             </summary>
@@ -1097,7 +1004,7 @@
             <param name="region">The rectangle that defines the crop region.</param>
             <returns>A new WriteableBitmap that is a cropped version of the input.</returns>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.Resize(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.Interpolation)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.Resize(System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32,System.Windows.Media.Imaging.WriteableBitmapExtensions.Interpolation)">
             <summary>
             Creates a new resized WriteableBitmap.
             </summary>
@@ -1107,7 +1014,7 @@
             <param name="interpolation">The interpolation method that should be used.</param>
             <returns>A new WriteableBitmap that is a resized version of the input.</returns>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.Resize(Windows.UI.Xaml.Media.Imaging.BitmapContext,System.Int32,System.Int32,System.Int32,System.Int32,Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.Interpolation)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.Resize(System.Windows.Media.Imaging.BitmapContext,System.Int32,System.Int32,System.Int32,System.Int32,System.Windows.Media.Imaging.WriteableBitmapExtensions.Interpolation)">
             <summary>
             Creates a new resized bitmap.
             </summary>
@@ -1119,7 +1026,7 @@
             <param name="interpolation">The interpolation method that should be used.</param>
             <returns>A new bitmap that is a resized version of the input.</returns>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.Rotate(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Int32)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.Rotate(System.Windows.Media.Imaging.WriteableBitmap,System.Int32)">
             <summary>
             Rotates the bitmap in 90° steps clockwise and returns a new rotated WriteableBitmap.
             </summary>
@@ -1127,7 +1034,7 @@
             <param name="angle">The angle in degress the bitmap should be rotated in 90° steps clockwise.</param>
             <returns>A new WriteableBitmap that is a rotated version of the input.</returns>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.RotateFree(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,System.Double,System.Boolean)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.RotateFree(System.Windows.Media.Imaging.WriteableBitmap,System.Double,System.Boolean)">
             <summary>
             Rotates the bitmap in any degree returns a new rotated WriteableBitmap.
             </summary>
@@ -1136,7 +1043,7 @@
             <param name="crop">if true: keep the size, false: adjust canvas to new size</param>
             <returns>A new WriteableBitmap that is a rotated version of the input.</returns>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.Flip(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.FlipMode)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapExtensions.Flip(System.Windows.Media.Imaging.WriteableBitmap,System.Windows.Media.Imaging.WriteableBitmapExtensions.FlipMode)">
             <summary>
             Flips (reflects the image) eiter vertical or horizontal.
             </summary>
@@ -1144,82 +1051,202 @@
             <param name="flipMode">The flip mode.</param>
             <returns>A new WriteableBitmap that is a flipped version of the input.</returns>
         </member>
-        <member name="T:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.BlendMode">
+        <member name="T:System.Windows.Media.Imaging.WriteableBitmapExtensions.BlendMode">
             <summary>
             The blending mode.
             </summary>
         </member>
-        <member name="F:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.BlendMode.Alpha">
+        <member name="F:System.Windows.Media.Imaging.WriteableBitmapExtensions.BlendMode.Alpha">
             <summary>
             Alpha blendiing uses the alpha channel to combine the source and destination. 
             </summary>
         </member>
-        <member name="F:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.BlendMode.Additive">
+        <member name="F:System.Windows.Media.Imaging.WriteableBitmapExtensions.BlendMode.Additive">
             <summary>
             Additive blending adds the colors of the source and the destination.
             </summary>
         </member>
-        <member name="F:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.BlendMode.Subtractive">
+        <member name="F:System.Windows.Media.Imaging.WriteableBitmapExtensions.BlendMode.Subtractive">
             <summary>
             Subtractive blending subtracts the source color from the destination.
             </summary>
         </member>
-        <member name="F:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.BlendMode.Mask">
+        <member name="F:System.Windows.Media.Imaging.WriteableBitmapExtensions.BlendMode.Mask">
             <summary>
             Uses the source color as a mask.
             </summary>
         </member>
-        <member name="F:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.BlendMode.Multiply">
+        <member name="F:System.Windows.Media.Imaging.WriteableBitmapExtensions.BlendMode.Multiply">
             <summary>
             Multiplies the source color with the destination color.
             </summary>
         </member>
-        <member name="F:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.BlendMode.ColorKeying">
+        <member name="F:System.Windows.Media.Imaging.WriteableBitmapExtensions.BlendMode.ColorKeying">
             <summary>
             Ignores the specified Color
             </summary>
         </member>
-        <member name="F:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.BlendMode.None">
+        <member name="F:System.Windows.Media.Imaging.WriteableBitmapExtensions.BlendMode.None">
             <summary>
             No blending just copies the pixels from the source.
             </summary>
         </member>
-        <member name="T:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.Interpolation">
+        <member name="T:System.Windows.Media.Imaging.WriteableBitmapExtensions.Interpolation">
             <summary>
             The interpolation method.
             </summary>
         </member>
-        <member name="F:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.Interpolation.NearestNeighbor">
+        <member name="F:System.Windows.Media.Imaging.WriteableBitmapExtensions.Interpolation.NearestNeighbor">
             <summary>
             The nearest neighbor algorithm simply selects the color of the nearest pixel.
             </summary>
         </member>
-        <member name="F:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.Interpolation.Bilinear">
+        <member name="F:System.Windows.Media.Imaging.WriteableBitmapExtensions.Interpolation.Bilinear">
             <summary>
             Linear interpolation in 2D using the average of 3 neighboring pixels.
             </summary>
         </member>
-        <member name="T:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.FlipMode">
+        <member name="T:System.Windows.Media.Imaging.WriteableBitmapExtensions.FlipMode">
             <summary>
             The mode for flipping.
             </summary>
         </member>
-        <member name="F:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.FlipMode.Vertical">
+        <member name="F:System.Windows.Media.Imaging.WriteableBitmapExtensions.FlipMode.Vertical">
             <summary>
             Flips the image vertical (around the center of the y-axis).
             </summary>
         </member>
-        <member name="F:Windows.UI.Xaml.Media.Imaging.WriteableBitmapExtensions.FlipMode.Horizontal">
+        <member name="F:System.Windows.Media.Imaging.WriteableBitmapExtensions.FlipMode.Horizontal">
             <summary>
             Flips the image horizontal (around the center of the x-axis).
             </summary>
         </member>
-        <member name="T:Windows.UI.Xaml.Media.Imaging.WriteableBitmapContextExtensions">
+        <member name="T:System.Windows.Media.Imaging.ReadWriteMode">
+            <summary>
+            Read Write Mode for the BitmapContext.
+            </summary>
+        </member>
+        <member name="F:System.Windows.Media.Imaging.ReadWriteMode.ReadOnly">
+            <summary>
+            On Dispose of a BitmapContext, do not Invalidate
+            </summary>
+        </member>
+        <member name="F:System.Windows.Media.Imaging.ReadWriteMode.ReadWrite">
+            <summary>
+            On Dispose of a BitmapContext, invalidate the bitmap
+            </summary>
+        </member>
+        <member name="T:System.Windows.Media.Imaging.BitmapContext">
+            <summary>
+            A disposable cross-platform wrapper around a WriteableBitmap, allowing a common API for Silverlight + WPF with locking + unlocking if necessary
+            </summary>
+            <remarks>Attempting to put as many preprocessor hacks in this file, to keep the rest of the codebase relatively clean</remarks>
+        </member>
+        <member name="M:System.Windows.Media.Imaging.BitmapContext.#ctor(System.Windows.Media.Imaging.WriteableBitmap)">
+            <summary>
+            Creates an instance of a BitmapContext, with default mode = ReadWrite
+            </summary>
+            <param name="writeableBitmap"></param>
+        </member>
+        <member name="M:System.Windows.Media.Imaging.BitmapContext.#ctor(System.Windows.Media.Imaging.WriteableBitmap,System.Windows.Media.Imaging.ReadWriteMode)">
+            <summary>
+            Creates an instance of a BitmapContext, with specified ReadWriteMode
+            </summary>
+            <param name="writeableBitmap"></param>
+            <param name="mode"></param>
+        </member>
+        <member name="M:System.Windows.Media.Imaging.BitmapContext.BlockCopy(System.Windows.Media.Imaging.BitmapContext,System.Int32,System.Windows.Media.Imaging.BitmapContext,System.Int32,System.Int32)">
+            <summary>
+            Performs a Copy operation from source Bto destination BitmapContext
+            </summary>
+            <remarks>Equivalent to calling Buffer.BlockCopy in Silverlight, or native memcpy in WPF</remarks>
+        </member>
+        <member name="M:System.Windows.Media.Imaging.BitmapContext.BlockCopy(System.Int32[],System.Int32,System.Windows.Media.Imaging.BitmapContext,System.Int32,System.Int32)">
+            <summary>
+            Performs a Copy operation from source Array to destination BitmapContext
+            </summary>
+            <remarks>Equivalent to calling Buffer.BlockCopy in Silverlight, or native memcpy in WPF</remarks>
+        </member>
+        <member name="M:System.Windows.Media.Imaging.BitmapContext.BlockCopy(System.Byte[],System.Int32,System.Windows.Media.Imaging.BitmapContext,System.Int32,System.Int32)">
+            <summary>
+            Performs a Copy operation from source Array to destination BitmapContext
+            </summary>
+            <remarks>Equivalent to calling Buffer.BlockCopy in Silverlight, or native memcpy in WPF</remarks>
+        </member>
+        <member name="M:System.Windows.Media.Imaging.BitmapContext.BlockCopy(System.Windows.Media.Imaging.BitmapContext,System.Int32,System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Performs a Copy operation from source BitmapContext to destination Array
+            </summary>
+            <remarks>Equivalent to calling Buffer.BlockCopy in Silverlight, or native memcpy in WPF</remarks>
+        </member>
+        <member name="M:System.Windows.Media.Imaging.BitmapContext.BlockCopy(System.Windows.Media.Imaging.BitmapContext,System.Int32,System.Int32[],System.Int32,System.Int32)">
+            <summary>
+            Performs a Copy operation from source BitmapContext to destination Array
+            </summary>
+            <remarks>Equivalent to calling Buffer.BlockCopy in Silverlight, or native memcpy in WPF</remarks>
+        </member>
+        <member name="M:System.Windows.Media.Imaging.BitmapContext.Clear">
+            <summary>
+            Clears the BitmapContext, filling the underlying bitmap with zeros
+            </summary>
+        </member>
+        <member name="M:System.Windows.Media.Imaging.BitmapContext.Dispose">
+            <summary>
+            Disposes the BitmapContext, unlocking it and invalidating if WPF
+            </summary>
+        </member>
+        <member name="P:System.Windows.Media.Imaging.BitmapContext.WriteableBitmap">
+            <summary>
+            The Bitmap
+            </summary>
+        </member>
+        <member name="P:System.Windows.Media.Imaging.BitmapContext.Width">
+            <summary>
+            Width of the bitmap
+            </summary>
+        </member>
+        <member name="P:System.Windows.Media.Imaging.BitmapContext.Height">
+            <summary>
+            Height of the bitmap
+            </summary>
+        </member>
+        <member name="P:System.Windows.Media.Imaging.BitmapContext.Pixels">
+            <summary>
+            The pixels as ARGB integer values, where each channel is 8 bit.
+            </summary>
+        </member>
+        <member name="P:System.Windows.Media.Imaging.BitmapContext.Length">
+            <summary>
+            The number of pixels.
+            </summary>
+        </member>
+        <member name="T:System.Windows.Media.Imaging.BitmapFactory">
+            <summary>
+            Cross-platform factory for WriteableBitmaps
+            </summary>
+        </member>
+        <member name="M:System.Windows.Media.Imaging.BitmapFactory.New(System.Int32,System.Int32)">
+            <summary>
+            Creates a new WriteableBitmap of the specified width and height
+            </summary>
+            <remarks>For WPF the default DPI is 96x96 and PixelFormat is Pbgra32</remarks>
+            <param name="pixelWidth"></param>
+            <param name="pixelHeight"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.Windows.Media.Imaging.BitmapFactory.ConvertToPbgra32Format(System.Windows.Media.Imaging.BitmapSource)">
+            <summary>
+            Converts the input BitmapSource to the Pbgra32 format WriteableBitmap which is internally used by the WriteableBitmapEx.
+            </summary>
+            <param name="source">The source bitmap.</param>
+            <returns></returns>
+        </member>
+        <member name="T:System.Windows.Media.Imaging.WriteableBitmapContextExtensions">
             <summary>
             Provides the WriteableBitmap context pixel data
             </summary>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapContextExtensions.GetBitmapContext(Windows.UI.Xaml.Media.Imaging.WriteableBitmap)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapContextExtensions.GetBitmapContext(System.Windows.Media.Imaging.WriteableBitmap)">
             <summary>
             Gets a BitmapContext within which to perform nested IO operations on the bitmap
             </summary>
@@ -1227,7 +1254,7 @@
             <param name="bmp"></param>
             <returns></returns>
         </member>
-        <member name="M:Windows.UI.Xaml.Media.Imaging.WriteableBitmapContextExtensions.GetBitmapContext(Windows.UI.Xaml.Media.Imaging.WriteableBitmap,Windows.UI.Xaml.Media.Imaging.ReadWriteMode)">
+        <member name="M:System.Windows.Media.Imaging.WriteableBitmapContextExtensions.GetBitmapContext(System.Windows.Media.Imaging.WriteableBitmap,System.Windows.Media.Imaging.ReadWriteMode)">
             <summary>
             Gets a BitmapContext within which to perform nested IO operations on the bitmap
             </summary>
