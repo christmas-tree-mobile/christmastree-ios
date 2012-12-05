@@ -17,7 +17,7 @@
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel">
-            <phone:WebBrowser Name="HelpWebBrowser" />
+            <phone:WebBrowser Name="HelpWebBrowser" IsScriptEnabled="True" />
         </Grid>
     </Grid>
 </phone:PhoneApplicationPage>
