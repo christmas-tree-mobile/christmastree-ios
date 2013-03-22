@@ -590,9 +590,9 @@ namespace ChristmasTree
                         }
 
                         store.DeleteFile(file_name);
-
-                        MessageBox.Show(AppResources.MessageBoxMessageImageSavedInfo, AppResources.MessageBoxHeaderInfo, MessageBoxButton.OK);
                     }
+
+                    MessageBox.Show(AppResources.MessageBoxMessageImageSavedInfo, AppResources.MessageBoxHeaderInfo, MessageBoxButton.OK);
                 }
                 catch (Exception ex)
                 {
