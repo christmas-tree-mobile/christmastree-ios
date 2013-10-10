@@ -121,21 +121,21 @@
     <value>Erreur</value>
   </data>
   <data name="MessageBoxHeaderInfo" xml:space="preserve">
-    <value>Information</value>
+    <value>Info</value>
   </data>
   <data name="MessageBoxMessageImageSavedInfo" xml:space="preserve">
-    <value>L’image était sauvegardée avec succès.</value>
+    <value>Image enregistrée avec succès.</value>
   </data>
   <data name="MessageBoxMessageImageSaveError" xml:space="preserve">
-    <value>L’image ne peut pas être sauvegardée:</value>
+    <value>Impossible d'enregistrer l'image:</value>
   </data>
   <data name="MessageBoxMessageImageSaveTrialVersionQuestion" xml:space="preserve">
-    <value>La fonction de la sauvegarde est accessible dans la version complète. Voulez-vous acheter la version complète?</value>
+    <value>la fonction d’enregistrement  n'est disponible que dans la version complète. Voulez-vous acheter la version complète?</value>
   </data>
   <data name="MessageBoxMessageMarketplaceOpenError" xml:space="preserve">
-    <value>Marketplace ne peut pas être ouvert:</value>
+    <value>Impossible d'ouvrir le Marketplace:</value>
   </data>
   <data name="MessageBoxMessageSettingsTrialVersionQuestion" xml:space="preserve">
-    <value>Ces réglages sont accessibles dans la version complète seule. Voulez-vous acheter la version complète?</value>
+    <value>Ces paramètres  ne sont disponibles que dans la version complète. Voulez-vous acheter la version complète?</value>
   </data>
 </root>
