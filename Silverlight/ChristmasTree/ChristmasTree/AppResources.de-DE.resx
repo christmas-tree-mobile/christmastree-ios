@@ -124,18 +124,18 @@
     <value>Information</value>
   </data>
   <data name="MessageBoxMessageImageSavedInfo" xml:space="preserve">
-    <value>Das Bild wurde erfolgreich gespeichert.</value>
+    <value>Abbildung wurde erfolgreich gespeichert.</value>
   </data>
   <data name="MessageBoxMessageImageSaveError" xml:space="preserve">
-    <value>Das Bild kann nicht gespeichert werden:</value>
+    <value>Abbildung kann nicht gespeichert werden:</value>
   </data>
   <data name="MessageBoxMessageImageSaveTrialVersionQuestion" xml:space="preserve">
-    <value>Die Speicherfunktion ist nur in der Vollversion zugänglich. Möchten Sie die Vollversion kaufen?</value>
+    <value>Speicherfunktion ist nur in der Vollversion verfügbar. Möchten Sie die Vollversion kaufen?</value>
   </data>
   <data name="MessageBoxMessageMarketplaceOpenError" xml:space="preserve">
     <value>Marketplace kann nicht geöffnet werden:</value>
   </data>
   <data name="MessageBoxMessageSettingsTrialVersionQuestion" xml:space="preserve">
-    <value>Die Einstellungen sind nur in der Vollversion zugänglich. Möchten Sie die Vollversion kaufen?</value>
+    <value>Diese Einstellungen sind nur in der Vollversion verfügbar. Möchten Sie die Vollversion kaufen?</value>
   </data>
 </root>
