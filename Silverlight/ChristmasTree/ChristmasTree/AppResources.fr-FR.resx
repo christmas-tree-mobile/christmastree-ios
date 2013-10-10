@@ -130,12 +130,12 @@
     <value>Impossible d'enregistrer l'image:</value>
   </data>
   <data name="MessageBoxMessageImageSaveTrialVersionQuestion" xml:space="preserve">
-    <value>la fonction d’enregistrement  n'est disponible que dans la version complète. Voulez-vous acheter la version complète?</value>
+    <value>La fonction d’enregistrement n'est disponible que dans la version complète. Voulez-vous acheter la version complète?</value>
   </data>
   <data name="MessageBoxMessageMarketplaceOpenError" xml:space="preserve">
     <value>Impossible d'ouvrir le Marketplace:</value>
   </data>
   <data name="MessageBoxMessageSettingsTrialVersionQuestion" xml:space="preserve">
-    <value>Ces paramètres  ne sont disponibles que dans la version complète. Voulez-vous acheter la version complète?</value>
+    <value>Ces paramètres ne sont disponibles que dans la version complète. Voulez-vous acheter la version complète?</value>
   </data>
 </root>
