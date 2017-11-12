@@ -1,52 +1,31 @@
-import QtQuick 1.1
+import QtQuick 2.9
 
 Image {
     id:     toy
     width:  sourceSize.width
     height: sourceSize.height
-    smooth: true
 
     property int    toyNumber: 0
     property string toyType:   ""
 
     onToyNumberChanged: {
         if (toyNumber !== 0 && toyType !== "") {
-            source = "../../../images/" + treePage.imageDir + "/toys/" + toyType + "-" + toyNumber + ".png";
+            source = "qrc:/resources/images/tree/toys/%1_%2.png".arg(toyType).arg(toyNumber);
 
             if (toyType === "twinkle") {
-                twinkleSequentialAnimation.start();
+                twinkleAnimationTimer.start();
             }
         }
     }
 
     onToyTypeChanged: {
         if (toyNumber !== 0 && toyType !== "") {
-            source = "../../../images/" + treePage.imageDir + "/toys/" + toyType + "-" + toyNumber + ".png";
+            source = "qrc:/resources/images/tree/toys/%1_%2.png".arg(toyType).arg(toyNumber);
 
             if (toyType === "twinkle") {
-                twinkleSequentialAnimation.start();
+                twinkleAnimationTimer.start();
             }
         }
-    }
-
-    function enlargeToy() {
-        var center_x = x + width  / 2;
-        var center_y = y + height / 2;
-
-        width  = sourceSize.width  * 2;
-        height = sourceSize.height * 2;
-
-        x = center_x - width  / 2;
-        y = center_y - height / 2;
-    }
-
-    function reduceToy() {
-        var center_x = x + width / 2;
-
-        width  = sourceSize.width;
-        height = sourceSize.height;
-
-        x = center_x - width / 2;
     }
 
     function destroyToy() {
@@ -62,8 +41,6 @@ Image {
 
         onPressed: {
             var mapped = mapToItem(toy.parent, mouseX, mouseY);
-
-            toy.enlargeToy();
 
             toy.x = mapped.x - toy.width / 2;
             toy.y = mapped.y - toy.height;
@@ -87,8 +64,6 @@ Image {
         }
 
         onReleased: {
-            toy.reduceToy();
-
             if (!treePage.validateToy(toy.x + toy.width / 2, toy.y + toy.height / 2)) {
                 toy.destroyToy();
             }
@@ -133,7 +108,6 @@ Image {
         loops: Animation.Infinite
 
         PropertyAnimation {
-            id:       twinkleDecOpacityPropertyAnimation
             target:   toy
             property: "opacity"
             from:     1.0
@@ -142,12 +116,20 @@ Image {
         }
 
         PropertyAnimation {
-            id:       twinkleIncOpacityPropertyAnimation
             target:   toy
             property: "opacity"
             from:     0.5
             to:       1.0
             duration: 500
+        }
+    }
+
+    Timer {
+        id:       twinkleAnimationTimer
+        interval: 100
+
+        onTriggered: {
+            twinkleSequentialAnimation.start();
         }
     }
 }

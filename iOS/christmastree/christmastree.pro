@@ -3,15 +3,15 @@ CONFIG += c++11
 
 DEFINES += QT_DEPRECATED_WARNINGS WEBRTC_POSIX
 
-SOURCES += src/main.cpp \
-    src/capturehelper.cpp
+SOURCES += src/main.cpp
+#    src/capturehelper.cpp
 
 #OBJECTIVE_SOURCES += \
 #    src/admobhelper.mm \
 #    src/speechrecorder.mm
 
-HEADERS += \
-    src/capturehelper.h
+#HEADERS += \
+#    src/capturehelper.h
 
 RESOURCES += \
     qml.qrc \

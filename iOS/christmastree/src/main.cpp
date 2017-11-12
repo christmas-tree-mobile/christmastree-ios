@@ -4,8 +4,6 @@
 #include <QtQml/QQmlApplicationEngine>
 #include <QtQml/QQmlContext>
 
-#include "capturehelper.h"
-
 int main(int argc, char *argv[])
 {
     QTranslator     translator;
@@ -16,8 +14,6 @@ int main(int argc, char *argv[])
     }
 
     QQmlApplicationEngine engine;
-
-    engine.rootContext()->setContextProperty(QStringLiteral("CaptureHelper"), new CaptureHelper(&app));
 
     engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
 

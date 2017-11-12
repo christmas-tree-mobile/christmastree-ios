@@ -1,14 +1,13 @@
-import QtQuick 1.1
-import QtMultimediaKit 1.1
-import com.nokia.meego 1.0
-import Qt.labs.particles 1.0
+import QtQuick 2.9
+import QtMultimedia 5.9
 
 import "Tree"
 
-Page {
-    id:              treePage
-    anchors.fill:    parent
-    orientationLock: PageOrientation.LockPortrait
+Item {
+    id: treePage
+
+    property bool appInForeground:       Qt.application.active
+    property bool pageActive:            false
 
     property int currentBackgroundNum:   1
     property int maxBackgroundNum:       3
@@ -18,19 +17,14 @@ Page {
     property int maxTwinkleNum:          7
     property int currentSnowflakesCount: 10
     property int defaultSnowflakesCount: 10
+    property int upperTreePointX:        160
+    property int upperTreePointY:        75
+    property int lowerLeftTreePointX:    40
+    property int lowerLeftTreePointY:    464
+    property int lowerRightTreePointX:   284
+    property int lowerRightTreePointY:   470
 
-    property int upperTreePointX:      imageDir === "360x640" ? 180 : 238
-    property int upperTreePointY:      imageDir === "360x640" ? 50  : 66
-    property int lowerLeftTreePointX:  imageDir === "360x640" ? 10  : 12
-    property int lowerLeftTreePointY:  imageDir === "360x640" ? 550 : 730
-    property int lowerRightTreePointX: imageDir === "360x640" ? 350 : 464
-    property int lowerRightTreePointY: imageDir === "360x640" ? 550 : 730
-
-    property bool appInForeground:     Qt.application.active
-
-    property string imageDir:          "360x640"
-
-    property QtObject newToy:          null
+    property var newToy:                 null
 
     function setArtwork(background_num, tree_num) {
         if (background_num <= maxBackgroundNum) {
@@ -44,10 +38,6 @@ Page {
         } else {
             currentSnowflakesCount = defaultSnowflakesCount;
         }
-    }
-
-    function setVolume(volume) {
-        audio.volume = volume;
     }
 
     function validateToy(center_x, center_y) {
@@ -72,6 +62,7 @@ Page {
         }
     }
 
+/*
     Audio {
         id:     audio
         source: "../../sound/music.mp3"
@@ -90,6 +81,7 @@ Page {
             play();
         }
     }
+*/
 
     Rectangle {
         id:           backgroundRectangle
@@ -97,31 +89,95 @@ Page {
         color:        "black"
 
         Image {
-            id:           backgroundImage
-            anchors.fill: parent
-            source:       "../../images/" + treePage.imageDir + "/bg-" + treePage.currentBackgroundNum + ".png"
-            fillMode:     Image.PreserveAspectFit
-            smooth:       true
+            id:               backgroundImage
+            anchors.centerIn: parent
+            width:            parent.width
+            height:           parent.height
+            source:           "qrc:/resources/images/tree/background_%1.png".arg(treePage.currentBackgroundNum)
+            fillMode:         Image.PreserveAspectCrop
 
-            Image {
-                id:           treeImageBg
-                anchors.fill: parent
-                z:            1
-                source:       "../../images/" + treePage.imageDir + "/tree-" + treePage.currentTreeNum + "-bg.png"
-                fillMode:     Image.PreserveAspectFit
-                smooth:       true
+            property bool geometrySettled: false
+
+            onPaintedWidthChanged: {
+                if (!geometrySettled && width > 0 && height > 0 && paintedWidth > 0 && paintedHeight > 0) {
+                    geometrySettled = true;
+
+                    width  = paintedWidth;
+                    height = paintedHeight;
+                }
+            }
+
+            onPaintedHeightChanged: {
+                if (!geometrySettled && width > 0 && height > 0 && paintedWidth > 0 && paintedHeight > 0) {
+                    geometrySettled = true;
+
+                    width  = paintedWidth;
+                    height = paintedHeight;
+                }
             }
 
             Image {
-                id:           treeImageFg
-                anchors.fill: parent
-                z:            3
-                source:       "../../images/" + treePage.imageDir + "/tree-" + treePage.currentTreeNum + "-fg.png"
-                fillMode:     Image.PreserveAspectFit
-                smooth:       true
+                id:               treeImageBg
+                anchors.centerIn: parent
+                width:            parent.width
+                height:           parent.height
+                z:                1
+                source:           "qrc:/resources/images/tree/tree_%1_bg.png".arg(treePage.currentTreeNum)
+                fillMode:         Image.PreserveAspectCrop
+
+                property bool geometrySettled: false
+
+                onPaintedWidthChanged: {
+                    if (!geometrySettled && width > 0 && height > 0 && paintedWidth > 0 && paintedHeight > 0) {
+                        geometrySettled = true;
+
+                        width  = paintedWidth;
+                        height = paintedHeight;
+                    }
+                }
+
+                onPaintedHeightChanged: {
+                    if (!geometrySettled && width > 0 && height > 0 && paintedWidth > 0 && paintedHeight > 0) {
+                        geometrySettled = true;
+
+                        width  = paintedWidth;
+                        height = paintedHeight;
+                    }
+                }
+            }
+
+            Image {
+                id:               treeImageFg
+                anchors.centerIn: parent
+                width:            parent.width
+                height:           parent.height
+                z:                3
+                source:           "qrc:/resources/images/tree/tree_%1_fg.png".arg(treePage.currentTreeNum)
+                fillMode:         Image.PreserveAspectCrop
+
+                property bool geometrySettled: false
+
+                onPaintedWidthChanged: {
+                    if (!geometrySettled && width > 0 && height > 0 && paintedWidth > 0 && paintedHeight > 0) {
+                        geometrySettled = true;
+
+                        width  = paintedWidth;
+                        height = paintedHeight;
+                    }
+                }
+
+                onPaintedHeightChanged: {
+                    if (!geometrySettled && width > 0 && height > 0 && paintedWidth > 0 && paintedHeight > 0) {
+                        geometrySettled = true;
+
+                        width  = paintedWidth;
+                        height = paintedHeight;
+                    }
+                }
             }
         }
 
+/*
         Particles {
             id:                snowflakes1
             anchors.fill:      parent
@@ -197,46 +253,7 @@ Page {
                 pace:      100
             }
         }
-
-        Image {
-            id:           helpButtonImage
-            anchors.top:  parent.top
-            anchors.left: parent.left
-            width:        48
-            height:       48
-            z:            15
-            source:       "qrc:/resources/images/help.png"
-
-            MouseArea {
-                id:           helpButtonMouseArea
-                anchors.fill: parent
-
-                onClicked: {
-                    mainPageStack.replace(helpPage);
-                }
-            }
-        }
-
-        Image {
-            id:            settingsButtonImage
-            anchors.top:   parent.top
-            anchors.right: parent.right
-            width:         48
-            height:        48
-            z:             15
-            source:        "qrc:/resources/images/settings.png"
-
-            MouseArea {
-                id:           settingsButtonMouseArea
-                anchors.fill: parent
-
-                onClicked: {
-                    settingsPage.initSettings(treePage.currentBackgroundNum, treePage.currentTreeNum);
-
-                    mainPageStack.replace(settingsPage);
-                }
-            }
-        }
+*/
 
         Image {
             id:             toysButtonImage
@@ -245,7 +262,7 @@ Page {
             width:          48
             height:         48
             z:              15
-            source:         "qrc:/resources/images/toys.png"
+            source:         "qrc:/resources/images/tree/button_toys.png"
 
             MouseArea {
                 id:           toysButtonMouseArea
@@ -254,10 +271,10 @@ Page {
                 onClicked: {
                     if (toysListRectangle.visible) {
                         toysListRectangle.visible = false;
-                        toysButtonImage.source    = "qrc:/resources/images/toys.png";
+                        toysButtonImage.source    = "qrc:/resources/images/tree/button_toys.png";
                     } else {
                         toysListRectangle.visible = true;
-                        toysButtonImage.source    = "qrc:/resources/images/toys-pressed.png";
+                        toysButtonImage.source    = "qrc:/resources/images/tree/button_toys_pressed.png";
                     }
                 }
             }
@@ -270,7 +287,7 @@ Page {
             width:                    48
             height:                   48
             z:                        15
-            source:                   "qrc:/resources/images/capture.png"
+            source:                   "qrc:/resources/images/tree/button_capture.png"
 
             MouseArea {
                 id:           captureButtonMouseArea
@@ -287,20 +304,22 @@ Page {
         }
 
         Image {
-            id:             exitButtonImage
+            id:             settingsButtonImage
             anchors.bottom: parent.bottom
             anchors.right:  parent.right
             width:          48
             height:         48
             z:              15
-            source:         "qrc:/resources/images/exit.png"
+            source:         "qrc:/resources/images/tree/button_settings.png"
 
             MouseArea {
-                id:           exitButtonMouseArea
+                id:           settingsButtonMouseArea
                 anchors.fill: parent
 
                 onClicked: {
-                    Qt.quit();
+                    settingsPage.initSettings(treePage.currentBackgroundNum, treePage.currentTreeNum);
+
+                    mainPageStack.replace(settingsPage);
                 }
             }
         }
@@ -320,7 +339,6 @@ Page {
                 id:           toysListView
                 anchors.fill: parent
                 orientation:  ListView.Vertical
-                cacheBuffer:  (treePage.maxToyNum + treePage.maxTwinkleNum) * 256 // To prevent strange issue with "untouchable toys" on Symbian
                 model:        toysVisualDataModel
 
                 VisualDataModel {
@@ -334,7 +352,7 @@ Page {
                         id:     toysItemDelegate
                         width:  sourceSize.width
                         height: sourceSize.height
-                        source: "../../images/" + treePage.imageDir + "/toys/" + toyType + "-" + toyNumber + ".png"
+                        source: "qrc:/resources/images/tree/toys/%1_%2.png".arg(toyType).arg(toyNumber)
 
                         MouseArea {
                             id:           toysItemMouseArea
@@ -365,8 +383,6 @@ Page {
                                 preventStealing = false;
 
                                 if (treePage.newToy !== null) {
-                                    treePage.newToy.reduceToy();
-
                                     if (!treePage.validateToy(treePage.newToy.x + treePage.newToy.width / 2, treePage.newToy.y + treePage.newToy.height / 2)) {
                                         treePage.newToy.destroyToy();
                                     }
@@ -385,12 +401,16 @@ Page {
                                     if (toysItemMouseArea.pressed) {
                                         toysItemMouseArea.preventStealing = true;
 
-                                        treePage.newToy = Qt.createComponent("Tree/Toy.qml").createObject(backgroundImage, {"z": 4, "toyType": toyType, "toyNumber": toyNumber});
+                                        var component = Qt.createComponent("Tree/Toy.qml");
 
-                                        treePage.newToy.enlargeToy();
+                                        if (component.status === Component.Ready) {
+                                            treePage.newToy = component.createObject(backgroundImage, {"z": 4, "toyType": toyType, "toyNumber": toyNumber});
 
-                                        treePage.newToy.x = toysItemMouseArea.pressX - treePage.newToy.width / 2;
-                                        treePage.newToy.y = toysItemMouseArea.pressY - treePage.newToy.height;
+                                            treePage.newToy.x = toysItemMouseArea.pressX - treePage.newToy.width / 2;
+                                            treePage.newToy.y = toysItemMouseArea.pressY - treePage.newToy.height;
+                                        } else {
+                                            console.log(component.errorString());
+                                        }
                                     }
                                 }
                             }
@@ -401,33 +421,7 @@ Page {
         }
     }
 
-    QueryDialog {
-        id:               imageCapturedQueryDialog
-        titleText:        "Info"
-        icon:             "qrc:/resources/images/dialog_info.png"
-        message:          "Image saved successfully"
-        acceptButtonText: "OK"
-    }
-
-    QueryDialog {
-        id:               imageCaptureFailedQueryDialog
-        titleText:        "Error"
-        icon:             "qrc:/resources/images/dialog_error.png"
-        message:          "Could not save image"
-        acceptButtonText: "OK"
-    }
-
     Component.onCompleted: {
-        if ((screen.displayWidth === 360 && screen.displayHeight === 640) ||
-            (screen.displayWidth === 640 && screen.displayHeight === 360)) {
-            treePage.imageDir = "360x640";
-        } else if ((screen.displayWidth === 480 && screen.displayHeight === 854) ||
-                   (screen.displayWidth === 854 && screen.displayHeight === 480)) {
-            treePage.imageDir = "480x854";
-        } else {
-            treePage.imageDir = "360x640";
-        }
-
         toysListModel.clear();
 
         for (var i = 1; i <= treePage.maxToyNum; i++) {
@@ -437,7 +431,5 @@ Page {
         for (i = 1; i <= treePage.maxTwinkleNum; i++) {
             toysListModel.append({"toyType": "twinkle", "toyNumber": i});
         }
-
-        audio.play();
     }
 }

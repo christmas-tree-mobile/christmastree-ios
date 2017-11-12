@@ -81,7 +81,6 @@ Page {
                     height:   sourceSize.width !==0 && width !== 0 ? sourceSize.height / (sourceSize.width / width) : 0
                     source:   "../../images/" + treePage.imageDir + "/bg-1.png"
                     fillMode: Image.PreserveAspectFit
-                    smooth:   true
 
                     MouseArea {
                         id:           background1MouseArea
@@ -114,7 +113,6 @@ Page {
                     height:   sourceSize.width !==0 && width !== 0 ? sourceSize.height / (sourceSize.width / width) : 0
                     source:   "../../images/" + treePage.imageDir + "/bg-2.png"
                     fillMode: Image.PreserveAspectFit
-                    smooth:   true
 
                     MouseArea {
                         id:           background2MouseArea
@@ -147,7 +145,6 @@ Page {
                     height:   sourceSize.width !==0 && width !== 0 ? sourceSize.height / (sourceSize.width / width) : 0
                     source:   "../../images/" + treePage.imageDir + "/bg-3.png"
                     fillMode: Image.PreserveAspectFit
-                    smooth:   true
 
                     MouseArea {
                         id:           background3MouseArea
@@ -194,7 +191,6 @@ Page {
                     height:   sourceSize.width !==0 && width !== 0 ? sourceSize.height / (sourceSize.width / width) : 0
                     source:   "../../images/" + treePage.imageDir + "/tree-1-bg.png"
                     fillMode: Image.PreserveAspectFit
-                    smooth:   true
 
                     MouseArea {
                         id:           tree1MouseArea
@@ -227,7 +223,6 @@ Page {
                     height:   sourceSize.width !==0 && width !== 0 ? sourceSize.height / (sourceSize.width / width) : 0
                     source:   "../../images/" + treePage.imageDir + "/tree-2-bg.png"
                     fillMode: Image.PreserveAspectFit
-                    smooth:   true
 
                     MouseArea {
                         id:           tree2MouseArea
@@ -260,7 +255,6 @@ Page {
                     height:   sourceSize.width !==0 && width !== 0 ? sourceSize.height / (sourceSize.width / width) : 0
                     source:   "../../images/" + treePage.imageDir + "/tree-3-bg.png"
                     fillMode: Image.PreserveAspectFit
-                    smooth:   true
 
                     MouseArea {
                         id:           tree3MouseArea

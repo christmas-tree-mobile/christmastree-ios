@@ -1,9 +1,8 @@
-#include <QImage>
-#include <QPainter>
-#include <QStyleOptionGraphicsItem>
-#include <QDateTime>
-#include <QDir>
-#include <QDesktopServices>
+#include <QtCore/QDateTime>
+#include <QtCore/QDir>
+#include <QtGui/QImage>
+#include <QtGui/QPainter>
+#include <QtGui/QDesktopServices>
 
 #include "capturehelper.h"
 
@@ -15,21 +14,21 @@ CaptureHelper::~CaptureHelper()
 {
 }
 
-bool CaptureHelper::captureDeclarativeItem(QDeclarativeItem *item)
+bool CaptureHelper::captureQuickItem(QQuickItem *item)
 {
     if (item != NULL) {
         QImage                   image(item->boundingRect().size().toSize(), QImage::Format_ARGB32_Premultiplied);
         QPainter                 painter(&image);
-        QStyleOptionGraphicsItem style_option;
+        //QStyleOptionGraphicsItem style_option;
 
-        style_option.exposedRect = item->boundingRect();
+        //style_option.exposedRect = item->boundingRect();
 
-        item->paint(&painter, &style_option, NULL);
+        //item->paint(&painter, &style_option, NULL);
 
-        QList<QDeclarativeItem*> sorted_children;
+        QList<QQuickItem*> sorted_children;
 
         for (int i = 0; i < item->children().size(); i++) {
-            QDeclarativeItem *child = dynamic_cast<QDeclarativeItem*>(item->children().at(i));
+            QQuickItem *child = dynamic_cast<QQuickItem*>(item->children().at(i));
 
             if (child != NULL) {
                 if (sorted_children.size() == 0) {
@@ -53,7 +52,7 @@ bool CaptureHelper::captureDeclarativeItem(QDeclarativeItem *item)
         }
 
         for (int i = 0; i < sorted_children.size(); i++) {
-            QDeclarativeItem *child = sorted_children.at(i);
+            QQuickItem *child = sorted_children.at(i);
 
             painter.save();
 

@@ -1,8 +1,8 @@
 #ifndef CAPTUREHELPER_H
 #define CAPTUREHELPER_H
 
-#include <QObject>
-#include <QDeclarativeItem>
+#include <QtCore/QObject>
+#include <QtQuick/QQuickItem>
 
 class CaptureHelper : public QObject
 {
@@ -12,7 +12,7 @@ public:
     explicit CaptureHelper(QObject *parent = 0);
     virtual ~CaptureHelper();
 
-    Q_INVOKABLE bool captureDeclarativeItem(QDeclarativeItem *item);
+    Q_INVOKABLE bool captureQuickItem(QQuickItem *item);
 };
 
 #endif // CAPTUREHELPER_H

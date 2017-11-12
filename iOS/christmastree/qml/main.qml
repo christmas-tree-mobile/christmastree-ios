@@ -1,50 +1,85 @@
-import QtQuick 1.1
-import com.nokia.meego 1.0
+import QtQuick 2.9
+import QtQuick.Window 2.3
+import QtQuick.Controls 2.2
+import QtQuick.LocalStorage 2.0
 
 import "Core"
 
-import "Settings.js" as SettingsScript
-
 Window {
-    id: mainWindow
+    id:         mainWindow
+    visible:    true
+    visibility: Window.FullScreen
 
     function setSetting(key, value) {
-        SettingsScript.setSetting(key, value);
+        var db = LocalStorage.openDatabaseSync("ChristmasTreeDB", "1.0", "ChristmasTreeDB", 1000000);
+
+        db.transaction(
+                    function(tx) {
+                        tx.executeSql("REPLACE INTO SETTINGS (KEY, VALUE) VALUES (?, ?)", [key, value]);
+                    }
+        );
     }
 
-    Rectangle {
-        id:           backgroundRectangle
+    function getSetting(key, defaultValue) {
+        var value = defaultValue;
+        var db    = LocalStorage.openDatabaseSync("ChristmasTreeDB", "1.0", "ChristmasTreeDB", 1000000);
+
+        db.transaction(
+                    function(tx) {
+                        tx.executeSql("CREATE TABLE IF NOT EXISTS SETTINGS(KEY TEXT PRIMARY KEY, VALUE TEXT)");
+
+                        var res = tx.executeSql("SELECT VALUE FROM SETTINGS WHERE KEY=?", [key]);
+
+                        if (res.rows.length !== 0) {
+                            value = res.rows.item(0).VALUE;
+                        }
+                    }
+        );
+
+        return value;
+    }
+
+    StackView {
+        id:           mainStackView
         anchors.fill: parent
-        color:        "black"
 
-        PageStack {
-            id:           mainPageStack
-            anchors.fill: parent
-        }
+        onCurrentItemChanged: {
+            for (var i = 0; i < depth; i++) {
+                var item = get(i, false);
 
-        TreePage {
-            id: treePage
-        }
+                if (item !== null) {
+                    item.focus = false;
 
-        SettingsPage {
-            id: settingsPage
-        }
+                    if (item.hasOwnProperty("pageActive")) {
+                        item.pageActive = false;
+                    }
+                }
+            }
 
-        HelpPage {
-            id: helpPage
-        }
+            if (depth > 0) {
+                get(depth - 1).forceActiveFocus();
 
-        MouseArea {
-            id:           screenLockMouseArea
-            anchors.fill: parent
-            z:            50
-            enabled:      mainPageStack.busy
+                if (item.hasOwnProperty("pageActive")) {
+                    item.pageActive = true;
+                }
+            }
         }
+    }
+
+    TreePage {
+        id: treePage
+    }
+
+    MouseArea {
+        id:           screenLockMouseArea
+        anchors.fill: parent
+        z:            100
+        enabled:      mainStackView.busy
     }
 
     Component.onCompleted: {
-        treePage.setArtwork(SettingsScript.getSetting("BackgroundNum", 1), SettingsScript.getSetting("TreeNum", 1));
+        treePage.setArtwork(getSetting("BackgroundNum", 1), getSetting("TreeNum", 1));
 
-        mainPageStack.push(treePage);
+        mainStackView.push(treePage);
     }
 }
