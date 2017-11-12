@@ -259,8 +259,8 @@ Item {
             id:             toysButtonImage
             anchors.bottom: parent.bottom
             anchors.left:   parent.left
-            width:          48
-            height:         48
+            width:          64
+            height:         64
             z:              15
             source:         "qrc:/resources/images/tree/button_toys.png"
 
@@ -284,8 +284,8 @@ Item {
             id:                       captureButtonImage
             anchors.bottom:           parent.bottom
             anchors.horizontalCenter: parent.horizontalCenter
-            width:                    48
-            height:                   48
+            width:                    64
+            height:                   64
             z:                        15
             source:                   "qrc:/resources/images/tree/button_capture.png"
 
@@ -307,8 +307,8 @@ Item {
             id:             settingsButtonImage
             anchors.bottom: parent.bottom
             anchors.right:  parent.right
-            width:          48
-            height:         48
+            width:          64
+            height:         64
             z:              15
             source:         "qrc:/resources/images/tree/button_settings.png"
 
