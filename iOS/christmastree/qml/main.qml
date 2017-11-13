@@ -78,8 +78,6 @@ Window {
     }
 
     Component.onCompleted: {
-        treePage.setArtwork(getSetting("BackgroundNum", 1), getSetting("TreeNum", 1));
-
         mainStackView.push(treePage);
     }
 }

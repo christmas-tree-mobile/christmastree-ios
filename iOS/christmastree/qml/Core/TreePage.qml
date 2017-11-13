@@ -24,14 +24,33 @@ Item {
     property int lowerRightTreePointX:     300
     property int lowerRightTreePointY:     490
 
-    property var newToy:                 null
+    property var newToy:                   null
 
-    function setArtwork(background_num, tree_num) {
-        if (background_num <= maxBackgroundNum) {
-            currentBackgroundNum = background_num;
+    onAppInForegroundChanged: {
+        if (appInForeground && pageActive) {
+            var background_num = mainWindow.getSetting("BackgroundNum", 1);
+            var tree_num       = mainWindow.getSetting("TreeNum",       1);
+
+            if (background_num <= maxBackgroundNum) {
+                currentBackgroundNum = background_num;
+            }
+            if (tree_num <= maxTreeNum) {
+                currentTreeNum = tree_num;
+            }
         }
-        if (tree_num <= maxTreeNum) {
-            currentTreeNum = tree_num;
+    }
+
+    onPageActiveChanged: {
+        if (appInForeground && pageActive) {
+            var background_num = mainWindow.getSetting("BackgroundNum", 1);
+            var tree_num       = mainWindow.getSetting("TreeNum",       1);
+
+            if (background_num <= maxBackgroundNum) {
+                currentBackgroundNum = background_num;
+            }
+            if (tree_num <= maxTreeNum) {
+                currentTreeNum = tree_num;
+            }
         }
     }
 
@@ -57,26 +76,24 @@ Item {
         }
     }
 
-/*
+    function resetParticleSystems() {
+        particleSystem1.reset();
+        particleSystem2.reset();
+        particleSystem3.reset();
+        particleSystem4.reset();
+    }
+
     Audio {
-        id:     audio
-        source: "../../sound/music.mp3"
-        volume: 0.5
-        muted:  treePage.appInForeground ? false : true
-
-        onStopped: {
-            position = 0;
-
-            play();
-        }
+        volume:   1.0
+        muted:    !treePage.appInForeground || !treePage.pageActive
+        source:   "qrc:/resources/sound/tree/music.mp3"
+        autoPlay: true
+        loops:    Audio.Infinite
 
         onError: {
-            position = 0;
-
-            play();
+            console.log(errorString);
         }
     }
-*/
 
     Rectangle {
         id:           backgroundRectangle
@@ -284,6 +301,26 @@ Item {
             spacing:                  16
 
             Image {
+                id:     settingsButtonImage
+                width:  64
+                height: 64
+                source: "qrc:/resources/images/tree/button_settings.png"
+
+                MouseArea {
+                    id:           settingsButtonMouseArea
+                    anchors.fill: parent
+
+                    onClicked: {
+                        if (settingsRectangle.visible) {
+                            settingsRectangle.visible = false;
+                        } else {
+                            settingsRectangle.visible = true;
+                        }
+                    }
+                }
+            }
+
+            Image {
                 id:     captureButtonImage
                 width:  64
                 height: 64
@@ -299,24 +336,6 @@ Item {
                         } else {
                             imageCaptureFailedQueryDialog.open();
                         }
-                    }
-                }
-            }
-
-            Image {
-                id:     settingsButtonImage
-                width:  64
-                height: 64
-                source: "qrc:/resources/images/tree/button_settings.png"
-
-                MouseArea {
-                    id:           settingsButtonMouseArea
-                    anchors.fill: parent
-
-                    onClicked: {
-                        settingsPage.initSettings(treePage.currentBackgroundNum, treePage.currentTreeNum);
-
-                        mainPageStack.replace(settingsPage);
                     }
                 }
             }
@@ -338,6 +357,63 @@ Item {
                         } else {
                             toysListRectangle.visible = true;
                             toysButtonImage.source    = "qrc:/resources/images/tree/button_toys_pressed.png";
+                        }
+                    }
+                }
+            }
+        }
+
+        Rectangle {
+            id:                   settingsRectangle
+            anchors.top:          parent.top
+            anchors.bottom:       parent.bottom
+            anchors.left:         parent.left
+            anchors.topMargin:    32
+            anchors.bottomMargin: buttonImageRow.height + 16
+            width:                128
+            z:                    20
+            clip:                 true
+            color:                "black"
+            opacity:              0.75
+            visible:              false
+
+            ListView {
+                id:           settingsListView
+                anchors.fill: parent
+                orientation:  ListView.Vertical
+                model:        settingsVisualDataModel
+
+                VisualDataModel {
+                    id: settingsVisualDataModel
+
+                    model: ListModel {
+                        id: settingsListModel
+                    }
+
+                    delegate: Image {
+                        id:     settingsItemDelegate
+                        width:  settingsRectangle.width
+                        height: sourceSize.width > 0 ? (width / sourceSize.width) * sourceSize.height : 0
+                        source: settingType === "background" ? "qrc:/resources/images/tree/background_%1.png".arg(settingNumber) :
+                                                               "qrc:/resources/images/tree/tree_%1_bg.png".arg(settingNumber)
+
+                        MouseArea {
+                            id:           settingsItemMouseArea
+                            anchors.fill: parent
+
+                            onClicked: {
+                                if (settingType === "background") {
+                                    treePage.resetParticleSystems();
+
+                                    treePage.currentBackgroundNum = settingNumber;
+
+                                    mainWindow.setSetting("BackgroundNum", treePage.currentBackgroundNum);
+                                } else {
+                                    treePage.currentTreeNum = settingNumber;
+
+                                    mainWindow.setSetting("TreeNum", treePage.currentTreeNum);
+                                }
+                            }
                         }
                     }
                 }
@@ -450,6 +526,16 @@ Item {
     }
 
     Component.onCompleted: {
+        settingsListModel.clear();
+
+        for (var i = 1; i <= treePage.maxBackgroundNum; i++) {
+            settingsListModel.append({"settingType": "background", "settingNumber": i});
+        }
+
+        for (var i = 1; i <= treePage.maxTreeNum; i++) {
+            settingsListModel.append({"settingType": "tree", "settingNumber": i});
+        }
+
         toysListModel.clear();
 
         for (var i = 1; i <= treePage.maxToyNum; i++) {
