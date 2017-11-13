@@ -18,7 +18,7 @@ Item {
     property int maxToyNum:                37
     property int maxTwinkleNum:            7
     property int upperTreePointX:          160
-    property int upperTreePointY:          70
+    property int upperTreePointY:          50
     property int lowerLeftTreePointX:      20
     property int lowerLeftTreePointY:      490
     property int lowerRightTreePointX:     300
@@ -276,71 +276,70 @@ Item {
             }
         }
 
-        Image {
-            id:             toysButtonImage
-            anchors.bottom: parent.bottom
-            anchors.left:   parent.left
-            width:          64
-            height:         64
-            z:              15
-            source:         "qrc:/resources/images/tree/button_toys.png"
-
-            MouseArea {
-                id:           toysButtonMouseArea
-                anchors.fill: parent
-
-                onClicked: {
-                    if (toysListRectangle.visible) {
-                        toysListRectangle.visible = false;
-                        toysButtonImage.source    = "qrc:/resources/images/tree/button_toys.png";
-                    } else {
-                        toysListRectangle.visible = true;
-                        toysButtonImage.source    = "qrc:/resources/images/tree/button_toys_pressed.png";
-                    }
-                }
-            }
-        }
-
-        Image {
-            id:                       captureButtonImage
+        Row {
+            id:                       buttonImageRow
             anchors.bottom:           parent.bottom
             anchors.horizontalCenter: parent.horizontalCenter
-            width:                    64
-            height:                   64
             z:                        15
-            source:                   "qrc:/resources/images/tree/button_capture.png"
+            spacing:                  16
 
-            MouseArea {
-                id:           captureButtonMouseArea
-                anchors.fill: parent
+            Image {
+                id:     captureButtonImage
+                width:  64
+                height: 64
+                source: "qrc:/resources/images/tree/button_capture.png"
 
-                onClicked: {
-                    if (CaptureHelper.captureDeclarativeItem(backgroundImage)) {
-                        imageCapturedQueryDialog.open();
-                    } else {
-                        imageCaptureFailedQueryDialog.open();
+                MouseArea {
+                    id:           captureButtonMouseArea
+                    anchors.fill: parent
+
+                    onClicked: {
+                        if (CaptureHelper.captureDeclarativeItem(backgroundImage)) {
+                            imageCapturedQueryDialog.open();
+                        } else {
+                            imageCaptureFailedQueryDialog.open();
+                        }
                     }
                 }
             }
-        }
 
-        Image {
-            id:             settingsButtonImage
-            anchors.bottom: parent.bottom
-            anchors.right:  parent.right
-            width:          64
-            height:         64
-            z:              15
-            source:         "qrc:/resources/images/tree/button_settings.png"
+            Image {
+                id:     settingsButtonImage
+                width:  64
+                height: 64
+                source: "qrc:/resources/images/tree/button_settings.png"
 
-            MouseArea {
-                id:           settingsButtonMouseArea
-                anchors.fill: parent
+                MouseArea {
+                    id:           settingsButtonMouseArea
+                    anchors.fill: parent
 
-                onClicked: {
-                    settingsPage.initSettings(treePage.currentBackgroundNum, treePage.currentTreeNum);
+                    onClicked: {
+                        settingsPage.initSettings(treePage.currentBackgroundNum, treePage.currentTreeNum);
 
-                    mainPageStack.replace(settingsPage);
+                        mainPageStack.replace(settingsPage);
+                    }
+                }
+            }
+
+            Image {
+                id:     toysButtonImage
+                width:  64
+                height: 64
+                source: "qrc:/resources/images/tree/button_toys.png"
+
+                MouseArea {
+                    id:           toysButtonMouseArea
+                    anchors.fill: parent
+
+                    onClicked: {
+                        if (toysListRectangle.visible) {
+                            toysListRectangle.visible = false;
+                            toysButtonImage.source    = "qrc:/resources/images/tree/button_toys.png";
+                        } else {
+                            toysListRectangle.visible = true;
+                            toysButtonImage.source    = "qrc:/resources/images/tree/button_toys_pressed.png";
+                        }
+                    }
                 }
             }
         }
@@ -351,7 +350,7 @@ Item {
             anchors.bottom:       parent.bottom
             anchors.right:        parent.right
             anchors.topMargin:    32
-            anchors.bottomMargin: 72
+            anchors.bottomMargin: buttonImageRow.height + 16
             width:                54
             z:                    20
             clip:                 true
@@ -408,6 +407,8 @@ Item {
                                 preventStealing = false;
 
                                 if (treePage.newToy !== null) {
+                                    treePage.newToy.reduceToy();
+
                                     if (!treePage.validateToy(treePage.newToy.x + treePage.newToy.width / 2, treePage.newToy.y + treePage.newToy.height / 2)) {
                                         treePage.newToy.destroyToy();
                                     }
@@ -430,6 +431,8 @@ Item {
 
                                         if (component.status === Component.Ready) {
                                             treePage.newToy = component.createObject(backgroundImage, {"z": 4, "toyType": toyType, "toyNumber": toyNumber});
+
+                                            treePage.newToy.enlargeToy();
 
                                             treePage.newToy.x = toysItemMouseArea.pressX - treePage.newToy.width / 2;
                                             treePage.newToy.y = toysItemMouseArea.pressY - treePage.newToy.height;

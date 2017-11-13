@@ -28,6 +28,26 @@ Image {
         }
     }
 
+    function enlargeToy() {
+        var center_x = x + width  / 2;
+        var center_y = y + height / 2;
+
+        width  = sourceSize.width  * 2;
+        height = sourceSize.height * 2;
+
+        x = center_x - width  / 2;
+        y = center_y - height / 2;
+    }
+
+    function reduceToy() {
+        var center_x = x + width / 2;
+
+        width  = sourceSize.width;
+        height = sourceSize.height;
+
+        x = center_x - width / 2;
+    }
+
     function destroyToy() {
         destroyToyPropertyAnimation.start();
     }
