@@ -333,10 +333,18 @@ Item {
                     anchors.fill: parent
 
                     onClicked: {
-                        if (CaptureHelper.captureDeclarativeItem(backgroundImage)) {
-                            imageCapturedQueryDialog.open();
-                        } else {
-                            imageCaptureFailedQueryDialog.open();
+                        enabled = false;
+
+                        if (!backgroundImage.grabToImage(function (result) {
+                            result.saveToFile(ShareHelper.imageFilePath);
+
+                            ShareHelper.showShareToView();
+
+                            captureButtonMouseArea.enabled = true;
+                        })) {
+                            console.log("grabToImage() failed");
+
+                            enabled = true;
                         }
                     }
                 }

@@ -4,6 +4,8 @@
 #include <QtQml/QQmlApplicationEngine>
 #include <QtQml/QQmlContext>
 
+#include "sharehelper.h"
+
 int main(int argc, char *argv[])
 {
     QTranslator     translator;
@@ -14,6 +16,8 @@ int main(int argc, char *argv[])
     }
 
     QQmlApplicationEngine engine;
+
+    engine.rootContext()->setContextProperty(QStringLiteral("ShareHelper"), new ShareHelper(&app));
 
     engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
 
