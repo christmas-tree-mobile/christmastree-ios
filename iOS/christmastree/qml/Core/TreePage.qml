@@ -18,11 +18,11 @@ Item {
     property int currentSnowflakesCount: 10
     property int defaultSnowflakesCount: 10
     property int upperTreePointX:        160
-    property int upperTreePointY:        75
-    property int lowerLeftTreePointX:    40
-    property int lowerLeftTreePointY:    464
-    property int lowerRightTreePointX:   284
-    property int lowerRightTreePointY:   470
+    property int upperTreePointY:        70
+    property int lowerLeftTreePointX:    20
+    property int lowerLeftTreePointY:    490
+    property int lowerRightTreePointX:   300
+    property int lowerRightTreePointY:   490
 
     property var newToy:                 null
 
@@ -325,20 +325,24 @@ Item {
         }
 
         Rectangle {
-            id:             toysListRectangle
-            anchors.top:    parent.top
-            anchors.bottom: parent.bottom
-            anchors.right:  parent.right
-            width:          72
-            z:              20
-            color:          "black"
-            opacity:        0.75
-            visible:        false
+            id:                   toysListRectangle
+            anchors.top:          parent.top
+            anchors.bottom:       parent.bottom
+            anchors.right:        parent.right
+            anchors.topMargin:    32
+            anchors.bottomMargin: 72
+            width:                54
+            z:                    20
+            clip:                 true
+            color:                "black"
+            opacity:              0.75
+            visible:              false
 
             ListView {
                 id:           toysListView
                 anchors.fill: parent
                 orientation:  ListView.Vertical
+                cacheBuffer:  (treePage.maxToyNum + treePage.maxTwinkleNum) * 256 // To prevent strange issue with "untouchable toys"
                 model:        toysVisualDataModel
 
                 VisualDataModel {
