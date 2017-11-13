@@ -311,10 +311,12 @@ Item {
                     anchors.fill: parent
 
                     onClicked: {
-                        if (settingsRectangle.visible) {
-                            settingsRectangle.visible = false;
+                        if (settingsListRectangle.visible) {
+                            settingsListRectangle.visible = false;
+                            settingsButtonImage.source    = "qrc:/resources/images/tree/button_settings.png";
                         } else {
-                            settingsRectangle.visible = true;
+                            settingsListRectangle.visible = true;
+                            settingsButtonImage.source    = "qrc:/resources/images/tree/button_settings_pressed.png";
                         }
                     }
                 }
@@ -364,13 +366,13 @@ Item {
         }
 
         Rectangle {
-            id:                   settingsRectangle
+            id:                   settingsListRectangle
             anchors.top:          parent.top
             anchors.bottom:       parent.bottom
             anchors.left:         parent.left
             anchors.topMargin:    32
             anchors.bottomMargin: buttonImageRow.height + 16
-            width:                128
+            width:                96
             z:                    20
             clip:                 true
             color:                "black"
@@ -392,7 +394,7 @@ Item {
 
                     delegate: Image {
                         id:     settingsItemDelegate
-                        width:  settingsRectangle.width
+                        width:  settingsListRectangle.width
                         height: sourceSize.width > 0 ? (width / sourceSize.width) * sourceSize.height : 0
                         source: settingType === "background" ? "qrc:/resources/images/tree/background_%1.png".arg(settingNumber) :
                                                                "qrc:/resources/images/tree/tree_%1_bg.png".arg(settingNumber)
