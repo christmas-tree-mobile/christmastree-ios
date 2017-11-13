@@ -1,4 +1,5 @@
 import QtQuick 2.9
+import QtQuick.Particles 2.0
 import QtMultimedia 5.9
 
 import "Tree"
@@ -6,23 +7,22 @@ import "Tree"
 Item {
     id: treePage
 
-    property bool appInForeground:       Qt.application.active
-    property bool pageActive:            false
+    property bool appInForeground:         Qt.application.active
+    property bool pageActive:              false
 
-    property int currentBackgroundNum:   1
-    property int maxBackgroundNum:       3
-    property int currentTreeNum:         1
-    property int maxTreeNum:             3
-    property int maxToyNum:              37
-    property int maxTwinkleNum:          7
-    property int currentSnowflakesCount: 10
-    property int defaultSnowflakesCount: 10
-    property int upperTreePointX:        160
-    property int upperTreePointY:        70
-    property int lowerLeftTreePointX:    20
-    property int lowerLeftTreePointY:    490
-    property int lowerRightTreePointX:   300
-    property int lowerRightTreePointY:   490
+    property int currentBackgroundNum:     1
+    property int maxBackgroundNum:         3
+    property int maxBackgroundNumWithSnow: 2
+    property int currentTreeNum:           1
+    property int maxTreeNum:               3
+    property int maxToyNum:                37
+    property int maxTwinkleNum:            7
+    property int upperTreePointX:          160
+    property int upperTreePointY:          70
+    property int lowerLeftTreePointX:      20
+    property int lowerLeftTreePointY:      490
+    property int lowerRightTreePointX:     300
+    property int lowerRightTreePointY:     490
 
     property var newToy:                 null
 
@@ -32,11 +32,6 @@ Item {
         }
         if (tree_num <= maxTreeNum) {
             currentTreeNum = tree_num;
-        }
-        if (currentBackgroundNum === 3) {
-            currentSnowflakesCount = 0;
-        } else {
-            currentSnowflakesCount = defaultSnowflakesCount;
         }
     }
 
@@ -177,83 +172,109 @@ Item {
             }
         }
 
-/*
-        Particles {
-            id:                snowflakes1
-            anchors.fill:      parent
-            z:                 5
-            source:            "qrc:/resources/images/snowflake-1.png"
-            opacity:           0.75
-            lifeSpan:          1000
-            count:             treePage.currentSnowflakesCount
-            angle:             90
-            angleDeviation:    30
-            velocity:          30
-            velocityDeviation: 10
+        ParticleSystem {
+            id:      particleSystem1
+            running: treePage.appInForeground && treePage.pageActive &&
+                     treePage.currentBackgroundNum <= treePage.maxBackgroundNumWithSnow
+        }
 
-            ParticleMotionWander {
-                xvariance: 30
-                pace:      100
+        Emitter {
+            anchors.fill: parent
+            system:       particleSystem1
+            lifeSpan:     1000
+
+            velocity: AngleDirection {
+                angle:              90
+                angleVariation:     30
+                magnitude:          40
+                magnitudeVariation: 20
+            }
+
+            ImageParticle {
+                z:       5
+                opacity: 0.75
+                system:  particleSystem1
+                source:  "qrc:/resources/images/tree/snowflake_1.png"
             }
         }
 
-        Particles {
-            id:                snowflakes2
-            anchors.fill:      parent
-            z:                 5
-            source:            "qrc:/resources/images/snowflake-2.png"
-            opacity:           0.5
-            lifeSpan:          1000
-            count:             treePage.currentSnowflakesCount
-            angle:             90
-            angleDeviation:    30
-            velocity:          30
-            velocityDeviation: 10
+        ParticleSystem {
+            id:      particleSystem2
+            running: treePage.appInForeground && treePage.pageActive &&
+                     treePage.currentBackgroundNum <= treePage.maxBackgroundNumWithSnow
+        }
 
-            ParticleMotionWander {
-                xvariance: 30
-                pace:      100
+        Emitter {
+            anchors.fill: parent
+            system:       particleSystem2
+            lifeSpan:     1000
+
+            velocity: AngleDirection {
+                angle:              90
+                angleVariation:     30
+                magnitude:          40
+                magnitudeVariation: 20
+            }
+
+            ImageParticle {
+                z:       5
+                opacity: 0.75
+                system:  particleSystem2
+                source:  "qrc:/resources/images/tree/snowflake_2.png"
             }
         }
 
-        Particles {
-            id:                snowflakes3
-            anchors.fill:      parent
-            z:                 5
-            source:            "qrc:/resources/images/snowflake-3.png"
-            opacity:           0.5
-            lifeSpan:          1000
-            count:             treePage.currentSnowflakesCount
-            angle:             90
-            angleDeviation:    30
-            velocity:          30
-            velocityDeviation: 10
+        ParticleSystem {
+            id:      particleSystem3
+            running: treePage.appInForeground && treePage.pageActive &&
+                     treePage.currentBackgroundNum <= treePage.maxBackgroundNumWithSnow
+        }
 
-            ParticleMotionWander {
-                xvariance: 30
-                pace:      100
+        Emitter {
+            anchors.fill: parent
+            system:       particleSystem3
+            lifeSpan:     1000
+
+            velocity: AngleDirection {
+                angle:              90
+                angleVariation:     30
+                magnitude:          40
+                magnitudeVariation: 20
+            }
+
+            ImageParticle {
+                z:       5
+                opacity: 0.75
+                system:  particleSystem3
+                source:  "qrc:/resources/images/tree/snowflake_3.png"
             }
         }
 
-        Particles {
-            id:                snowflakes4
-            anchors.fill:      parent
-            z:                 5
-            source:            "qrc:/resources/images/snowflake-4.png"
-            opacity:           0.25
-            lifeSpan:          1000
-            count:             treePage.currentSnowflakesCount
-            angle:             90
-            angleDeviation:    30
-            velocity:          30
-            velocityDeviation: 10
+        ParticleSystem {
+            id:      particleSystem4
+            running: treePage.appInForeground && treePage.pageActive &&
+                     treePage.currentBackgroundNum <= treePage.maxBackgroundNumWithSnow
+        }
 
-            ParticleMotionWander {
-                xvariance: 30
-                pace:      100
+        Emitter {
+            anchors.fill: parent
+            system:       particleSystem4
+            lifeSpan:     1000
+
+            velocity: AngleDirection {
+                angle:              90
+                angleVariation:     30
+                magnitude:          40
+                magnitudeVariation: 20
+            }
+
+            ImageParticle {
+                z:       5
+                opacity: 0.75
+                system:  particleSystem4
+                source:  "qrc:/resources/images/tree/snowflake_4.png"
             }
         }
-*/
 
         Image {
             id:             toysButtonImage
