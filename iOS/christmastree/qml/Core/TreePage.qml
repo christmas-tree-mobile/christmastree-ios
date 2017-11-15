@@ -355,7 +355,11 @@ Item {
                     anchors.fill: parent
 
                     onClicked: {
-                        purchaseDialog.open();
+                        if (mainWindow.fullVersion) {
+                            treePage.shareImage();
+                        } else {
+                            purchaseDialog.open();
+                        }
                     }
                 }
             }
@@ -558,11 +562,11 @@ Item {
         }
 
         onPurchaseFullVersion: {
-
+            mainWindow.purchaseFullVersion();
         }
 
         onRestorePurchases: {
-
+            mainWindow.restorePurchases();
         }
     }
 

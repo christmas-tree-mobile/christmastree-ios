@@ -2,13 +2,27 @@ import QtQuick 2.9
 import QtQuick.Window 2.3
 import QtQuick.Controls 2.2
 import QtQuick.LocalStorage 2.0
+import QtPurchasing 1.0
 
 import "Core"
 
 Window {
-    id:         mainWindow
-    visible:    true
-    visibility: Window.FullScreen
+    id:      mainWindow
+    visible: true
+
+    property bool fullVersion: false
+
+    onFullVersionChanged: {
+        setSetting("FullVersion", fullVersion ? "true" : "false");
+
+        if (mainStackView.depth > 0 && mainStackView.currentItem.hasOwnProperty("bannerViewHeight")) {
+            if (mainWindow.fullVersion) {
+                AdMobHelper.hideBannerView();
+            } else {
+                AdMobHelper.showBannerView();
+            }
+        }
+    }
 
     function setSetting(key, value) {
         var db = LocalStorage.openDatabaseSync("ChristmasTreeDB", "1.0", "ChristmasTreeDB", 1000000);
@@ -39,6 +53,44 @@ Window {
         return value;
     }
 
+    function purchaseFullVersion() {
+        fullVersionProduct.purchase();
+    }
+
+    function restorePurchases() {
+        store.restorePurchases();
+    }
+
+    Store {
+        id: store
+
+        Product {
+            id:         fullVersionProduct
+            identifier: "christmastree.version.full"
+            type:       Product.Unlockable
+
+            onPurchaseSucceeded: {
+                mainWindow.fullVersion = true;
+
+                transaction.finalize();
+            }
+
+            onPurchaseRestored: {
+                mainWindow.fullVersion = true;
+
+                transaction.finalize();
+            }
+
+            onPurchaseFailed: {
+                if (transaction.failureReason === Transaction.ErrorOccurred) {
+                    console.log(transaction.errorString);
+                }
+
+                transaction.finalize();
+            }
+        }
+    }
+
     StackView {
         id:           mainStackView
         anchors.fill: parent
@@ -64,7 +116,11 @@ Window {
                 }
 
                 if (item.hasOwnProperty("bannerViewHeight")) {
-                    AdMobHelper.showBannerView();
+                    if (mainWindow.fullVersion) {
+                        AdMobHelper.hideBannerView();
+                    } else {
+                        AdMobHelper.showBannerView();
+                    }
                 } else {
                     AdMobHelper.hideBannerView();
                 }
@@ -84,6 +140,8 @@ Window {
     }
 
     Component.onCompleted: {
+        fullVersion = (getSetting("FullVersion", "false") === "true");
+
         AdMobHelper.initialize();
 
         mainStackView.push(treePage);
