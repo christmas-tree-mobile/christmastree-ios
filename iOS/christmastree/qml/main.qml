@@ -62,6 +62,12 @@ Window {
                 if (item.hasOwnProperty("pageActive")) {
                     item.pageActive = true;
                 }
+
+                if (item.hasOwnProperty("bannerViewHeight")) {
+                    AdMobHelper.showBannerView();
+                } else {
+                    AdMobHelper.hideBannerView();
+                }
             }
         }
     }
@@ -78,6 +84,8 @@ Window {
     }
 
     Component.onCompleted: {
+        AdMobHelper.initialize();
+
         mainStackView.push(treePage);
     }
 }

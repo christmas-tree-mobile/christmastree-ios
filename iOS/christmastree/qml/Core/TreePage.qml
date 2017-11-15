@@ -10,6 +10,7 @@ Item {
     property bool appInForeground:         Qt.application.active
     property bool pageActive:              false
 
+    property int bannerViewHeight:         AdMobHelper.bannerViewHeight
     property int currentBackgroundNum:     1
     property int maxBackgroundNum:         3
     property int maxBackgroundNumWithSnow: 2
@@ -378,7 +379,7 @@ Item {
             anchors.top:          parent.top
             anchors.bottom:       parent.bottom
             anchors.left:         parent.left
-            anchors.topMargin:    32
+            anchors.topMargin:    bannerViewHeight      + 16
             anchors.bottomMargin: buttonImageRow.height + 16
             width:                96
             z:                    20
@@ -435,7 +436,7 @@ Item {
             anchors.top:          parent.top
             anchors.bottom:       parent.bottom
             anchors.right:        parent.right
-            anchors.topMargin:    32
+            anchors.topMargin:    bannerViewHeight      + 16
             anchors.bottomMargin: buttonImageRow.height + 16
             width:                54
             z:                    20

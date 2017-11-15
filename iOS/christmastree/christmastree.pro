@@ -6,9 +6,11 @@ DEFINES += QT_DEPRECATED_WARNINGS WEBRTC_POSIX
 SOURCES += src/main.cpp
 
 OBJECTIVE_SOURCES += \
+    src/admobhelper.mm \
     src/sharehelper.mm
 
 HEADERS += \
+    src/admobhelper.h \
     src/sharehelper.h
 
 RESOURCES += \
@@ -26,6 +28,16 @@ QML_IMPORT_PATH =
 QML_DESIGNER_IMPORT_PATH =
 
 ios {
+    LIBS += -F $$PWD/admob -framework GoogleMobileAds \
+                -framework AdSupport \
+                -framework CFNetwork \
+                -framework CoreMotion \
+                -framework CoreTelephony \
+                -framework GLKit \
+                -framework MediaPlayer \
+                -framework MessageUI \
+                -framework SystemConfiguration
+
     QMAKE_APPLE_DEVICE_ARCHS = arm64
     QMAKE_INFO_PLIST = ios/Info.plist
 }
