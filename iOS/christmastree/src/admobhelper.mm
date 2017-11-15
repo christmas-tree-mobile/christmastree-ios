@@ -133,7 +133,9 @@ AdMobHelper::AdMobHelper(QObject *parent) : QObject(parent)
 AdMobHelper::~AdMobHelper()
 {
     if (Initialized) {
-        [BannerViewDelegateInstance release];
+        if (BannerViewDelegateInstance != NULL && BannerViewDelegateInstance != nil) {
+            [BannerViewDelegateInstance release];
+        }
     }
 }
 
