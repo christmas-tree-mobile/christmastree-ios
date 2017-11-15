@@ -6,6 +6,7 @@
 
 #ifdef __OBJC__
 @class BannerViewDelegate;
+@class InterstitialDelegate;
 #endif
 
 class AdMobHelper : public QObject
@@ -19,6 +20,7 @@ class AdMobHelper : public QObject
 public:
     static const QString ADMOB_APP_ID,
                          ADMOB_BANNERVIEW_UNIT_ID,
+                         ADMOB_INTERSTITIAL_UNIT_ID,
                          ADMOB_TEST_DEVICE_ID;
 
     explicit AdMobHelper(QObject *parent = 0);
@@ -41,11 +43,15 @@ signals:
     void bannerViewHeightChanged(int bannerViewHeight);
 
 private:
-    bool                Initialized, InterstitialActive;
-    int                 BannerViewHeight;
-    static AdMobHelper *Instance;
+    bool                  Initialized, InterstitialActive;
+    int                   BannerViewHeight;
+    static AdMobHelper   *Instance;
 #ifdef __OBJC__
-    BannerViewDelegate *BannerViewDelegateInstance;
+    BannerViewDelegate   *BannerViewDelegateInstance;
+    InterstitialDelegate *InterstitialDelegateInstance;
+#else
+    void                 *BannerViewDelegateInstance;
+    void                 *InterstitialDelegateInstance;
 #endif
 };
 

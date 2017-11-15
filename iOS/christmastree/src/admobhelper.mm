@@ -2,14 +2,17 @@
 #import <GoogleMobileAds/GADRequest.h>
 #import <GoogleMobileAds/GADBannerView.h>
 #import <GoogleMobileAds/GADBannerViewDelegate.h>
+#import <GoogleMobileAds/GADInterstitial.h>
+#import <GoogleMobileAds/GADInterstitialDelegate.h>
 
 #include <QtCore/QDebug>
 
 #include "admobhelper.h"
 
-const QString AdMobHelper::ADMOB_APP_ID            ("ca-app-pub-2455088855015693~5306005769");
-const QString AdMobHelper::ADMOB_BANNERVIEW_UNIT_ID("ca-app-pub-3940256099942544/2934735716");
-const QString AdMobHelper::ADMOB_TEST_DEVICE_ID    ("ac878e09bd5bd55f0b72b20a8fca6ffa");
+const QString AdMobHelper::ADMOB_APP_ID              ("ca-app-pub-2455088855015693~5306005769");
+const QString AdMobHelper::ADMOB_BANNERVIEW_UNIT_ID  ("ca-app-pub-3940256099942544/2934735716");
+const QString AdMobHelper::ADMOB_INTERSTITIAL_UNIT_ID("ca-app-pub-3940256099942544/4411468910");
+const QString AdMobHelper::ADMOB_TEST_DEVICE_ID      ("ac878e09bd5bd55f0b72b20a8fca6ffa");
 
 AdMobHelper *AdMobHelper::Instance = NULL;
 
@@ -40,23 +43,23 @@ AdMobHelper *AdMobHelper::Instance = NULL;
             *stop = (root_view_controller != nil);
         }];
 
-        self.BannerView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeSmartBannerPortrait];
+        BannerView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeSmartBannerPortrait];
 
-        self.BannerView.adUnitID                                  = AdMobHelper::ADMOB_BANNERVIEW_UNIT_ID.toNSString();
-        self.BannerView.rootViewController                        = root_view_controller;
-        self.BannerView.translatesAutoresizingMaskIntoConstraints = NO;
-        self.BannerView.delegate                                  = self;
+        BannerView.adUnitID                                  = AdMobHelper::ADMOB_BANNERVIEW_UNIT_ID.toNSString();
+        BannerView.rootViewController                        = root_view_controller;
+        BannerView.translatesAutoresizingMaskIntoConstraints = NO;
+        BannerView.delegate                                  = self;
 
-        [root_view_controller.view addSubview:self.BannerView];
+        [root_view_controller.view addSubview:BannerView];
         [root_view_controller.view addConstraints:@[
-            [NSLayoutConstraint constraintWithItem:self.BannerView
+            [NSLayoutConstraint constraintWithItem:BannerView
                                 attribute:NSLayoutAttributeTop
                                 relatedBy:NSLayoutRelationEqual
                                 toItem:root_view_controller.topLayoutGuide
                                 attribute:NSLayoutAttributeBottom
                                 multiplier:1
                                 constant:0],
-            [NSLayoutConstraint constraintWithItem:self.BannerView
+            [NSLayoutConstraint constraintWithItem:BannerView
                                 attribute:NSLayoutAttributeCenterX
                                 relatedBy:NSLayoutRelationEqual
                                 toItem:root_view_controller.view
@@ -121,13 +124,135 @@ AdMobHelper *AdMobHelper::Instance = NULL;
 
 @end
 
+@interface InterstitialDelegate : NSObject<GADInterstitialDelegate>
+
+- (id)init;
+- (void)dealloc;
+- (void)loadAd;
+- (void)show;
+- (bool)isReady;
+
+@property (nonatomic, retain) GADInterstitial *Interstitial;
+
+@end
+
+@implementation InterstitialDelegate
+
+@synthesize Interstitial;
+
+- (id)init
+{
+    self = [super init];
+
+    if (self) {
+        Interstitial = nil;
+    }
+
+    return self;
+}
+
+- (void)dealloc
+{
+    if (Interstitial != nil) {
+        [Interstitial release];
+    }
+
+    [super dealloc];
+}
+
+- (void)loadAd
+{
+    if (self.Interstitial != nil) {
+        [self.Interstitial release];
+    }
+
+    self.Interstitial = [[GADInterstitial alloc] initWithAdUnitID:AdMobHelper::ADMOB_INTERSTITIAL_UNIT_ID.toNSString()];
+
+    self.Interstitial.delegate = self;
+
+    GADRequest *request = [GADRequest request];
+
+    if (AdMobHelper::ADMOB_TEST_DEVICE_ID != "") {
+        request.testDevices = @[ AdMobHelper::ADMOB_TEST_DEVICE_ID.toNSString() ];
+    }
+
+    [self.Interstitial loadRequest:request];
+}
+
+- (void)show
+{
+    if (self.Interstitial != nil && self.Interstitial.isReady) {
+        UIViewController * __block root_view_controller = nil;
+
+        [[[UIApplication sharedApplication] windows] enumerateObjectsUsingBlock:^(UIWindow * _Nonnull window, NSUInteger, BOOL * _Nonnull stop) {
+            root_view_controller = [window rootViewController];
+
+            *stop = (root_view_controller != nil);
+        }];
+
+        [self.Interstitial presentFromRootViewController:root_view_controller];
+    }
+}
+
+- (bool)isReady
+{
+    if (self.Interstitial != nil) {
+        return self.Interstitial.isReady;
+    } else {
+        return false;
+    }
+}
+
+- (void)interstitialDidReceiveAd:(GADInterstitial *)ad
+{
+    Q_UNUSED(ad)
+}
+
+- (void)interstitialWillPresentScreen:(GADInterstitial *)ad
+{
+    Q_UNUSED(ad)
+
+    AdMobHelper::setInterstitialActive(true);
+}
+
+- (void)interstitialWillDismissScreen:(GADInterstitial *)ad
+{
+    Q_UNUSED(ad)
+}
+
+- (void)interstitialDidDismissScreen:(GADInterstitial *)ad
+{
+    Q_UNUSED(ad)
+
+    AdMobHelper::setInterstitialActive(false);
+
+    [self performSelector:@selector(loadAd) withObject:nil afterDelay:10.0];
+}
+
+- (void)interstitialWillLeaveApplication:(GADInterstitial *)ad
+{
+    Q_UNUSED(ad)
+}
+
+- (void)interstitial:(GADInterstitial *)ad didFailToReceiveAdWithError:(GADRequestError *)error
+{
+    Q_UNUSED(ad)
+
+    qWarning() << QString::fromNSString([error localizedDescription]);
+
+    [self performSelector:@selector(loadAd) withObject:nil afterDelay:10.0];
+}
+
+@end
+
 AdMobHelper::AdMobHelper(QObject *parent) : QObject(parent)
 {
-    Initialized                = false;
-    InterstitialActive         = false;
-    BannerViewHeight           = 0;
-    Instance                   = this;
-    BannerViewDelegateInstance = NULL;
+    Initialized                  = false;
+    InterstitialActive           = false;
+    BannerViewHeight             = 0;
+    Instance                     = this;
+    BannerViewDelegateInstance   = NULL;
+    InterstitialDelegateInstance = NULL;
 }
 
 AdMobHelper::~AdMobHelper()
@@ -136,14 +261,15 @@ AdMobHelper::~AdMobHelper()
         if (BannerViewDelegateInstance != NULL && BannerViewDelegateInstance != nil) {
             [BannerViewDelegateInstance release];
         }
+
+        [InterstitialDelegateInstance release];
     }
 }
 
 bool AdMobHelper::interstitialReady() const
 {
     if (Initialized) {
-        return false;
-        //return [[GADRewardBasedVideoAd sharedInstance] isReady];
+        return [InterstitialDelegateInstance isReady];
     } else {
         return false;
     }
@@ -163,6 +289,10 @@ void AdMobHelper::initialize()
 {
     if (!Initialized) {
         [GADMobileAds configureWithApplicationID:ADMOB_APP_ID.toNSString()];
+
+        InterstitialDelegateInstance = [[InterstitialDelegate alloc] init];
+
+        [InterstitialDelegateInstance loadAd];
 
         Initialized = true;
     }
@@ -205,6 +335,7 @@ void AdMobHelper::hideBannerView()
 void AdMobHelper::showInterstitial()
 {
     if (Initialized) {
+        [InterstitialDelegateInstance show];
     }
 }
 
