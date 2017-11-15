@@ -1,5 +1,11 @@
 <RCC>
     <qresource prefix="/">
+        <file>resources/images/dialog/cancel.png</file>
+        <file>resources/images/dialog/purchase_dialog.png</file>
+        <file>resources/images/dialog/purchase_dialog_button.png</file>
+        <file>resources/images/dialog/purchase_dialog_purchase.png</file>
+        <file>resources/images/dialog/purchase_dialog_restore.png</file>
+        <file>resources/images/dialog/purchase_dialog_view_ad.png</file>
         <file>resources/images/tree/toys/toy_1.png</file>
         <file>resources/images/tree/toys/toy_2.png</file>
         <file>resources/images/tree/toys/toy_3.png</file>

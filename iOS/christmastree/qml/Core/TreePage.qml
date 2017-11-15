@@ -2,6 +2,7 @@ import QtQuick 2.9
 import QtQuick.Particles 2.0
 import QtMultimedia 5.9
 
+import "Dialog"
 import "Tree"
 
 Item {
@@ -9,6 +10,8 @@ Item {
 
     property bool appInForeground:         Qt.application.active
     property bool pageActive:              false
+    property bool interstitialActive:      AdMobHelper.interstitialActive
+    property bool lastInterstitialActive:  false
 
     property int bannerViewHeight:         AdMobHelper.bannerViewHeight
     property int currentBackgroundNum:     1
@@ -55,6 +58,14 @@ Item {
         }
     }
 
+    onInterstitialActiveChanged: {
+        if (!interstitialActive && lastInterstitialActive) {
+            shareImage();
+        }
+
+        lastInterstitialActive = interstitialActive;
+    }
+
     function validateToy(center_x, center_y) {
         var x0 = center_x;
         var x1 = upperTreePointX;
@@ -84,9 +95,19 @@ Item {
         particleSystem4.reset();
     }
 
+    function shareImage() {
+        if (!backgroundImage.grabToImage(function (result) {
+            result.saveToFile(ShareHelper.imageFilePath);
+
+            ShareHelper.showShareToView();
+        })) {
+            console.log("grabToImage() failed");
+        }
+    }
+
     Audio {
         volume:   1.0
-        muted:    !treePage.appInForeground || !treePage.pageActive
+        muted:    !treePage.appInForeground || !treePage.pageActive || treePage.interstitialActive
         source:   "qrc:/resources/sound/tree/music.mp3"
         autoPlay: true
         loops:    Audio.Infinite
@@ -334,19 +355,7 @@ Item {
                     anchors.fill: parent
 
                     onClicked: {
-                        enabled = false;
-
-                        if (!backgroundImage.grabToImage(function (result) {
-                            result.saveToFile(ShareHelper.imageFilePath);
-
-                            ShareHelper.showShareToView();
-
-                            captureButtonMouseArea.enabled = true;
-                        })) {
-                            console.log("grabToImage() failed");
-
-                            enabled = true;
-                        }
+                        purchaseDialog.open();
                     }
                 }
             }
@@ -533,6 +542,27 @@ Item {
                     }
                 }
             }
+        }
+    }
+
+    PurchaseDialog {
+        id: purchaseDialog
+        z:  25
+
+        onViewAd: {
+            if (AdMobHelper.interstitialReady) {
+                AdMobHelper.showInterstitial();
+            } else {
+                treePage.shareImage();
+            }
+        }
+
+        onPurchaseFullVersion: {
+
+        }
+
+        onRestorePurchases: {
+
         }
     }
 

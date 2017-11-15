@@ -46,6 +46,7 @@ AdMobHelper *AdMobHelper::Instance = NULL;
         BannerView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeSmartBannerPortrait];
 
         BannerView.adUnitID                                  = AdMobHelper::ADMOB_BANNERVIEW_UNIT_ID.toNSString();
+        BannerView.autoloadEnabled                           = YES;
         BannerView.rootViewController                        = root_view_controller;
         BannerView.translatesAutoresizingMaskIntoConstraints = NO;
         BannerView.delegate                                  = self;
