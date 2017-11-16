@@ -10,9 +10,9 @@
 #include "admobhelper.h"
 
 const QString AdMobHelper::ADMOB_APP_ID              ("ca-app-pub-2455088855015693~2566748048");
-const QString AdMobHelper::ADMOB_BANNERVIEW_UNIT_ID  ("ca-app-pub-2455088855015693/5862941320");
-const QString AdMobHelper::ADMOB_INTERSTITIAL_UNIT_ID("ca-app-pub-2455088855015693/4082955796");
-const QString AdMobHelper::ADMOB_TEST_DEVICE_ID      ("ac878e09bd5bd55f0b72b20a8fca6ffa");
+const QString AdMobHelper::ADMOB_BANNERVIEW_UNIT_ID  ("ca-app-pub-3940256099942544/2934735716");
+const QString AdMobHelper::ADMOB_INTERSTITIAL_UNIT_ID("ca-app-pub-3940256099942544/4411468910");
+const QString AdMobHelper::ADMOB_TEST_DEVICE_ID      ("");
 
 AdMobHelper *AdMobHelper::Instance = NULL;
 
