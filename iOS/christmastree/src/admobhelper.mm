@@ -131,7 +131,7 @@ AdMobHelper *AdMobHelper::Instance = NULL;
 - (void)dealloc;
 - (void)loadAd;
 - (void)show;
-- (bool)isReady;
+- (BOOL)isReady;
 
 @property (nonatomic, retain) GADInterstitial *Interstitial;
 
@@ -195,12 +195,12 @@ AdMobHelper *AdMobHelper::Instance = NULL;
     }
 }
 
-- (bool)isReady
+- (BOOL)isReady
 {
     if (self.Interstitial != nil) {
         return self.Interstitial.isReady;
     } else {
-        return false;
+        return NO;
     }
 }
 
