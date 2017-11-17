@@ -13,8 +13,8 @@ MouseArea {
     signal opened()
     signal closed()
 
-    signal viewAdAndShareImage()
-    signal viewAdAndShareGIF()
+    signal viewAdAndCaptureImage()
+    signal viewAdAndCaptureGIF()
     signal purchaseFullVersion()
     signal restorePurchases()
     signal cancel()
@@ -135,9 +135,9 @@ MouseArea {
                         purchaseDialog.visible = false;
 
                         if (imageFormat === "IMAGE") {
-                            purchaseDialog.viewAdAndShareImage();
+                            purchaseDialog.viewAdAndCaptureImage();
                         } else {
-                            purchaseDialog.viewAdAndShareGIF();
+                            purchaseDialog.viewAdAndCaptureGIF();
                         }
 
                         purchaseDialog.closed();
@@ -169,7 +169,7 @@ MouseArea {
                         horizontalAlignment:    Text.AlignHCenter
                         verticalAlignment:      Text.AlignVCenter
                         wrapMode:               Text.Wrap
-                        text:                   qsTr("View ad and share image")
+                        text:                   qsTr("View ad and capture image")
                     }
                 }
             }

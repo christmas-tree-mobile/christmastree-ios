@@ -9,27 +9,27 @@ import "Tree"
 Item {
     id: treePage
 
-    property bool appInForeground:         Qt.application.active
-    property bool pageActive:              false
-    property bool interstitialActive:      AdMobHelper.interstitialActive
-    property bool lastInterstitialActive:  false
+    property bool appInForeground:          Qt.application.active
+    property bool pageActive:               false
+    property bool interstitialActive:       AdMobHelper.interstitialActive
+    property bool lastInterstitialActive:   false
 
-    property int bannerViewHeight:         AdMobHelper.bannerViewHeight
-    property int currentBackgroundNum:     1
-    property int maxBackgroundNum:         3
-    property int maxBackgroundNumWithSnow: 2
-    property int currentTreeNum:           1
-    property int maxTreeNum:               3
-    property int maxToyNum:                37
-    property int maxTwinkleNum:            7
-    property int upperTreePointX:          160
-    property int upperTreePointY:          50
-    property int lowerLeftTreePointX:      20
-    property int lowerLeftTreePointY:      490
-    property int lowerRightTreePointX:     300
-    property int lowerRightTreePointY:     490
+    property int bannerViewHeight:          AdMobHelper.bannerViewHeight
+    property int currentBackgroundNum:      1
+    property int maxBackgroundNum:          3
+    property int maxBackgroundNumWithSnow:  2
+    property int currentTreeNum:            1
+    property int maxTreeNum:                3
+    property int maxToyNum:                 37
+    property int maxTwinkleNum:             7
+    property int upperTreePointX:           160
+    property int upperTreePointY:           50
+    property int lowerLeftTreePointX:       20
+    property int lowerLeftTreePointY:       490
+    property int lowerRightTreePointX:      300
+    property int lowerRightTreePointY:      490
 
-    property string interstitialShareFmt:  ""
+    property string interstitialCaptureFmt: ""
 
     property var newToy:                   null
 
@@ -63,10 +63,10 @@ Item {
 
     onInterstitialActiveChanged: {
         if (!interstitialActive && lastInterstitialActive) {
-            if (interstitialShareFmt === "IMAGE") {
-                shareImage();
+            if (interstitialCaptureFmt === "IMAGE") {
+                captureImage();
             } else {
-                shareGIFTimer.start();
+                captureGIFTimer.start();
             }
         }
 
@@ -102,7 +102,7 @@ Item {
         particleSystem4.reset();
     }
 
-    function shareImage() {
+    function captureImage() {
         waitRectangle.visible = true;
 
         if (!backgroundImage.grabToImage(function (result) {
@@ -328,6 +328,26 @@ Item {
             }
         }
 
+        Image {
+            id:                helpButtonImage
+            anchors.top:       parent.top
+            anchors.left:      parent.left
+            anchors.topMargin: bannerViewHeight + 4
+            width:             32
+            height:            32
+            z:                 15
+            source:            "qrc:/resources/images/tree/button_help.png"
+
+            MouseArea {
+                id:           helpButtonMouseArea
+                anchors.fill: parent
+
+                onClicked: {
+                    helpDialog.open();
+                }
+            }
+        }
+
         Row {
             id:                       buttonImageRow
             anchors.bottom:           parent.bottom
@@ -369,7 +389,7 @@ Item {
 
                     onClicked: {
                         if (mainWindow.fullVersion) {
-                            treePage.shareImage();
+                            treePage.captureImage();
                         } else {
                             purchaseDialog.open("IMAGE");
                         }
@@ -389,7 +409,7 @@ Item {
 
                     onClicked: {
                         if (mainWindow.fullVersion) {
-                            shareGIFTimer.start();
+                            captureGIFTimer.start();
                         } else {
                             purchaseDialog.open("GIF");
                         }
@@ -423,10 +443,10 @@ Item {
         Rectangle {
             id:                   settingsListRectangle
             anchors.top:          parent.top
-            anchors.bottom:       parent.bottom
+            anchors.bottom:       buttonImageRow.top
             anchors.left:         parent.left
-            anchors.topMargin:    bannerViewHeight      + 16
-            anchors.bottomMargin: buttonImageRow.height + 16
+            anchors.topMargin:    bannerViewHeight + 16
+            anchors.bottomMargin: 16
             width:                96
             z:                    20
             clip:                 true
@@ -480,10 +500,10 @@ Item {
         Rectangle {
             id:                   toysListRectangle
             anchors.top:          parent.top
-            anchors.bottom:       parent.bottom
+            anchors.bottom:       buttonImageRow.top
             anchors.right:        parent.right
-            anchors.topMargin:    bannerViewHeight      + 16
-            anchors.bottomMargin: buttonImageRow.height + 16
+            anchors.topMargin:    bannerViewHeight + 16
+            anchors.bottomMargin: 16
             width:                54
             z:                    20
             clip:                 true
@@ -604,23 +624,23 @@ Item {
         id: purchaseDialog
         z:  30
 
-        onViewAdAndShareImage: {
+        onViewAdAndCaptureImage: {
             if (AdMobHelper.interstitialReady) {
-                treePage.interstitialShareFmt = "IMAGE";
+                treePage.interstitialCaptureFmt = "IMAGE";
 
                 AdMobHelper.showInterstitial();
             } else {
-                treePage.shareImage();
+                treePage.captureImage();
             }
         }
 
-        onViewAdAndShareGIF: {
+        onViewAdAndCaptureGIF: {
             if (AdMobHelper.interstitialReady) {
-                treePage.interstitialShareFmt = "GIF";
+                treePage.interstitialCaptureFmt = "GIF";
 
                 AdMobHelper.showInterstitial();
             } else {
-                shareGIFTimer.start();
+                captureGIFTimer.start();
             }
         }
 
@@ -633,8 +653,13 @@ Item {
         }
     }
 
+    HelpDialog {
+        id: helpDialog
+        z:  30
+    }
+
     Timer {
-        id:               shareGIFTimer
+        id:               captureGIFTimer
         interval:         200
         repeat:           true
         triggeredOnStart: true

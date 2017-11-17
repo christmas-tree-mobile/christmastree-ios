@@ -1,6 +1,8 @@
 <RCC>
     <qresource prefix="/">
         <file>resources/images/dialog/cancel.png</file>
+        <file>resources/images/dialog/help_dialog.png</file>
+        <file>resources/images/dialog/ok.png</file>
         <file>resources/images/dialog/purchase_dialog.png</file>
         <file>resources/images/dialog/purchase_dialog_button.png</file>
         <file>resources/images/dialog/purchase_dialog_purchase.png</file>
@@ -55,6 +57,7 @@
         <file>resources/images/tree/background_3.png</file>
         <file>resources/images/tree/button_capture_gif.png</file>
         <file>resources/images/tree/button_capture_image.png</file>
+        <file>resources/images/tree/button_help.png</file>
         <file>resources/images/tree/button_settings.png</file>
         <file>resources/images/tree/button_settings_pressed.png</file>
         <file>resources/images/tree/button_toys.png</file>
