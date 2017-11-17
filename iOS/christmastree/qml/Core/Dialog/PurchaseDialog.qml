@@ -5,13 +5,16 @@ MouseArea {
     anchors.centerIn: parent
     visible:          false
 
-    property int parentWidth:  parent.width
-    property int parentHeight: parent.height
+    property int parentWidth:    parent.width
+    property int parentHeight:   parent.height
+
+    property string imageFormat: ""
 
     signal opened()
     signal closed()
 
-    signal viewAd()
+    signal viewAdAndShareImage()
+    signal viewAdAndShareGIF()
     signal purchaseFullVersion()
     signal restorePurchases()
     signal cancel()
@@ -52,8 +55,9 @@ MouseArea {
         }
     }
 
-    function open() {
-        visible = true;
+    function open(image_format) {
+        visible     = true;
+        imageFormat = image_format;
 
         opened();
     }
@@ -130,7 +134,12 @@ MouseArea {
                     onClicked: {
                         purchaseDialog.visible = false;
 
-                        purchaseDialog.viewAd();
+                        if (imageFormat === "IMAGE") {
+                            purchaseDialog.viewAdAndShareImage();
+                        } else {
+                            purchaseDialog.viewAdAndShareGIF();
+                        }
+
                         purchaseDialog.closed();
                     }
                 }

@@ -1,0 +1,24 @@
+#ifndef GIFCREATOR_H
+#define GIFCREATOR_H
+
+#include <QtCore/QObject>
+#include <QtCore/QString>
+
+class GIFCreator : public QObject
+{
+    Q_OBJECT
+
+    Q_PROPERTY(QString imageFilePathMask READ imageFilePathMask)
+    Q_PROPERTY(QString gifFilePath       READ gifFilePath)
+
+public:
+    explicit GIFCreator(QObject *parent = 0);
+    virtual ~GIFCreator();
+
+    QString imageFilePathMask() const;
+    QString gifFilePath() const;
+
+    Q_INVOKABLE bool createGIF(const int &frames_count, const int &frame_delay);
+};
+
+#endif // GIFCREATOR_H

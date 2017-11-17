@@ -53,7 +53,8 @@
         <file>resources/images/tree/background_1.png</file>
         <file>resources/images/tree/background_2.png</file>
         <file>resources/images/tree/background_3.png</file>
-        <file>resources/images/tree/button_capture.png</file>
+        <file>resources/images/tree/button_capture_gif.png</file>
+        <file>resources/images/tree/button_capture_image.png</file>
         <file>resources/images/tree/button_settings.png</file>
         <file>resources/images/tree/button_settings_pressed.png</file>
         <file>resources/images/tree/button_toys.png</file>

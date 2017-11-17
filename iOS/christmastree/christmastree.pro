@@ -1,4 +1,4 @@
-QT += quick sql multimedia purchasing
+QT += quick quickcontrols2 sql multimedia purchasing
 CONFIG += c++11
 
 DEFINES += QT_DEPRECATED_WARNINGS WEBRTC_POSIX
@@ -7,11 +7,14 @@ SOURCES += src/main.cpp
 
 OBJECTIVE_SOURCES += \
     src/admobhelper.mm \
-    src/sharehelper.mm
+    src/sharehelper.mm \
+    src/gifcreator.mm
 
 HEADERS += \
     src/admobhelper.h \
-    src/sharehelper.h
+    src/sharehelper.h \
+    src/gif.h \
+    src/gifcreator.h
 
 RESOURCES += \
     qml.qrc \

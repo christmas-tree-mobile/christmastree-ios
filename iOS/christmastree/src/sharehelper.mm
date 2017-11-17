@@ -1,5 +1,4 @@
 #import <Foundation/Foundation.h>
-#import <UIKit/UIImage.h>
 #import <UIKit/UIWindow.h>
 #import <UIKit/UIApplication.h>
 #import <UIKit/UIActivityViewController.h>
@@ -21,10 +20,9 @@ QString ShareHelper::imageFilePath() const
     return QDir(QString::fromNSString(NSTemporaryDirectory())).filePath("image.jpg");
 }
 
-void ShareHelper::showShareToView()
+void ShareHelper::showShareToView(const QString &image_path)
 {
-    UIImage                  *image                    = [UIImage imageWithContentsOfFile:imageFilePath().toNSString()];
-    UIActivityViewController *activity_view_controller = [[UIActivityViewController alloc] initWithActivityItems:@[image] applicationActivities:nil];
+    UIActivityViewController *activity_view_controller = [[UIActivityViewController alloc] initWithActivityItems:@[[NSURL fileURLWithPath:image_path.toNSString()]] applicationActivities:nil];
 
     activity_view_controller.excludedActivityTypes = @[];
 

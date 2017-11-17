@@ -1,4 +1,5 @@
 import QtQuick 2.9
+import QtQuick.Controls 2.2
 import QtQuick.Particles 2.0
 import QtMultimedia 5.9
 
@@ -27,6 +28,8 @@ Item {
     property int lowerLeftTreePointY:      490
     property int lowerRightTreePointX:     300
     property int lowerRightTreePointY:     490
+
+    property string interstitialShareFmt:  ""
 
     property var newToy:                   null
 
@@ -60,7 +63,11 @@ Item {
 
     onInterstitialActiveChanged: {
         if (!interstitialActive && lastInterstitialActive) {
-            shareImage();
+            if (interstitialShareFmt === "IMAGE") {
+                shareImage();
+            } else {
+                shareGIFTimer.start();
+            }
         }
 
         lastInterstitialActive = interstitialActive;
@@ -96,12 +103,18 @@ Item {
     }
 
     function shareImage() {
+        waitRectangle.visible = true;
+
         if (!backgroundImage.grabToImage(function (result) {
             result.saveToFile(ShareHelper.imageFilePath);
 
-            ShareHelper.showShareToView();
+            ShareHelper.showShareToView(ShareHelper.imageFilePath);
+
+            waitRectangle.visible = false;
         })) {
             console.log("grabToImage() failed");
+
+            waitRectangle.visible = false;
         }
     }
 
@@ -345,20 +358,40 @@ Item {
             }
 
             Image {
-                id:     captureButtonImage
+                id:     captureImageButtonImage
                 width:  64
                 height: 64
-                source: "qrc:/resources/images/tree/button_capture.png"
+                source: "qrc:/resources/images/tree/button_capture_image.png"
 
                 MouseArea {
-                    id:           captureButtonMouseArea
+                    id:           captureImageButtonMouseArea
                     anchors.fill: parent
 
                     onClicked: {
                         if (mainWindow.fullVersion) {
                             treePage.shareImage();
                         } else {
-                            purchaseDialog.open();
+                            purchaseDialog.open("IMAGE");
+                        }
+                    }
+                }
+            }
+
+            Image {
+                id:     captureGIFButtonImage
+                width:  64
+                height: 64
+                source: "qrc:/resources/images/tree/button_capture_gif.png"
+
+                MouseArea {
+                    id:           captureGIFButtonMouseArea
+                    anchors.fill: parent
+
+                    onClicked: {
+                        if (mainWindow.fullVersion) {
+                            shareGIFTimer.start();
+                        } else {
+                            purchaseDialog.open("GIF");
                         }
                     }
                 }
@@ -547,17 +580,47 @@ Item {
                 }
             }
         }
+
+        Rectangle {
+             id:           waitRectangle
+             anchors.fill: parent
+             z:            25
+             color:        "black"
+             opacity:      0.75
+             visible:      false
+
+             BusyIndicator {
+                 anchors.centerIn: parent
+                 running:          parent.visible
+             }
+
+             MouseArea {
+                 anchors.fill: parent
+             }
+         }
     }
 
     PurchaseDialog {
         id: purchaseDialog
-        z:  25
+        z:  30
 
-        onViewAd: {
+        onViewAdAndShareImage: {
             if (AdMobHelper.interstitialReady) {
+                treePage.interstitialShareFmt = "IMAGE";
+
                 AdMobHelper.showInterstitial();
             } else {
                 treePage.shareImage();
+            }
+        }
+
+        onViewAdAndShareGIF: {
+            if (AdMobHelper.interstitialReady) {
+                treePage.interstitialShareFmt = "GIF";
+
+                AdMobHelper.showInterstitial();
+            } else {
+                shareGIFTimer.start();
             }
         }
 
@@ -567,6 +630,54 @@ Item {
 
         onRestorePurchases: {
             mainWindow.restorePurchases();
+        }
+    }
+
+    Timer {
+        id:               shareGIFTimer
+        interval:         200
+        repeat:           true
+        triggeredOnStart: true
+
+        property bool lastRunning: false
+
+        property int frameNumber:  0
+        property int framesCount:  5
+
+        onRunningChanged: {
+            if (running && !lastRunning) {
+                waitRectangle.visible = true;
+
+                frameNumber = 0;
+            } else if (!running && lastRunning) {
+                if (frameNumber >= framesCount) {
+                    if (GIFCreator.createGIF(framesCount, interval / 10)) {
+                        ShareHelper.showShareToView(GIFCreator.gifFilePath);
+                    } else {
+                        console.log("createGIF() failed");
+                    }
+                }
+
+                waitRectangle.visible = false;
+            }
+
+            lastRunning = running;
+        }
+
+        onTriggered: {
+            if (frameNumber < framesCount) {
+                var frame_number = frameNumber;
+
+                if (!backgroundImage.grabToImage(function (result) {
+                    result.saveToFile(GIFCreator.imageFilePathMask.arg(frame_number));
+                })) {
+                    console.log("grabToImage() failed for frame %1".arg(frame_number));
+                }
+
+                frameNumber = frameNumber + 1;
+            } else {
+                stop();
+            }
         }
     }
 
