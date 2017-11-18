@@ -53,12 +53,16 @@ AdMobHelper *AdMobHelper::Instance = NULL;
 
         [root_view_controller.view addSubview:BannerView];
 
-        UILayoutGuide *guide = root_view_controller.view.safeAreaLayoutGuide;
+        if (@available(iOS 11, *)) {
+            UILayoutGuide *guide = root_view_controller.view.safeAreaLayoutGuide;
 
-        [NSLayoutConstraint activateConstraints:@[
-            [BannerView.centerXAnchor constraintEqualToAnchor:guide.centerXAnchor],
-            [BannerView.topAnchor     constraintEqualToAnchor:guide.topAnchor]
-        ]];
+            [NSLayoutConstraint activateConstraints:@[
+                [BannerView.centerXAnchor constraintEqualToAnchor:guide.centerXAnchor],
+                [BannerView.topAnchor     constraintEqualToAnchor:guide.topAnchor]
+            ]];
+        } else {
+            assert(0);
+        }
     }
 
     return self;

@@ -22,8 +22,8 @@ Item {
     property int maxTreeNum:                3
     property int maxToyNum:                 37
     property int maxTwinkleNum:             7
-    property int upperTreePointX:           0
-    property int upperTreePointY:          -240
+    property int upperTreePointX:           0   // Coordinates relative to the center of source image
+    property int upperTreePointY:          -240 // in source image original resolution
     property int lowerLeftTreePointX:      -170
     property int lowerLeftTreePointY:       220
     property int lowerRightTreePointX:      170
