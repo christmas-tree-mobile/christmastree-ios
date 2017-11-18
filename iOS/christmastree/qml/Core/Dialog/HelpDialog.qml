@@ -1,4 +1,5 @@
 import QtQuick 2.9
+import QtQuick.Controls 2.2
 
 MouseArea {
     id:               helpDialog
@@ -98,6 +99,10 @@ MouseArea {
             contentWidth:         helpText.width
             contentHeight:        helpText.height
             clip:                 true
+
+            ScrollBar.vertical: ScrollBar {
+                policy: ScrollBar.AlwaysOn
+            }
 
             Text {
                 id:                   helpText
