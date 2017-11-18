@@ -21,8 +21,10 @@ RESOURCES += \
     resources.qrc \
     translations.qrc
 
-#TRANSLATIONS += \
-#    translations/christmastree_ru.ts
+TRANSLATIONS += \
+    translations/christmastree_ru.ts \
+    translations/christmastree_de.ts \
+    translations/christmastree_fr.ts
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
