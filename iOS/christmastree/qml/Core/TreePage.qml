@@ -22,12 +22,12 @@ Item {
     property int maxTreeNum:                3
     property int maxToyNum:                 37
     property int maxTwinkleNum:             7
-    property int upperTreePointX:           160
-    property int upperTreePointY:           50
-    property int lowerLeftTreePointX:       20
-    property int lowerLeftTreePointY:       490
-    property int lowerRightTreePointX:      300
-    property int lowerRightTreePointY:      490
+    property int upperTreePointX:           0
+    property int upperTreePointY:          -240
+    property int lowerLeftTreePointX:      -170
+    property int lowerLeftTreePointY:       220
+    property int lowerRightTreePointX:      170
+    property int lowerRightTreePointY:      220
 
     property string interstitialCaptureFmt: ""
 
@@ -151,6 +151,15 @@ Item {
 
                     width  = paintedWidth;
                     height = paintedHeight;
+
+                    treePage.upperTreePointX = (sourceSize.width  / 2 + treePage.upperTreePointX) * (width  / sourceSize.width);
+                    treePage.upperTreePointY = (sourceSize.height / 2 + treePage.upperTreePointY) * (height / sourceSize.height);
+
+                    treePage.lowerLeftTreePointX = (sourceSize.width  / 2 + treePage.lowerLeftTreePointX) * (width  / sourceSize.width);
+                    treePage.lowerLeftTreePointY = (sourceSize.height / 2 + treePage.lowerLeftTreePointY) * (height / sourceSize.height);
+
+                    treePage.lowerRightTreePointX = (sourceSize.width  / 2 + treePage.lowerRightTreePointX) * (width  / sourceSize.width);
+                    treePage.lowerRightTreePointY = (sourceSize.height / 2 + treePage.lowerRightTreePointY) * (height / sourceSize.height);
                 }
             }
 
@@ -160,6 +169,15 @@ Item {
 
                     width  = paintedWidth;
                     height = paintedHeight;
+
+                    treePage.upperTreePointX = (sourceSize.width  / 2 + treePage.upperTreePointX) * (width  / sourceSize.width);
+                    treePage.upperTreePointY = (sourceSize.height / 2 + treePage.upperTreePointY) * (height / sourceSize.height);
+
+                    treePage.lowerLeftTreePointX = (sourceSize.width  / 2 + treePage.lowerLeftTreePointX) * (width  / sourceSize.width);
+                    treePage.lowerLeftTreePointY = (sourceSize.height / 2 + treePage.lowerLeftTreePointY) * (height / sourceSize.height);
+
+                    treePage.lowerRightTreePointX = (sourceSize.width  / 2 + treePage.lowerRightTreePointX) * (width  / sourceSize.width);
+                    treePage.lowerRightTreePointY = (sourceSize.height / 2 + treePage.lowerRightTreePointY) * (height / sourceSize.height);
                 }
             }
 
@@ -329,14 +347,15 @@ Item {
         }
 
         Image {
-            id:                helpButtonImage
-            anchors.top:       parent.top
-            anchors.left:      parent.left
-            anchors.topMargin: bannerViewHeight + 4
-            width:             32
-            height:            32
-            z:                 15
-            source:            "qrc:/resources/images/tree/button_help.png"
+            id:                 helpButtonImage
+            anchors.top:        parent.top
+            anchors.left:       parent.left
+            anchors.topMargin:  Math.max(bannerViewHeight + 8, 34)
+            anchors.leftMargin: 8
+            width:              32
+            height:             32
+            z:                  15
+            source:             "qrc:/resources/images/tree/button_help.png"
 
             MouseArea {
                 id:           helpButtonMouseArea
@@ -445,7 +464,7 @@ Item {
             anchors.top:          parent.top
             anchors.bottom:       buttonImageRow.top
             anchors.left:         parent.left
-            anchors.topMargin:    bannerViewHeight + 16
+            anchors.topMargin:    Math.max(bannerViewHeight + 8, 34)
             anchors.bottomMargin: 16
             width:                96
             z:                    20
@@ -502,7 +521,7 @@ Item {
             anchors.top:          parent.top
             anchors.bottom:       buttonImageRow.top
             anchors.right:        parent.right
-            anchors.topMargin:    bannerViewHeight + 16
+            anchors.topMargin:    Math.max(bannerViewHeight + 8, 34)
             anchors.bottomMargin: 16
             width:                54
             z:                    20

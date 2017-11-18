@@ -52,21 +52,12 @@ AdMobHelper *AdMobHelper::Instance = NULL;
         BannerView.delegate                                  = self;
 
         [root_view_controller.view addSubview:BannerView];
-        [root_view_controller.view addConstraints:@[
-            [NSLayoutConstraint constraintWithItem:BannerView
-                                attribute:NSLayoutAttributeTop
-                                relatedBy:NSLayoutRelationEqual
-                                toItem:root_view_controller.topLayoutGuide
-                                attribute:NSLayoutAttributeBottom
-                                multiplier:1
-                                constant:0],
-            [NSLayoutConstraint constraintWithItem:BannerView
-                                attribute:NSLayoutAttributeCenterX
-                                relatedBy:NSLayoutRelationEqual
-                                toItem:root_view_controller.view
-                                attribute:NSLayoutAttributeCenterX
-                                multiplier:1
-                                constant:0]
+
+        UILayoutGuide *guide = root_view_controller.view.safeAreaLayoutGuide;
+
+        [NSLayoutConstraint activateConstraints:@[
+            [BannerView.centerXAnchor constraintEqualToAnchor:guide.centerXAnchor],
+            [BannerView.topAnchor     constraintEqualToAnchor:guide.topAnchor]
         ]];
     }
 
@@ -96,7 +87,10 @@ AdMobHelper *AdMobHelper::Instance = NULL;
 {
     Q_UNUSED(adView)
 
-    AdMobHelper::setBannerViewHeight(BannerView.bounds.size.height);
+    CGSize status_bar_size   = [[UIApplication sharedApplication] statusBarFrame].size;
+    int    status_bar_height = MIN(status_bar_size.width, status_bar_size.height);
+
+    AdMobHelper::setBannerViewHeight(BannerView.frame.origin.y - status_bar_height + BannerView.frame.size.height);
 }
 
 - (void)adViewWillPresentScreen:(GADBannerView *)adView

@@ -7,8 +7,9 @@ import QtPurchasing 1.0
 import "Core"
 
 Window {
-    id:      mainWindow
-    visible: true
+    id:         mainWindow
+    visibility: Window.FullScreen
+    visible:    true
 
     property bool fullVersion: false
 
