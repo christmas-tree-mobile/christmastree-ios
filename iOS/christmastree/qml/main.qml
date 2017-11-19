@@ -6,6 +6,8 @@ import QtPurchasing 1.0
 
 import "Core"
 
+import "BuildSettings.js" as BuildSettingsScript
+
 Window {
     id:         mainWindow
     visibility: Window.FullScreen
@@ -141,7 +143,11 @@ Window {
     }
 
     Component.onCompleted: {
-        fullVersion = (getSetting("FullVersion", "false") === "true");
+        if (BuildSettingsScript.VERSION_FOR_KIDS) {
+            fullVersion = true;
+        } else {
+            fullVersion = (getSetting("FullVersion", "false") === "true");
+        }
 
         AdMobHelper.initialize();
 

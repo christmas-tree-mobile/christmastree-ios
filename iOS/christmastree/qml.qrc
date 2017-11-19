@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
+        <file>qml/BuildSettings.js</file>
         <file>qml/main.qml</file>
         <file>qml/Core/TreePage.qml</file>
         <file>qml/Core/Dialog/HelpDialog.qml</file>
