@@ -44,6 +44,8 @@ Item {
             if (tree_num <= maxTreeNum) {
                 currentTreeNum = tree_num;
             }
+
+            helpOnStartupTimer.restart();
         }
     }
 
@@ -58,6 +60,8 @@ Item {
             if (tree_num <= maxTreeNum) {
                 currentTreeNum = tree_num;
             }
+
+            helpOnStartupTimer.restart();
         }
     }
 
@@ -675,6 +679,19 @@ Item {
     HelpDialog {
         id: helpDialog
         z:  30
+    }
+
+    Timer {
+        id:       helpOnStartupTimer
+        interval: 100
+
+        onTriggered: {
+            if (mainWindow.getSetting("ShowHelpOnStartup", "true") === "true") {
+                helpDialog.open();
+            }
+
+            mainWindow.setSetting("ShowHelpOnStartup", "false");
+        }
     }
 
     Timer {

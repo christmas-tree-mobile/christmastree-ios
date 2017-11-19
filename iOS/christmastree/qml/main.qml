@@ -19,7 +19,7 @@ Window {
         setSetting("FullVersion", fullVersion ? "true" : "false");
 
         if (mainStackView.depth > 0 && mainStackView.currentItem.hasOwnProperty("bannerViewHeight")) {
-            if (mainWindow.fullVersion) {
+            if (fullVersion) {
                 AdMobHelper.hideBannerView();
             } else {
                 AdMobHelper.showBannerView();
@@ -112,13 +112,13 @@ Window {
             }
 
             if (depth > 0) {
-                get(depth - 1).forceActiveFocus();
+                currentItem.forceActiveFocus();
 
-                if (item.hasOwnProperty("pageActive")) {
-                    item.pageActive = true;
+                if (currentItem.hasOwnProperty("pageActive")) {
+                    currentItem.pageActive = true;
                 }
 
-                if (item.hasOwnProperty("bannerViewHeight")) {
+                if (currentItem.hasOwnProperty("bannerViewHeight")) {
                     if (mainWindow.fullVersion) {
                         AdMobHelper.hideBannerView();
                     } else {
