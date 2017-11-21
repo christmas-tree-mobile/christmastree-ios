@@ -3,5 +3,6 @@
         <file alias="christmastree_ru.qm">translations/christmastree_ru.qm</file>
         <file alias="christmastree_de.qm">translations/christmastree_de.qm</file>
         <file alias="christmastree_fr.qm">translations/christmastree_fr.qm</file>
+        <file alias="christmastree_zh.qm">translations/christmastree_zh.qm</file>
     </qresource>
 </RCC>
