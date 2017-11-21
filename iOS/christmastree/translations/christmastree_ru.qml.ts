@@ -11,7 +11,7 @@
     <message>
         <location filename="../qml/Core/Dialog/HelpDialog.qml" line="110"/>
         <source>1. Press Settings button to choose how your tree and background image should look like. Press Settings button again to hide list of available options.</source>
-        <translation>1. Нажмите кнопку Настройки, чтобы выбрать фоновое изображение и вид вашей елки. Намите кнопку Настройки еще раз, чтобы скрыть список доступных вариантов.</translation>
+        <translation>1. Нажмите кнопку Настройки, чтобы выбрать фоновое изображение и вид вашей елки. Нажмите кнопку Настройки еще раз, чтобы скрыть список доступных вариантов.</translation>
     </message>
     <message>
         <location filename="../qml/Core/Dialog/HelpDialog.qml" line="111"/>

@@ -16,7 +16,7 @@
     <message>
         <location filename="../qml/Core/Dialog/HelpDialog.qml" line="111"/>
         <source>2. Press Toys button to open toys gallery. Press Toys button again to hide this gallery.</source>
-        <translation>2. Drücken Sie die Spielzeugtaste, um die Spielzeuggalerie zu öffnen. Drücken Sie die &quot;Spielzeug&quot; -Taste erneut, um diese Galerie auszublenden.</translation>
+        <translation>2. Drücken Sie die Spielzeugtaste, um die Spielzeuggalerie zu öffnen. Drücken Sie die Spielzeugtaste erneut, um diese Galerie auszublenden.</translation>
     </message>
     <message>
         <location filename="../qml/Core/Dialog/HelpDialog.qml" line="112"/>
