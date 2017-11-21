@@ -13,7 +13,8 @@ Window {
     visibility: Window.FullScreen
     visible:    true
 
-    property bool fullVersion: false
+    property bool fullVersion:    false
+    property bool versionForKids: BuildSettingsScript.VERSION_FOR_KIDS
 
     onFullVersionChanged: {
         setSetting("FullVersion", fullVersion ? "true" : "false");

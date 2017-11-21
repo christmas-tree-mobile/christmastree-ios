@@ -411,10 +411,14 @@ Item {
                     anchors.fill: parent
 
                     onClicked: {
-                        if (mainWindow.fullVersion) {
-                            treePage.captureImage();
+                        if (mainWindow.versionForKids) {
+                            parentalGateDialog.open("IMAGE");
                         } else {
-                            purchaseDialog.open("IMAGE");
+                            if (mainWindow.fullVersion) {
+                                treePage.captureImage();
+                            } else {
+                                purchaseDialog.open("IMAGE");
+                            }
                         }
                     }
                 }
@@ -431,10 +435,14 @@ Item {
                     anchors.fill: parent
 
                     onClicked: {
-                        if (mainWindow.fullVersion) {
-                            captureGIFTimer.start();
+                        if (mainWindow.versionForKids) {
+                            parentalGateDialog.open("GIF");
                         } else {
-                            purchaseDialog.open("GIF");
+                            if (mainWindow.fullVersion) {
+                                captureGIFTimer.start();
+                            } else {
+                                purchaseDialog.open("GIF");
+                            }
                         }
                     }
                 }
@@ -673,6 +681,19 @@ Item {
 
         onRestorePurchases: {
             mainWindow.restorePurchases();
+        }
+    }
+
+    ParentalGateDialog {
+        id: parentalGateDialog
+        z:  30
+
+        onPassAndCaptureImage: {
+            treePage.captureImage();
+        }
+
+        onPassAndCaptureGIF: {
+            captureGIFTimer.start();
         }
     }
 
