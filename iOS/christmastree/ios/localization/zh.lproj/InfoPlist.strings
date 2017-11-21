@@ -1,0 +1,6 @@
+/* 
+  InfoPlist.strings
+*/
+
+CFBundleDisplayName               = "圣诞树";
+NSPhotoLibraryAddUsageDescription = "如果要保存圣诞树图像，请启用对照片库的写入访问权限";

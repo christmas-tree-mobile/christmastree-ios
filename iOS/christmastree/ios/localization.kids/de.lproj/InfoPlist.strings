@@ -1,0 +1,6 @@
+/* 
+  InfoPlist.strings
+*/
+
+CFBundleDisplayName               = "Tannenbaum für Kinder";
+NSPhotoLibraryAddUsageDescription = "Bitte aktivieren Sie den Schreibzugriff auf die Fotobibliothek, wenn Sie das Tannenbaumbild darauf speichern mochten";
