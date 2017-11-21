@@ -30,6 +30,14 @@
     </message>
 </context>
 <context>
+    <name>ParentalGateDialog</name>
+    <message>
+        <location filename="../qml/Core/Dialog/ParentalGateDialog.qml" line="131"/>
+        <source>Slide with two fingers over this dialog to continue</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>PurchaseDialog</name>
     <message>
         <location filename="../qml/Core/Dialog/PurchaseDialog.qml" line="172"/>
