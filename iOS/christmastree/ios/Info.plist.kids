@@ -28,6 +28,8 @@
 	<string>1.0.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Please enable camera access if you want to get access to this feature</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Please enable write access to photo library if you want to save Christmas Tree image to it</string>
 	<key>UILaunchStoryboardName</key>
