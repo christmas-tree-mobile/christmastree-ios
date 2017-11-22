@@ -2,5 +2,5 @@
   InfoPlist.strings
 */
 
-CFBundleDisplayName               = "Елка для детей";
+CFBundleDisplayName               = "Елка 0+";
 NSPhotoLibraryAddUsageDescription = "Пожалуйста, разрешите доступ к Фотогалерее, чтобы сохранить изображение новогодней елки";

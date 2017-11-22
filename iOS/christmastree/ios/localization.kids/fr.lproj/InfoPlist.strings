@@ -2,5 +2,5 @@
   InfoPlist.strings
 */
 
-CFBundleDisplayName               = "Sapin de Noël";
+CFBundleDisplayName               = "Sapin de Noël 0+";
 NSPhotoLibraryAddUsageDescription = "Activez l'accès en écriture à la photothèque si vous souhaitez enregistrer l'image de l'arbre de Noël";
