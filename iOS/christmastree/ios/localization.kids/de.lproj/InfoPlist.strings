@@ -2,6 +2,6 @@
   InfoPlist.strings
 */
 
-CFBundleDisplayName               = "Tannenbaum 0+";
+CFBundleDisplayName               = "Tannenbaum für Kinder";
 NSCameraUsageDescription          = "Bitte aktivieren Sie den Kamerazugriff, wenn Sie auf diese Funktion zugreifen möchten";
 NSPhotoLibraryAddUsageDescription = "Bitte aktivieren Sie den Schreibzugriff auf die Fotobibliothek, wenn Sie das Tannenbaumbild darauf speichern mochten";

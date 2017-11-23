@@ -2,6 +2,6 @@
   InfoPlist.strings
 */
 
-CFBundleDisplayName               = "Sapin de Noël 0+";
+CFBundleDisplayName               = "Noël pour les enfants";
 NSCameraUsageDescription          = "Veuillez activer l'accès à la caméra si vous souhaitez accéder à cette fonctionnalité";
 NSPhotoLibraryAddUsageDescription = "Activez l'accès en écriture à la photothèque si vous souhaitez enregistrer l'image de l'arbre de Noël";
