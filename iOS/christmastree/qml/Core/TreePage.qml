@@ -354,7 +354,7 @@ Item {
             id:                 helpButtonImage
             anchors.top:        parent.top
             anchors.left:       parent.left
-            anchors.topMargin:  Math.max(bannerViewHeight + 8, 34)
+            anchors.topMargin:  Math.max(treePage.bannerViewHeight + 8, 34)
             anchors.leftMargin: 8
             width:              32
             height:             32
@@ -476,7 +476,7 @@ Item {
             anchors.top:          parent.top
             anchors.bottom:       buttonImageRow.top
             anchors.left:         parent.left
-            anchors.topMargin:    Math.max(bannerViewHeight + 8, 34)
+            anchors.topMargin:    Math.max(treePage.bannerViewHeight + 8, 34)
             anchors.bottomMargin: 16
             width:                96
             z:                    20
@@ -533,7 +533,7 @@ Item {
             anchors.top:          parent.top
             anchors.bottom:       buttonImageRow.top
             anchors.right:        parent.right
-            anchors.topMargin:    Math.max(bannerViewHeight + 8, 34)
+            anchors.topMargin:    Math.max(treePage.bannerViewHeight + 8, 34)
             anchors.bottomMargin: 16
             width:                54
             z:                    20
