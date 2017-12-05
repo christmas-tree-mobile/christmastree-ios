@@ -33,6 +33,8 @@ Window {
 
         db.transaction(
                     function(tx) {
+                        tx.executeSql("CREATE TABLE IF NOT EXISTS SETTINGS(KEY TEXT PRIMARY KEY, VALUE TEXT)");
+
                         tx.executeSql("REPLACE INTO SETTINGS (KEY, VALUE) VALUES (?, ?)", [key, value]);
                     }
         );
