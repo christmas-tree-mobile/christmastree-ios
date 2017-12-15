@@ -8,11 +8,13 @@ SOURCES += src/main.cpp
 OBJECTIVE_SOURCES += \
     src/admobhelper.mm \
     src/sharehelper.mm \
+    src/storehelper.mm \
     src/gifcreator.mm
 
 HEADERS += \
     src/admobhelper.h \
     src/sharehelper.h \
+    src/storehelper.h \
     src/gif.h \
     src/gifcreator.h
 

@@ -122,6 +122,10 @@ Item {
         }
     }
 
+    function shareToViewCompleted() {
+        StoreHelper.requestReview();
+    }
+
     Audio {
         volume:   1.0
         muted:    !treePage.appInForeground || !treePage.pageActive || treePage.interstitialActive
@@ -764,6 +768,8 @@ Item {
     }
 
     Component.onCompleted: {
+        ShareHelper.shareToViewCompleted.connect(shareToViewCompleted);
+
         settingsListModel.clear();
 
         for (var i = 1; i <= treePage.maxBackgroundNum; i++) {

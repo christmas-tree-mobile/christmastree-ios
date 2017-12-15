@@ -24,7 +24,10 @@ void ShareHelper::showShareToView(const QString &image_path)
 {
     UIActivityViewController *activity_view_controller = [[UIActivityViewController alloc] initWithActivityItems:@[[NSURL fileURLWithPath:image_path.toNSString()]] applicationActivities:nil];
 
-    activity_view_controller.excludedActivityTypes = @[];
+    activity_view_controller.excludedActivityTypes      = @[];
+    activity_view_controller.completionWithItemsHandler = ^(UIActivityType, BOOL, NSArray *, NSError *) {
+        emit shareToViewCompleted();
+    };
 
     UIViewController * __block root_view_controller = nil;
 
