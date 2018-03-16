@@ -1,7 +1,7 @@
 QT += quick quickcontrols2 sql multimedia purchasing
 CONFIG += c++11
 
-DEFINES += QT_DEPRECATED_WARNINGS WEBRTC_POSIX
+DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += src/main.cpp
 
