@@ -22,7 +22,7 @@ QString ShareHelper::imageFilePath() const
 
 void ShareHelper::showShareToView(const QString &image_path)
 {
-    UIActivityViewController *activity_view_controller = [[UIActivityViewController alloc] initWithActivityItems:@[[NSURL fileURLWithPath:image_path.toNSString()]] applicationActivities:nil];
+    UIActivityViewController *activity_view_controller = [[[UIActivityViewController alloc] initWithActivityItems:@[[NSURL fileURLWithPath:image_path.toNSString()]] applicationActivities:nil] autorelease];
 
     activity_view_controller.excludedActivityTypes      = @[];
     activity_view_controller.completionWithItemsHandler = ^(UIActivityType, BOOL, NSArray *, NSError *) {
