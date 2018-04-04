@@ -60,6 +60,8 @@ AdMobHelper *AdMobHelper::Instance = NULL;
                 [BannerView.centerXAnchor constraintEqualToAnchor:guide.centerXAnchor],
                 [BannerView.topAnchor     constraintEqualToAnchor:guide.topAnchor]
             ]];
+
+            AdMobHelper::setBannerViewHeight(BannerView.frame.size.height + root_view_controller.view.safeAreaInsets.top);
         } else {
             assert(0);
         }
@@ -90,11 +92,6 @@ AdMobHelper *AdMobHelper::Instance = NULL;
 - (void)adViewDidReceiveAd:(GADBannerView *)adView
 {
     Q_UNUSED(adView)
-
-    CGSize status_bar_size   = [[UIApplication sharedApplication] statusBarFrame].size;
-    int    status_bar_height = MIN(status_bar_size.width, status_bar_size.height);
-
-    AdMobHelper::setBannerViewHeight(BannerView.frame.origin.y - status_bar_height + BannerView.frame.size.height);
 }
 
 - (void)adViewWillPresentScreen:(GADBannerView *)adView
