@@ -38,15 +38,16 @@ QML_IMPORT_PATH =
 QML_DESIGNER_IMPORT_PATH =
 
 ios {
-    LIBS += -F $$PWD/admob -framework GoogleMobileAds \
-                -framework AdSupport \
-                -framework CFNetwork \
-                -framework CoreMotion \
-                -framework CoreTelephony \
-                -framework GLKit \
-                -framework MediaPlayer \
-                -framework MessageUI \
-                -framework SystemConfiguration
+    LIBS += -F $$PWD/ios/frameworks \
+            -framework GoogleMobileAds \
+            -framework AdSupport \
+            -framework CFNetwork \
+            -framework CoreMotion \
+            -framework CoreTelephony \
+            -framework GLKit \
+            -framework MediaPlayer \
+            -framework MessageUI \
+            -framework SystemConfiguration
 
     QMAKE_APPLE_DEVICE_ARCHS = arm64
     QMAKE_INFO_PLIST = ios/Info.plist
