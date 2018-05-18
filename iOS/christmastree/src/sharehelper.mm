@@ -20,7 +20,7 @@ QString ShareHelper::imageFilePath() const
     return QDir(QString::fromNSString(NSTemporaryDirectory())).filePath("image.jpg");
 }
 
-void ShareHelper::showShareToView(const QString &image_path)
+void ShareHelper::showShareToView(QString image_path)
 {
     UIViewController * __block root_view_controller = nil;
 

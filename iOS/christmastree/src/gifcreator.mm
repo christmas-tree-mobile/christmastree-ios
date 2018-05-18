@@ -24,7 +24,7 @@ QString GIFCreator::gifFilePath() const
     return QDir(QString::fromNSString(NSTemporaryDirectory())).filePath("image.gif");
 }
 
-bool GIFCreator::createGIF(const int &frames_count, const int &frame_delay)
+bool GIFCreator::createGIF(int frames_count, int frame_delay)
 {
     QImage first_image(imageFilePathMask().arg(0));
 

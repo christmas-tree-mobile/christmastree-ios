@@ -18,7 +18,7 @@ public:
     QString imageFilePathMask() const;
     QString gifFilePath() const;
 
-    Q_INVOKABLE bool createGIF(const int &frames_count, const int &frame_delay);
+    Q_INVOKABLE bool createGIF(int frames_count, int frame_delay);
 };
 
 #endif // GIFCREATOR_H
