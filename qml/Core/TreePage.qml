@@ -35,8 +35,8 @@ Item {
 
     onAppInForegroundChanged: {
         if (appInForeground && pageActive) {
-            var background_num = parseInt(mainWindow.getSetting("BackgroundNum", 1), 10);
-            var tree_num       = parseInt(mainWindow.getSetting("TreeNum",       1), 10);
+            var background_num = parseInt(mainWindow.getSetting("BackgroundNum", "1"), 10);
+            var tree_num       = parseInt(mainWindow.getSetting("TreeNum",       "1"), 10);
 
             if (background_num <= maxBackgroundNum) {
                 currentBackgroundNum = background_num;
@@ -51,8 +51,8 @@ Item {
 
     onPageActiveChanged: {
         if (appInForeground && pageActive) {
-            var background_num = parseInt(mainWindow.getSetting("BackgroundNum", 1), 10);
-            var tree_num       = parseInt(mainWindow.getSetting("TreeNum",       1), 10);
+            var background_num = parseInt(mainWindow.getSetting("BackgroundNum", "1"), 10);
+            var tree_num       = parseInt(mainWindow.getSetting("TreeNum",       "1"), 10);
 
             if (background_num <= maxBackgroundNum) {
                 currentBackgroundNum = background_num;
