@@ -146,8 +146,6 @@ Window {
             fullVersion = true;
         } else {
             fullVersion = (getSetting("FullVersion", "false") === "true");
-
-            AdMobHelper.initialize();
         }
 
         mainStackView.push(treePage);
