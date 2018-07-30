@@ -1,9 +1,9 @@
-#import <Foundation/Foundation.h>
 #import <UIKit/UIWindow.h>
 #import <UIKit/UIApplication.h>
 #import <UIKit/UIActivityViewController.h>
 
 #include <QtCore/QDir>
+#include <QtCore/QStandardPaths>
 
 #include "sharehelper.h"
 
@@ -17,7 +17,13 @@ ShareHelper::~ShareHelper()
 
 QString ShareHelper::imageFilePath() const
 {
-    return QDir(QString::fromNSString(NSTemporaryDirectory())).filePath("image.jpg");
+    QString tmp_dir = QStandardPaths::writableLocation(QStandardPaths::TempLocation);
+
+    if (tmp_dir != "") {
+        QDir().mkpath(tmp_dir);
+    }
+
+    return QDir(tmp_dir).filePath("image.jpg");
 }
 
 void ShareHelper::showShareToView(QString image_path)

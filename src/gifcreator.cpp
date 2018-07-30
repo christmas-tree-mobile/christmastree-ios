@@ -1,6 +1,5 @@
-#import <Foundation/Foundation.h>
-
 #include <QtCore/QDir>
+#include <QtCore/QStandardPaths>
 #include <QtGui/QImage>
 
 #include "gif.h"
@@ -16,12 +15,24 @@ GIFCreator::~GIFCreator()
 
 QString GIFCreator::imageFilePathMask() const
 {
-    return QDir(QString::fromNSString(NSTemporaryDirectory())).filePath("image_%1.jpg");
+    QString tmp_dir = QStandardPaths::writableLocation(QStandardPaths::TempLocation);
+
+    if (tmp_dir != "") {
+        QDir().mkpath(tmp_dir);
+    }
+
+    return QDir(tmp_dir).filePath("image_%1.jpg");
 }
 
 QString GIFCreator::gifFilePath() const
 {
-    return QDir(QString::fromNSString(NSTemporaryDirectory())).filePath("image.gif");
+    QString tmp_dir = QStandardPaths::writableLocation(QStandardPaths::TempLocation);
+
+    if (tmp_dir != "") {
+        QDir().mkpath(tmp_dir);
+    }
+
+    return QDir(tmp_dir).filePath("image.gif");
 }
 
 bool GIFCreator::createGIF(int frames_count, int frame_delay)

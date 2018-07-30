@@ -3,13 +3,13 @@ CONFIG += c++11
 
 DEFINES += QT_DEPRECATED_WARNINGS
 
-SOURCES += src/main.cpp
+SOURCES += src/main.cpp \
+    src/gifcreator.cpp
 
 OBJECTIVE_SOURCES += \
     src/admobhelper.mm \
     src/sharehelper.mm \
-    src/storehelper.mm \
-    src/gifcreator.mm
+    src/storehelper.mm
 
 HEADERS += \
     src/admobhelper.h \
