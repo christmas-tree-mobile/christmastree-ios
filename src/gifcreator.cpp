@@ -42,7 +42,9 @@ bool GIFCreator::createGIF(int frames_count, int frame_delay)
     if (!first_image.isNull()) {
         GifWriter gif_writer;
 
-        if (GifBegin(&gif_writer, gifFilePath().toUtf8(), first_image.width(), first_image.height(), frame_delay)) {
+        if (GifBegin(&gif_writer, gifFilePath().toUtf8(), static_cast<uint32_t>(first_image.width()),
+                                                          static_cast<uint32_t>(first_image.height()),
+                                                          static_cast<uint32_t>(frame_delay))) {
             for (int frame = 0; frame < frames_count; frame++) {
                 QImage image(imageFilePathMask().arg(frame));
 
@@ -50,7 +52,9 @@ bool GIFCreator::createGIF(int frames_count, int frame_delay)
                     if (!GifWriteFrame(&gif_writer,
                                        image.convertToFormat(QImage::Format_Indexed8).
                                              convertToFormat(QImage::Format_RGBA8888).constBits(),
-                                       image.width(), image.height(), frame_delay)) {
+                                       static_cast<uint32_t>(image.width()),
+                                       static_cast<uint32_t>(image.height()),
+                                       static_cast<uint32_t>(frame_delay))) {
                         GifEnd(&gif_writer);
 
                         return false;

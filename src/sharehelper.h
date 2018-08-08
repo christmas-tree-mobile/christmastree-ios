@@ -11,7 +11,7 @@ class ShareHelper : public QObject
     Q_PROPERTY(QString imageFilePath READ imageFilePath)
 
 public:
-    explicit ShareHelper(QObject *parent = 0);
+    explicit ShareHelper(QObject *parent = nullptr);
     virtual ~ShareHelper();
 
     QString imageFilePath() const;

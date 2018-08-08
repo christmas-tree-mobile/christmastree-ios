@@ -12,7 +12,7 @@ class GIFCreator : public QObject
     Q_PROPERTY(QString gifFilePath       READ gifFilePath)
 
 public:
-    explicit GIFCreator(QObject *parent = 0);
+    explicit GIFCreator(QObject *parent = nullptr);
     virtual ~GIFCreator();
 
     QString imageFilePathMask() const;
