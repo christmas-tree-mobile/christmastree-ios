@@ -10,6 +10,7 @@ import "BuildSettings.js" as BuildSettingsScript
 
 Window {
     id:         mainWindow
+    title:      qsTr("Christmas")
     visibility: Window.FullScreen
     visible:    true
 
