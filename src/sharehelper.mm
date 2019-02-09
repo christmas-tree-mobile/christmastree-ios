@@ -30,8 +30,8 @@ void ShareHelper::showShareToView(QString image_path)
 {
     UIViewController * __block root_view_controller = nil;
 
-    [[[UIApplication sharedApplication] windows] enumerateObjectsUsingBlock:^(UIWindow * _Nonnull window, NSUInteger, BOOL * _Nonnull stop) {
-        root_view_controller = [window rootViewController];
+    [UIApplication.sharedApplication.windows enumerateObjectsUsingBlock:^(UIWindow * _Nonnull window, NSUInteger, BOOL * _Nonnull stop) {
+        root_view_controller = window.rootViewController;
 
         *stop = (root_view_controller != nil);
     }];
