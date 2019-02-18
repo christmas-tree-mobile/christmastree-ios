@@ -9,8 +9,8 @@ import "Tree"
 Item {
     id: treePage
 
-    property bool appInForeground:           Qt.application.active
-    property bool pageActive:                false
+    property bool appInForeground:           Qt.application.state === Qt.ApplicationActive
+    property bool pageActive:                StackView.status === StackView.Active
     property bool interstitialActive:        AdMobHelper.interstitialActive
     property bool lastInterstitialActive:    false
 
