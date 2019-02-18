@@ -164,12 +164,15 @@ MouseArea {
                         width:                  parent.width - viewAdImage.width - parent.spacing -
                                                 parent.leftPadding - parent.rightPadding
                         height:                 parent.height - 8
-                        clip:                   true
+                        text:                   qsTr("View ad and capture image")
                         color:                  "black"
+                        font.pointSize:         16
+                        font.family:            "Helvetica"
                         horizontalAlignment:    Text.AlignHCenter
                         verticalAlignment:      Text.AlignVCenter
                         wrapMode:               Text.Wrap
-                        text:                   qsTr("View ad and capture image")
+                        fontSizeMode:           Text.Fit
+                        minimumPointSize:       8
                     }
                 }
             }
@@ -232,12 +235,15 @@ MouseArea {
                         width:                  parent.width - purchaseFullVersionImage.width - parent.spacing -
                                                 parent.leftPadding - parent.rightPadding
                         height:                 parent.height - 8
-                        clip:                   true
+                        text:                   qsTr("Purchase full version")
                         color:                  "black"
+                        font.pointSize:         16
+                        font.family:            "Helvetica"
                         horizontalAlignment:    Text.AlignHCenter
                         verticalAlignment:      Text.AlignVCenter
                         wrapMode:               Text.Wrap
-                        text:                   qsTr("Purchase full version")
+                        fontSizeMode:           Text.Fit
+                        minimumPointSize:       8
                     }
                 }
             }
@@ -300,12 +306,15 @@ MouseArea {
                         width:                  parent.width - restorePurchasesImage.width - parent.spacing -
                                                 parent.leftPadding - parent.rightPadding
                         height:                 parent.height - 8
-                        clip:                   true
+                        text:                   qsTr("Restore purchases")
                         color:                  "black"
+                        font.pointSize:         16
+                        font.family:            "Helvetica"
                         horizontalAlignment:    Text.AlignHCenter
                         verticalAlignment:      Text.AlignVCenter
                         wrapMode:               Text.Wrap
-                        text:                   qsTr("Restore purchases")
+                        fontSizeMode:           Text.Fit
+                        minimumPointSize:       8
                     }
                 }
             }

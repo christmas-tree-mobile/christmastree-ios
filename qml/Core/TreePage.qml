@@ -9,25 +9,31 @@ import "Tree"
 Item {
     id: treePage
 
-    property bool appInForeground:          Qt.application.active
-    property bool pageActive:               false
-    property bool interstitialActive:       AdMobHelper.interstitialActive
-    property bool lastInterstitialActive:   false
+    property bool appInForeground:           Qt.application.active
+    property bool pageActive:                false
+    property bool interstitialActive:        AdMobHelper.interstitialActive
+    property bool lastInterstitialActive:    false
 
-    property int bannerViewHeight:          AdMobHelper.bannerViewHeight
-    property int currentBackgroundNum:      1
-    property int maxBackgroundNum:          3
-    property int maxBackgroundNumWithSnow:  2
-    property int currentTreeNum:            1
-    property int maxTreeNum:                3
-    property int maxToyNum:                 37
-    property int maxTwinkleNum:             7
-    property int upperTreePointX:           0   // Coordinates relative to the center of source image
-    property int upperTreePointY:          -240 // in source image original resolution
-    property int lowerLeftTreePointX:      -170
-    property int lowerLeftTreePointY:       220
-    property int lowerRightTreePointX:      170
-    property int lowerRightTreePointY:      220
+    property int bannerViewHeight:           AdMobHelper.bannerViewHeight
+    property int currentBackgroundNum:       1
+    property int maxBackgroundNum:           3
+    property int maxBackgroundNumWithSnow:   2
+    property int currentTreeNum:             1
+    property int maxTreeNum:                 3
+    property int maxToyNum:                  37
+    property int maxTwinkleNum:              7
+    property int upperTreePointXConfig:      0   // Coordinates relative to the center of source image
+    property int upperTreePointYConfig:     -240 // in source image original resolution
+    property int lowerLeftTreePointXConfig: -170
+    property int lowerLeftTreePointYConfig:  220
+    property int lowerRightTreePointXConfig: 170
+    property int lowerRightTreePointYConfig: 220
+    property int upperTreePointX:            upperTreePointXConfig
+    property int upperTreePointY:            upperTreePointYConfig
+    property int lowerLeftTreePointX:        lowerLeftTreePointXConfig
+    property int lowerLeftTreePointY:        lowerLeftTreePointYConfig
+    property int lowerRightTreePointX:       lowerRightTreePointXConfig
+    property int lowerRightTreePointY:       lowerRightTreePointYConfig
 
     property string interstitialCaptureFmt: ""
 
@@ -146,75 +152,91 @@ Item {
         Image {
             id:               backgroundImage
             anchors.centerIn: parent
-            width:            parent.width
-            height:           parent.height
+            width:            Math.floor(calculateWidth (sourceSize.width, sourceSize.height, parent.width, parent.height))
+            height:           Math.floor(calculateHeight(sourceSize.width, sourceSize.height, parent.width, parent.height))
             source:           "qrc:/resources/images/tree/background_%1.png".arg(treePage.currentBackgroundNum)
             fillMode:         Image.PreserveAspectCrop
 
-            property bool geometrySettled: false
-
             onPaintedWidthChanged: {
-                if (!geometrySettled && width > 0 && height > 0 && paintedWidth > 0 && paintedHeight > 0) {
-                    geometrySettled = true;
+                if (sourceSize.width > 0 && sourceSize.height > 0) {
+                    treePage.upperTreePointX = (sourceSize.width  / 2 + treePage.upperTreePointXConfig) * (paintedWidth  / sourceSize.width);
+                    treePage.upperTreePointY = (sourceSize.height / 2 + treePage.upperTreePointYConfig) * (paintedHeight / sourceSize.height);
 
-                    width  = paintedWidth;
-                    height = paintedHeight;
+                    treePage.lowerLeftTreePointX = (sourceSize.width  / 2 + treePage.lowerLeftTreePointXConfig) * (paintedWidth  / sourceSize.width);
+                    treePage.lowerLeftTreePointY = (sourceSize.height / 2 + treePage.lowerLeftTreePointYConfig) * (paintedHeight / sourceSize.height);
 
-                    treePage.upperTreePointX = (sourceSize.width  / 2 + treePage.upperTreePointX) * (width  / sourceSize.width);
-                    treePage.upperTreePointY = (sourceSize.height / 2 + treePage.upperTreePointY) * (height / sourceSize.height);
-
-                    treePage.lowerLeftTreePointX = (sourceSize.width  / 2 + treePage.lowerLeftTreePointX) * (width  / sourceSize.width);
-                    treePage.lowerLeftTreePointY = (sourceSize.height / 2 + treePage.lowerLeftTreePointY) * (height / sourceSize.height);
-
-                    treePage.lowerRightTreePointX = (sourceSize.width  / 2 + treePage.lowerRightTreePointX) * (width  / sourceSize.width);
-                    treePage.lowerRightTreePointY = (sourceSize.height / 2 + treePage.lowerRightTreePointY) * (height / sourceSize.height);
+                    treePage.lowerRightTreePointX = (sourceSize.width  / 2 + treePage.lowerRightTreePointXConfig) * (paintedWidth  / sourceSize.width);
+                    treePage.lowerRightTreePointY = (sourceSize.height / 2 + treePage.lowerRightTreePointYConfig) * (paintedHeight / sourceSize.height);
                 }
             }
 
             onPaintedHeightChanged: {
-                if (!geometrySettled && width > 0 && height > 0 && paintedWidth > 0 && paintedHeight > 0) {
-                    geometrySettled = true;
+                if (sourceSize.width > 0 && sourceSize.height > 0) {
+                    treePage.upperTreePointX = (sourceSize.width  / 2 + treePage.upperTreePointXConfig) * (paintedWidth  / sourceSize.width);
+                    treePage.upperTreePointY = (sourceSize.height / 2 + treePage.upperTreePointYConfig) * (paintedHeight / sourceSize.height);
 
-                    width  = paintedWidth;
-                    height = paintedHeight;
+                    treePage.lowerLeftTreePointX = (sourceSize.width  / 2 + treePage.lowerLeftTreePointXConfig) * (paintedWidth  / sourceSize.width);
+                    treePage.lowerLeftTreePointY = (sourceSize.height / 2 + treePage.lowerLeftTreePointYConfig) * (paintedHeight / sourceSize.height);
 
-                    treePage.upperTreePointX = (sourceSize.width  / 2 + treePage.upperTreePointX) * (width  / sourceSize.width);
-                    treePage.upperTreePointY = (sourceSize.height / 2 + treePage.upperTreePointY) * (height / sourceSize.height);
+                    treePage.lowerRightTreePointX = (sourceSize.width  / 2 + treePage.lowerRightTreePointXConfig) * (paintedWidth  / sourceSize.width);
+                    treePage.lowerRightTreePointY = (sourceSize.height / 2 + treePage.lowerRightTreePointYConfig) * (paintedHeight / sourceSize.height);
+                }
+            }
 
-                    treePage.lowerLeftTreePointX = (sourceSize.width  / 2 + treePage.lowerLeftTreePointX) * (width  / sourceSize.width);
-                    treePage.lowerLeftTreePointY = (sourceSize.height / 2 + treePage.lowerLeftTreePointY) * (height / sourceSize.height);
+            function calculateWidth(src_width, src_height, dst_width, dst_height) {
+                if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
+                    if (dst_width / dst_height < src_width / src_height) {
+                        return src_width * dst_height / src_height;
+                    } else {
+                        return dst_width;
+                    }
+                } else {
+                    return 0;
+                }
+            }
 
-                    treePage.lowerRightTreePointX = (sourceSize.width  / 2 + treePage.lowerRightTreePointX) * (width  / sourceSize.width);
-                    treePage.lowerRightTreePointY = (sourceSize.height / 2 + treePage.lowerRightTreePointY) * (height / sourceSize.height);
+            function calculateHeight(src_width, src_height, dst_width, dst_height) {
+                if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
+                    if (dst_width / dst_height < src_width / src_height) {
+                        return dst_height;
+                    } else {
+                        return src_height * dst_width / src_width;
+                    }
+                } else {
+                    return 0;
                 }
             }
 
             Image {
                 id:               treeImageBg
                 anchors.centerIn: parent
-                width:            parent.width
-                height:           parent.height
+                width:            Math.floor(calculateWidth (sourceSize.width, sourceSize.height, parent.width, parent.height))
+                height:           Math.floor(calculateHeight(sourceSize.width, sourceSize.height, parent.width, parent.height))
                 z:                1
                 source:           "qrc:/resources/images/tree/tree_%1_bg.png".arg(treePage.currentTreeNum)
                 fillMode:         Image.PreserveAspectCrop
 
-                property bool geometrySettled: false
-
-                onPaintedWidthChanged: {
-                    if (!geometrySettled && width > 0 && height > 0 && paintedWidth > 0 && paintedHeight > 0) {
-                        geometrySettled = true;
-
-                        width  = paintedWidth;
-                        height = paintedHeight;
+                function calculateWidth(src_width, src_height, dst_width, dst_height) {
+                    if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
+                        if (dst_width / dst_height < src_width / src_height) {
+                            return src_width * dst_height / src_height;
+                        } else {
+                            return dst_width;
+                        }
+                    } else {
+                        return 0;
                     }
                 }
 
-                onPaintedHeightChanged: {
-                    if (!geometrySettled && width > 0 && height > 0 && paintedWidth > 0 && paintedHeight > 0) {
-                        geometrySettled = true;
-
-                        width  = paintedWidth;
-                        height = paintedHeight;
+                function calculateHeight(src_width, src_height, dst_width, dst_height) {
+                    if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
+                        if (dst_width / dst_height < src_width / src_height) {
+                            return dst_height;
+                        } else {
+                            return src_height * dst_width / src_width;
+                        }
+                    } else {
+                        return 0;
                     }
                 }
             }
@@ -222,29 +244,33 @@ Item {
             Image {
                 id:               treeImageFg
                 anchors.centerIn: parent
-                width:            parent.width
-                height:           parent.height
+                width:            Math.floor(calculateWidth (sourceSize.width, sourceSize.height, parent.width, parent.height))
+                height:           Math.floor(calculateHeight(sourceSize.width, sourceSize.height, parent.width, parent.height))
                 z:                3
                 source:           "qrc:/resources/images/tree/tree_%1_fg.png".arg(treePage.currentTreeNum)
                 fillMode:         Image.PreserveAspectCrop
 
-                property bool geometrySettled: false
-
-                onPaintedWidthChanged: {
-                    if (!geometrySettled && width > 0 && height > 0 && paintedWidth > 0 && paintedHeight > 0) {
-                        geometrySettled = true;
-
-                        width  = paintedWidth;
-                        height = paintedHeight;
+                function calculateWidth(src_width, src_height, dst_width, dst_height) {
+                    if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
+                        if (dst_width / dst_height < src_width / src_height) {
+                            return src_width * dst_height / src_height;
+                        } else {
+                            return dst_width;
+                        }
+                    } else {
+                        return 0;
                     }
                 }
 
-                onPaintedHeightChanged: {
-                    if (!geometrySettled && width > 0 && height > 0 && paintedWidth > 0 && paintedHeight > 0) {
-                        geometrySettled = true;
-
-                        width  = paintedWidth;
-                        height = paintedHeight;
+                function calculateHeight(src_width, src_height, dst_width, dst_height) {
+                    if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
+                        if (dst_width / dst_height < src_width / src_height) {
+                            return dst_height;
+                        } else {
+                            return src_height * dst_width / src_width;
+                        }
+                    } else {
+                        return 0;
                     }
                 }
             }
