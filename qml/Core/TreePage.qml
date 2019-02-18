@@ -641,7 +641,7 @@ Item {
                                         var component = Qt.createComponent("Tree/Toy.qml");
 
                                         if (component.status === Component.Ready) {
-                                            treePage.newToy = component.createObject(backgroundImage, {"z": 4, "toyType": toyType, "toyNumber": toyNumber});
+                                            treePage.newToy = component.createObject(backgroundImage, {"z": 4, "treePage": treePage, "toyType": toyType, "toyNumber": toyNumber});
 
                                             treePage.newToy.enlargeToy();
 
