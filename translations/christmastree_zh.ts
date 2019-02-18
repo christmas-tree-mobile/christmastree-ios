@@ -46,4 +46,11 @@
         <translation>恢复购买</translation>
     </message>
 </context>
+<context>
+    <name>main</name>
+    <message>
+        <source>Christmas</source>
+        <translation>圣诞树</translation>
+    </message>
+</context>
 </TS>

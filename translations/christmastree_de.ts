@@ -46,4 +46,11 @@
         <translation>Käufe wiederherstellen</translation>
     </message>
 </context>
+<context>
+    <name>main</name>
+    <message>
+        <source>Christmas</source>
+        <translation>Tannenbaum</translation>
+    </message>
+</context>
 </TS>

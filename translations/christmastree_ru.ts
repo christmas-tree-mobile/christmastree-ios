@@ -46,4 +46,11 @@
         <translation>Восстановить покупки</translation>
     </message>
 </context>
+<context>
+    <name>main</name>
+    <message>
+        <source>Christmas</source>
+        <translation>Елка</translation>
+    </message>
+</context>
 </TS>

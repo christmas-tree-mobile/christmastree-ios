@@ -46,4 +46,11 @@
         <translation>Restaurer les achats</translation>
     </message>
 </context>
+<context>
+    <name>main</name>
+    <message>
+        <source>Christmas</source>
+        <translation>Sapin de Noël</translation>
+    </message>
+</context>
 </TS>
