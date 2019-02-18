@@ -503,18 +503,16 @@ Item {
         }
 
         Rectangle {
-            id:                   settingsListRectangle
-            anchors.top:          parent.top
-            anchors.bottom:       buttonImageRow.top
-            anchors.left:         parent.left
-            anchors.topMargin:    Math.max(treePage.bannerViewHeight + 8, 34)
-            anchors.bottomMargin: 16
-            width:                96
-            z:                    20
-            clip:                 true
-            color:                "black"
-            opacity:              0.75
-            visible:              false
+            id:                     settingsListRectangle
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.left:           parent.left
+            width:                  96
+            height:                 Math.min(parent.height * 5 / 8, settingsListView.contentHeight)
+            z:                      20
+            clip:                   true
+            color:                  "black"
+            opacity:                0.75
+            visible:                false
 
             ListView {
                 id:           settingsListView
@@ -560,18 +558,16 @@ Item {
         }
 
         Rectangle {
-            id:                   toysListRectangle
-            anchors.top:          parent.top
-            anchors.bottom:       buttonImageRow.top
-            anchors.right:        parent.right
-            anchors.topMargin:    Math.max(treePage.bannerViewHeight + 8, 34)
-            anchors.bottomMargin: 16
-            width:                54
-            z:                    20
-            clip:                 true
-            color:                "black"
-            opacity:              0.75
-            visible:              false
+            id:                     toysListRectangle
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.right:          parent.right
+            width:                  54
+            height:                 Math.min(parent.height * 5 / 8, toysListView.contentHeight)
+            z:                      20
+            clip:                   true
+            color:                  "black"
+            opacity:                0.75
+            visible:                false
 
             ListView {
                 id:           toysListView
