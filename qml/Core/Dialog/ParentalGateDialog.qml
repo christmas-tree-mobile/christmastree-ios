@@ -70,30 +70,7 @@ MouseArea {
     Image {
         id:               dialogImage
         anchors.centerIn: parent
-        width:            Math.min(parent.width, parent.height) - 16
-        height:           Math.min(parent.width, parent.height) - 72
         source:           "qrc:/resources/images/dialog/parental_gate_dialog.png"
-        fillMode:         Image.PreserveAspectFit
-
-        property bool geometrySettled: false
-
-        onPaintedWidthChanged: {
-            if (!geometrySettled && width > 0 && height > 0 && paintedWidth > 0 && paintedHeight > 0) {
-                geometrySettled = true;
-
-                width  = paintedWidth;
-                height = paintedHeight;
-            }
-        }
-
-        onPaintedHeightChanged: {
-            if (!geometrySettled && width > 0 && height > 0 && paintedWidth > 0 && paintedHeight > 0) {
-                geometrySettled = true;
-
-                width  = paintedWidth;
-                height = paintedHeight;
-            }
-        }
 
         MultiPointTouchArea {
             anchors.fill:       parent

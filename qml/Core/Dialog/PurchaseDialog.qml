@@ -72,61 +72,15 @@ MouseArea {
     Image {
         id:               dialogImage
         anchors.centerIn: parent
-        width:            Math.min(parent.width, parent.height) - 16
-        height:           Math.min(parent.width, parent.height) - 72
         source:           "qrc:/resources/images/dialog/purchase_dialog.png"
-        fillMode:         Image.PreserveAspectFit
-
-        property bool geometrySettled: false
-
-        onPaintedWidthChanged: {
-            if (!geometrySettled && width > 0 && height > 0 && paintedWidth > 0 && paintedHeight > 0) {
-                geometrySettled = true;
-
-                width  = paintedWidth;
-                height = paintedHeight;
-            }
-        }
-
-        onPaintedHeightChanged: {
-            if (!geometrySettled && width > 0 && height > 0 && paintedWidth > 0 && paintedHeight > 0) {
-                geometrySettled = true;
-
-                width  = paintedWidth;
-                height = paintedHeight;
-            }
-        }
 
         Column {
             anchors.centerIn: parent
             spacing:          8
 
             Image {
-                id:       viewAdButtonImage
-                width:    dialogImage.width  - 24
-                height:   dialogImage.height - 24
-                source:   "qrc:/resources/images/dialog/purchase_dialog_button.png"
-                fillMode: Image.PreserveAspectFit
-
-                property bool geometrySettled: false
-
-                onPaintedWidthChanged: {
-                    if (!geometrySettled && width > 0 && height > 0 && paintedWidth > 0 && paintedHeight > 0) {
-                        geometrySettled = true;
-
-                        width  = paintedWidth;
-                        height = paintedHeight;
-                    }
-                }
-
-                onPaintedHeightChanged: {
-                    if (!geometrySettled && width > 0 && height > 0 && paintedWidth > 0 && paintedHeight > 0) {
-                        geometrySettled = true;
-
-                        width  = paintedWidth;
-                        height = paintedHeight;
-                    }
-                }
+                id:     viewAdButtonImage
+                source: "qrc:/resources/images/dialog/purchase_dialog_button.png"
 
                 MouseArea {
                     anchors.fill: parent
@@ -178,31 +132,8 @@ MouseArea {
             }
 
             Image {
-                id:       purchaseFullVersionButtonImage
-                width:    dialogImage.width  - 24
-                height:   dialogImage.height - 24
-                source:   "qrc:/resources/images/dialog/purchase_dialog_button.png"
-                fillMode: Image.PreserveAspectFit
-
-                property bool geometrySettled: false
-
-                onPaintedWidthChanged: {
-                    if (!geometrySettled && width > 0 && height > 0 && paintedWidth > 0 && paintedHeight > 0) {
-                        geometrySettled = true;
-
-                        width  = paintedWidth;
-                        height = paintedHeight;
-                    }
-                }
-
-                onPaintedHeightChanged: {
-                    if (!geometrySettled && width > 0 && height > 0 && paintedWidth > 0 && paintedHeight > 0) {
-                        geometrySettled = true;
-
-                        width  = paintedWidth;
-                        height = paintedHeight;
-                    }
-                }
+                id:     purchaseFullVersionButtonImage
+                source: "qrc:/resources/images/dialog/purchase_dialog_button.png"
 
                 MouseArea {
                     anchors.fill: parent
@@ -249,31 +180,8 @@ MouseArea {
             }
 
             Image {
-                id:       restorePurchasesButtonImage
-                width:    dialogImage.width  - 24
-                height:   dialogImage.height - 24
-                source:   "qrc:/resources/images/dialog/purchase_dialog_button.png"
-                fillMode: Image.PreserveAspectFit
-
-                property bool geometrySettled: false
-
-                onPaintedWidthChanged: {
-                    if (!geometrySettled && width > 0 && height > 0 && paintedWidth > 0 && paintedHeight > 0) {
-                        geometrySettled = true;
-
-                        width  = paintedWidth;
-                        height = paintedHeight;
-                    }
-                }
-
-                onPaintedHeightChanged: {
-                    if (!geometrySettled && width > 0 && height > 0 && paintedWidth > 0 && paintedHeight > 0) {
-                        geometrySettled = true;
-
-                        width  = paintedWidth;
-                        height = paintedHeight;
-                    }
-                }
+                id:     restorePurchasesButtonImage
+                source: "qrc:/resources/images/dialog/purchase_dialog_button.png"
 
                 MouseArea {
                     anchors.fill: parent
