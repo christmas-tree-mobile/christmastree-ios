@@ -405,6 +405,7 @@ Item {
             id:                       buttonImageRow
             anchors.bottom:           parent.bottom
             anchors.horizontalCenter: parent.horizontalCenter
+            anchors.bottomMargin:     30
             z:                        15
             spacing:                  16
 
@@ -802,18 +803,18 @@ Item {
             settingsListModel.append({"settingType": "background", "settingNumber": i});
         }
 
-        for (var i = 1; i <= treePage.maxTreeNum; i++) {
-            settingsListModel.append({"settingType": "tree", "settingNumber": i});
+        for (var j = 1; j <= treePage.maxTreeNum; j++) {
+            settingsListModel.append({"settingType": "tree", "settingNumber": j});
         }
 
         toysListModel.clear();
 
-        for (var i = 1; i <= treePage.maxToyNum; i++) {
-            toysListModel.append({"toyType": "toy", "toyNumber": i});
+        for (var k = 1; k <= treePage.maxToyNum; k++) {
+            toysListModel.append({"toyType": "toy", "toyNumber": k});
         }
 
-        for (i = 1; i <= treePage.maxTwinkleNum; i++) {
-            toysListModel.append({"toyType": "twinkle", "toyNumber": i});
+        for (var n = 1; n <= treePage.maxTwinkleNum; n++) {
+            toysListModel.append({"toyType": "twinkle", "toyNumber": n});
         }
     }
 }
