@@ -1,6 +1,7 @@
 #import <UIKit/UIWindow.h>
 #import <UIKit/UIApplication.h>
 #import <UIKit/UIActivityViewController.h>
+#import <UIKit/UIPopoverPresentationController.h>
 
 #include <QtCore/QDir>
 #include <QtCore/QStandardPaths>
@@ -42,6 +43,10 @@ void ShareHelper::showShareToView(QString image_path)
     activity_view_controller.completionWithItemsHandler = ^(UIActivityType, BOOL, NSArray *, NSError *) {
         emit shareToViewCompleted();
     };
+
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        activity_view_controller.popoverPresentationController.sourceView = root_view_controller.view;
+    }
 
     [root_view_controller presentViewController:activity_view_controller animated:YES completion:nil];
 }
