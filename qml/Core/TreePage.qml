@@ -518,41 +518,40 @@ Item {
                 id:           settingsListView
                 anchors.fill: parent
                 orientation:  ListView.Vertical
-                model:        settingsVisualDataModel
 
-                VisualDataModel {
-                    id: settingsVisualDataModel
+                model: ListModel {
+                    id: settingsListModel
+                }
 
-                    model: ListModel {
-                        id: settingsListModel
-                    }
+                delegate: Image {
+                    id:     settingsItemDelegate
+                    width:  settingsListRectangle.width
+                    height: sourceSize.width > 0 ? (width / sourceSize.width) * sourceSize.height : 0
+                    source: settingType === "background" ? "qrc:/resources/images/tree/background_%1.png".arg(settingNumber) :
+                                                           "qrc:/resources/images/tree/tree_%1_bg.png".arg(settingNumber)
 
-                    delegate: Image {
-                        id:     settingsItemDelegate
-                        width:  settingsListRectangle.width
-                        height: sourceSize.width > 0 ? (width / sourceSize.width) * sourceSize.height : 0
-                        source: settingType === "background" ? "qrc:/resources/images/tree/background_%1.png".arg(settingNumber) :
-                                                               "qrc:/resources/images/tree/tree_%1_bg.png".arg(settingNumber)
+                    MouseArea {
+                        id:           settingsItemMouseArea
+                        anchors.fill: parent
 
-                        MouseArea {
-                            id:           settingsItemMouseArea
-                            anchors.fill: parent
+                        onClicked: {
+                            if (settingType === "background") {
+                                treePage.resetParticleSystems();
 
-                            onClicked: {
-                                if (settingType === "background") {
-                                    treePage.resetParticleSystems();
+                                treePage.currentBackgroundNum = settingNumber;
 
-                                    treePage.currentBackgroundNum = settingNumber;
+                                mainWindow.setSetting("BackgroundNum", treePage.currentBackgroundNum.toString(10));
+                            } else {
+                                treePage.currentTreeNum = settingNumber;
 
-                                    mainWindow.setSetting("BackgroundNum", treePage.currentBackgroundNum.toString(10));
-                                } else {
-                                    treePage.currentTreeNum = settingNumber;
-
-                                    mainWindow.setSetting("TreeNum", treePage.currentTreeNum.toString(10));
-                                }
+                                mainWindow.setSetting("TreeNum", treePage.currentTreeNum.toString(10));
                             }
                         }
                     }
+                }
+
+                ScrollBar.vertical: ScrollBar {
+                    policy: ScrollBar.AlwaysOn
                 }
             }
         }
@@ -574,87 +573,86 @@ Item {
                 anchors.fill: parent
                 orientation:  ListView.Vertical
                 cacheBuffer:  (treePage.maxToyNum + treePage.maxTwinkleNum) * 256 // To prevent strange issue with "untouchable toys"
-                model:        toysVisualDataModel
 
-                VisualDataModel {
-                    id: toysVisualDataModel
+                model: ListModel {
+                    id: toysListModel
+                }
 
-                    model: ListModel {
-                        id: toysListModel
-                    }
+                delegate: Image {
+                    id:     toysItemDelegate
+                    width:  sourceSize.width
+                    height: sourceSize.height
+                    source: "qrc:/resources/images/tree/toys/%1_%2.png".arg(toyType).arg(toyNumber)
 
-                    delegate: Image {
-                        id:     toysItemDelegate
-                        width:  sourceSize.width
-                        height: sourceSize.height
-                        source: "qrc:/resources/images/tree/toys/%1_%2.png".arg(toyType).arg(toyNumber)
+                    MouseArea {
+                        id:           toysItemMouseArea
+                        anchors.fill: parent
 
-                        MouseArea {
-                            id:           toysItemMouseArea
-                            anchors.fill: parent
+                        property int pressX: 0
+                        property int pressY: 0
 
-                            property int pressX: 0
-                            property int pressY: 0
+                        onPressed: {
+                            var mapped = mapToItem(backgroundImage, mouseX, mouseY);
 
-                            onPressed: {
-                                var mapped = mapToItem(backgroundImage, mouseX, mouseY);
+                            pressX = mapped.x;
+                            pressY = mapped.y;
 
-                                pressX = mapped.x;
-                                pressY = mapped.y;
+                            pressAndHoldTimer.start();
+                        }
 
-                                pressAndHoldTimer.start();
+                        onPositionChanged: {
+                            var mapped = mapToItem(backgroundImage, mouseX, mouseY);
+
+                            if (treePage.newToy !== null) {
+                                treePage.newToy.x = mapped.x - treePage.newToy.width / 2;
+                                treePage.newToy.y = mapped.y - treePage.newToy.height;
                             }
+                        }
 
-                            onPositionChanged: {
-                                var mapped = mapToItem(backgroundImage, mouseX, mouseY);
+                        onReleased: {
+                            preventStealing = false;
 
-                                if (treePage.newToy !== null) {
-                                    treePage.newToy.x = mapped.x - treePage.newToy.width / 2;
-                                    treePage.newToy.y = mapped.y - treePage.newToy.height;
-                                }
-                            }
+                            if (treePage.newToy !== null) {
+                                treePage.newToy.reduceToy();
 
-                            onReleased: {
-                                preventStealing = false;
-
-                                if (treePage.newToy !== null) {
-                                    treePage.newToy.reduceToy();
-
-                                    if (!treePage.validateToy(treePage.newToy.x + treePage.newToy.width / 2, treePage.newToy.y + treePage.newToy.height / 2)) {
-                                        treePage.newToy.destroyToy();
-                                    }
-
-                                    treePage.newToy = null;
+                                if (!treePage.validateToy(treePage.newToy.x + treePage.newToy.width / 2, treePage.newToy.y + treePage.newToy.height / 2)) {
+                                    treePage.newToy.destroyToy();
                                 }
 
-                                pressAndHoldTimer.stop();
+                                treePage.newToy = null;
                             }
 
-                            Timer {
-                                id:       pressAndHoldTimer
-                                interval: 500
+                            pressAndHoldTimer.stop();
+                        }
 
-                                onTriggered: {
-                                    if (toysItemMouseArea.pressed) {
-                                        toysItemMouseArea.preventStealing = true;
+                        Timer {
+                            id:       pressAndHoldTimer
+                            interval: 500
 
-                                        var component = Qt.createComponent("Tree/Toy.qml");
+                            onTriggered: {
+                                if (toysItemMouseArea.pressed) {
+                                    toysItemMouseArea.preventStealing = true;
 
-                                        if (component.status === Component.Ready) {
-                                            treePage.newToy = component.createObject(backgroundImage, {"z": 4, "treePage": treePage, "toyType": toyType, "toyNumber": toyNumber});
+                                    var component = Qt.createComponent("Tree/Toy.qml");
 
-                                            treePage.newToy.enlargeToy();
+                                    if (component.status === Component.Ready) {
+                                        treePage.newToy = component.createObject(backgroundImage, {"z": 4, "treePage": treePage, "toyType": toyType, "toyNumber": toyNumber});
 
-                                            treePage.newToy.x = toysItemMouseArea.pressX - treePage.newToy.width / 2;
-                                            treePage.newToy.y = toysItemMouseArea.pressY - treePage.newToy.height;
-                                        } else {
-                                            console.log(component.errorString());
-                                        }
+                                        treePage.newToy.enlargeToy();
+
+                                        treePage.newToy.x = toysItemMouseArea.pressX - treePage.newToy.width / 2;
+                                        treePage.newToy.y = toysItemMouseArea.pressY - treePage.newToy.height;
+                                    } else {
+                                        console.log(component.errorString());
                                     }
                                 }
                             }
                         }
                     }
+                }
+
+                ScrollBar.vertical: ScrollBar {
+                    policy: ScrollBar.AlwaysOff
                 }
             }
         }
