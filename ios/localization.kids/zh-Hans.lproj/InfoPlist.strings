@@ -1,7 +1,0 @@
-/* 
-  InfoPlist.strings
-*/
-
-CFBundleDisplayName               = "儿童的圣诞树";
-NSCameraUsageDescription          = "如果您想访问此功能，请启用摄像头";
-NSPhotoLibraryAddUsageDescription = "如果要保存圣诞树图像，请启用对照片库的写入访问权限";

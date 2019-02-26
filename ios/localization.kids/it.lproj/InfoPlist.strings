@@ -1,7 +1,0 @@
-/* 
-  InfoPlist.strings
-*/
-
-CFBundleDisplayName               = "Albero di Natale per bambini";
-NSCameraUsageDescription          = "Abilitare l'accesso alla telecamera se si desidera accedere a questa funzione";
-NSPhotoLibraryAddUsageDescription = "Abilitare l'accesso in scrittura alla libreria di foto se si desidera salvare l'immagine acquisita";
