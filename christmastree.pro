@@ -1,3 +1,5 @@
+TARGET = christmastree.4kids
+
 QT += quick quickcontrols2 sql multimedia purchasing
 CONFIG += c++11
 

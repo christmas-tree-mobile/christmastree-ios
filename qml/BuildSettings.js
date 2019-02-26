@@ -1,1 +1,1 @@
-var VERSION_FOR_KIDS = false;
+var VERSION_FOR_KIDS = true;
