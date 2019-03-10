@@ -5,8 +5,8 @@ MouseArea {
     anchors.centerIn: parent
     visible:          false
 
-    property int parentWidth:  parent.width
-    property int parentHeight: parent.height
+    property int parentWidth:    parent.width
+    property int parentHeight:   parent.height
 
     property string imageFormat: ""
 
