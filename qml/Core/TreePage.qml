@@ -746,17 +746,15 @@ Item {
         repeat:           true
         triggeredOnStart: true
 
-        property bool lastRunning: false
-
-        property int frameNumber:  0
-        property int framesCount:  5
+        property int frameNumber: 0
+        property int framesCount: 5
 
         onRunningChanged: {
-            if (running && !lastRunning) {
+            if (running) {
                 waitRectangle.visible = true;
 
                 frameNumber = 0;
-            } else if (!running && lastRunning) {
+            } else {
                 if (frameNumber >= framesCount) {
                     if (GIFCreator.createGIF(framesCount, interval / 10)) {
                         ShareHelper.showShareToView(GIFCreator.gifFilePath);
@@ -767,8 +765,6 @@ Item {
 
                 waitRectangle.visible = false;
             }
-
-            lastRunning = running;
         }
 
         onTriggered: {
