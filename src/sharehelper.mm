@@ -12,10 +12,6 @@ ShareHelper::ShareHelper(QObject *parent) : QObject(parent)
 {
 }
 
-ShareHelper::~ShareHelper()
-{
-}
-
 QString ShareHelper::imageFilePath() const
 {
     QString tmp_dir = QStandardPaths::writableLocation(QStandardPaths::TempLocation);
@@ -27,7 +23,7 @@ QString ShareHelper::imageFilePath() const
     return QDir(tmp_dir).filePath("image.jpg");
 }
 
-void ShareHelper::showShareToView(QString image_path)
+void ShareHelper::showShareToView(const QString &image_path)
 {
     UIViewController * __block root_view_controller = nil;
 
