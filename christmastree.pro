@@ -1,3 +1,4 @@
+TEMPLATE = app
 TARGET = christmastree.4kids
 
 QT += quick quickcontrols2 sql multimedia purchasing
@@ -59,6 +60,3 @@ ios {
     QMAKE_APPLE_DEVICE_ARCHS = arm64
     QMAKE_INFO_PLIST = ios/Info.plist
 }
-
-# Default rules for deployment.
-include(deployment.pri)
