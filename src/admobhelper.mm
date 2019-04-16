@@ -1,9 +1,5 @@
-#import <GoogleMobileAds/GADMobileAds.h>
-#import <GoogleMobileAds/GADRequest.h>
-#import <GoogleMobileAds/GADBannerView.h>
-#import <GoogleMobileAds/GADBannerViewDelegate.h>
-#import <GoogleMobileAds/GADInterstitial.h>
-#import <GoogleMobileAds/GADInterstitialDelegate.h>
+#import <UIKit/UIKit.h>
+#import <GoogleMobileAds/GoogleMobileAds.h>
 
 #include <QtCore/QtGlobal>
 #include <QtCore/QtMath>
@@ -46,11 +42,16 @@ AdMobHelper *AdMobHelper::Instance = nullptr;
 
         BannerView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeSmartBannerPortrait];
 
-        BannerView.adUnitID                                  = AdMobHelper::ADMOB_BANNERVIEW_UNIT_ID.toNSString();
-        BannerView.autoloadEnabled                           = YES;
-        BannerView.rootViewController                        = root_view_controller;
-        BannerView.translatesAutoresizingMaskIntoConstraints = NO;
-        BannerView.delegate                                  = self;
+        BannerView.adUnitID           = AdMobHelper::ADMOB_BANNERVIEW_UNIT_ID.toNSString();
+        BannerView.autoloadEnabled    = YES;
+        BannerView.rootViewController = root_view_controller;
+        BannerView.delegate           = self;
+
+        if (@available(iOS 6, *)) {
+            BannerView.translatesAutoresizingMaskIntoConstraints = NO;
+        } else {
+            assert(0);
+        }
 
         [root_view_controller.view addSubview:BannerView];
 
@@ -258,7 +259,7 @@ AdMobHelper::AdMobHelper(QObject *parent) : QObject(parent)
     [InterstitialDelegateInstance loadAd];
 }
 
-AdMobHelper::~AdMobHelper()
+AdMobHelper::~AdMobHelper() noexcept
 {
     if (BannerViewDelegateInstance != nullptr && BannerViewDelegateInstance != nil) {
         [BannerViewDelegateInstance release];
