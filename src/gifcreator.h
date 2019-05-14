@@ -17,8 +17,8 @@ public:
     GIFCreator(const GIFCreator&) = delete;
     GIFCreator(GIFCreator&&) noexcept = delete;
 
-    GIFCreator& operator=(const GIFCreator&) = delete;
-    GIFCreator& operator=(GIFCreator&&) noexcept = delete;
+    GIFCreator &operator=(const GIFCreator&) = delete;
+    GIFCreator &operator=(GIFCreator&&) noexcept = delete;
 
     ~GIFCreator() noexcept override = default;
 

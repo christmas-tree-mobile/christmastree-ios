@@ -16,8 +16,8 @@ public:
     ShareHelper(const ShareHelper&) = delete;
     ShareHelper(ShareHelper&&) noexcept = delete;
 
-    ShareHelper& operator=(const ShareHelper&) = delete;
-    ShareHelper& operator=(ShareHelper&&) noexcept = delete;
+    ShareHelper &operator=(const ShareHelper&) = delete;
+    ShareHelper &operator=(ShareHelper&&) noexcept = delete;
 
     ~ShareHelper() noexcept override = default;
 
