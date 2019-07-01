@@ -18,7 +18,7 @@ Window {
     onFullVersionChanged: {
         setSetting("FullVersion", fullVersion ? "true" : "false");
 
-        if (mainStackView.depth > 0 && mainStackView.currentItem.hasOwnProperty("bannerViewHeight")) {
+        if (mainStackView.depth > 0 && typeof mainStackView.currentItem.bannerViewHeight === "number") {
             if (fullVersion) {
                 AdMobHelper.hideBannerView();
             } else {
@@ -110,7 +110,7 @@ Window {
             if (depth > 0) {
                 currentItem.forceActiveFocus();
 
-                if (currentItem.hasOwnProperty("bannerViewHeight")) {
+                if (typeof currentItem.bannerViewHeight === "number") {
                     if (mainWindow.fullVersion) {
                         AdMobHelper.hideBannerView();
                     } else {
