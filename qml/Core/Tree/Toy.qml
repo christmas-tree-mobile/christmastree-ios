@@ -5,9 +5,11 @@ Image {
     width:  sourceSize.width
     height: sourceSize.height
 
-    property int    toyNumber: 0
-    property string toyType:   ""
-    property var    treePage:  null
+    property int toyNumber:  0
+
+    property string toyType: ""
+
+    property var treePage:   null
 
     onToyNumberChanged: {
         if (toyNumber !== 0 && toyType !== "") {

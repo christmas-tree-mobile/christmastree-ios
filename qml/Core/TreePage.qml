@@ -9,35 +9,37 @@ import "Tree"
 Item {
     id: treePage
 
-    property bool appInForeground:           Qt.application.state === Qt.ApplicationActive
-    property bool pageActive:                StackView.status === StackView.Active
-    property bool interstitialActive:        AdMobHelper.interstitialActive
-    property bool lastInterstitialActive:    false
+    readonly property bool appInForeground:           Qt.application.state === Qt.ApplicationActive
+    readonly property bool pageActive:                StackView.status === StackView.Active
+    readonly property bool interstitialActive:        AdMobHelper.interstitialActive
 
-    property int bannerViewHeight:           AdMobHelper.bannerViewHeight
-    property int currentBackgroundNum:       1
-    property int maxBackgroundNum:           3
-    property int maxBackgroundNumWithSnow:   2
-    property int currentTreeNum:             1
-    property int maxTreeNum:                 3
-    property int maxToyNum:                  37
-    property int maxTwinkleNum:              7
-    property int upperTreePointXConfig:      0   // Coordinates relative to the center of source image
-    property int upperTreePointYConfig:     -240 // in source image original resolution
-    property int lowerLeftTreePointXConfig: -170
-    property int lowerLeftTreePointYConfig:  220
-    property int lowerRightTreePointXConfig: 170
-    property int lowerRightTreePointYConfig: 220
-    property int upperTreePointX:            upperTreePointXConfig
-    property int upperTreePointY:            upperTreePointYConfig
-    property int lowerLeftTreePointX:        lowerLeftTreePointXConfig
-    property int lowerLeftTreePointY:        lowerLeftTreePointYConfig
-    property int lowerRightTreePointX:       lowerRightTreePointXConfig
-    property int lowerRightTreePointY:       lowerRightTreePointYConfig
+    readonly property int bannerViewHeight:           AdMobHelper.bannerViewHeight
+    readonly property int maxBackgroundNum:           3
+    readonly property int maxBackgroundNumWithSnow:   2
+    readonly property int maxTreeNum:                 3
+    readonly property int maxToyNum:                  37
+    readonly property int maxTwinkleNum:              7
+    readonly property int upperTreePointXConfig:      0   // Coordinates relative to the center of source image
+    readonly property int upperTreePointYConfig:     -240 // in source image original resolution
+    readonly property int lowerLeftTreePointXConfig: -170
+    readonly property int lowerLeftTreePointYConfig:  220
+    readonly property int lowerRightTreePointXConfig: 170
+    readonly property int lowerRightTreePointYConfig: 220
 
-    property string interstitialCaptureFmt: ""
+    property bool lastInterstitialActive:             false
 
-    property var newToy:                   null
+    property int currentBackgroundNum:                1
+    property int currentTreeNum:                      1
+    property int upperTreePointX:                     upperTreePointXConfig
+    property int upperTreePointY:                     upperTreePointYConfig
+    property int lowerLeftTreePointX:                 lowerLeftTreePointXConfig
+    property int lowerLeftTreePointY:                 lowerLeftTreePointYConfig
+    property int lowerRightTreePointX:                lowerRightTreePointXConfig
+    property int lowerRightTreePointY:                lowerRightTreePointYConfig
+
+    property string interstitialCaptureFmt:           ""
+
+    property var newToy:                              null
 
     onAppInForegroundChanged: {
         if (appInForeground && pageActive) {
@@ -746,8 +748,9 @@ Item {
         repeat:           true
         triggeredOnStart: true
 
-        property int frameNumber: 0
-        property int framesCount: 5
+        readonly property int framesCount: 5
+
+        property int frameNumber:          0
 
         onRunningChanged: {
             if (running) {
