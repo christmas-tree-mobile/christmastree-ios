@@ -297,7 +297,7 @@ Item {
             }
 
             ImageParticle {
-                z:       5
+                z:       1
                 opacity: 0.75
                 system:  particleSystem1
                 source:  "qrc:/resources/images/tree/snowflake_1.png"
@@ -323,7 +323,7 @@ Item {
             }
 
             ImageParticle {
-                z:       5
+                z:       1
                 opacity: 0.75
                 system:  particleSystem2
                 source:  "qrc:/resources/images/tree/snowflake_2.png"
@@ -349,7 +349,7 @@ Item {
             }
 
             ImageParticle {
-                z:       5
+                z:       1
                 opacity: 0.75
                 system:  particleSystem3
                 source:  "qrc:/resources/images/tree/snowflake_3.png"
@@ -375,7 +375,7 @@ Item {
             }
 
             ImageParticle {
-                z:       5
+                z:       1
                 opacity: 0.75
                 system:  particleSystem4
                 source:  "qrc:/resources/images/tree/snowflake_4.png"
@@ -390,7 +390,7 @@ Item {
             anchors.leftMargin: 8
             width:              32
             height:             32
-            z:                  15
+            z:                  5
             source:             "qrc:/resources/images/tree/button_help.png"
 
             MouseArea {
@@ -408,7 +408,7 @@ Item {
             anchors.bottom:           parent.bottom
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottomMargin:     30
-            z:                        15
+            z:                        5
             spacing:                  16
 
             Image {
@@ -510,7 +510,7 @@ Item {
             anchors.left:           parent.left
             width:                  96
             height:                 Math.min(parent.height * 5 / 8, settingsListView.contentHeight)
-            z:                      20
+            z:                      6
             clip:                   true
             color:                  "black"
             opacity:                0.75
@@ -564,7 +564,7 @@ Item {
             anchors.right:          parent.right
             width:                  54
             height:                 Math.min(parent.height * 5 / 8, toysListView.contentHeight)
-            z:                      20
+            z:                      6
             clip:                   true
             color:                  "black"
             opacity:                0.75
@@ -662,7 +662,7 @@ Item {
         Rectangle {
              id:           waitRectangle
              anchors.fill: parent
-             z:            25
+             z:            7
              color:        "black"
              opacity:      0.75
              visible:      false
@@ -672,7 +672,7 @@ Item {
                  running:          parent.visible
              }
 
-             MouseArea {
+             MultiPointTouchArea {
                  anchors.fill: parent
              }
          }
@@ -680,7 +680,7 @@ Item {
 
     PurchaseDialog {
         id: purchaseDialog
-        z:  30
+        z:  1
 
         onViewAdAndCaptureImage: {
             if (AdMobHelper.interstitialReady) {
@@ -713,7 +713,7 @@ Item {
 
     ParentalGateDialog {
         id: parentalGateDialog
-        z:  30
+        z:  1
 
         onPassAndCaptureImage: {
             treePage.captureImage();
@@ -726,7 +726,7 @@ Item {
 
     HelpDialog {
         id: helpDialog
-        z:  30
+        z:  1
     }
 
     Timer {
