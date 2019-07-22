@@ -1,6 +1,6 @@
 import QtQuick 2.12
 
-MouseArea {
+MultiPointTouchArea {
     id:               purchaseDialog
     anchors.centerIn: parent
     visible:          false
@@ -20,7 +20,7 @@ MouseArea {
     signal cancel()
 
     onParentWidthChanged: {
-        if (typeof(parent) !== "undefined" && parent !== null) {
+        if (parent) {
             if (rotation === 0 || rotation === 180) {
                 width  = parent.width;
                 height = parent.height;
@@ -32,7 +32,7 @@ MouseArea {
     }
 
     onParentHeightChanged: {
-        if (typeof(parent) !== "undefined" && parent !== null) {
+        if (parent) {
             if (rotation === 0 || rotation === 180) {
                 width  = parent.width;
                 height = parent.height;
@@ -44,7 +44,7 @@ MouseArea {
     }
 
     onRotationChanged: {
-        if (typeof(parent) !== "undefined" && parent !== null) {
+        if (parent) {
             if (rotation === 0 || rotation === 180) {
                 width  = parent.width;
                 height = parent.height;
@@ -235,7 +235,7 @@ MouseArea {
         anchors.verticalCenter:   dialogImage.bottom
         width:                    64
         height:                   64
-        z:                        dialogImage.z + 1
+        z:                        1
         source:                   "qrc:/resources/images/dialog/cancel.png"
 
         MouseArea {
