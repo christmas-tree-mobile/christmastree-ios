@@ -101,7 +101,7 @@ const QString AdMobHelper::ADMOB_TEST_DEVICE_ID      ("");
     GADRequest *request = [GADRequest request];
 
     if (AdMobHelper::ADMOB_TEST_DEVICE_ID != "") {
-        request.testDevices = @[ AdMobHelper::ADMOB_TEST_DEVICE_ID.toNSString() ];
+        request.testDevices = @[AdMobHelper::ADMOB_TEST_DEVICE_ID.toNSString()];
     }
 
     [BannerView loadRequest:request];
@@ -197,7 +197,7 @@ const QString AdMobHelper::ADMOB_TEST_DEVICE_ID      ("");
     GADRequest *request = [GADRequest request];
 
     if (AdMobHelper::ADMOB_TEST_DEVICE_ID != "") {
-        request.testDevices = @[ AdMobHelper::ADMOB_TEST_DEVICE_ID.toNSString() ];
+        request.testDevices = @[AdMobHelper::ADMOB_TEST_DEVICE_ID.toNSString()];
     }
 
     [Interstitial loadRequest:request];
@@ -279,7 +279,7 @@ AdMobHelper::AdMobHelper(QObject *parent) : QObject(parent)
 
     InterstitialActive           = false;
     BannerViewHeight             = 0;
-    BannerViewDelegateInstance   = nullptr;
+    BannerViewDelegateInstance   = nil;
     InterstitialDelegateInstance = [[InterstitialDelegate alloc] initWithHelper:this];
 
     [InterstitialDelegateInstance loadAd];
@@ -287,7 +287,7 @@ AdMobHelper::AdMobHelper(QObject *parent) : QObject(parent)
 
 AdMobHelper::~AdMobHelper() noexcept
 {
-    if (BannerViewDelegateInstance != nullptr && BannerViewDelegateInstance != nil) {
+    if (BannerViewDelegateInstance != nil) {
         [BannerViewDelegateInstance removeHelperAndAutorelease];
     }
 
@@ -318,7 +318,7 @@ int AdMobHelper::bannerViewHeight() const
 
 void AdMobHelper::showBannerView()
 {
-    if (BannerViewDelegateInstance != nullptr && BannerViewDelegateInstance != nil) {
+    if (BannerViewDelegateInstance != nil) {
         [BannerViewDelegateInstance removeHelperAndAutorelease];
 
         BannerViewHeight = 0;
@@ -335,7 +335,7 @@ void AdMobHelper::showBannerView()
 
 void AdMobHelper::hideBannerView()
 {
-    if (BannerViewDelegateInstance != nullptr && BannerViewDelegateInstance != nil) {
+    if (BannerViewDelegateInstance != nil) {
         [BannerViewDelegateInstance removeHelperAndAutorelease];
 
         BannerViewHeight = 0;
