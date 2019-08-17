@@ -154,8 +154,8 @@ Item {
         Image {
             id:               backgroundImage
             anchors.centerIn: parent
-            width:            Math.floor(calculateWidth (sourceSize.width, sourceSize.height, parent.width, parent.height))
-            height:           Math.floor(calculateHeight(sourceSize.width, sourceSize.height, parent.width, parent.height))
+            width:            Math.floor(imageWidth(sourceSize.width, sourceSize.height, parent.width, parent.height))
+            height:           Math.floor(imageHeight(sourceSize.width, sourceSize.height, parent.width, parent.height))
             source:           "qrc:/resources/images/tree/background_%1.png".arg(treePage.currentBackgroundNum)
             fillMode:         Image.PreserveAspectCrop
 
@@ -185,7 +185,7 @@ Item {
                 }
             }
 
-            function calculateWidth(src_width, src_height, dst_width, dst_height) {
+            function imageWidth(src_width, src_height, dst_width, dst_height) {
                 if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
                     if (dst_width / dst_height < src_width / src_height) {
                         return src_width * dst_height / src_height;
@@ -197,7 +197,7 @@ Item {
                 }
             }
 
-            function calculateHeight(src_width, src_height, dst_width, dst_height) {
+            function imageHeight(src_width, src_height, dst_width, dst_height) {
                 if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
                     if (dst_width / dst_height < src_width / src_height) {
                         return dst_height;
@@ -212,13 +212,13 @@ Item {
             Image {
                 id:               treeImageBg
                 anchors.centerIn: parent
-                width:            Math.floor(calculateWidth (sourceSize.width, sourceSize.height, parent.width, parent.height))
-                height:           Math.floor(calculateHeight(sourceSize.width, sourceSize.height, parent.width, parent.height))
+                width:            Math.floor(imageWidth(sourceSize.width, sourceSize.height, parent.width, parent.height))
+                height:           Math.floor(imageHeight(sourceSize.width, sourceSize.height, parent.width, parent.height))
                 z:                1
                 source:           "qrc:/resources/images/tree/tree_%1_bg.png".arg(treePage.currentTreeNum)
                 fillMode:         Image.PreserveAspectCrop
 
-                function calculateWidth(src_width, src_height, dst_width, dst_height) {
+                function imageWidth(src_width, src_height, dst_width, dst_height) {
                     if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
                         if (dst_width / dst_height < src_width / src_height) {
                             return src_width * dst_height / src_height;
@@ -230,7 +230,7 @@ Item {
                     }
                 }
 
-                function calculateHeight(src_width, src_height, dst_width, dst_height) {
+                function imageHeight(src_width, src_height, dst_width, dst_height) {
                     if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
                         if (dst_width / dst_height < src_width / src_height) {
                             return dst_height;
@@ -246,13 +246,13 @@ Item {
             Image {
                 id:               treeImageFg
                 anchors.centerIn: parent
-                width:            Math.floor(calculateWidth (sourceSize.width, sourceSize.height, parent.width, parent.height))
-                height:           Math.floor(calculateHeight(sourceSize.width, sourceSize.height, parent.width, parent.height))
+                width:            Math.floor(imageWidth(sourceSize.width, sourceSize.height, parent.width, parent.height))
+                height:           Math.floor(imageHeight(sourceSize.width, sourceSize.height, parent.width, parent.height))
                 z:                3
                 source:           "qrc:/resources/images/tree/tree_%1_fg.png".arg(treePage.currentTreeNum)
                 fillMode:         Image.PreserveAspectCrop
 
-                function calculateWidth(src_width, src_height, dst_width, dst_height) {
+                function imageWidth(src_width, src_height, dst_width, dst_height) {
                     if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
                         if (dst_width / dst_height < src_width / src_height) {
                             return src_width * dst_height / src_height;
@@ -264,7 +264,7 @@ Item {
                     }
                 }
 
-                function calculateHeight(src_width, src_height, dst_width, dst_height) {
+                function imageHeight(src_width, src_height, dst_width, dst_height) {
                     if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
                         if (dst_width / dst_height < src_width / src_height) {
                             return dst_height;
