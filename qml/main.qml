@@ -77,18 +77,6 @@ ApplicationWindow {
         }
     }
 
-    function showAdMobConsentDialog() {
-        adMobConsentDialog.open();
-    }
-
-    function purchaseFullVersion() {
-        fullVersionProduct.purchase();
-    }
-
-    function restorePurchases() {
-        store.restorePurchases();
-    }
-
     Store {
         id: store
 
