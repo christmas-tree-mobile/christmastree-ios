@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
+        <file>resources/images/dialog/admob_consent_dialog.png</file>
         <file>resources/images/dialog/cancel.png</file>
         <file>resources/images/dialog/help_dialog.png</file>
         <file>resources/images/dialog/ok.png</file>

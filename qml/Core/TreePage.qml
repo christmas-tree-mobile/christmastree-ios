@@ -403,6 +403,28 @@ Item {
             }
         }
 
+        Image {
+            id:                  adSettingsButtonImage
+            anchors.top:         parent.top
+            anchors.right:       parent.right
+            anchors.topMargin:   Math.max(treePage.bannerViewHeight + UtilScript.pt(8), UtilScript.pt(34))
+            anchors.rightMargin: UtilScript.pt(8)
+            z:                   5
+            width:               UtilScript.pt(32)
+            height:              UtilScript.pt(32)
+            source:              "qrc:/resources/images/tree/button_ad_settings.png"
+            fillMode:            Image.PreserveAspectFit
+
+            MouseArea {
+                id:           adSettingsButtonMouseArea
+                anchors.fill: parent
+
+                onClicked: {
+                    mainWindow.showAdMobConsentDialog();
+                }
+            }
+        }
+
         Row {
             id:                       buttonImageRow
             anchors.bottom:           parent.bottom
