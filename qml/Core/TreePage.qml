@@ -437,7 +437,7 @@ Item {
                 anchors.fill: parent
 
                 onClicked: {
-                    mainWindow.showAdMobConsentDialog();
+                    adMobConsentDialog.open();
                 }
             }
         }
@@ -742,11 +742,11 @@ Item {
         }
 
         onPurchaseFullVersionSelected: {
-            mainWindow.purchaseFullVersion();
+            fullVersionProduct.purchase();
         }
 
         onRestorePurchasesSelected: {
-            mainWindow.restorePurchases();
+            store.restorePurchases();
         }
     }
 
