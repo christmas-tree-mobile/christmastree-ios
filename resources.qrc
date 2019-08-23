@@ -10,6 +10,27 @@
         <file>resources/images/dialog/purchase_dialog_purchase.png</file>
         <file>resources/images/dialog/purchase_dialog_restore.png</file>
         <file>resources/images/dialog/purchase_dialog_view_ad.png</file>
+        <file>resources/images/tree/background_1.png</file>
+        <file>resources/images/tree/background_2.png</file>
+        <file>resources/images/tree/background_3.png</file>
+        <file>resources/images/tree/button_ad_settings.png</file>
+        <file>resources/images/tree/button_capture_gif.png</file>
+        <file>resources/images/tree/button_capture_image.png</file>
+        <file>resources/images/tree/button_help.png</file>
+        <file>resources/images/tree/button_settings.png</file>
+        <file>resources/images/tree/button_settings_pressed.png</file>
+        <file>resources/images/tree/button_toys.png</file>
+        <file>resources/images/tree/button_toys_pressed.png</file>
+        <file>resources/images/tree/snowflake_1.png</file>
+        <file>resources/images/tree/snowflake_2.png</file>
+        <file>resources/images/tree/snowflake_3.png</file>
+        <file>resources/images/tree/snowflake_4.png</file>
+        <file>resources/images/tree/tree_1_bg.png</file>
+        <file>resources/images/tree/tree_1_fg.png</file>
+        <file>resources/images/tree/tree_2_bg.png</file>
+        <file>resources/images/tree/tree_2_fg.png</file>
+        <file>resources/images/tree/tree_3_bg.png</file>
+        <file>resources/images/tree/tree_3_fg.png</file>
         <file>resources/images/tree/toys/toy_1.png</file>
         <file>resources/images/tree/toys/toy_2.png</file>
         <file>resources/images/tree/toys/toy_3.png</file>
@@ -54,26 +75,6 @@
         <file>resources/images/tree/toys/twinkle_5.png</file>
         <file>resources/images/tree/toys/twinkle_6.png</file>
         <file>resources/images/tree/toys/twinkle_7.png</file>
-        <file>resources/images/tree/background_1.png</file>
-        <file>resources/images/tree/background_2.png</file>
-        <file>resources/images/tree/background_3.png</file>
-        <file>resources/images/tree/button_capture_gif.png</file>
-        <file>resources/images/tree/button_capture_image.png</file>
-        <file>resources/images/tree/button_help.png</file>
-        <file>resources/images/tree/button_settings.png</file>
-        <file>resources/images/tree/button_settings_pressed.png</file>
-        <file>resources/images/tree/button_toys.png</file>
-        <file>resources/images/tree/button_toys_pressed.png</file>
-        <file>resources/images/tree/snowflake_1.png</file>
-        <file>resources/images/tree/snowflake_2.png</file>
-        <file>resources/images/tree/snowflake_3.png</file>
-        <file>resources/images/tree/snowflake_4.png</file>
-        <file>resources/images/tree/tree_1_bg.png</file>
-        <file>resources/images/tree/tree_1_fg.png</file>
-        <file>resources/images/tree/tree_2_bg.png</file>
-        <file>resources/images/tree/tree_2_fg.png</file>
-        <file>resources/images/tree/tree_3_bg.png</file>
-        <file>resources/images/tree/tree_3_fg.png</file>
         <file>resources/sound/tree/music.mp3</file>
     </qresource>
 </RCC>

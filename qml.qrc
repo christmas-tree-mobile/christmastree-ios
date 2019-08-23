@@ -1,6 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>qml/BuildSettings.js</file>
+        <file>qml/Util.js</file>
         <file>qml/main.qml</file>
         <file>qml/Core/TreePage.qml</file>
         <file>qml/Core/Dialog/AdMobConsentDialog.qml</file>

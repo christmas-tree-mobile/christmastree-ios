@@ -6,6 +6,8 @@ import QtMultimedia 5.12
 import "Dialog"
 import "Tree"
 
+import "../Util.js" as UtilScript
+
 Item {
     id: treePage
 
@@ -25,53 +27,33 @@ Item {
     readonly property int lowerLeftTreePointYConfig:  220
     readonly property int lowerRightTreePointXConfig: 170
     readonly property int lowerRightTreePointYConfig: 220
+    readonly property int upperTreePointX:            pageUpperTreePointX(backgroundImage.sourceSize,
+                                                                          backgroundImage.paintedWidth,
+                                                                          upperTreePointXConfig)
+    readonly property int upperTreePointY:            pageUpperTreePointY(backgroundImage.sourceSize,
+                                                                          backgroundImage.paintedHeight,
+                                                                          upperTreePointYConfig)
+    readonly property int lowerLeftTreePointX:        pageLowerLeftTreePointX(backgroundImage.sourceSize,
+                                                                              backgroundImage.paintedWidth,
+                                                                              lowerLeftTreePointXConfig)
+    readonly property int lowerLeftTreePointY:        pageLowerLeftTreePointY(backgroundImage.sourceSize,
+                                                                              backgroundImage.paintedHeight,
+                                                                              lowerLeftTreePointYConfig)
+    readonly property int lowerRightTreePointX:       pageLowerRightTreePointX(backgroundImage.sourceSize,
+                                                                               backgroundImage.paintedWidth,
+                                                                               lowerRightTreePointXConfig)
+    readonly property int lowerRightTreePointY:       pageLowerRightTreePointY(backgroundImage.sourceSize,
+                                                                               backgroundImage.paintedHeight,
+                                                                               lowerRightTreePointYConfig)
 
     property bool lastInterstitialActive:             false
 
     property int currentBackgroundNum:                1
     property int currentTreeNum:                      1
-    property int upperTreePointX:                     upperTreePointXConfig
-    property int upperTreePointY:                     upperTreePointYConfig
-    property int lowerLeftTreePointX:                 lowerLeftTreePointXConfig
-    property int lowerLeftTreePointY:                 lowerLeftTreePointYConfig
-    property int lowerRightTreePointX:                lowerRightTreePointXConfig
-    property int lowerRightTreePointY:                lowerRightTreePointYConfig
 
     property string interstitialCaptureFmt:           ""
 
     property var newToy:                              null
-
-    onAppInForegroundChanged: {
-        if (appInForeground && pageActive) {
-            var background_num = parseInt(mainWindow.getSetting("BackgroundNum", "1"), 10);
-            var tree_num       = parseInt(mainWindow.getSetting("TreeNum",       "1"), 10);
-
-            if (background_num <= maxBackgroundNum) {
-                currentBackgroundNum = background_num;
-            }
-            if (tree_num <= maxTreeNum) {
-                currentTreeNum = tree_num;
-            }
-
-            helpOnStartupTimer.restart();
-        }
-    }
-
-    onPageActiveChanged: {
-        if (appInForeground && pageActive) {
-            var background_num = parseInt(mainWindow.getSetting("BackgroundNum", "1"), 10);
-            var tree_num       = parseInt(mainWindow.getSetting("TreeNum",       "1"), 10);
-
-            if (background_num <= maxBackgroundNum) {
-                currentBackgroundNum = background_num;
-            }
-            if (tree_num <= maxTreeNum) {
-                currentTreeNum = tree_num;
-            }
-
-            helpOnStartupTimer.restart();
-        }
-    }
 
     onInterstitialActiveChanged: {
         if (!interstitialActive && lastInterstitialActive) {
@@ -83,6 +65,70 @@ Item {
         }
 
         lastInterstitialActive = interstitialActive;
+    }
+
+    onCurrentBackgroundNumChanged: {
+        mainWindow.setSetting("BackgroundNum", currentBackgroundNum.toString(10));
+
+        resetParticleSystems();
+    }
+
+    onCurrentTreeNumChanged: {
+        mainWindow.setSetting("TreeNum", currentTreeNum.toString(10));
+    }
+
+    function pageUpperTreePointX(background_image_source_size, background_image_painted_width, upper_tree_point_x_config) {
+        if (background_image_source_size.width > 0) {
+            return (background_image_source_size.width / 2 + upper_tree_point_x_config) *
+                   (background_image_painted_width / background_image_source_size.width);
+        } else {
+            return 0;
+        }
+    }
+
+    function pageUpperTreePointY(background_image_source_size, background_image_painted_height, upper_tree_point_y_config) {
+        if (background_image_source_size.height > 0) {
+            return (background_image_source_size.height / 2 + upper_tree_point_y_config) *
+                   (background_image_painted_height / background_image_source_size.height);
+        } else {
+            return 0;
+        }
+    }
+
+    function pageLowerLeftTreePointX(background_image_source_size, background_image_painted_width, lower_left_tree_point_x_config) {
+        if (background_image_source_size.width > 0) {
+            return (background_image_source_size.width / 2 + lower_left_tree_point_x_config) *
+                   (background_image_painted_width / background_image_source_size.width);
+        } else {
+            return 0;
+        }
+    }
+
+    function pageLowerLeftTreePointY(background_image_source_size, background_image_painted_height, lower_left_tree_point_y_config) {
+        if (background_image_source_size.height > 0) {
+            return (background_image_source_size.height / 2 + lower_left_tree_point_y_config) *
+                   (background_image_painted_height / background_image_source_size.height);
+        } else {
+            return 0;
+        }
+    }
+
+    function pageLowerRightTreePointX(background_image_source_size, background_image_painted_width, lower_right_tree_point_x_config) {
+        if (background_image_source_size.width > 0) {
+            return (background_image_source_size.width / 2 + lower_right_tree_point_x_config) *
+                   (background_image_painted_width / background_image_source_size.width);
+        } else {
+            return 0;
+        }
+    }
+
+    function pageLowerRightTreePointY(background_image_source_size, background_image_painted_height, lower_right_tree_point_y_config) {
+        if (background_image_source_size.height > 0) {
+            return (background_image_source_size.height / 2 + lower_right_tree_point_y_config) *
+                   (background_image_painted_height / background_image_source_size.height);
+        } else {
+            return 0;
+        }
     }
 
     function validateToy(center_x, center_y) {
@@ -130,10 +176,6 @@ Item {
         }
     }
 
-    function shareToViewCompleted() {
-        StoreHelper.requestReview();
-    }
-
     Audio {
         volume:   1.0
         muted:    !treePage.appInForeground || !treePage.pageActive || treePage.interstitialActive
@@ -158,32 +200,6 @@ Item {
             height:           Math.floor(imageHeight(sourceSize.width, sourceSize.height, parent.width, parent.height))
             source:           "qrc:/resources/images/tree/background_%1.png".arg(treePage.currentBackgroundNum)
             fillMode:         Image.PreserveAspectCrop
-
-            onPaintedWidthChanged: {
-                if (sourceSize.width > 0 && sourceSize.height > 0) {
-                    treePage.upperTreePointX = (sourceSize.width  / 2 + treePage.upperTreePointXConfig) * (paintedWidth  / sourceSize.width);
-                    treePage.upperTreePointY = (sourceSize.height / 2 + treePage.upperTreePointYConfig) * (paintedHeight / sourceSize.height);
-
-                    treePage.lowerLeftTreePointX = (sourceSize.width  / 2 + treePage.lowerLeftTreePointXConfig) * (paintedWidth  / sourceSize.width);
-                    treePage.lowerLeftTreePointY = (sourceSize.height / 2 + treePage.lowerLeftTreePointYConfig) * (paintedHeight / sourceSize.height);
-
-                    treePage.lowerRightTreePointX = (sourceSize.width  / 2 + treePage.lowerRightTreePointXConfig) * (paintedWidth  / sourceSize.width);
-                    treePage.lowerRightTreePointY = (sourceSize.height / 2 + treePage.lowerRightTreePointYConfig) * (paintedHeight / sourceSize.height);
-                }
-            }
-
-            onPaintedHeightChanged: {
-                if (sourceSize.width > 0 && sourceSize.height > 0) {
-                    treePage.upperTreePointX = (sourceSize.width  / 2 + treePage.upperTreePointXConfig) * (paintedWidth  / sourceSize.width);
-                    treePage.upperTreePointY = (sourceSize.height / 2 + treePage.upperTreePointYConfig) * (paintedHeight / sourceSize.height);
-
-                    treePage.lowerLeftTreePointX = (sourceSize.width  / 2 + treePage.lowerLeftTreePointXConfig) * (paintedWidth  / sourceSize.width);
-                    treePage.lowerLeftTreePointY = (sourceSize.height / 2 + treePage.lowerLeftTreePointYConfig) * (paintedHeight / sourceSize.height);
-
-                    treePage.lowerRightTreePointX = (sourceSize.width  / 2 + treePage.lowerRightTreePointXConfig) * (paintedWidth  / sourceSize.width);
-                    treePage.lowerRightTreePointY = (sourceSize.height / 2 + treePage.lowerRightTreePointYConfig) * (paintedHeight / sourceSize.height);
-                }
-            }
 
             function imageWidth(src_width, src_height, dst_width, dst_height) {
                 if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
@@ -212,9 +228,9 @@ Item {
             Image {
                 id:               treeImageBg
                 anchors.centerIn: parent
+                z:                1
                 width:            Math.floor(imageWidth(sourceSize.width, sourceSize.height, parent.width, parent.height))
                 height:           Math.floor(imageHeight(sourceSize.width, sourceSize.height, parent.width, parent.height))
-                z:                1
                 source:           "qrc:/resources/images/tree/tree_%1_bg.png".arg(treePage.currentTreeNum)
                 fillMode:         Image.PreserveAspectCrop
 
@@ -246,9 +262,9 @@ Item {
             Image {
                 id:               treeImageFg
                 anchors.centerIn: parent
+                z:                3
                 width:            Math.floor(imageWidth(sourceSize.width, sourceSize.height, parent.width, parent.height))
                 height:           Math.floor(imageHeight(sourceSize.width, sourceSize.height, parent.width, parent.height))
-                z:                3
                 source:           "qrc:/resources/images/tree/tree_%1_fg.png".arg(treePage.currentTreeNum)
                 fillMode:         Image.PreserveAspectCrop
 
@@ -298,9 +314,9 @@ Item {
 
             ImageParticle {
                 z:       1
-                opacity: 0.75
                 system:  particleSystem1
                 source:  "qrc:/resources/images/tree/snowflake_1.png"
+                opacity: 0.75
             }
         }
 
@@ -324,9 +340,9 @@ Item {
 
             ImageParticle {
                 z:       1
-                opacity: 0.75
                 system:  particleSystem2
                 source:  "qrc:/resources/images/tree/snowflake_2.png"
+                opacity: 0.75
             }
         }
 
@@ -350,9 +366,9 @@ Item {
 
             ImageParticle {
                 z:       1
-                opacity: 0.75
                 system:  particleSystem3
                 source:  "qrc:/resources/images/tree/snowflake_3.png"
+                opacity: 0.75
             }
         }
 
@@ -376,9 +392,9 @@ Item {
 
             ImageParticle {
                 z:       1
-                opacity: 0.75
                 system:  particleSystem4
                 source:  "qrc:/resources/images/tree/snowflake_4.png"
+                opacity: 0.75
             }
         }
 
@@ -386,12 +402,13 @@ Item {
             id:                 helpButtonImage
             anchors.top:        parent.top
             anchors.left:       parent.left
-            anchors.topMargin:  Math.max(treePage.bannerViewHeight + 8, 34)
-            anchors.leftMargin: 8
-            width:              32
-            height:             32
+            anchors.topMargin:  Math.max(treePage.bannerViewHeight + UtilScript.pt(8), UtilScript.pt(34))
+            anchors.leftMargin: UtilScript.pt(8)
             z:                  5
+            width:              UtilScript.pt(32)
+            height:             UtilScript.pt(32)
             source:             "qrc:/resources/images/tree/button_help.png"
+            fillMode:           Image.PreserveAspectFit
 
             MouseArea {
                 id:           helpButtonMouseArea
@@ -429,15 +446,16 @@ Item {
             id:                       buttonImageRow
             anchors.bottom:           parent.bottom
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.bottomMargin:     30
+            anchors.bottomMargin:     UtilScript.pt(30)
             z:                        5
-            spacing:                  16
+            spacing:                  UtilScript.pt(16)
 
             Image {
-                id:     settingsButtonImage
-                width:  64
-                height: 64
-                source: "qrc:/resources/images/tree/button_settings.png"
+                id:       settingsButtonImage
+                width:    UtilScript.pt(64)
+                height:   UtilScript.pt(64)
+                source:   "qrc:/resources/images/tree/button_settings.png"
+                fillMode: Image.PreserveAspectFit
 
                 MouseArea {
                     id:           settingsButtonMouseArea
@@ -456,10 +474,11 @@ Item {
             }
 
             Image {
-                id:     captureImageButtonImage
-                width:  64
-                height: 64
-                source: "qrc:/resources/images/tree/button_capture_image.png"
+                id:       captureImageButtonImage
+                width:    UtilScript.pt(64)
+                height:   UtilScript.pt(64)
+                source:   "qrc:/resources/images/tree/button_capture_image.png"
+                fillMode: Image.PreserveAspectFit
 
                 MouseArea {
                     id:           captureImageButtonMouseArea
@@ -480,10 +499,11 @@ Item {
             }
 
             Image {
-                id:     captureGIFButtonImage
-                width:  64
-                height: 64
-                source: "qrc:/resources/images/tree/button_capture_gif.png"
+                id:       captureGIFButtonImage
+                width:    UtilScript.pt(64)
+                height:   UtilScript.pt(64)
+                source:   "qrc:/resources/images/tree/button_capture_gif.png"
+                fillMode: Image.PreserveAspectFit
 
                 MouseArea {
                     id:           captureGIFButtonMouseArea
@@ -504,10 +524,11 @@ Item {
             }
 
             Image {
-                id:     toysButtonImage
-                width:  64
-                height: 64
-                source: "qrc:/resources/images/tree/button_toys.png"
+                id:       toysButtonImage
+                width:    UtilScript.pt(64)
+                height:   UtilScript.pt(64)
+                source:   "qrc:/resources/images/tree/button_toys.png"
+                fillMode: Image.PreserveAspectFit
 
                 MouseArea {
                     id:           toysButtonMouseArea
@@ -530,11 +551,11 @@ Item {
             id:                     settingsListRectangle
             anchors.verticalCenter: parent.verticalCenter
             anchors.left:           parent.left
-            width:                  96
-            height:                 Math.min(parent.height * 5 / 8, settingsListView.contentHeight)
             z:                      6
-            clip:                   true
+            width:                  UtilScript.pt(96)
+            height:                 Math.min(parent.height * 5 / 8, settingsListView.contentHeight)
             color:                  "black"
+            clip:                   true
             opacity:                0.75
             visible:                false
 
@@ -548,11 +569,12 @@ Item {
                 }
 
                 delegate: Image {
-                    id:     settingsItemDelegate
-                    width:  settingsListRectangle.width
-                    height: sourceSize.width > 0 ? (width / sourceSize.width) * sourceSize.height : 0
-                    source: settingType === "background" ? "qrc:/resources/images/tree/background_%1.png".arg(settingNumber) :
-                                                           "qrc:/resources/images/tree/tree_%1_bg.png".arg(settingNumber)
+                    id:       settingsItemDelegate
+                    width:    settingsListRectangle.width
+                    height:   sourceSize.width > 0 ? (width / sourceSize.width) * sourceSize.height : 0
+                    source:   settingType === "background" ? "qrc:/resources/images/tree/background_%1.png".arg(settingNumber) :
+                                                             "qrc:/resources/images/tree/tree_%1_bg.png".arg(settingNumber)
+                    fillMode: Image.PreserveAspectFit
 
                     MouseArea {
                         id:           settingsItemMouseArea
@@ -560,15 +582,9 @@ Item {
 
                         onClicked: {
                             if (settingType === "background") {
-                                treePage.resetParticleSystems();
-
                                 treePage.currentBackgroundNum = settingNumber;
-
-                                mainWindow.setSetting("BackgroundNum", treePage.currentBackgroundNum.toString(10));
                             } else {
                                 treePage.currentTreeNum = settingNumber;
-
-                                mainWindow.setSetting("TreeNum", treePage.currentTreeNum.toString(10));
                             }
                         }
                     }
@@ -584,11 +600,11 @@ Item {
             id:                     toysListRectangle
             anchors.verticalCenter: parent.verticalCenter
             anchors.right:          parent.right
-            width:                  54
-            height:                 Math.min(parent.height * 5 / 8, toysListView.contentHeight)
             z:                      6
-            clip:                   true
+            width:                  UtilScript.pt(54)
+            height:                 Math.min(parent.height * 5 / 8, toysListView.contentHeight)
             color:                  "black"
+            clip:                   true
             opacity:                0.75
             visible:                false
 
@@ -603,10 +619,11 @@ Item {
                 }
 
                 delegate: Image {
-                    id:     toysItemDelegate
-                    width:  sourceSize.width
-                    height: sourceSize.height
-                    source: "qrc:/resources/images/tree/toys/%1_%2.png".arg(toyType).arg(toyNumber)
+                    id:       toysItemDelegate
+                    width:    toysListRectangle.width
+                    height:   sourceSize.width > 0 ? (width / sourceSize.width) * sourceSize.height : 0
+                    source:   "qrc:/resources/images/tree/toys/%1_%2.png".arg(toyType).arg(toyNumber)
+                    fillMode: Image.PreserveAspectFit
 
                     MouseArea {
                         id:           toysItemMouseArea
@@ -704,7 +721,7 @@ Item {
         id: purchaseDialog
         z:  1
 
-        onViewAdAndCaptureImage: {
+        onViewAdAndCaptureImageSelected: {
             if (AdMobHelper.interstitialReady) {
                 treePage.interstitialCaptureFmt = "IMAGE";
 
@@ -714,7 +731,7 @@ Item {
             }
         }
 
-        onViewAdAndCaptureGIF: {
+        onViewAdAndCaptureGIFSelected: {
             if (AdMobHelper.interstitialReady) {
                 treePage.interstitialCaptureFmt = "GIF";
 
@@ -724,11 +741,11 @@ Item {
             }
         }
 
-        onPurchaseFullVersion: {
+        onPurchaseFullVersionSelected: {
             mainWindow.purchaseFullVersion();
         }
 
-        onRestorePurchases: {
+        onRestorePurchasesSelected: {
             mainWindow.restorePurchases();
         }
     }
@@ -737,11 +754,11 @@ Item {
         id: parentalGateDialog
         z:  1
 
-        onPassAndCaptureImage: {
+        onPassedToCaptureImage: {
             treePage.captureImage();
         }
 
-        onPassAndCaptureGIF: {
+        onPassedToCaptureGIF: {
             captureGIFTimer.start();
         }
     }
@@ -749,19 +766,6 @@ Item {
     HelpDialog {
         id: helpDialog
         z:  1
-    }
-
-    Timer {
-        id:       helpOnStartupTimer
-        interval: 100
-
-        onTriggered: {
-            if (mainWindow.getSetting("ShowHelpOnStartup", "true") === "true") {
-                helpDialog.open();
-            }
-
-            mainWindow.setSetting("ShowHelpOnStartup", "false");
-        }
     }
 
     Timer {
@@ -809,8 +813,25 @@ Item {
         }
     }
 
+    Connections {
+        target: ShareHelper
+
+        onShareToViewCompleted: {
+            StoreHelper.requestReview();
+        }
+    }
+
     Component.onCompleted: {
-        ShareHelper.shareToViewCompleted.connect(shareToViewCompleted);
+        var show_help_on_startup =         (mainWindow.getSetting("ShowHelpOnStartup", "true") === "true");
+        var background_num       = parseInt(mainWindow.getSetting("BackgroundNum",     "1"), 10);
+        var tree_num             = parseInt(mainWindow.getSetting("TreeNum",           "1"), 10);
+
+        if (background_num <= maxBackgroundNum) {
+            currentBackgroundNum = background_num;
+        }
+        if (tree_num <= maxTreeNum) {
+            currentTreeNum = tree_num;
+        }
 
         settingsListModel.clear();
 
@@ -830,6 +851,12 @@ Item {
 
         for (var n = 1; n <= treePage.maxTwinkleNum; n++) {
             toysListModel.append({"toyType": "twinkle", "toyNumber": n});
+        }
+
+        if (show_help_on_startup) {
+            helpDialog.open();
+
+            mainWindow.setSetting("ShowHelpOnStartup", "false");
         }
     }
 }
