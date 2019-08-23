@@ -1,55 +1,36 @@
 import QtQuick 2.12
 
+import "../../Util.js" as UtilScript
+
 MultiPointTouchArea {
     id:               parentalGateDialog
     anchors.centerIn: parent
+    width:            dialogWidth(rotation, parent.width, parent.height)
+    height:           dialogHeight(rotation, parent.width, parent.height)
     visible:          false
 
-    readonly property int parentWidth:  parent.width
-    readonly property int parentHeight: parent.height
-
-    property string imageFormat:        ""
+    property string imageFormat: ""
 
     signal opened()
     signal closed()
 
-    signal passAndCaptureImage()
-    signal passAndCaptureGIF()
-    signal cancel()
+    signal passedToCaptureImage()
+    signal passedToCaptureGIF()
+    signal cancelled()
 
-    onParentWidthChanged: {
-        if (parent) {
-            if (rotation === 0 || rotation === 180) {
-                width  = parent.width;
-                height = parent.height;
-            } else if (rotation === 90 || rotation === 270) {
-                width  = parent.height;
-                height = parent.width;
-            }
+    function dialogWidth(rotation, parent_width, parent_height) {
+        if (rotation === 90 || rotation === 270) {
+            return parent_height;
+        } else {
+            return parent_width;
         }
     }
 
-    onParentHeightChanged: {
-        if (parent) {
-            if (rotation === 0 || rotation === 180) {
-                width  = parent.width;
-                height = parent.height;
-            } else if (rotation === 90 || rotation === 270) {
-                width  = parent.height;
-                height = parent.width;
-            }
-        }
-    }
-
-    onRotationChanged: {
-        if (parent) {
-            if (rotation === 0 || rotation === 180) {
-                width  = parent.width;
-                height = parent.height;
-            } else if (rotation === 90 || rotation === 270) {
-                width  = parent.height;
-                height = parent.width;
-            }
+    function dialogHeight(rotation, parent_width, parent_height) {
+        if (rotation === 90 || rotation === 270) {
+            return parent_width;
+        } else {
+            return parent_height;
         }
     }
 
@@ -63,14 +44,17 @@ MultiPointTouchArea {
     function close() {
         visible = false;
 
-        cancel();
+        cancelled();
         closed();
     }
 
     Image {
         id:               dialogImage
         anchors.centerIn: parent
+        width:            UtilScript.pt(sourceSize.width)
+        height:           UtilScript.pt(sourceSize.height)
         source:           "qrc:/resources/images/dialog/parental_gate_dialog.png"
+        fillMode:         Image.PreserveAspectFit
 
         MultiPointTouchArea {
             anchors.fill:       parent
@@ -87,9 +71,9 @@ MultiPointTouchArea {
                     parentalGateDialog.visible = false;
 
                     if (imageFormat === "IMAGE") {
-                        parentalGateDialog.passAndCaptureImage();
+                        parentalGateDialog.passedToCaptureImage();
                     } else {
-                        parentalGateDialog.passAndCaptureGIF();
+                        parentalGateDialog.passedToCaptureGIF();
                     }
 
                     parentalGateDialog.closed();
@@ -98,8 +82,8 @@ MultiPointTouchArea {
 
             Text {
                 anchors.fill:         parent
-                anchors.margins:      16
-                anchors.bottomMargin: 40
+                anchors.margins:      UtilScript.pt(16)
+                anchors.bottomMargin: UtilScript.pt(40)
                 text:                 qsTr("Slide with two fingers over this dialog to continue")
                 color:                "black"
                 font.pointSize:       24
@@ -117,10 +101,11 @@ MultiPointTouchArea {
         id:                       cancelButtonImage
         anchors.horizontalCenter: dialogImage.horizontalCenter
         anchors.verticalCenter:   dialogImage.bottom
-        width:                    64
-        height:                   64
         z:                        1
+        width:                    UtilScript.pt(64)
+        height:                   UtilScript.pt(64)
         source:                   "qrc:/resources/images/dialog/cancel.png"
+        fillMode:                 Image.PreserveAspectFit
 
         MouseArea {
             anchors.fill: parent
@@ -128,7 +113,7 @@ MultiPointTouchArea {
             onClicked: {
                 parentalGateDialog.visible = false;
 
-                parentalGateDialog.cancel();
+                parentalGateDialog.cancelled();
                 parentalGateDialog.closed();
             }
         }

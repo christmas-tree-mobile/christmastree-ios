@@ -1,9 +1,14 @@
 import QtQuick 2.12
 
+import "../../Util.js" as UtilScript
+
 Image {
-    id:     toy
-    width:  sourceSize.width
-    height: sourceSize.height
+    id:       toy
+    width:    UtilScript.pt(sourceSize.width)
+    height:   UtilScript.pt(sourceSize.height)
+    source:   imageSource(toyNumber, toyType)
+    fillMode: Image.PreserveAspectFit
+    enabled:  !destroyToyPropertyAnimation.running
 
     property int toyNumber:  0
 
@@ -11,23 +16,11 @@ Image {
 
     property var treePage:   null
 
-    onToyNumberChanged: {
-        if (toyNumber !== 0 && toyType !== "") {
-            source = "qrc:/resources/images/tree/toys/%1_%2.png".arg(toyType).arg(toyNumber);
-
-            if (toyType === "twinkle") {
-                twinkleAnimationTimer.start();
-            }
-        }
-    }
-
-    onToyTypeChanged: {
-        if (toyNumber !== 0 && toyType !== "") {
-            source = "qrc:/resources/images/tree/toys/%1_%2.png".arg(toyType).arg(toyNumber);
-
-            if (toyType === "twinkle") {
-                twinkleAnimationTimer.start();
-            }
+    function imageSource(toy_number, toy_type) {
+        if (toy_number !== 0 && toy_type !== "") {
+            return "qrc:/resources/images/tree/toys/%1_%2.png".arg(toy_type).arg(toy_number);
+        } else {
+            return "";
         }
     }
 
@@ -110,27 +103,29 @@ Image {
         }
     }
 
-    PropertyAnimation {
-        id:       destroyToyPropertyAnimation
-        target:   toy
-        property: "y"
-        to:       parent.height
-        duration: 200
+    SequentialAnimation {
+        id: destroyToyPropertyAnimation
 
-        onRunningChanged: {
-            if (running) {
-                toyMouseArea.enabled = false;
-            } else {
+        NumberAnimation {
+            target:   toy
+            property: "y"
+            to:       parent.height
+            duration: 200
+        }
+
+        ScriptAction {
+            script: {
                 toy.destroy();
             }
         }
     }
 
     SequentialAnimation {
-        id:    twinkleSequentialAnimation
-        loops: Animation.Infinite
+        id:      twinkleSequentialAnimation
+        loops:   Animation.Infinite
+        running: toy.toyType === "twinkle"
 
-        PropertyAnimation {
+        NumberAnimation {
             target:   toy
             property: "opacity"
             from:     1.0
@@ -138,21 +133,12 @@ Image {
             duration: 500
         }
 
-        PropertyAnimation {
+        NumberAnimation {
             target:   toy
             property: "opacity"
             from:     0.5
             to:       1.0
             duration: 500
-        }
-    }
-
-    Timer {
-        id:       twinkleAnimationTimer
-        interval: 100
-
-        onTriggered: {
-            twinkleSequentialAnimation.start();
         }
     }
 }
