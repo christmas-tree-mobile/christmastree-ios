@@ -95,7 +95,7 @@ MultiPointTouchArea {
                         id:                     viewAdImage
                         anchors.verticalCenter: parent.verticalCenter
                         width:                  sourceSize.width * (height / sourceSize.height)
-                        height:                 parent.height - 8
+                        height:                 parent.height - UtilScript.pt(8)
                         source:                 "qrc:/resources/images/dialog/purchase_dialog_view_ad.png"
                         fillMode:               Image.PreserveAspectFit
                     }
@@ -104,7 +104,7 @@ MultiPointTouchArea {
                         anchors.verticalCenter: parent.verticalCenter
                         width:                  parent.width - viewAdImage.width - parent.spacing -
                                                 parent.leftPadding - parent.rightPadding
-                        height:                 parent.height - 8
+                        height:                 parent.height - UtilScript.pt(8)
                         text:                   qsTr("View ad and capture image")
                         color:                  "black"
                         font.pointSize:         16
@@ -146,7 +146,7 @@ MultiPointTouchArea {
                         id:                     purchaseFullVersionImage
                         anchors.verticalCenter: parent.verticalCenter
                         width:                  sourceSize.width * (height / sourceSize.height)
-                        height:                 parent.height - 8
+                        height:                 parent.height - UtilScript.pt(8)
                         source:                 "qrc:/resources/images/dialog/purchase_dialog_purchase.png"
                         fillMode:               Image.PreserveAspectFit
                     }
@@ -155,7 +155,7 @@ MultiPointTouchArea {
                         anchors.verticalCenter: parent.verticalCenter
                         width:                  parent.width - purchaseFullVersionImage.width - parent.spacing -
                                                 parent.leftPadding - parent.rightPadding
-                        height:                 parent.height - 8
+                        height:                 parent.height - UtilScript.pt(8)
                         text:                   qsTr("Purchase full version")
                         color:                  "black"
                         font.pointSize:         16
@@ -197,7 +197,7 @@ MultiPointTouchArea {
                         id:                     restorePurchasesImage
                         anchors.verticalCenter: parent.verticalCenter
                         width:                  sourceSize.width * (height / sourceSize.height)
-                        height:                 parent.height - 8
+                        height:                 parent.height - UtilScript.pt(8)
                         source:                 "qrc:/resources/images/dialog/purchase_dialog_restore.png"
                         fillMode:               Image.PreserveAspectFit
                     }
@@ -206,7 +206,7 @@ MultiPointTouchArea {
                         anchors.verticalCenter: parent.verticalCenter
                         width:                  parent.width - restorePurchasesImage.width - parent.spacing -
                                                 parent.leftPadding - parent.rightPadding
-                        height:                 parent.height - 8
+                        height:                 parent.height - UtilScript.pt(8)
                         text:                   qsTr("Restore purchases")
                         color:                  "black"
                         font.pointSize:         16
