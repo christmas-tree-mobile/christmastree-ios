@@ -826,9 +826,8 @@ Item {
     }
 
     Component.onCompleted: {
-        var show_help_on_startup =         (mainWindow.getSetting("ShowHelpOnStartup", "true") === "true");
-        var background_num       = parseInt(mainWindow.getSetting("BackgroundNum",     "1"), 10);
-        var tree_num             = parseInt(mainWindow.getSetting("TreeNum",           "1"), 10);
+        var background_num = parseInt(mainWindow.getSetting("BackgroundNum", "1"), 10);
+        var tree_num       = parseInt(mainWindow.getSetting("TreeNum",       "1"), 10);
 
         if (background_num <= maxBackgroundNum) {
             currentBackgroundNum = background_num;
@@ -857,7 +856,7 @@ Item {
             toysListModel.append({"toyType": "twinkle", "toyNumber": n});
         }
 
-        if (show_help_on_startup) {
+        if (mainWindow.getSetting("ShowHelpOnStartup", "true") === "true") {
             helpDialog.open();
 
             mainWindow.setSetting("ShowHelpOnStartup", "false");
