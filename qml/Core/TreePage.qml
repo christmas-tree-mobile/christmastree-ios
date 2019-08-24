@@ -304,12 +304,13 @@ Item {
             anchors.fill: parent
             system:       particleSystem1
             lifeSpan:     1000
+            size:         UtilScript.pt(32)
 
             velocity: AngleDirection {
                 angle:              90
                 angleVariation:     30
-                magnitude:          40
-                magnitudeVariation: 20
+                magnitude:          UtilScript.pt(40)
+                magnitudeVariation: UtilScript.pt(20)
             }
 
             ImageParticle {
@@ -330,12 +331,13 @@ Item {
             anchors.fill: parent
             system:       particleSystem2
             lifeSpan:     1000
+            size:         UtilScript.pt(32)
 
             velocity: AngleDirection {
                 angle:              90
                 angleVariation:     30
-                magnitude:          40
-                magnitudeVariation: 20
+                magnitude:          UtilScript.pt(40)
+                magnitudeVariation: UtilScript.pt(20)
             }
 
             ImageParticle {
@@ -356,12 +358,13 @@ Item {
             anchors.fill: parent
             system:       particleSystem3
             lifeSpan:     1000
+            size:         UtilScript.pt(32)
 
             velocity: AngleDirection {
                 angle:              90
                 angleVariation:     30
-                magnitude:          40
-                magnitudeVariation: 20
+                magnitude:          UtilScript.pt(40)
+                magnitudeVariation: UtilScript.pt(20)
             }
 
             ImageParticle {
@@ -382,12 +385,13 @@ Item {
             anchors.fill: parent
             system:       particleSystem4
             lifeSpan:     1000
+            size:         UtilScript.pt(32)
 
             velocity: AngleDirection {
                 angle:              90
                 angleVariation:     30
-                magnitude:          40
-                magnitudeVariation: 20
+                magnitude:          UtilScript.pt(40)
+                magnitudeVariation: UtilScript.pt(20)
             }
 
             ImageParticle {
