@@ -8,7 +8,7 @@ Image {
     height:   UtilScript.pt(sourceSize.height)
     source:   imageSource(toyNumber, toyType)
     fillMode: Image.PreserveAspectFit
-    enabled:  !destroyToyPropertyAnimation.running
+    enabled:  !destroyToyAnimation.running
 
     property int toyNumber:  0
 
@@ -45,7 +45,7 @@ Image {
     }
 
     function destroyToy() {
-        destroyToyPropertyAnimation.start();
+        destroyToyAnimation.start();
     }
 
     MouseArea {
@@ -104,7 +104,7 @@ Image {
     }
 
     SequentialAnimation {
-        id: destroyToyPropertyAnimation
+        id: destroyToyAnimation
 
         NumberAnimation {
             target:   toy
