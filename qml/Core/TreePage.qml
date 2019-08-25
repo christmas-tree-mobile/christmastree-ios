@@ -13,9 +13,7 @@ Item {
 
     readonly property bool appInForeground:           Qt.application.state === Qt.ApplicationActive
     readonly property bool pageActive:                StackView.status === StackView.Active
-    readonly property bool interstitialActive:        AdMobHelper.interstitialActive
 
-    readonly property int bannerViewHeight:           AdMobHelper.bannerViewHeight
     readonly property int maxBackgroundNum:           3
     readonly property int maxBackgroundNumWithSnow:   2
     readonly property int maxTreeNum:                 3
@@ -46,26 +44,10 @@ Item {
                                                                                backgroundImage.paintedHeight,
                                                                                lowerRightTreePointYConfig)
 
-    property bool lastInterstitialActive:             false
-
     property int currentBackgroundNum:                1
     property int currentTreeNum:                      1
 
-    property string interstitialCaptureFmt:           ""
-
     property var newToy:                              null
-
-    onInterstitialActiveChanged: {
-        if (!interstitialActive && lastInterstitialActive) {
-            if (interstitialCaptureFmt === "IMAGE") {
-                captureImage();
-            } else {
-                captureGIFTimer.start();
-            }
-        }
-
-        lastInterstitialActive = interstitialActive;
-    }
 
     onCurrentBackgroundNumChanged: {
         mainWindow.setSetting("BackgroundNum", currentBackgroundNum.toString(10));
@@ -178,7 +160,7 @@ Item {
 
     Audio {
         volume:   1.0
-        muted:    !treePage.appInForeground || !treePage.pageActive || treePage.interstitialActive
+        muted:    !treePage.appInForeground || !treePage.pageActive
         source:   "qrc:/resources/sound/tree/music.mp3"
         autoPlay: true
         loops:    Audio.Infinite
@@ -406,7 +388,7 @@ Item {
             id:                 helpButtonImage
             anchors.top:        parent.top
             anchors.left:       parent.left
-            anchors.topMargin:  Math.max(treePage.bannerViewHeight + UtilScript.pt(8), UtilScript.pt(34))
+            anchors.topMargin:  UtilScript.pt(34)
             anchors.leftMargin: UtilScript.pt(8)
             z:                  5
             width:              UtilScript.pt(32)
@@ -420,28 +402,6 @@ Item {
 
                 onClicked: {
                     helpDialog.open();
-                }
-            }
-        }
-
-        Image {
-            id:                  adSettingsButtonImage
-            anchors.top:         parent.top
-            anchors.right:       parent.right
-            anchors.topMargin:   Math.max(treePage.bannerViewHeight + UtilScript.pt(8), UtilScript.pt(34))
-            anchors.rightMargin: UtilScript.pt(8)
-            z:                   5
-            width:               UtilScript.pt(32)
-            height:              UtilScript.pt(32)
-            source:              "qrc:/resources/images/tree/button_ad_settings.png"
-            fillMode:            Image.PreserveAspectFit
-
-            MouseArea {
-                id:           adSettingsButtonMouseArea
-                anchors.fill: parent
-
-                onClicked: {
-                    adMobConsentDialog.open();
                 }
             }
         }
@@ -489,15 +449,7 @@ Item {
                     anchors.fill: parent
 
                     onClicked: {
-                        if (mainWindow.versionForKids) {
-                            parentalGateDialog.open("IMAGE");
-                        } else {
-                            if (mainWindow.fullVersion) {
-                                treePage.captureImage();
-                            } else {
-                                purchaseDialog.open("IMAGE");
-                            }
-                        }
+                        parentalGateDialog.open("IMAGE");
                     }
                 }
             }
@@ -514,15 +466,7 @@ Item {
                     anchors.fill: parent
 
                     onClicked: {
-                        if (mainWindow.versionForKids) {
-                            parentalGateDialog.open("GIF");
-                        } else {
-                            if (mainWindow.fullVersion) {
-                                captureGIFTimer.start();
-                            } else {
-                                purchaseDialog.open("GIF");
-                            }
-                        }
+                        parentalGateDialog.open("GIF");
                     }
                 }
             }
@@ -719,39 +663,6 @@ Item {
                  anchors.fill: parent
              }
          }
-    }
-
-    PurchaseDialog {
-        id: purchaseDialog
-        z:  1
-
-        onViewAdAndCaptureImageSelected: {
-            if (AdMobHelper.interstitialReady) {
-                treePage.interstitialCaptureFmt = "IMAGE";
-
-                AdMobHelper.showInterstitial();
-            } else {
-                treePage.captureImage();
-            }
-        }
-
-        onViewAdAndCaptureGIFSelected: {
-            if (AdMobHelper.interstitialReady) {
-                treePage.interstitialCaptureFmt = "GIF";
-
-                AdMobHelper.showInterstitial();
-            } else {
-                captureGIFTimer.start();
-            }
-        }
-
-        onPurchaseFullVersionSelected: {
-            fullVersionProduct.purchase();
-        }
-
-        onRestorePurchasesSelected: {
-            store.restorePurchases();
-        }
     }
 
     ParentalGateDialog {

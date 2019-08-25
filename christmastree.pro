@@ -1,7 +1,7 @@
 TEMPLATE = app
 TARGET = christmastree.4kids
 
-QT += quick quickcontrols2 sql multimedia purchasing
+QT += quick quickcontrols2 sql multimedia
 CONFIG += c++11
 
 DEFINES += QT_DEPRECATED_WARNINGS
@@ -10,12 +10,10 @@ SOURCES += src/main.cpp \
     src/gifcreator.cpp
 
 OBJECTIVE_SOURCES += \
-    src/admobhelper.mm \
     src/sharehelper.mm \
     src/storehelper.mm
 
 HEADERS += \
-    src/admobhelper.h \
     src/sharehelper.h \
     src/storehelper.h \
     src/gif.h \
@@ -47,14 +45,8 @@ ios {
     DEPENDPATH += $$PWD/ios/frameworks
 
     LIBS += -F $$PWD/ios/frameworks \
-            -framework GoogleAppMeasurement \
-            -framework GoogleMobileAds \
-            -framework GoogleUtilities \
-            -framework nanopb \
             -framework UIKit \
             -framework StoreKit
-
-    QMAKE_LFLAGS += -ObjC
 
     QMAKE_APPLE_DEVICE_ARCHS = arm64
     QMAKE_INFO_PLIST = ios/Info.plist

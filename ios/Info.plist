@@ -26,10 +26,6 @@
 	<string>1.0.6</string>
 	<key>CFBundleVersion</key>
 	<string>1.0.6</string>
-	<key>GADApplicationIdentifier</key>
-	<string>ca-app-pub-2455088855015693~2566748048</string>
-	<key>GADDelayAppMeasurementInit</key>
-	<true/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
