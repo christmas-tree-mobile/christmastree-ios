@@ -6,19 +6,15 @@ import QtPurchasing 1.0
 
 import "Core/Dialog"
 
-import "BuildSettings.js" as BuildSettingsScript
-
 ApplicationWindow {
     id:         mainWindow
     title:      qsTr("Christmas")
     visibility: Window.FullScreen
     visible:    true
 
-    readonly property bool versionForKids: BuildSettingsScript.VERSION_FOR_KIDS
+    property bool fullVersion:    false
 
-    property bool fullVersion:             false
-
-    property string adMobConsent:          ""
+    property string adMobConsent: ""
 
     onFullVersionChanged: {
         setSetting("FullVersion", fullVersion ? "true" : "false");
@@ -157,13 +153,8 @@ ApplicationWindow {
     }
 
     Component.onCompleted: {
-        if (BuildSettingsScript.VERSION_FOR_KIDS) {
-            fullVersion = true;
-        } else {
-            fullVersion = (getSetting("FullVersion", "false") === "true");
-        }
-
-        adMobConsent = getSetting("AdMobConsent", "");
+        fullVersion  = (getSetting("FullVersion",  "false") === "true");
+        adMobConsent =  getSetting("AdMobConsent", "");
 
         updateFeatures();
 

@@ -48,14 +48,6 @@
     </message>
 </context>
 <context>
-    <name>ParentalGateDialog</name>
-    <message>
-        <location filename="../qml/Core/Dialog/ParentalGateDialog.qml" line="87"/>
-        <source>Slide with two fingers over this dialog to continue</source>
-        <translation>用两个手指滑过对话框继续</translation>
-    </message>
-</context>
-<context>
     <name>PurchaseDialog</name>
     <message>
         <location filename="../qml/Core/Dialog/PurchaseDialog.qml" line="108"/>
@@ -76,7 +68,7 @@
 <context>
     <name>main</name>
     <message>
-        <location filename="../qml/main.qml" line="13"/>
+        <location filename="../qml/main.qml" line="11"/>
         <source>Christmas</source>
         <translation>圣诞树</translation>
     </message>

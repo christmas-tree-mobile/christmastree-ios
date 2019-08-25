@@ -1,12 +1,10 @@
 <RCC>
     <qresource prefix="/">
-        <file>qml/BuildSettings.js</file>
         <file>qml/Util.js</file>
         <file>qml/main.qml</file>
         <file>qml/Core/TreePage.qml</file>
         <file>qml/Core/Dialog/AdMobConsentDialog.qml</file>
         <file>qml/Core/Dialog/HelpDialog.qml</file>
-        <file>qml/Core/Dialog/ParentalGateDialog.qml</file>
         <file>qml/Core/Dialog/PurchaseDialog.qml</file>
         <file>qml/Core/Tree/Toy.qml</file>
     </qresource>

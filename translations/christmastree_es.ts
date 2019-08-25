@@ -40,13 +40,6 @@
     </message>
 </context>
 <context>
-    <name>ParentalGateDialog</name>
-    <message>
-        <source>Slide with two fingers over this dialog to continue</source>
-        <translation>Deslice con dos dedos sobre este diálogo para continuar</translation>
-    </message>
-</context>
-<context>
     <name>PurchaseDialog</name>
     <message>
         <source>View ad and capture image</source>

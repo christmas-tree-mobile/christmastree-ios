@@ -489,14 +489,10 @@ Item {
                     anchors.fill: parent
 
                     onClicked: {
-                        if (mainWindow.versionForKids) {
-                            parentalGateDialog.open("IMAGE");
+                        if (mainWindow.fullVersion) {
+                            treePage.captureImage();
                         } else {
-                            if (mainWindow.fullVersion) {
-                                treePage.captureImage();
-                            } else {
-                                purchaseDialog.open("IMAGE");
-                            }
+                            purchaseDialog.open("IMAGE");
                         }
                     }
                 }
@@ -514,14 +510,10 @@ Item {
                     anchors.fill: parent
 
                     onClicked: {
-                        if (mainWindow.versionForKids) {
-                            parentalGateDialog.open("GIF");
+                        if (mainWindow.fullVersion) {
+                            captureGIFTimer.start();
                         } else {
-                            if (mainWindow.fullVersion) {
-                                captureGIFTimer.start();
-                            } else {
-                                purchaseDialog.open("GIF");
-                            }
+                            purchaseDialog.open("GIF");
                         }
                     }
                 }
@@ -751,19 +743,6 @@ Item {
 
         onRestorePurchasesSelected: {
             store.restorePurchases();
-        }
-    }
-
-    ParentalGateDialog {
-        id: parentalGateDialog
-        z:  1
-
-        onPassedToCaptureImage: {
-            treePage.captureImage();
-        }
-
-        onPassedToCaptureGIF: {
-            captureGIFTimer.start();
         }
     }
 
