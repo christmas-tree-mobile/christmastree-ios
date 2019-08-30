@@ -292,113 +292,113 @@ Item {
                     }
                 }
             }
-        }
 
-        ParticleSystem {
-            id:      particleSystem1
-            running: treePage.appInForeground && treePage.pageActive &&
-                     treePage.currentBackgroundNum <= treePage.maxBackgroundNumWithSnow
-        }
-
-        Emitter {
-            anchors.fill: parent
-            system:       particleSystem1
-            lifeSpan:     1000
-            size:         UtilScript.pt(32)
-
-            velocity: AngleDirection {
-                angle:              90
-                angleVariation:     30
-                magnitude:          UtilScript.pt(40)
-                magnitudeVariation: UtilScript.pt(20)
+            ParticleSystem {
+                id:      particleSystem1
+                running: treePage.appInForeground && treePage.pageActive &&
+                         treePage.currentBackgroundNum <= treePage.maxBackgroundNumWithSnow
             }
 
-            ImageParticle {
-                z:       1
-                system:  particleSystem1
-                source:  "qrc:/resources/images/tree/snowflake_1.png"
-                opacity: 0.75
-            }
-        }
+            Emitter {
+                anchors.fill: parent
+                system:       particleSystem1
+                lifeSpan:     1000
+                size:         UtilScript.pt(32)
 
-        ParticleSystem {
-            id:      particleSystem2
-            running: treePage.appInForeground && treePage.pageActive &&
-                     treePage.currentBackgroundNum <= treePage.maxBackgroundNumWithSnow
-        }
+                velocity: AngleDirection {
+                    angle:              90
+                    angleVariation:     30
+                    magnitude:          UtilScript.pt(40)
+                    magnitudeVariation: UtilScript.pt(20)
+                }
 
-        Emitter {
-            anchors.fill: parent
-            system:       particleSystem2
-            lifeSpan:     1000
-            size:         UtilScript.pt(32)
-
-            velocity: AngleDirection {
-                angle:              90
-                angleVariation:     30
-                magnitude:          UtilScript.pt(40)
-                magnitudeVariation: UtilScript.pt(20)
+                ImageParticle {
+                    z:       10
+                    system:  particleSystem1
+                    source:  "qrc:/resources/images/tree/snowflake_1.png"
+                    opacity: 0.75
+                }
             }
 
-            ImageParticle {
-                z:       1
-                system:  particleSystem2
-                source:  "qrc:/resources/images/tree/snowflake_2.png"
-                opacity: 0.75
-            }
-        }
-
-        ParticleSystem {
-            id:      particleSystem3
-            running: treePage.appInForeground && treePage.pageActive &&
-                     treePage.currentBackgroundNum <= treePage.maxBackgroundNumWithSnow
-        }
-
-        Emitter {
-            anchors.fill: parent
-            system:       particleSystem3
-            lifeSpan:     1000
-            size:         UtilScript.pt(32)
-
-            velocity: AngleDirection {
-                angle:              90
-                angleVariation:     30
-                magnitude:          UtilScript.pt(40)
-                magnitudeVariation: UtilScript.pt(20)
+            ParticleSystem {
+                id:      particleSystem2
+                running: treePage.appInForeground && treePage.pageActive &&
+                         treePage.currentBackgroundNum <= treePage.maxBackgroundNumWithSnow
             }
 
-            ImageParticle {
-                z:       1
-                system:  particleSystem3
-                source:  "qrc:/resources/images/tree/snowflake_3.png"
-                opacity: 0.75
-            }
-        }
+            Emitter {
+                anchors.fill: parent
+                system:       particleSystem2
+                lifeSpan:     1000
+                size:         UtilScript.pt(32)
 
-        ParticleSystem {
-            id:      particleSystem4
-            running: treePage.appInForeground && treePage.pageActive &&
-                     treePage.currentBackgroundNum <= treePage.maxBackgroundNumWithSnow
-        }
+                velocity: AngleDirection {
+                    angle:              90
+                    angleVariation:     30
+                    magnitude:          UtilScript.pt(40)
+                    magnitudeVariation: UtilScript.pt(20)
+                }
 
-        Emitter {
-            anchors.fill: parent
-            system:       particleSystem4
-            lifeSpan:     1000
-            size:         UtilScript.pt(32)
-
-            velocity: AngleDirection {
-                angle:              90
-                angleVariation:     30
-                magnitude:          UtilScript.pt(40)
-                magnitudeVariation: UtilScript.pt(20)
+                ImageParticle {
+                    z:       10
+                    system:  particleSystem2
+                    source:  "qrc:/resources/images/tree/snowflake_2.png"
+                    opacity: 0.75
+                }
             }
 
-            ImageParticle {
-                z:       1
-                system:  particleSystem4
-                source:  "qrc:/resources/images/tree/snowflake_4.png"
-                opacity: 0.75
+            ParticleSystem {
+                id:      particleSystem3
+                running: treePage.appInForeground && treePage.pageActive &&
+                         treePage.currentBackgroundNum <= treePage.maxBackgroundNumWithSnow
+            }
+
+            Emitter {
+                anchors.fill: parent
+                system:       particleSystem3
+                lifeSpan:     1000
+                size:         UtilScript.pt(32)
+
+                velocity: AngleDirection {
+                    angle:              90
+                    angleVariation:     30
+                    magnitude:          UtilScript.pt(40)
+                    magnitudeVariation: UtilScript.pt(20)
+                }
+
+                ImageParticle {
+                    z:       10
+                    system:  particleSystem3
+                    source:  "qrc:/resources/images/tree/snowflake_3.png"
+                    opacity: 0.75
+                }
+            }
+
+            ParticleSystem {
+                id:      particleSystem4
+                running: treePage.appInForeground && treePage.pageActive &&
+                         treePage.currentBackgroundNum <= treePage.maxBackgroundNumWithSnow
+            }
+
+            Emitter {
+                anchors.fill: parent
+                system:       particleSystem4
+                lifeSpan:     1000
+                size:         UtilScript.pt(32)
+
+                velocity: AngleDirection {
+                    angle:              90
+                    angleVariation:     30
+                    magnitude:          UtilScript.pt(40)
+                    magnitudeVariation: UtilScript.pt(20)
+                }
+
+                ImageParticle {
+                    z:       10
+                    system:  particleSystem4
+                    source:  "qrc:/resources/images/tree/snowflake_4.png"
+                    opacity: 0.75
+                }
             }
         }
 
@@ -408,7 +408,7 @@ Item {
             anchors.left:       parent.left
             anchors.topMargin:  Math.max(treePage.bannerViewHeight + UtilScript.pt(8), UtilScript.pt(34))
             anchors.leftMargin: UtilScript.pt(8)
-            z:                  5
+            z:                  1
             width:              UtilScript.pt(32)
             height:             UtilScript.pt(32)
             source:             "qrc:/resources/images/tree/button_help.png"
@@ -430,7 +430,7 @@ Item {
             anchors.right:       parent.right
             anchors.topMargin:   Math.max(treePage.bannerViewHeight + UtilScript.pt(8), UtilScript.pt(34))
             anchors.rightMargin: UtilScript.pt(8)
-            z:                   5
+            z:                   1
             width:               UtilScript.pt(32)
             height:              UtilScript.pt(32)
             source:              "qrc:/resources/images/tree/button_ad_settings.png"
@@ -451,7 +451,7 @@ Item {
             anchors.bottom:           parent.bottom
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottomMargin:     UtilScript.pt(30)
-            z:                        5
+            z:                        1
             spacing:                  UtilScript.pt(16)
 
             Image {
@@ -547,7 +547,7 @@ Item {
             id:                     settingsListRectangle
             anchors.verticalCenter: parent.verticalCenter
             anchors.left:           parent.left
-            z:                      6
+            z:                      2
             width:                  UtilScript.pt(96)
             height:                 Math.min(parent.height * 5 / 8, settingsListView.contentHeight)
             color:                  "black"
@@ -596,7 +596,7 @@ Item {
             id:                     toysListRectangle
             anchors.verticalCenter: parent.verticalCenter
             anchors.right:          parent.right
-            z:                      6
+            z:                      2
             width:                  UtilScript.pt(54)
             height:                 Math.min(parent.height * 5 / 8, toysListView.contentHeight)
             color:                  "black"
@@ -697,7 +697,7 @@ Item {
         Rectangle {
              id:           waitRectangle
              anchors.fill: parent
-             z:            7
+             z:            3
              color:        "black"
              opacity:      0.75
              visible:      false
