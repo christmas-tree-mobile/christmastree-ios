@@ -629,7 +629,7 @@ Item {
                         property int pressY: 0
 
                         onPressed: {
-                            var mapped = mapToItem(backgroundImage, mouseX, mouseY);
+                            var mapped = mapToItem(backgroundRectangle, mouseX, mouseY);
 
                             pressX = mapped.x;
                             pressY = mapped.y;
@@ -638,7 +638,7 @@ Item {
                         }
 
                         onPositionChanged: {
-                            var mapped = mapToItem(backgroundImage, mouseX, mouseY);
+                            var mapped = mapToItem(backgroundRectangle, mouseX, mouseY);
 
                             if (treePage.newToy !== null) {
                                 treePage.newToy.x = mapped.x - treePage.newToy.width / 2;
@@ -647,9 +647,16 @@ Item {
                         }
 
                         onReleased: {
+                            var mapped = mapToItem(backgroundImage, mouseX, mouseY);
+
                             preventStealing = false;
 
                             if (treePage.newToy !== null) {
+                                treePage.newToy.parent = backgroundImage;
+                                treePage.newToy.x      = mapped.x - treePage.newToy.width / 2;
+                                treePage.newToy.y      = mapped.y - treePage.newToy.height;
+                                treePage.newToy.z      = 4;
+
                                 treePage.newToy.reduceToy();
 
                                 if (!treePage.validateToy(treePage.newToy.x + treePage.newToy.width / 2, treePage.newToy.y + treePage.newToy.height / 2)) {
@@ -664,7 +671,7 @@ Item {
 
                         Timer {
                             id:       pressAndHoldTimer
-                            interval: 500
+                            interval: 250
 
                             onTriggered: {
                                 if (toysItemMouseArea.pressed) {
@@ -673,7 +680,7 @@ Item {
                                     var component = Qt.createComponent("Tree/Toy.qml");
 
                                     if (component.status === Component.Ready) {
-                                        treePage.newToy = component.createObject(backgroundImage, {"z": 4, "treePage": treePage, "toyType": toyType, "toyNumber": toyNumber});
+                                        treePage.newToy = component.createObject(backgroundRectangle, {"z": 3, "treePage": treePage, "toyType": toyType, "toyNumber": toyNumber});
 
                                         treePage.newToy.enlargeToy();
 
@@ -697,7 +704,7 @@ Item {
         Rectangle {
              id:           waitRectangle
              anchors.fill: parent
-             z:            3
+             z:            4
              color:        "black"
              opacity:      0.75
              visible:      false
