@@ -625,20 +625,20 @@ Item {
                         id:           toysItemMouseArea
                         anchors.fill: parent
 
-                        property int pressX: 0
-                        property int pressY: 0
+                        property int pressingX: 0
+                        property int pressingY: 0
 
                         onPressed: {
-                            var mapped = mapToItem(backgroundRectangle, mouseX, mouseY);
+                            var mapped = mapToItem(backgroundRectangle, mouse.x, mouse.y);
 
-                            pressX = mapped.x;
-                            pressY = mapped.y;
+                            pressingX = mapped.x;
+                            pressingY = mapped.y;
 
                             pressAndHoldTimer.start();
                         }
 
                         onPositionChanged: {
-                            var mapped = mapToItem(backgroundRectangle, mouseX, mouseY);
+                            var mapped = mapToItem(backgroundRectangle, mouse.x, mouse.y);
 
                             if (treePage.newToy !== null) {
                                 treePage.newToy.x = mapped.x - treePage.newToy.width / 2;
@@ -647,7 +647,7 @@ Item {
                         }
 
                         onReleased: {
-                            var mapped = mapToItem(backgroundImage, mouseX, mouseY);
+                            var mapped = mapToItem(backgroundImage, mouse.x, mouse.y);
 
                             preventStealing = false;
 
@@ -684,8 +684,8 @@ Item {
 
                                         treePage.newToy.enlargeToy();
 
-                                        treePage.newToy.x = toysItemMouseArea.pressX - treePage.newToy.width / 2;
-                                        treePage.newToy.y = toysItemMouseArea.pressY - treePage.newToy.height;
+                                        treePage.newToy.x = toysItemMouseArea.pressingX - treePage.newToy.width / 2;
+                                        treePage.newToy.y = toysItemMouseArea.pressingY - treePage.newToy.height;
                                     } else {
                                         console.log(component.errorString());
                                     }
