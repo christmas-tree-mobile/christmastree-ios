@@ -52,8 +52,8 @@ Image {
         id:           toyMouseArea
         anchors.fill: parent
 
-        property int pressingX: 0
-        property int pressingY: 0
+        property int pressEventX: 0
+        property int pressEventY: 0
 
         onPressed: {
             var mapped = mapToItem(toy.parent, mouse.x, mouse.y);
@@ -61,8 +61,8 @@ Image {
             toy.x = mapped.x - toy.width / 2;
             toy.y = mapped.y - toy.height;
 
-            pressingX = mapped.x;
-            pressingY = mapped.y;
+            pressEventX = mapped.x;
+            pressEventY = mapped.y;
 
             pressAndHoldTimer.start();
         }
@@ -73,8 +73,8 @@ Image {
             toy.x = mapped.x - toy.width / 2;
             toy.y = mapped.y - toy.height;
 
-            if (Math.abs(mapped.x - pressingX) > UtilScript.pt(16) ||
-                Math.abs(mapped.y - pressingY) > UtilScript.pt(16)) {
+            if (Math.abs(mapped.x - pressEventX) > UtilScript.pt(16) ||
+                Math.abs(mapped.y - pressEventY) > UtilScript.pt(16)) {
                 pressAndHoldTimer.stop();
             }
         }
