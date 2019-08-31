@@ -625,14 +625,14 @@ Item {
                         id:           toysItemMouseArea
                         anchors.fill: parent
 
-                        property int pressingX: 0
-                        property int pressingY: 0
+                        property int pressEventX: 0
+                        property int pressEventY: 0
 
                         onPressed: {
                             var mapped = mapToItem(backgroundRectangle, mouse.x, mouse.y);
 
-                            pressingX = mapped.x;
-                            pressingY = mapped.y;
+                            pressEventX = mapped.x;
+                            pressEventY = mapped.y;
 
                             pressAndHoldTimer.start();
                         }
@@ -684,8 +684,8 @@ Item {
 
                                         treePage.newToy.enlargeToy();
 
-                                        treePage.newToy.x = toysItemMouseArea.pressingX - treePage.newToy.width / 2;
-                                        treePage.newToy.y = toysItemMouseArea.pressingY - treePage.newToy.height;
+                                        treePage.newToy.x = toysItemMouseArea.pressEventX - treePage.newToy.width / 2;
+                                        treePage.newToy.y = toysItemMouseArea.pressEventY - treePage.newToy.height;
                                     } else {
                                         console.log(component.errorString());
                                     }
