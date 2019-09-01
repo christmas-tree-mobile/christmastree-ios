@@ -293,13 +293,13 @@ Item {
                     magnitude:          UtilScript.pt(40)
                     magnitudeVariation: UtilScript.pt(20)
                 }
+            }
 
-                ImageParticle {
-                    z:       10
-                    system:  particleSystem1
-                    source:  "qrc:/resources/images/tree/snowflake_1.png"
-                    opacity: 0.75
-                }
+            ImageParticle {
+                z:       10
+                system:  particleSystem1
+                source:  "qrc:/resources/images/tree/snowflake_1.png"
+                opacity: 0.75
             }
 
             ParticleSystem {
@@ -320,13 +320,13 @@ Item {
                     magnitude:          UtilScript.pt(40)
                     magnitudeVariation: UtilScript.pt(20)
                 }
+            }
 
-                ImageParticle {
-                    z:       10
-                    system:  particleSystem2
-                    source:  "qrc:/resources/images/tree/snowflake_2.png"
-                    opacity: 0.75
-                }
+            ImageParticle {
+                z:       10
+                system:  particleSystem2
+                source:  "qrc:/resources/images/tree/snowflake_2.png"
+                opacity: 0.75
             }
 
             ParticleSystem {
@@ -347,13 +347,13 @@ Item {
                     magnitude:          UtilScript.pt(40)
                     magnitudeVariation: UtilScript.pt(20)
                 }
+            }
 
-                ImageParticle {
-                    z:       10
-                    system:  particleSystem3
-                    source:  "qrc:/resources/images/tree/snowflake_3.png"
-                    opacity: 0.75
-                }
+            ImageParticle {
+                z:       10
+                system:  particleSystem3
+                source:  "qrc:/resources/images/tree/snowflake_3.png"
+                opacity: 0.75
             }
 
             ParticleSystem {
@@ -374,13 +374,13 @@ Item {
                     magnitude:          UtilScript.pt(40)
                     magnitudeVariation: UtilScript.pt(20)
                 }
+            }
 
-                ImageParticle {
-                    z:       10
-                    system:  particleSystem4
-                    source:  "qrc:/resources/images/tree/snowflake_4.png"
-                    opacity: 0.75
-                }
+            ImageParticle {
+                z:       10
+                system:  particleSystem4
+                source:  "qrc:/resources/images/tree/snowflake_4.png"
+                opacity: 0.75
             }
         }
 
