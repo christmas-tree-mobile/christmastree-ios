@@ -7,11 +7,16 @@ import "../../Util.js" as UtilScript
 Popup {
     id:               adMobConsentDialog
     anchors.centerIn: Overlay.overlay
+    padding:          0
     modal:            true
     closePolicy:      Popup.NoAutoClose
 
     signal personalizedAdsSelected()
     signal nonPersonalizedAdsSelected()
+
+    background: Rectangle {
+        color: "transparent"
+    }
 
     contentItem: Rectangle {
         implicitWidth:  UtilScript.pt(dialogImage.sourceSize.width)
@@ -28,7 +33,7 @@ Popup {
                 anchors.fill:         parent
                 anchors.topMargin:    UtilScript.pt(20)
                 anchors.bottomMargin: UtilScript.pt(20)
-                spacing:              UtilScript.pt(12)
+                spacing:              UtilScript.pt(8)
 
                 Text {
                     leftPadding:         UtilScript.pt(20)
