@@ -4,8 +4,8 @@ import "../../Util.js" as UtilScript
 
 Image {
     id:       toy
-    width:    UtilScript.pt(sourceSize.width)
-    height:   UtilScript.pt(sourceSize.height)
+    width:    UtilScript.dp(sourceSize.width)
+    height:   UtilScript.dp(sourceSize.height)
     source:   imageSource(toyNumber, toyType)
     fillMode: Image.PreserveAspectFit
     enabled:  !destroyToyAnimation.running
@@ -73,8 +73,8 @@ Image {
             toy.x = mapped.x - toy.width / 2;
             toy.y = mapped.y - toy.height;
 
-            if (Math.abs(mapped.x - pressEventX) > UtilScript.pt(16) ||
-                Math.abs(mapped.y - pressEventY) > UtilScript.pt(16)) {
+            if (Math.abs(mapped.x - pressEventX) > UtilScript.dp(16) ||
+                Math.abs(mapped.y - pressEventY) > UtilScript.dp(16)) {
                 pressAndHoldTimer.stop();
             }
         }

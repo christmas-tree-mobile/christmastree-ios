@@ -285,13 +285,13 @@ Item {
                 anchors.fill: parent
                 system:       particleSystem1
                 lifeSpan:     1000
-                size:         UtilScript.pt(32)
+                size:         UtilScript.dp(32)
 
                 velocity: AngleDirection {
                     angle:              90
                     angleVariation:     30
-                    magnitude:          UtilScript.pt(40)
-                    magnitudeVariation: UtilScript.pt(20)
+                    magnitude:          UtilScript.dp(40)
+                    magnitudeVariation: UtilScript.dp(20)
                 }
             }
 
@@ -312,13 +312,13 @@ Item {
                 anchors.fill: parent
                 system:       particleSystem2
                 lifeSpan:     1000
-                size:         UtilScript.pt(32)
+                size:         UtilScript.dp(32)
 
                 velocity: AngleDirection {
                     angle:              90
                     angleVariation:     30
-                    magnitude:          UtilScript.pt(40)
-                    magnitudeVariation: UtilScript.pt(20)
+                    magnitude:          UtilScript.dp(40)
+                    magnitudeVariation: UtilScript.dp(20)
                 }
             }
 
@@ -339,13 +339,13 @@ Item {
                 anchors.fill: parent
                 system:       particleSystem3
                 lifeSpan:     1000
-                size:         UtilScript.pt(32)
+                size:         UtilScript.dp(32)
 
                 velocity: AngleDirection {
                     angle:              90
                     angleVariation:     30
-                    magnitude:          UtilScript.pt(40)
-                    magnitudeVariation: UtilScript.pt(20)
+                    magnitude:          UtilScript.dp(40)
+                    magnitudeVariation: UtilScript.dp(20)
                 }
             }
 
@@ -366,13 +366,13 @@ Item {
                 anchors.fill: parent
                 system:       particleSystem4
                 lifeSpan:     1000
-                size:         UtilScript.pt(32)
+                size:         UtilScript.dp(32)
 
                 velocity: AngleDirection {
                     angle:              90
                     angleVariation:     30
-                    magnitude:          UtilScript.pt(40)
-                    magnitudeVariation: UtilScript.pt(20)
+                    magnitude:          UtilScript.dp(40)
+                    magnitudeVariation: UtilScript.dp(20)
                 }
             }
 
@@ -388,11 +388,11 @@ Item {
             id:                 helpButtonImage
             anchors.top:        parent.top
             anchors.left:       parent.left
-            anchors.topMargin:  UtilScript.pt(34)
-            anchors.leftMargin: UtilScript.pt(8)
+            anchors.topMargin:  UtilScript.dp(34)
+            anchors.leftMargin: UtilScript.dp(8)
             z:                  1
-            width:              UtilScript.pt(32)
-            height:             UtilScript.pt(32)
+            width:              UtilScript.dp(32)
+            height:             UtilScript.dp(32)
             source:             "qrc:/resources/images/tree/button_help.png"
             fillMode:           Image.PreserveAspectFit
 
@@ -410,14 +410,14 @@ Item {
             id:                       buttonImageRow
             anchors.bottom:           parent.bottom
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.bottomMargin:     UtilScript.pt(30)
+            anchors.bottomMargin:     UtilScript.dp(30)
             z:                        1
-            spacing:                  UtilScript.pt(16)
+            spacing:                  UtilScript.dp(16)
 
             Image {
                 id:       settingsButtonImage
-                width:    UtilScript.pt(64)
-                height:   UtilScript.pt(64)
+                width:    UtilScript.dp(64)
+                height:   UtilScript.dp(64)
                 source:   "qrc:/resources/images/tree/button_settings.png"
                 fillMode: Image.PreserveAspectFit
 
@@ -439,8 +439,8 @@ Item {
 
             Image {
                 id:       captureImageButtonImage
-                width:    UtilScript.pt(64)
-                height:   UtilScript.pt(64)
+                width:    UtilScript.dp(64)
+                height:   UtilScript.dp(64)
                 source:   "qrc:/resources/images/tree/button_capture_image.png"
                 fillMode: Image.PreserveAspectFit
 
@@ -456,8 +456,8 @@ Item {
 
             Image {
                 id:       captureGIFButtonImage
-                width:    UtilScript.pt(64)
-                height:   UtilScript.pt(64)
+                width:    UtilScript.dp(64)
+                height:   UtilScript.dp(64)
                 source:   "qrc:/resources/images/tree/button_capture_gif.png"
                 fillMode: Image.PreserveAspectFit
 
@@ -473,8 +473,8 @@ Item {
 
             Image {
                 id:       toysButtonImage
-                width:    UtilScript.pt(64)
-                height:   UtilScript.pt(64)
+                width:    UtilScript.dp(64)
+                height:   UtilScript.dp(64)
                 source:   "qrc:/resources/images/tree/button_toys.png"
                 fillMode: Image.PreserveAspectFit
 
@@ -500,7 +500,7 @@ Item {
             anchors.verticalCenter: parent.verticalCenter
             anchors.left:           parent.left
             z:                      2
-            width:                  UtilScript.pt(96)
+            width:                  UtilScript.dp(96)
             height:                 Math.min(parent.height * 5 / 8, settingsListView.contentHeight)
             color:                  "black"
             clip:                   true
@@ -549,7 +549,7 @@ Item {
             anchors.verticalCenter: parent.verticalCenter
             anchors.right:          parent.right
             z:                      2
-            width:                  UtilScript.pt(54)
+            width:                  UtilScript.dp(54)
             height:                 Math.min(parent.height * 5 / 8, toysListView.contentHeight)
             color:                  "black"
             clip:                   true
