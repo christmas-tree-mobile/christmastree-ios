@@ -47,16 +47,16 @@ MultiPointTouchArea {
     Image {
         id:               dialogImage
         anchors.centerIn: parent
-        width:            UtilScript.pt(sourceSize.width)
-        height:           UtilScript.pt(sourceSize.height)
+        width:            UtilScript.dp(sourceSize.width)
+        height:           UtilScript.dp(sourceSize.height)
         source:           "qrc:/resources/images/dialog/help_dialog.png"
         fillMode:         Image.PreserveAspectFit
 
         Flickable {
             id:                   helpTextFlickable
             anchors.fill:         parent
-            anchors.margins:      UtilScript.pt(16)
-            anchors.bottomMargin: UtilScript.pt(40)
+            anchors.margins:      UtilScript.dp(16)
+            anchors.bottomMargin: UtilScript.dp(40)
             contentWidth:         helpText.width
             contentHeight:        helpText.height
             clip:                 true
@@ -88,8 +88,8 @@ MultiPointTouchArea {
         anchors.horizontalCenter: dialogImage.horizontalCenter
         anchors.verticalCenter:   dialogImage.bottom
         z:                        1
-        width:                    UtilScript.pt(64)
-        height:                   UtilScript.pt(64)
+        width:                    UtilScript.dp(64)
+        height:                   UtilScript.dp(64)
         source:                   "qrc:/resources/images/dialog/ok.png"
         fillMode:                 Image.PreserveAspectFit
 

@@ -26,17 +26,17 @@ Popup {
     }
 
     contentItem: Rectangle {
-        implicitWidth:  UtilScript.pt(backgroundImage.sourceSize.width)
-        implicitHeight: UtilScript.pt(backgroundImage.sourceSize.height)
+        implicitWidth:  UtilScript.dp(backgroundImage.sourceSize.width)
+        implicitHeight: UtilScript.dp(backgroundImage.sourceSize.height)
         color:          "transparent"
 
         ColumnLayout {
             anchors.fill:         parent
-            anchors.topMargin:    UtilScript.pt(20)
-            anchors.bottomMargin: UtilScript.pt(20)
-            anchors.leftMargin:   UtilScript.pt(10)
-            anchors.rightMargin:  UtilScript.pt(10)
-            spacing:              UtilScript.pt(8)
+            anchors.topMargin:    UtilScript.dp(20)
+            anchors.bottomMargin: UtilScript.dp(20)
+            anchors.leftMargin:   UtilScript.dp(10)
+            anchors.rightMargin:  UtilScript.dp(10)
+            spacing:              UtilScript.dp(8)
 
             Text {
                 text:                qsTr("We keep this app free by showing ads. Ad network will <a href=\"https://policies.google.com/technologies/ads\">collect data and use a unique identifier on your device</a> to show you ads. <b>Do you allow to use your data to tailor ads for you?</b>")
@@ -58,15 +58,15 @@ Popup {
             }
 
             Rectangle {
-                width:            UtilScript.pt(280)
-                height:           UtilScript.pt(48)
+                width:            UtilScript.dp(280)
+                height:           UtilScript.dp(48)
                 color:            "dodgerblue"
-                radius:           UtilScript.pt(8)
+                radius:           UtilScript.dp(8)
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
                 Text {
                     anchors.fill:        parent
-                    anchors.margins:     UtilScript.pt(2)
+                    anchors.margins:     UtilScript.dp(2)
                     text:                qsTr("Yes, show me relevant ads")
                     color:               "white"
                     font.pointSize:      16
@@ -90,15 +90,15 @@ Popup {
             }
 
             Rectangle {
-                width:            UtilScript.pt(280)
-                height:           UtilScript.pt(48)
+                width:            UtilScript.dp(280)
+                height:           UtilScript.dp(48)
                 color:            "dodgerblue"
-                radius:           UtilScript.pt(8)
+                radius:           UtilScript.dp(8)
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
                 Text {
                     anchors.fill:        parent
-                    anchors.margins:     UtilScript.pt(2)
+                    anchors.margins:     UtilScript.dp(2)
                     text:                qsTr("No, show me ads that are less relevant")
                     color:               "white"
                     font.pointSize:      16
