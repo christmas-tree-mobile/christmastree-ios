@@ -1,5 +1,7 @@
 #import <UIKit/UIKit.h>
 
+#include <cstdlib>
+
 #include <QtCore/QDir>
 #include <QtCore/QStandardPaths>
 
@@ -51,6 +53,6 @@ void ShareHelper::showShareToView(const QString &image_path)
 
         [root_view_controller presentViewController:activity_view_controller animated:YES completion:nil];
     } else {
-        assert(0);
+        abort();
     }
 }
