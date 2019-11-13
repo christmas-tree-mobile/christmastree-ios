@@ -4,17 +4,19 @@ import "../../Util.js" as UtilScript
 
 Image {
     id:       toy
-    width:    UtilScript.dp(sourceSize.width)
-    height:   UtilScript.dp(sourceSize.height)
+    width:    sourceSize.width  * imageScale
+    height:   sourceSize.height * imageScale
     source:   imageSource(toyNumber, toyType)
     fillMode: Image.PreserveAspectFit
     enabled:  !destroyToyAnimation.running
 
-    property int toyNumber:  0
+    property int toyNumber:   0
 
-    property string toyType: ""
+    property real imageScale: 1.0
 
-    property var treePage:   null
+    property string toyType:  ""
+
+    property var treePage:    null
 
     function imageSource(toy_number, toy_type) {
         if (toy_number !== 0 && toy_type !== "") {
@@ -22,26 +24,6 @@ Image {
         } else {
             return "";
         }
-    }
-
-    function enlargeToy() {
-        var center_x = x + width  / 2;
-        var center_y = y + height / 2;
-
-        width  = sourceSize.width  * 2;
-        height = sourceSize.height * 2;
-
-        x = center_x - width  / 2;
-        y = center_y - height / 2;
-    }
-
-    function reduceToy() {
-        var center_x = x + width / 2;
-
-        width  = sourceSize.width;
-        height = sourceSize.height;
-
-        x = center_x - width / 2;
     }
 
     function destroyToy() {
