@@ -46,8 +46,6 @@ Item {
                                                                                backgroundImage.paintedHeight,
                                                                                lowerRightTreePointYConfig)
 
-    property bool lastInterstitialActive:             false
-
     property int currentBackgroundNum:                1
     property int currentTreeNum:                      1
 
@@ -56,15 +54,13 @@ Item {
     property var newToy:                              null
 
     onInterstitialActiveChanged: {
-        if (!interstitialActive && lastInterstitialActive) {
+        if (!interstitialActive) {
             if (interstitialCaptureFmt === "IMAGE") {
                 captureImage();
             } else {
                 captureGIFTimer.start();
             }
         }
-
-        lastInterstitialActive = interstitialActive;
     }
 
     onCurrentBackgroundNumChanged: {
@@ -161,18 +157,20 @@ Item {
     }
 
     function captureImage() {
-        waitRectangle.visible = true;
+        waitArea.visible = true;
 
         if (!backgroundImage.grabToImage(function (result) {
-            result.saveToFile(ShareHelper.imageFilePath);
+            if (result.saveToFile(ShareHelper.imageFilePath)) {
+                ShareHelper.showShareToView(ShareHelper.imageFilePath);
+            } else {
+                console.error("saveToFile() failed");
+            }
 
-            ShareHelper.showShareToView(ShareHelper.imageFilePath);
-
-            waitRectangle.visible = false;
+            waitArea.visible = false;
         })) {
-            console.log("grabToImage() failed");
+            console.error("grabToImage() failed");
 
-            waitRectangle.visible = false;
+            waitArea.visible = false;
         }
     }
 
@@ -184,7 +182,7 @@ Item {
         loops:    Audio.Infinite
 
         onError: {
-            console.log(errorString);
+            console.error(errorString);
         }
     }
 
@@ -200,6 +198,8 @@ Item {
             height:           Math.floor(imageHeight(sourceSize.width, sourceSize.height, parent.width, parent.height))
             source:           "qrc:/resources/images/tree/background_%1.png".arg(treePage.currentBackgroundNum)
             fillMode:         Image.PreserveAspectCrop
+
+            readonly property real imageScale: sourceSize.width > 0.0 ? paintedWidth / sourceSize.width : 1.0
 
             function imageWidth(src_width, src_height, dst_width, dst_height) {
                 if (src_width > 0 && src_height > 0 && dst_width > 0 && dst_height > 0) {
@@ -295,7 +295,7 @@ Item {
 
             ParticleSystem {
                 id:      particleSystem1
-                running: treePage.appInForeground && treePage.pageActive &&
+                running: treePage.pageActive &&
                          treePage.currentBackgroundNum <= treePage.maxBackgroundNumWithSnow
             }
 
@@ -303,7 +303,7 @@ Item {
                 anchors.fill: parent
                 system:       particleSystem1
                 lifeSpan:     1000
-                size:         UtilScript.dp(32)
+                size:         UtilScript.dp(16)
 
                 velocity: AngleDirection {
                     angle:              90
@@ -322,7 +322,7 @@ Item {
 
             ParticleSystem {
                 id:      particleSystem2
-                running: treePage.appInForeground && treePage.pageActive &&
+                running: treePage.pageActive &&
                          treePage.currentBackgroundNum <= treePage.maxBackgroundNumWithSnow
             }
 
@@ -330,7 +330,7 @@ Item {
                 anchors.fill: parent
                 system:       particleSystem2
                 lifeSpan:     1000
-                size:         UtilScript.dp(32)
+                size:         UtilScript.dp(16)
 
                 velocity: AngleDirection {
                     angle:              90
@@ -349,7 +349,7 @@ Item {
 
             ParticleSystem {
                 id:      particleSystem3
-                running: treePage.appInForeground && treePage.pageActive &&
+                running: treePage.pageActive &&
                          treePage.currentBackgroundNum <= treePage.maxBackgroundNumWithSnow
             }
 
@@ -357,7 +357,7 @@ Item {
                 anchors.fill: parent
                 system:       particleSystem3
                 lifeSpan:     1000
-                size:         UtilScript.dp(32)
+                size:         UtilScript.dp(16)
 
                 velocity: AngleDirection {
                     angle:              90
@@ -376,7 +376,7 @@ Item {
 
             ParticleSystem {
                 id:      particleSystem4
-                running: treePage.appInForeground && treePage.pageActive &&
+                running: treePage.pageActive &&
                          treePage.currentBackgroundNum <= treePage.maxBackgroundNumWithSnow
             }
 
@@ -384,7 +384,7 @@ Item {
                 anchors.fill: parent
                 system:       particleSystem4
                 lifeSpan:     1000
-                size:         UtilScript.dp(32)
+                size:         UtilScript.dp(16)
 
                 velocity: AngleDirection {
                     angle:              90
@@ -657,8 +657,6 @@ Item {
                                 treePage.newToy.y      = mapped.y - treePage.newToy.height;
                                 treePage.newToy.z      = 4;
 
-                                treePage.newToy.reduceToy();
-
                                 if (!treePage.validateToy(treePage.newToy.x + treePage.newToy.width / 2, treePage.newToy.y + treePage.newToy.height / 2)) {
                                     treePage.newToy.destroyToy();
                                 }
@@ -680,14 +678,12 @@ Item {
                                     var component = Qt.createComponent("Tree/Toy.qml");
 
                                     if (component.status === Component.Ready) {
-                                        treePage.newToy = component.createObject(backgroundRectangle, {"z": 3, "treePage": treePage, "toyType": toyType, "toyNumber": toyNumber});
-
-                                        treePage.newToy.enlargeToy();
+                                        treePage.newToy = component.createObject(backgroundRectangle, {"z": 3, "treePage": treePage, "imageScale": backgroundImage.imageScale, "toyType": toyType, "toyNumber": toyNumber});
 
                                         treePage.newToy.x = toysItemMouseArea.pressEventX - treePage.newToy.width / 2;
                                         treePage.newToy.y = toysItemMouseArea.pressEventY - treePage.newToy.height;
                                     } else {
-                                        console.log(component.errorString());
+                                        console.error(component.errorString());
                                     }
                                 }
                             }
@@ -701,23 +697,26 @@ Item {
             }
         }
 
-        Rectangle {
-             id:           waitRectangle
-             anchors.fill: parent
-             z:            4
-             color:        "black"
-             opacity:      0.75
-             visible:      false
+        MultiPointTouchArea {
+            id:           waitArea
+            anchors.fill: parent
+            z:            4
+            visible:      false
 
-             BusyIndicator {
-                 anchors.centerIn: parent
-                 running:          parent.visible
-             }
+            Rectangle {
+                anchors.fill: parent
+                color:        "black"
+                opacity:      0.75
+            }
 
-             MultiPointTouchArea {
-                 anchors.fill: parent
-             }
-         }
+            BusyIndicator {
+                anchors.centerIn: parent
+                z:                1
+                implicitWidth:    UtilScript.dp(64)
+                implicitHeight:   UtilScript.dp(64)
+                running:          parent.visible
+            }
+        }
     }
 
     PurchaseDialog {
@@ -767,22 +766,24 @@ Item {
         readonly property int framesCount: 5
 
         property int frameNumber:          0
+        property int capturedFramesCount:  0
 
         onRunningChanged: {
             if (running) {
-                waitRectangle.visible = true;
+                waitArea.visible = true;
 
-                frameNumber = 0;
+                frameNumber         = 0;
+                capturedFramesCount = 0;
             } else {
-                if (frameNumber >= framesCount) {
+                if (capturedFramesCount >= framesCount) {
                     if (GIFCreator.createGIF(framesCount, interval / 10)) {
                         ShareHelper.showShareToView(GIFCreator.gifFilePath);
                     } else {
-                        console.log("createGIF() failed");
+                        console.error("createGIF() failed");
                     }
                 }
 
-                waitRectangle.visible = false;
+                waitArea.visible = false;
             }
         }
 
@@ -791,14 +792,24 @@ Item {
                 var frame_number = frameNumber;
 
                 if (!backgroundImage.grabToImage(function (result) {
-                    result.saveToFile(GIFCreator.imageFilePathMask.arg(frame_number));
+                    if (result.saveToFile(GIFCreator.imageFilePathMask.arg(frame_number))) {
+                        capturedFramesCount = capturedFramesCount + 1;
+
+                        if (capturedFramesCount >= framesCount) {
+                            stop();
+                        }
+                    } else {
+                        console.error("saveToFile() failed for frame %1".arg(frame_number));
+
+                        stop();
+                    }
                 })) {
-                    console.log("grabToImage() failed for frame %1".arg(frame_number));
+                    console.error("grabToImage() failed for frame %1".arg(frame_number));
+
+                    stop();
                 }
 
                 frameNumber = frameNumber + 1;
-            } else {
-                stop();
             }
         }
     }
