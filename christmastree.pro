@@ -6,8 +6,9 @@ CONFIG += c++11
 
 DEFINES += QT_DEPRECATED_WARNINGS QT_NO_CAST_FROM_ASCII QT_NO_CAST_TO_ASCII
 
-SOURCES += src/main.cpp \
-    src/gifcreator.cpp
+SOURCES += \
+    src/gifcreator.cpp \
+    src/main.cpp
 
 OBJECTIVE_SOURCES += \
     src/admobhelper.mm \
@@ -16,10 +17,10 @@ OBJECTIVE_SOURCES += \
 
 HEADERS += \
     src/admobhelper.h \
-    src/sharehelper.h \
-    src/storehelper.h \
     src/gif.h \
-    src/gifcreator.h
+    src/gifcreator.h \
+    src/sharehelper.h \
+    src/storehelper.h
 
 RESOURCES += \
     qml.qrc \
@@ -27,12 +28,12 @@ RESOURCES += \
     translations.qrc
 
 TRANSLATIONS += \
-    translations/christmastree_ru.ts \
     translations/christmastree_de.ts \
-    translations/christmastree_fr.ts \
-    translations/christmastree_zh.ts \
     translations/christmastree_es.ts \
-    translations/christmastree_it.ts
+    translations/christmastree_fr.ts \
+    translations/christmastree_it.ts \
+    translations/christmastree_ru.ts \
+    translations/christmastree_zh.ts
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
