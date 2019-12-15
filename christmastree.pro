@@ -52,6 +52,7 @@ ios {
             -framework GoogleMobileAds \
             -framework GoogleUtilities \
             -framework nanopb \
+            -framework Foundation \
             -framework UIKit \
             -framework StoreKit
 
