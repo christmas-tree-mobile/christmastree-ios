@@ -2,11 +2,20 @@
 
 #include <QtCore/QDir>
 #include <QtCore/QStandardPaths>
+#include <QtCore/QDebug>
 
 #include "sharehelper.h"
 
 ShareHelper::ShareHelper(QObject *parent) : QObject(parent)
 {
+    ThisGuard = std::make_shared<bool>(true);
+}
+
+ShareHelper::~ShareHelper() noexcept
+{
+    if (ThisGuard) {
+        *ThisGuard = false;
+    }
 }
 
 ShareHelper &ShareHelper::GetInstance()
@@ -37,11 +46,17 @@ void ShareHelper::showShareToView(const QString &image_path)
         *stop = (root_view_controller != nil);
     }];
 
+    std::shared_ptr<bool> this_guard = ThisGuard;
+
     UIActivityViewController *activity_view_controller = [[[UIActivityViewController alloc] initWithActivityItems:@[[NSURL fileURLWithPath:image_path.toNSString()]] applicationActivities:nil] autorelease];
 
     activity_view_controller.excludedActivityTypes      = @[];
     activity_view_controller.completionWithItemsHandler = ^(UIActivityType, BOOL, NSArray *, NSError *) {
-        emit shareToViewCompleted();
+        if (this_guard && *this_guard) {
+            emit shareToViewCompleted();
+        } else {
+            qWarning() << "showShareToView() : block context has been destroyed";
+        }
     };
 
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {

@@ -1,6 +1,8 @@
 #ifndef SHAREHELPER_H
 #define SHAREHELPER_H
 
+#include <memory>
+
 #include <QtCore/QObject>
 #include <QtCore/QString>
 
@@ -12,7 +14,7 @@ class ShareHelper : public QObject
 
 private:
     explicit ShareHelper(QObject *parent = nullptr);
-    ~ShareHelper() noexcept override = default;
+    ~ShareHelper() noexcept override;
 
 public:
     ShareHelper(const ShareHelper &) = delete;
@@ -29,6 +31,9 @@ public:
 
 signals:
     void shareToViewCompleted();
+
+private:
+    std::shared_ptr<bool> ThisGuard;
 };
 
 #endif // SHAREHELPER_H
