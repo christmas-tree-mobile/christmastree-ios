@@ -7,6 +7,7 @@ CONFIG += c++11
 DEFINES += QT_DEPRECATED_WARNINGS QT_NO_CAST_FROM_ASCII QT_NO_CAST_TO_ASCII
 
 SOURCES += \
+    src/contextguard.cpp \
     src/gifcreator.cpp \
     src/main.cpp
 
@@ -15,6 +16,7 @@ OBJECTIVE_SOURCES += \
     src/storehelper.mm
 
 HEADERS += \
+    src/contextguard.h \
     src/gif.h \
     src/gifcreator.h \
     src/sharehelper.h \
