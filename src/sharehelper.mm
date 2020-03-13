@@ -6,16 +6,14 @@
 
 #include "sharehelper.h"
 
-ShareHelper::ShareHelper(QObject *parent) : QObject(parent)
+ShareHelper::ShareHelper(QObject *parent) :
+    QObject(parent)
 {
-    ThisGuard = std::make_shared<bool>(true);
 }
 
 ShareHelper::~ShareHelper() noexcept
 {
-    if (ThisGuard) {
-        *ThisGuard = false;
-    }
+    ThisGuard.Invalidate();
 }
 
 ShareHelper &ShareHelper::GetInstance()
@@ -46,13 +44,13 @@ void ShareHelper::showShareToView(const QString &image_path)
         *stop = (root_view_controller != nil);
     }];
 
-    std::shared_ptr<bool> this_guard = ThisGuard;
+    ContextGuard this_guard = ThisGuard;
 
     UIActivityViewController *activity_view_controller = [[[UIActivityViewController alloc] initWithActivityItems:@[[NSURL fileURLWithPath:image_path.toNSString()]] applicationActivities:nil] autorelease];
 
     activity_view_controller.excludedActivityTypes      = @[];
     activity_view_controller.completionWithItemsHandler = ^(UIActivityType, BOOL, NSArray *, NSError *) {
-        if (this_guard && *this_guard) {
+        if (this_guard) {
             emit shareToViewCompleted();
         } else {
             qWarning() << "showShareToView() : block context has been destroyed";

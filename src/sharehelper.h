@@ -1,10 +1,10 @@
 #ifndef SHAREHELPER_H
 #define SHAREHELPER_H
 
-#include <memory>
-
 #include <QtCore/QObject>
 #include <QtCore/QString>
+
+#include "contextguard.h"
 
 class ShareHelper : public QObject
 {
@@ -33,7 +33,7 @@ signals:
     void shareToViewCompleted();
 
 private:
-    std::shared_ptr<bool> ThisGuard;
+    ContextGuard ThisGuard;
 };
 
 #endif // SHAREHELPER_H
