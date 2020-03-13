@@ -14,7 +14,7 @@ class ShareHelper : public QObject
 
 private:
     explicit ShareHelper(QObject *parent = nullptr);
-    ~ShareHelper() noexcept override;
+    ~ShareHelper() noexcept override = default;
 
 public:
     ShareHelper(const ShareHelper &) = delete;

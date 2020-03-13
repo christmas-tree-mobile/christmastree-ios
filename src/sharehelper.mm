@@ -11,11 +11,6 @@ ShareHelper::ShareHelper(QObject *parent) :
 {
 }
 
-ShareHelper::~ShareHelper() noexcept
-{
-    ThisGuard.Invalidate();
-}
-
 ShareHelper &ShareHelper::GetInstance()
 {
     static ShareHelper instance;
