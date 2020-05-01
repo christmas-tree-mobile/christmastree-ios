@@ -58,8 +58,8 @@ Popup {
             }
 
             Rectangle {
-                width:            UtilScript.dp(280)
-                height:           UtilScript.dp(48)
+                implicitWidth:    UtilScript.dp(280)
+                implicitHeight:   UtilScript.dp(48)
                 color:            "dodgerblue"
                 radius:           UtilScript.dp(8)
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
@@ -90,8 +90,8 @@ Popup {
             }
 
             Rectangle {
-                width:            UtilScript.dp(280)
-                height:           UtilScript.dp(48)
+                implicitWidth:    UtilScript.dp(280)
+                implicitHeight:   UtilScript.dp(48)
                 color:            "dodgerblue"
                 radius:           UtilScript.dp(8)
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
