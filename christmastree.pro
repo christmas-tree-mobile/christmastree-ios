@@ -2,7 +2,7 @@ TEMPLATE = app
 TARGET = christmastree
 
 QT += quick quickcontrols2 sql multimedia purchasing
-CONFIG += c++11
+CONFIG += c++17
 
 DEFINES += QT_DEPRECATED_WARNINGS QT_NO_CAST_FROM_ASCII QT_NO_CAST_TO_ASCII
 
