@@ -38,7 +38,7 @@
     </message>
     <message>
         <location filename="../qml/Core/Dialog/HelpDialog.qml" line="74"/>
-        <source>3. Select toy you like from gallery by holding your finger on it and then drag selected toy to appropriate place on Christmas Tree. Press and hold your finger on the toy to send it to background or bring to foreground. Move toy away from Christmas Tree to remove it.</source>
+        <source>3. Select toy you like from gallery by holding your finger down on it and then drag selected toy to appropriate place on Christmas Tree. Press and hold down your finger on the toy to send it to background or bring to foreground. Move toy away from Christmas Tree to remove it.</source>
         <translation>3. Seleziona il giocattolo che ti piace dalla galleria tenendo il dito su di esso e trascina il giocattolo selezionato nel punto appropriato sull&apos;albero di Natale. Premi e tieni premuto il dito sul giocattolo per inviarlo allo sfondo o portare in primo piano. Sposta il giocattolo lontano dall&apos;albero di Natale per rimuoverlo.</translation>
     </message>
     <message>

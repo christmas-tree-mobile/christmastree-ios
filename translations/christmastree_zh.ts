@@ -31,7 +31,7 @@
         <translation>二。 按下玩具按钮打开玩具画廊。 再次按玩具按钮以隐藏此图库。</translation>
     </message>
     <message>
-        <source>3. Select toy you like from gallery by holding your finger on it and then drag selected toy to appropriate place on Christmas Tree. Press and hold your finger on the toy to send it to background or bring to foreground. Move toy away from Christmas Tree to remove it.</source>
+        <source>3. Select toy you like from gallery by holding your finger down on it and then drag selected toy to appropriate place on Christmas Tree. Press and hold down your finger on the toy to send it to background or bring to foreground. Move toy away from Christmas Tree to remove it.</source>
         <translation>三。 在手指上选择您喜欢的玩具，然后将选定的玩具拖到圣诞树上适当的位置。 按住玩具上的手指将其发送到背景或将其带到前台。 将玩具从圣诞树移开以将其取出。</translation>
     </message>
     <message>
