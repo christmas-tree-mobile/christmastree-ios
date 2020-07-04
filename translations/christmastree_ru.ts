@@ -16,7 +16,7 @@
         <translation>2. Нажмите кнопку Игрушки, чтобы открыть галерею елочных игрушек. Нажмите кнопку Игрушки еще раз, чтобы скрыть эту галерею.</translation>
     </message>
     <message>
-        <source>3. Select toy you like from gallery by holding your finger on it and then drag selected toy to appropriate place on Christmas Tree. Press and hold your finger on the toy to send it to background or bring to foreground. Move toy away from Christmas Tree to remove it.</source>
+        <source>3. Select toy you like from gallery by holding your finger down on it and then drag selected toy to appropriate place on Christmas Tree. Press and hold down your finger on the toy to send it to background or bring to foreground. Move toy away from Christmas Tree to remove it.</source>
         <translation>3. Выберите понравившуюся вам игрушку из галереи длительным нажатием пальца, а затем переместите ее на елку. Перемещайте игрушку за ветки или на передний план длительным нажатием пальца. Переместите игрушку за пределы елки для ее удаления с экрана.</translation>
     </message>
     <message>
