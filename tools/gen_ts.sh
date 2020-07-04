@@ -1,6 +1,6 @@
 #!/bin/sh
 
-PATH=$PATH:~/Qt/5.13.0/ios/bin
+PATH=$PATH:~/Qt/5.12.9/ios/bin
 
 lupdate -locations absolute ../christmastree.pro -ts ../translations/christmastree_de.src.ts
 lupdate -locations absolute ../qml               -ts ../translations/christmastree_de.qml.ts
