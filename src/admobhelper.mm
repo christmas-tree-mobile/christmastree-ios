@@ -106,10 +106,6 @@ constexpr NSTimeInterval AD_RELOAD_ON_FAILURE_DELAY = 60.0;
 {
     GADRequest *request = [GADRequest request];
 
-    if (AdMobHelper::ADMOB_TEST_DEVICE_ID != QLatin1String("")) {
-        request.testDevices = @[AdMobHelper::ADMOB_TEST_DEVICE_ID.toNSString()];
-    }
-
     if (!ShowPersonalizedAds) {
         GADExtras *extras = [[[GADExtras alloc] init] autorelease];
 
@@ -213,10 +209,6 @@ constexpr NSTimeInterval AD_RELOAD_ON_FAILURE_DELAY = 60.0;
     Interstitial.delegate = self;
 
     GADRequest *request = [GADRequest request];
-
-    if (AdMobHelper::ADMOB_TEST_DEVICE_ID != QLatin1String("")) {
-        request.testDevices = @[AdMobHelper::ADMOB_TEST_DEVICE_ID.toNSString()];
-    }
 
     if (!ShowPersonalizedAds) {
         GADExtras *extras = [[[GADExtras alloc] init] autorelease];
@@ -346,6 +338,10 @@ void AdMobHelper::initAds()
 {
     if (!Initialized) {
         [GADMobileAds sharedInstance].requestConfiguration.maxAdContentRating = GADMaxAdContentRatingGeneral;
+
+        if (AdMobHelper::ADMOB_TEST_DEVICE_ID != QLatin1String("")) {
+            [GADMobileAds sharedInstance].requestConfiguration.testDeviceIdentifiers = @[AdMobHelper::ADMOB_TEST_DEVICE_ID.toNSString()];
+        }
 
         [[GADMobileAds sharedInstance] startWithCompletionHandler:nil];
 
