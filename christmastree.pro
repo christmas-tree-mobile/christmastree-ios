@@ -14,10 +14,6 @@ SOURCES += \
     src/gifcreator.cpp \
     src/main.cpp
 
-OBJECTIVE_SOURCES += \
-    src/sharehelper.mm \
-    src/storehelper.mm
-
 HEADERS += \
     3rdparty/gif-h/gif.h \
     src/contextguard.h \
@@ -53,6 +49,10 @@ ios {
 
     INCLUDEPATH += ios/frameworks
     DEPENDPATH += ios/frameworks
+
+    OBJECTIVE_SOURCES += \
+        src/sharehelper.mm \
+        src/storehelper.mm
 
     LIBS += -F $$PWD/ios/frameworks \
             -framework UIKit \
