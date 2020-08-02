@@ -65,6 +65,7 @@ ios {
             -framework UIKit \
             -framework StoreKit
 
+    QMAKE_OBJECTIVE_CFLAGS += $$(QMAKE_OBJECTIVE_CFLAGS_ENV)
     QMAKE_LFLAGS += -ObjC
 
     QMAKE_APPLE_DEVICE_ARCHS = arm64
