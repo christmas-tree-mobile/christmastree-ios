@@ -1,0 +1,79 @@
+language: cpp
+
+os: osx
+
+osx_image: xcode12u
+
+addons:
+  sonarcloud:
+    organization: "christmas-tree-mobile-github"
+    token:
+      secure: "guS0rfx08llCb6C7EMHOX4mzT6emLVASjpywKqiq04rlKcr8Pk8Gt2MugLQsMQhUI2Pj2ZksTjAr7za/DYUbebusUlJY29lQwl0L+oxUP73Q3CRZSoIeUFCKAw+iu+Ps1sXYt3NJov5meJi83Bvdft1kkXubXRST4QEHIkbr/vWHPeJQ3nrLtCu3BkvTy35cNS3I0NwS2xCPHt8r5tlQ5MBYiiTDcHsJQH7imUmnk+e/nV3ivROaeW8Db34/0GVvpNPDOSDBLT2pGitNXFDPwTPWeNT1Mi9c1l4CYpwDx/R1FrLyvViaR+V18pNqQWnJRasAXYO51I8wFZobHSgrsR3E11D/gkqL8muUex+/OFFhl3XtFdRLq64/c8Srq5yfFL7jdH0PXu0NbEqtESmoy86J93DXCNKjvPRpy76rBuGAHi+Vzz3F5H06/Ncmq1Kr0PZbAsqx6bvrMSuKh0RzgaCmOybKXbTF8Eh0vS1eaFR8EE8SOfnKeRucqH2y6rLzsn27n78MBQYNrcKdlLTeftHwx6pWcrAHlDaE54p9HZmDwPM8IHJLlRt6CodbU4Em/SMKJ7e/QszLX6MRS4F1ZTkn3AU+pcF4ZhqvCrSrNw7smEzws7N4koYMkhgnhKtgVy8bjkIE35+JhmdYDeTRKp7bQc6gvaYuv6Yf05yo+HQ="
+
+install:
+  - |
+    echo && \
+    echo "---- INSTALLATION OF HOMEBREW PACKAGES ----" && \
+    echo && \
+    brew install p7zip && \
+    echo && \
+    echo "------- INSTALLATION OF QT PACKAGES -------" && \
+    echo && \
+    bash tools/install-qt.sh --version 5.12.9 --target ios --toolchain ios --directory "$HOME/Qt" qtbase qtdeclarative qtquickcontrols2 qtmultimedia qtpurchasing && \
+    echo && \
+    echo "----------- END OF INSTALLATION -----------" && \
+    echo
+
+script:
+  - |
+    echo && \
+    echo "---------- ENVIRONMENT VARIABLES ----------" && \
+    echo && \
+    export PATH="$HOME/Qt/5.12.9/ios/bin:$PATH" && \
+    export QMAKE_CFLAGS_ENV="-Werror" && \
+    export QMAKE_CXXFLAGS_ENV="-Werror" && \
+    export QMAKE_OBJECTIVE_CFLAGS_ENV="-Werror -Wno-error-objc-property-no-attribute" && \
+    echo && \
+    echo "--------- UNSHALLOW GIT FOR SONAR ---------" && \
+    echo && \
+    git fetch --unshallow && \
+    echo && \
+    echo "---------- CREATE BUILD DIRECTORY ---------" && \
+    echo && \
+    mkdir .build && \
+    cd .build && \
+    echo && \
+    echo "------------------ QMAKE ------------------" && \
+    echo && \
+    qmake ../christmastree.pro && \
+    echo && \
+    echo "------------------ MAKE -------------------" && \
+    echo && \
+    make XCODEBUILD_FLAGS="CODE_SIGN_IDENTITY=\"\" CODE_SIGNING_REQUIRED=NO" debug-device && \
+    if [[ "$TRAVIS_PULL_REQUEST" == "false" ]]; then \
+        echo && \
+        echo "------------- MAKE DISTCLEAN --------------" && \
+        echo && \
+        make distclean && \
+        echo && \
+        echo "------------------ QMAKE ------------------" && \
+        echo && \
+        qmake ../christmastree.pro && \
+        echo && \
+        echo "-------------- SONAR WRAPPER --------------" && \
+        echo && \
+        build-wrapper-macosx-x86 --out-dir bw-output make XCODEBUILD_FLAGS="CODE_SIGN_IDENTITY=\"\" CODE_SIGNING_REQUIRED=NO" debug-device && \
+        echo && \
+        echo "-------------- SONAR SCANNER --------------" && \
+        echo && \
+        cd .. && \
+        sonar-scanner -Dsonar.projectKey=christmas-tree-mobile_christmastree-ios \
+                      -Dsonar.projectName="ChristmasTree iOS" \
+                      -Dsonar.sources=. \
+                      -Dsonar.sourceEncoding=UTF-8 \
+                      -Dsonar.exclusions="qml_*.cpp,qrc_*.cpp,3rdparty/**/*,qml/**/*,translations/*" \
+                      -Dsonar.cfamily.build-wrapper-output=.build/bw-output \
+                      -Dsonar.cfamily.cache.enabled=false \
+                      -Dsonar.cfamily.threads=1 \
+                      -Dsonar.cpp.file.suffixes=.cpp,.mm; \
+    fi
