@@ -1,6 +1,7 @@
 #import <UIKit/UIKit.h>
 
 #include <QtCore/QLatin1String>
+#include <QtCore/QPointer>
 #include <QtCore/QDir>
 #include <QtCore/QStandardPaths>
 #include <QtCore/QDebug>
@@ -40,13 +41,13 @@ void ShareHelper::showShareToView(const QString &image_path)
         *stop = (root_view_controller != nil);
     }];
 
-    ContextGuard this_guard = ThisGuard;
+    QPointer this_guard(this);
 
     UIActivityViewController *activity_view_controller = [[[UIActivityViewController alloc] initWithActivityItems:@[[NSURL fileURLWithPath:image_path.toNSString()]] applicationActivities:nil] autorelease];
 
     activity_view_controller.excludedActivityTypes      = @[];
     activity_view_controller.completionWithItemsHandler = ^(UIActivityType, BOOL, NSArray *, NSError *) {
-        if (this_guard) {
+        if (!this_guard.isNull()) {
             emit shareToViewCompleted();
         } else {
             qWarning() << "showShareToView() : block context has been destroyed";
