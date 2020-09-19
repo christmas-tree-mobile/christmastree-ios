@@ -10,14 +10,12 @@ INCLUDEPATH += \
     3rdparty/gif-h
 
 SOURCES += \
-    src/contextguard.cpp \
     src/gifcreator.cpp \
     src/main.cpp
 
 HEADERS += \
     3rdparty/gif-h/gif.h \
     src/admobhelper.h \
-    src/contextguard.h \
     src/gifcreator.h \
     src/sharehelper.h \
     src/storehelper.h
