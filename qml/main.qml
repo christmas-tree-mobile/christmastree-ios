@@ -46,7 +46,7 @@ ApplicationWindow {
             for (var i = 0; i < depth; i++) {
                 var item = get(i, StackView.DontLoad);
 
-                if (item !== null) {
+                if (item) {
                     item.focus = false;
                 }
             }
