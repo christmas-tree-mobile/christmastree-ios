@@ -1,0 +1,15 @@
+.DS_Store
+/.qmake.stash
+/Makefile
+/christmastree.pro.user
+/christmastree_plugin_import.cpp
+/christmastree_qml_plugin_import.cpp
+/moc_*.cpp
+/qml_*.cpp
+/qmlcache_loader.cpp
+/qrc_*.cpp
+/.xcode/
+/Debug-iphoneos/
+/Release-iphoneos/
+/christmastree/Images.xcassets/
+/christmastree.xcodeproj/
