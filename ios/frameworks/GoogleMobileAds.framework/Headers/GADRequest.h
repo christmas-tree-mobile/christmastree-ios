@@ -12,7 +12,7 @@
 #import <UIKit/UIKit.h>
 
 /// Add this constant to the testDevices property's array to receive test ads on the simulator.
-GAD_EXTERN const id _Nonnull kGADSimulatorID;
+GAD_EXTERN NSString *_Nonnull const kGADSimulatorID;
 
 /// Deprecated gender constants.
 typedef NS_ENUM(NSInteger, GADGender) {
@@ -44,11 +44,6 @@ typedef NS_ENUM(NSInteger, GADGender) {
 /// extras type.
 - (void)removeAdNetworkExtrasFor:(nonnull Class<GADAdNetworkExtras>)aClass;
 
-#pragma mark Collecting SDK Information
-
-/// Returns the version of the SDK.
-+ (nonnull NSString *)sdkVersion;
-
 #pragma mark Publisher Provided
 
 /// Scene object. Used in multiscene apps to request ads of the appropriate size.
@@ -67,11 +62,16 @@ typedef NS_ENUM(NSInteger, GADGender) {
 
 /// Array of keyword strings. Keywords are words or phrases describing the current user activity
 /// such as @"Sports Scores" or @"Football". Set this property to nil to clear the keywords.
-@property(nonatomic, copy, nullable) NSArray *keywords;
+@property(nonatomic, copy, nullable) NSArray<NSString *> *keywords;
 
 /// URL string for a webpage whose content matches the app's primary content. This webpage content
 /// is used for targeting and brand safety purposes.
 @property(nonatomic, copy, nullable) NSString *contentURL;
+
+/// URL strings for non-primary web content near an ad. Promotes brand safety and allows displayed
+/// ads to have an app level rating (MA, T, PG, etc) that is more appropriate to neighboring
+/// content.
+@property(nonatomic, copy, nullable) NSArray<NSString *> *neighboringContentURLStrings;
 
 #pragma mark Request Agent Information
 
@@ -80,50 +80,5 @@ typedef NS_ENUM(NSInteger, GADGender) {
 /// For example, a third party ad network called "CoolAds network" that is mediating requests to the
 /// Mobile Ads SDK should set this property as "CoolAds".
 @property(nonatomic, copy, nullable) NSString *requestAgent;
-
-#pragma mark Deprecated Methods
-
-/// Test ads will be returned for devices with device IDs specified in this array.
-/// Use GADRequestConfiguration instead.
-@property(nonatomic, copy, nullable) NSArray<NSString *> *testDevices GAD_DEPRECATED_MSG_ATTRIBUTE(
-    "Use GADMobileAds.sharedInstance.requestConfiguration.testDeviceIdentifiers.");
-
-/// Deprecated property. The user's gender.
-@property(nonatomic, assign) GADGender gender GAD_DEPRECATED_ATTRIBUTE;
-
-/// Deprecated property. The user's birthday.
-@property(nonatomic, copy, nullable) NSDate *birthday GAD_DEPRECATED_ATTRIBUTE;
-
-/// Provide the user's birthday to increase ad relevancy.
-- (void)setBirthdayWithMonth:(NSInteger)month
-                         day:(NSInteger)day
-                        year:(NSInteger)year GAD_DEPRECATED_ATTRIBUTE;
-
-/// When Core Location isn't available but the user's location is known, supplying it here may
-/// deliver more relevant ads. It can be any free-form text such as @"Champs-Elysees Paris" or
-/// @"94041 US".
-- (void)setLocationWithDescription:(nullable NSString *)locationDescription
-    GAD_DEPRECATED_MSG_ATTRIBUTE(" use setLocationWithLatitude:longitude:accuracy:.");
-
-/// [Optional] This method allows you to specify whether you would like your app to be treated as
-/// child-directed for purposes of the Children’s Online Privacy Protection Act (COPPA),
-/// http://business.ftc.gov/privacy-and-security/childrens-privacy.
-///
-/// If you call this method with YES, you are indicating that your app should be treated as
-/// child-directed for purposes of the Children’s Online Privacy Protection Act (COPPA). If you call
-/// this method with NO, you are indicating that your app should not be treated as child-directed
-/// for purposes of the Children’s Online Privacy Protection Act (COPPA). If you do not call this
-/// method, ad requests will include no indication of how you would like your app treated with
-/// respect to COPPA.
-///
-/// By setting this method, you certify that this notification is accurate and you are authorized to
-/// act on behalf of the owner of the app. You understand that abuse of this setting may result in
-/// termination of your Google account.
-///
-/// It may take some time for this designation to be fully implemented in applicable Google
-/// services. This designation will only apply to ad requests for which you have set this method.
-- (void)tagForChildDirectedTreatment:(BOOL)childDirectedTreatment
-    GAD_DEPRECATED_MSG_ATTRIBUTE(
-        " use [GADMobileAds.sharedInstance.requestConfiguration tagForChildDirectedTreatment]");
 
 @end
