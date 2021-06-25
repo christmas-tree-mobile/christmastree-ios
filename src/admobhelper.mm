@@ -53,7 +53,8 @@ constexpr NSTimeInterval AD_RELOAD_ON_FAILURE_DELAY = 60.0;
             *stop = (root_view_controller != nil);
         }];
 
-        BannerView = [[GADBannerView alloc] initWithAdSize:kGADAdSizeSmartBannerPortrait];
+        BannerView = [[GADBannerView alloc] initWithAdSize:(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ?
+                                                            kGADAdSizeLeaderboard : kGADAdSizeBanner)];
 
         BannerView.adUnitID                                  = AdMobHelper::ADMOB_BANNERVIEW_UNIT_ID.toNSString();
         BannerView.autoloadEnabled                           = YES;
@@ -105,9 +106,9 @@ constexpr NSTimeInterval AD_RELOAD_ON_FAILURE_DELAY = 60.0;
     [BannerView loadRequest:request];
 }
 
-- (void)adViewDidReceiveAd:(GADBannerView *)adView
+- (void)bannerViewDidReceiveAd:(nonnull GADBannerView *)bannerView
 {
-    Q_UNUSED(adView)
+    Q_UNUSED(bannerView)
 
     UIViewController * __block root_view_controller = nil;
 
@@ -135,24 +136,9 @@ constexpr NSTimeInterval AD_RELOAD_ON_FAILURE_DELAY = 60.0;
     }
 }
 
-- (void)adViewWillPresentScreen:(GADBannerView *)adView
+- (void)bannerView:(nonnull GADBannerView *)bannerView didFailToReceiveAdWithError:(nonnull NSError *)error
 {
-    Q_UNUSED(adView)
-}
-
-- (void)adViewWillDismissScreen:(GADBannerView *)adView
-{
-    Q_UNUSED(adView)
-}
-
-- (void)adViewWillLeaveApplication:(GADBannerView *)adView
-{
-    Q_UNUSED(adView)
-}
-
-- (void)adView:(GADBannerView *)adView didFailToReceiveAdWithError:(GADRequestError *)error
-{
-    Q_UNUSED(adView)
+    Q_UNUSED(bannerView)
 
     qWarning() << QString::fromNSString(error.localizedDescription);
 
@@ -161,7 +147,7 @@ constexpr NSTimeInterval AD_RELOAD_ON_FAILURE_DELAY = 60.0;
 
 @end
 
-@interface InterstitialDelegate : NSObject<GADInterstitialDelegate>
+@interface InterstitialDelegate : NSObject<GADFullScreenContentDelegate>
 
 - (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithHelper:(AdMobHelper *)helper NS_DESIGNATED_INITIALIZER;
@@ -176,9 +162,9 @@ constexpr NSTimeInterval AD_RELOAD_ON_FAILURE_DELAY = 60.0;
 
 @implementation InterstitialDelegate
 {
-    BOOL             ShowPersonalizedAds;
-    GADInterstitial *Interstitial;
-    AdMobHelper     *AdMobHelperInstance;
+    BOOL               ShowPersonalizedAds;
+    GADInterstitialAd *Interstitial;
+    AdMobHelper       *AdMobHelperInstance;
 }
 
 - (instancetype)initWithHelper:(AdMobHelper *)helper
@@ -189,9 +175,7 @@ constexpr NSTimeInterval AD_RELOAD_ON_FAILURE_DELAY = 60.0;
         ShowPersonalizedAds = NO;
         AdMobHelperInstance = helper;
 
-        Interstitial = [[GADInterstitial alloc] initWithAdUnitID:AdMobHelper::ADMOB_INTERSTITIAL_UNIT_ID.toNSString()];
-
-        Interstitial.delegate = self;
+        [self performSelector:@selector(loadAd) withObject:nil afterDelay:0.0];
     }
 
     return self;
@@ -199,7 +183,7 @@ constexpr NSTimeInterval AD_RELOAD_ON_FAILURE_DELAY = 60.0;
 
 - (void)dealloc
 {
-    Interstitial.delegate = nil;
+    Interstitial.fullScreenContentDelegate = nil;
 
     [Interstitial release];
 
@@ -222,6 +206,12 @@ constexpr NSTimeInterval AD_RELOAD_ON_FAILURE_DELAY = 60.0;
 
 - (void)loadAd
 {
+    Interstitial.fullScreenContentDelegate = nil;
+
+    [Interstitial release];
+
+    Interstitial = nil;
+
     GADRequest *request = [GADRequest request];
 
     if (!ShowPersonalizedAds) {
@@ -232,12 +222,23 @@ constexpr NSTimeInterval AD_RELOAD_ON_FAILURE_DELAY = 60.0;
         [request registerAdNetworkExtras:extras];
     }
 
-    [Interstitial loadRequest:request];
+    [GADInterstitialAd loadWithAdUnitID:AdMobHelper::ADMOB_INTERSTITIAL_UNIT_ID.toNSString() request:request
+                       completionHandler:^(GADInterstitialAd *ad, NSError *error) {
+        if (error != nil) {
+            qWarning() << QString::fromNSString(error.localizedDescription);
+
+            [self performSelector:@selector(loadAd) withObject:nil afterDelay:AD_RELOAD_ON_FAILURE_DELAY];
+        } else {
+            Interstitial = [ad retain];
+
+            Interstitial.fullScreenContentDelegate = self;
+        }
+    }];
 }
 
 - (void)show
 {
-    if (Interstitial != nil && Interstitial.isReady) {
+    if (Interstitial != nil) {
         UIViewController * __block root_view_controller = nil;
 
         [UIApplication.sharedApplication.windows enumerateObjectsUsingBlock:^(UIWindow * _Nonnull window, NSUInteger, BOOL * _Nonnull stop) {
@@ -253,18 +254,13 @@ constexpr NSTimeInterval AD_RELOAD_ON_FAILURE_DELAY = 60.0;
 - (BOOL)isReady
 {
     if (Interstitial != nil) {
-        return Interstitial.isReady;
+        return YES;
     } else {
         return NO;
     }
 }
 
-- (void)interstitialDidReceiveAd:(GADInterstitial *)ad
-{
-    Q_UNUSED(ad)
-}
-
-- (void)interstitialWillPresentScreen:(GADInterstitial *)ad
+- (void)adDidPresentFullScreenContent:(nonnull id<GADFullScreenPresentingAd>)ad
 {
     Q_UNUSED(ad)
 
@@ -273,42 +269,22 @@ constexpr NSTimeInterval AD_RELOAD_ON_FAILURE_DELAY = 60.0;
     }
 }
 
-- (void)interstitialWillDismissScreen:(GADInterstitial *)ad
+- (void)adDidDismissFullScreenContent:(nonnull id<GADFullScreenPresentingAd>)ad
 {
     Q_UNUSED(ad)
-}
-
-- (void)interstitialDidDismissScreen:(GADInterstitial *)ad
-{
-    Q_UNUSED(ad)
-
-    Interstitial.delegate = nil;
-
-    [Interstitial autorelease];
 
     if (AdMobHelperInstance != nullptr) {
         AdMobHelperInstance->SetInterstitialActive(false);
     }
 
-    Interstitial = [[GADInterstitial alloc] initWithAdUnitID:AdMobHelper::ADMOB_INTERSTITIAL_UNIT_ID.toNSString()];
-
-    Interstitial.delegate = self;
-
     [self performSelector:@selector(loadAd) withObject:nil afterDelay:0.0];
 }
 
-- (void)interstitialWillLeaveApplication:(GADInterstitial *)ad
-{
-    Q_UNUSED(ad)
-}
-
-- (void)interstitial:(GADInterstitial *)ad didFailToReceiveAdWithError:(GADRequestError *)error
+- (void)ad:(nonnull id<GADFullScreenPresentingAd>)ad didFailToPresentFullScreenContentWithError:(nonnull NSError *)error
 {
     Q_UNUSED(ad)
 
     qWarning() << QString::fromNSString(error.localizedDescription);
-
-    [self performSelector:@selector(loadAd) withObject:nil afterDelay:AD_RELOAD_ON_FAILURE_DELAY];
 }
 
 @end
