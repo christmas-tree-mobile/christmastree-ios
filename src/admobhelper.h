@@ -40,8 +40,6 @@ public:
 
     Q_INVOKABLE void initAds();
 
-    Q_INVOKABLE void setPersonalization(bool personalized);
-
     Q_INVOKABLE void showBannerView();
     Q_INVOKABLE void hideBannerView();
 
@@ -55,7 +53,7 @@ signals:
     void bannerViewHeightChanged(int bannerViewHeight);
 
 private:
-    bool                  Initialized, ShowPersonalizedAds, InterstitialActive;
+    bool                  Initialized, InterstitialActive;
     int                   BannerViewHeight;
 #ifdef __OBJC__
     BannerViewDelegate   *BannerViewDelegateInstance;

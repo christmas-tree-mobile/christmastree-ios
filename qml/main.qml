@@ -4,26 +4,16 @@ import QtQuick.Controls 2.5
 import QtQuick.LocalStorage 2.12
 import QtPurchasing 1.0
 
-import "Core/Dialog"
-
 ApplicationWindow {
     id:         mainWindow
     title:      qsTr("Christmas")
     visibility: Window.FullScreen
     visible:    true
 
-    property bool fullVersion:    false
-
-    property string adMobConsent: ""
+    property bool fullVersion: false
 
     onFullVersionChanged: {
         setSetting("FullVersion", fullVersion ? "true" : "false");
-
-        updateFeatures();
-    }
-
-    onAdMobConsentChanged: {
-        setSetting("AdMobConsent", adMobConsent);
 
         updateFeatures();
     }
@@ -56,9 +46,7 @@ ApplicationWindow {
     }
 
     function updateFeatures() {
-        if (!fullVersion && (adMobConsent === "PERSONALIZED" || adMobConsent === "NON_PERSONALIZED")) {
-            AdMobHelper.setPersonalization(adMobConsent === "PERSONALIZED");
-
+        if (!fullVersion) {
             AdMobHelper.initAds();
         }
 
@@ -140,21 +128,8 @@ ApplicationWindow {
         enabled:      mainStackView.busy
     }
 
-    AdMobConsentDialog {
-        id: adMobConsentDialog
-
-        onPersonalizedAdsSelected: {
-            mainWindow.adMobConsent = "PERSONALIZED";
-        }
-
-        onNonPersonalizedAdsSelected: {
-            mainWindow.adMobConsent = "NON_PERSONALIZED";
-        }
-    }
-
     Component.onCompleted: {
-        fullVersion  = (getSetting("FullVersion",  "false") === "true");
-        adMobConsent =  getSetting("AdMobConsent", "");
+        fullVersion = (getSetting("FullVersion", "false") === "true");
 
         updateFeatures();
 
@@ -164,10 +139,6 @@ ApplicationWindow {
             mainStackView.push(component);
         } else {
             console.error(component.errorString());
-        }
-
-        if (!fullVersion && adMobConsent !== "PERSONALIZED" && adMobConsent !== "NON_PERSONALIZED") {
-            adMobConsentDialog.open();
         }
     }
 }

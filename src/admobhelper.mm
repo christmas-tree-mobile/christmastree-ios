@@ -25,14 +25,12 @@ constexpr NSTimeInterval AD_RELOAD_ON_FAILURE_DELAY = 60.0;
 - (instancetype)initWithHelper:(AdMobHelper *)helper NS_DESIGNATED_INITIALIZER;
 - (void)dealloc;
 - (void)cleanupAndAutorelease;
-- (void)setPersonalization:(BOOL)personalized;
 - (void)loadAd;
 
 @end
 
 @implementation BannerViewDelegate
 {
-    BOOL           ShowPersonalizedAds;
     GADBannerView *BannerView;
     AdMobHelper   *AdMobHelperInstance;
 }
@@ -42,7 +40,6 @@ constexpr NSTimeInterval AD_RELOAD_ON_FAILURE_DELAY = 60.0;
     self = [super init];
 
     if (self != nil) {
-        ShowPersonalizedAds = NO;
         AdMobHelperInstance = helper;
 
         UIViewController * __block root_view_controller = nil;
@@ -86,24 +83,9 @@ constexpr NSTimeInterval AD_RELOAD_ON_FAILURE_DELAY = 60.0;
     [self autorelease];
 }
 
-- (void)setPersonalization:(BOOL)personalized
-{
-    ShowPersonalizedAds = personalized;
-}
-
 - (void)loadAd
 {
-    GADRequest *request = [GADRequest request];
-
-    if (!ShowPersonalizedAds) {
-        GADExtras *extras = [[[GADExtras alloc] init] autorelease];
-
-        extras.additionalParameters = @{@"npa": @"1"};
-
-        [request registerAdNetworkExtras:extras];
-    }
-
-    [BannerView loadRequest:request];
+    [BannerView loadRequest:[GADRequest request]];
 }
 
 - (void)bannerViewDidReceiveAd:(nonnull GADBannerView *)bannerView
@@ -153,7 +135,6 @@ constexpr NSTimeInterval AD_RELOAD_ON_FAILURE_DELAY = 60.0;
 - (instancetype)initWithHelper:(AdMobHelper *)helper NS_DESIGNATED_INITIALIZER;
 - (void)dealloc;
 - (void)cleanupAndAutorelease;
-- (void)setPersonalization:(BOOL)personalized;
 - (void)loadAd;
 - (void)show;
 - (BOOL)isReady;
@@ -162,7 +143,6 @@ constexpr NSTimeInterval AD_RELOAD_ON_FAILURE_DELAY = 60.0;
 
 @implementation InterstitialDelegate
 {
-    BOOL               ShowPersonalizedAds;
     GADInterstitialAd *Interstitial;
     AdMobHelper       *AdMobHelperInstance;
 }
@@ -172,7 +152,6 @@ constexpr NSTimeInterval AD_RELOAD_ON_FAILURE_DELAY = 60.0;
     self = [super init];
 
     if (self != nil) {
-        ShowPersonalizedAds = NO;
         AdMobHelperInstance = helper;
 
         [self performSelector:@selector(loadAd) withObject:nil afterDelay:0.0];
@@ -199,11 +178,6 @@ constexpr NSTimeInterval AD_RELOAD_ON_FAILURE_DELAY = 60.0;
     [self autorelease];
 }
 
-- (void)setPersonalization:(BOOL)personalized
-{
-    ShowPersonalizedAds = personalized;
-}
-
 - (void)loadAd
 {
     Interstitial.fullScreenContentDelegate = nil;
@@ -212,17 +186,7 @@ constexpr NSTimeInterval AD_RELOAD_ON_FAILURE_DELAY = 60.0;
 
     Interstitial = nil;
 
-    GADRequest *request = [GADRequest request];
-
-    if (!ShowPersonalizedAds) {
-        GADExtras *extras = [[[GADExtras alloc] init] autorelease];
-
-        extras.additionalParameters = @{@"npa": @"1"};
-
-        [request registerAdNetworkExtras:extras];
-    }
-
-    [GADInterstitialAd loadWithAdUnitID:AdMobHelper::ADMOB_INTERSTITIAL_UNIT_ID.toNSString() request:request
+    [GADInterstitialAd loadWithAdUnitID:AdMobHelper::ADMOB_INTERSTITIAL_UNIT_ID.toNSString() request:[GADRequest request]
                        completionHandler:^(GADInterstitialAd *ad, NSError *error) {
         if (error != nil) {
             qWarning() << QString::fromNSString(error.localizedDescription);
@@ -292,7 +256,6 @@ constexpr NSTimeInterval AD_RELOAD_ON_FAILURE_DELAY = 60.0;
 AdMobHelper::AdMobHelper(QObject *parent) :
     QObject                     (parent),
     Initialized                 (false),
-    ShowPersonalizedAds         (false),
     InterstitialActive          (false),
     BannerViewHeight            (0),
     BannerViewDelegateInstance  (nil),
@@ -345,20 +308,9 @@ void AdMobHelper::initAds()
 
         InterstitialDelegateInstance = [[InterstitialDelegate alloc] initWithHelper:this];
 
-        [InterstitialDelegateInstance setPersonalization:ShowPersonalizedAds];
         [InterstitialDelegateInstance loadAd];
 
         Initialized = true;
-    }
-}
-
-void AdMobHelper::setPersonalization(bool personalized)
-{
-    ShowPersonalizedAds = personalized;
-
-    if (Initialized) {
-        [BannerViewDelegateInstance   setPersonalization:ShowPersonalizedAds];
-        [InterstitialDelegateInstance setPersonalization:ShowPersonalizedAds];
     }
 }
 
@@ -375,7 +327,6 @@ void AdMobHelper::showBannerView()
 
         BannerViewDelegateInstance = [[BannerViewDelegate alloc] initWithHelper:this];
 
-        [BannerViewDelegateInstance setPersonalization:ShowPersonalizedAds];
         [BannerViewDelegateInstance loadAd];
     }
 }

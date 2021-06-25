@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>resources/images/dialog/admob_consent_dialog.png</file>
         <file>resources/images/dialog/cancel.png</file>
         <file>resources/images/dialog/help_dialog.png</file>
         <file>resources/images/dialog/ok.png</file>
@@ -12,7 +11,6 @@
         <file>resources/images/tree/background_1.png</file>
         <file>resources/images/tree/background_2.png</file>
         <file>resources/images/tree/background_3.png</file>
-        <file>resources/images/tree/button_ad_settings.png</file>
         <file>resources/images/tree/button_capture_gif.png</file>
         <file>resources/images/tree/button_capture_image.png</file>
         <file>resources/images/tree/button_help.png</file>
