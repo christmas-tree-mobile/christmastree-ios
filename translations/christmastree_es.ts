@@ -2,21 +2,6 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="es_ES">
 <context>
-    <name>AdMobConsentDialog</name>
-    <message>
-        <source>We keep this app free by showing ads. Ad network will &lt;a href=&quot;https://policies.google.com/technologies/ads&quot;&gt;collect data and use a unique identifier on your device&lt;/a&gt; to show you ads. &lt;b&gt;Do you allow to use your data to tailor ads for you?&lt;/b&gt;</source>
-        <translation>Mantenemos esta aplicación gratuita mostrando anuncios. La red publicitaria &lt;a href=&quot;https://policies.google.com/technologies/ads&quot;&gt;recopilar datos y utilizará un identificador único&lt;/a&gt; en su dispositivo para mostrarle anuncios. &lt;b&gt;¿Permites usar tus datos para personalizar anuncios para ti?&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>Yes, show me relevant ads</source>
-        <translation>Sí, muéstrame anuncios relevantes</translation>
-    </message>
-    <message>
-        <source>No, show me ads that are less relevant</source>
-        <translation>No, muéstrame anuncios que sean menos relevantes</translation>
-    </message>
-</context>
-<context>
     <name>HelpDialog</name>
     <message>
         <source>How to decorate Christmas Tree</source>
