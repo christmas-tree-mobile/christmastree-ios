@@ -36,7 +36,7 @@ jobs:
       env:
         QMAKE_CFLAGS_ENV: "-Werror"
         QMAKE_CXXFLAGS_ENV: ""
-        QMAKE_OBJECTIVE_CFLAGS_ENV: "-Werror -Wno-error-objc-property-no-attribute"
+        QMAKE_OBJECTIVE_CFLAGS_ENV: ""
       run: |
         export PATH="$HOME/Qt/$QT_VERSION/ios/bin:$PATH"
         mkdir .build
