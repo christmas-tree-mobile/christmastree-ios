@@ -10,7 +10,7 @@ get additional information.
 
 ---
 
-[![Build Status](https://github.com/christmas-tree-mobile/christmastree-ios/workflows/Build/badge.svg)](https://github.com/christmas-tree-mobile/christmastree-ios/actions?query=workflow%3A%22Build%22)
+[![Build Status](https://github.com/christmas-tree-mobile/christmastree-ios/actions/workflows/build.yml/badge.svg?branch=4kids)](https://github.com/christmas-tree-mobile/christmastree-ios/actions/workflows/build.yml?query=branch%3A4kids)
 [![Xcode Analysis Status](https://github.com/christmas-tree-mobile/christmastree-ios/workflows/Xcode%20Analysis/badge.svg)](https://github.com/christmas-tree-mobile/christmastree-ios/actions?query=workflow%3A%22Xcode%20Analysis%22)
 [![SonarCloud Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=christmas-tree-mobile_christmastree-ios&metric=alert_status)](https://sonarcloud.io/dashboard?id=christmas-tree-mobile_christmastree-ios)
 
